@@ -13,7 +13,7 @@ function useTriggerButtonSub(
   useEffect(() => {
     const triggerBtn = parentRef.current;
     if (!triggerBtn) return;
-    function ToggleFn(e: PointerEvent) {
+    function ToggleFn(e: MouseEvent) {
       // to stop the trigger to the parent outterClick
       e.stopImmediatePropagation();
       // toggle

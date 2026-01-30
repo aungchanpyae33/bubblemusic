@@ -11,7 +11,7 @@ function useOutterClickSub(
   useEffect(() => {
     const copyRef = portalElRef.current;
     if (!copyRef) return;
-    function OutterClickFunction(e: PointerEvent) {
+    function OutterClickFunction(e: MouseEvent) {
       // to stop the trigger to the parent outterClick
       e.stopImmediatePropagation();
       if (stack > stackNum) {
