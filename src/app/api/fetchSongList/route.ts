@@ -9,7 +9,7 @@ export async function GET(request: NextRequest) {
     | null;
   const id = searchParams.get("id");
   try {
-    if (!type || !id) throw "id  or type is required";
+    if (!type || !id) throw new Error("id  or type is required");
     const { data, error } = await getSongList(id, type);
     return new NextResponse(JSON.stringify({ data, error }), {
       status: 200,
