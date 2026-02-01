@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import type { Artist } from "../../../../database.types-fest";
-const MediaSessionDes = (name: string, artists: Artist[]) => {
+const useMediaSessionDes = (name: string, artists: Artist[]) => {
   // console.log(urlSongs)
   useEffect(() => {
     if ("mediaSession" in navigator) {
@@ -21,4 +21,4 @@ const MediaSessionDes = (name: string, artists: Artist[]) => {
     };
   }, [name, artists]);
 };
-export default MediaSessionDes;
+export default useMediaSessionDes;

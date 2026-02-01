@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDirectPlayBack, useSongFunction } from "../../zustand";
 import type { DirectPlayBackAction, SongFunctionActions } from "../../zustand";
-const MediaSessionToggle = () => {
+const useMediaSessionToggle = () => {
   const setPlay = useSongFunction(
     (state: SongFunctionActions) => state.setPlay,
   );
@@ -23,4 +23,4 @@ const MediaSessionToggle = () => {
     };
   }, [setPlay, setPlayList]);
 };
-export default MediaSessionToggle;
+export default useMediaSessionToggle;

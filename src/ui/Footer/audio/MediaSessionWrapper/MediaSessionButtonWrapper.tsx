@@ -1,5 +1,5 @@
-import MediaSessionButton from "@/lib/CustomHooks/MediaSession/MediaSessionButton";
-import MediaSessionToggle from "@/lib/CustomHooks/MediaSession/MediaSessionToggle";
+import useMediaSessionButton from "@/lib/CustomHooks/MediaSession/useMediaSessionButton";
+import useMediaSessionToggle from "@/lib/CustomHooks/MediaSession/useMediaSessionToggle";
 import { ReactNode } from "react";
 
 function MediaSessionButtonWrapper({
@@ -9,8 +9,8 @@ function MediaSessionButtonWrapper({
   children: ReactNode;
   id: string;
 }) {
-  MediaSessionButton(id);
-  MediaSessionToggle();
+  useMediaSessionButton(id);
+  useMediaSessionToggle();
   return children;
 }
 

@@ -3,7 +3,7 @@ import { playBackRate } from "../../MediaSource/playBackRate";
 import AbortFetch from "../../MediaSource/AbortFetch";
 import { AudioElementContext } from "@/ui/Footer/audio/AudioWrapper";
 
-const MediaSessionSeek = (
+const useMediaSessionSeek = (
   fetching: RefObject<{ isFetch: boolean; fetchingseg: number }>,
   abortController: RefObject<AbortController | null>,
   segNum: RefObject<number>,
@@ -55,4 +55,4 @@ const MediaSessionSeek = (
   ]);
 };
 
-export default MediaSessionSeek;
+export default useMediaSessionSeek;

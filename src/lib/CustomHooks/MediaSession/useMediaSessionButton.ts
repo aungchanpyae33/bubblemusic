@@ -18,7 +18,7 @@ import outputCurrentIndex from "@/lib/OutputCurrentIndex";
 import type { ListSongPage } from "@/database/data-types-return";
 import type { Artist } from "../../../../database.types-fest";
 
-const MediaSessionButton = (id_scope: string) => {
+const useMediaSessionButton = (id_scope: string) => {
   //[todo] need to add more code to align with audiofunction pre and next but can safe remove some code as there will be no ui when page refresh
   // const [playListArrayKey, playListArray] = useRepeatAndCurrentPlayList(
   //   (state: currentSongPlaylist) =>
@@ -180,4 +180,4 @@ const MediaSessionButton = (id_scope: string) => {
     setPlayList,
   ]);
 };
-export default MediaSessionButton;
+export default useMediaSessionButton;

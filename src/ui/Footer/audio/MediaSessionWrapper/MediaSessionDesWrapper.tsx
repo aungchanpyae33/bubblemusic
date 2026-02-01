@@ -1,4 +1,4 @@
-import MediaSessionDes from "@/lib/CustomHooks/MediaSession/MediaSessionDescription";
+import useMediaSessionDes from "@/lib/CustomHooks/MediaSession/useMediaSessionDescription";
 import type { Artist } from "../../../../../database.types-fest";
 
 function MediaSessionDesWrapper({
@@ -8,7 +8,7 @@ function MediaSessionDesWrapper({
   name: string;
   artists: Artist[];
 }) {
-  MediaSessionDes(name, artists);
+  useMediaSessionDes(name, artists);
   return null;
 }
 
