@@ -37,7 +37,6 @@ function PlaceHolderFetchQueue() {
           song_id,
           abortController,
         );
-        if (!data || error) return null;
         if (!data || error) return;
         if (
           FetchSongsListId &&
