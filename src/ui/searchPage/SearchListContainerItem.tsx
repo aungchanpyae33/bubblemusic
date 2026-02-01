@@ -12,6 +12,8 @@ import UnderLineLinkHover from "../general/UnderLineLinkHover";
 import IconWrapper from "../general/IconWrapper";
 import { Folder } from "lucide-react";
 import VerticalThreeDots from "../general/icon/VerticalThreeDots";
+
+import { outputRelative } from "@/lib/outputRelative";
 interface SearchListContainerItemProps {
   description: string;
   index: number;
@@ -65,7 +67,9 @@ function SearchListContainerItem({
       </div>
       <div className=" flex items-center">
         <ContextSongListContainer className="w-[50px]" id={id} list={Itemdata}>
-          <MoreOptionContext relative={{ id: related_id, name: related_name }}>
+          <MoreOptionContext
+            relative={outputRelative(related_id, related_name)}
+          >
             <MoreOption
               targetElement={<SongListContainerOption />}
               triggerEl={<VerticalThreeDots />}

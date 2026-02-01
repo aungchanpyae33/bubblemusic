@@ -12,6 +12,8 @@ import { outputRelatedType } from "@/lib/prototypeOuputRelatedType";
 import NoThankYouPreFetchLink from "../general/NoThankYouPreFetchLink";
 import VerticalThreeDots from "../general/icon/VerticalThreeDots";
 
+import { outputRelative } from "@/lib/outputRelative";
+
 interface SonglistsContainerProps {
   description: string;
   index: number;
@@ -49,7 +51,9 @@ function SonglistsContainer({
           )}
         </NoThankYouPreFetchLink>
         <SonglistContainerWrapper className="absolute top-2 right-2">
-          <MoreOptionContext relative={{ id: related_id, name: related_name }}>
+          <MoreOptionContext
+            relative={outputRelative(related_id, related_name)}
+          >
             <MoreOption
               triggerEl={<VerticalThreeDots />}
               targetElement={

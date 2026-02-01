@@ -1,4 +1,5 @@
 import { getAlbumSongs } from "@/database/data";
+import { outputRelative } from "@/lib/outputRelative";
 import AlbumUpperBackground from "@/ui/albumContainer/AlbumUpperBackground";
 import AlbumUpperContainer from "@/ui/albumContainer/AlbumUpperContainer";
 import AudiosContainer from "@/ui/albumContainer/AudiosContainer";
@@ -34,7 +35,7 @@ async function page(props: { params: Promise<{ album: string }> }) {
 
           <div>
             <MoreOptionContext
-              relative={{ id: songs.related_id, name: songs.related_name }}
+              relative={outputRelative(songs.related_id, songs.related_name)}
             >
               <MoreOption
                 targetElement={<SongListContainerOption />}

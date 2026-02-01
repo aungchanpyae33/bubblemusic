@@ -15,6 +15,7 @@ import SongListContainerOption from "../general/optionBox/SongListContainerOptio
 import EditableAudiosContainer from "../albumContainer/EditableAudiosContainer";
 import PlaylistUpperWrapper from "./PlaylistUpperWrapper";
 import VerticalThreeDots from "../general/icon/VerticalThreeDots";
+import { outputRelative } from "@/lib/outputRelative";
 
 function OwnEdit({
   queryClient,
@@ -41,7 +42,7 @@ function OwnEdit({
 
             <div>
               <MoreOptionContext
-                relative={{ id: songs.related_id, name: songs.related_name }}
+                relative={outputRelative(songs.related_id, songs.related_name)}
               >
                 <MoreOption
                   targetElement={<SongListContainerOption />}

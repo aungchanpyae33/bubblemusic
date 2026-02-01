@@ -10,7 +10,9 @@ import MoreOption from "../trackComponent/MoreOption";
 import SongListContainerOption from "../general/optionBox/SongListContainerOption";
 import AudiosContainer from "../albumContainer/AudiosContainer";
 import VerticalThreeDots from "../general/icon/VerticalThreeDots";
-function View({ songs }: { songs: listSongsSection }) {
+
+import { outputRelative } from "@/lib/outputRelative";
+function View({ songs }: { songs: ListSongPage }) {
   return (
     <div className=" w-full">
       <AlbumUpperBackground>
@@ -23,7 +25,7 @@ function View({ songs }: { songs: listSongsSection }) {
 
           <div>
             <MoreOptionContext
-              relative={{ id: songs.related_id, name: songs.related_name }}
+              relative={outputRelative(songs.related_id, songs.related_name)}
             >
               <MoreOption
                 targetElement={<SongListContainerOption />}

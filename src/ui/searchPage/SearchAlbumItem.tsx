@@ -11,6 +11,8 @@ import UnderLineLinkHover from "../general/UnderLineLinkHover";
 import { outputRelatedType } from "@/lib/prototypeOuputRelatedType";
 import VerticalThreeDots from "../general/icon/VerticalThreeDots";
 
+import { outputRelative } from "@/lib/outputRelative";
+
 interface SearchAlbumItemProps {
   description: string;
   index: number;
@@ -60,7 +62,9 @@ function SearchAlbumItem({
           id={id}
           list={Itemdata}
         >
-          <MoreOptionContext relative={{ id: related_id, name: related_name }}>
+          <MoreOptionContext
+            relative={outputRelative(related_id, related_name)}
+          >
             <MoreOption
               targetElement={<SongListContainerOption />}
               triggerEl={<VerticalThreeDots />}
