@@ -24,8 +24,8 @@ function ToggleButtonSpaceKey() {
         e.stopImmediatePropagation();
         //to prevent scroll
         e.preventDefault();
-        setPlay("unknown", undefined);
-        setPlayList("unknown", undefined);
+        setPlay("toggle_key", undefined);
+        setPlayList("toggle_key", undefined);
       }
     };
     document.addEventListener("keydown", handleKeyDown);

@@ -110,8 +110,8 @@ const ToggleElement = ({
 
         // safe to check currentsong exist because it will only one source of truth
         if (songCuUrl) {
-          setPlay("unknown", undefined);
-          setPlayList("unknown", undefined);
+          setPlay("toggle_key", undefined);
+          setPlayList("toggle_key", undefined);
         } else {
           const data = {
             [uniUrl || ""]: song.url,

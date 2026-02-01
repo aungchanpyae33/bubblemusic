@@ -125,8 +125,9 @@ function DirectPlayButton({ listId, type, className }: DirectPlayButtonProps) {
         [listId || ""]: playlistData,
       });
       if (playlistId) {
-        setPlay("unknown", undefined);
-        setPlayList("unknown", undefined);
+        // the playlist is playing and direct playback button does not know which song is currently playling , so  it check in zustand
+        setPlay("toggle_key", undefined);
+        setPlayList("toggle_key", undefined);
       } else {
         updateSongCu({
           [uniUrl || ""]: url,

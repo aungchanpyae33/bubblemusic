@@ -126,9 +126,12 @@ function PlaceHolderToggleState({
           cover_url,
         } = songList[playListArray.idArray[nextIndex]];
         const uniUrl = id;
-        if (currentIndex >= playListArray.idArray.length - 1 && uniUrl === id) {
-          setPlay("unknown", undefined);
-          setPlayList("unknown", undefined);
+        if (
+          currentIndex >= playListArray.songs.idArray.length - 1 &&
+          uniUrl === id
+        ) {
+          setPlay("toggle_key", undefined);
+          setPlayList("toggle_key", undefined);
           return;
         }
         updateSongCu({

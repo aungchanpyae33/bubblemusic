@@ -85,8 +85,8 @@ function ListContainerPlayBack({ list }: ListContainerPlayBackProps) {
         [playListId || ""]: list,
       });
       if (playlistId) {
-        setPlay("unknown", undefined);
-        setPlayList("unknown", undefined);
+        setPlay("toggle_key", undefined);
+        setPlayList("toggle_key", undefined);
       } else {
         updateSongCu({
           [uniUrl || ""]: url,

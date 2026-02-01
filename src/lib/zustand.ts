@@ -209,16 +209,16 @@ export const usePreviousPlayList = create<
 export const useSongFunction = create<SongFunctionState & SongFunctionActions>(
   (set) => ({
     Isplay: {},
-    setPlay: (key: string, play: boolean | undefined) =>
-      set((state) => ({
-        Isplay: {
-          [key === "unknown" ? Object.keys(state.Isplay)[0] : key]:
-            play ||
-            !state.Isplay[
-              key === "unknown" ? Object.keys(state.Isplay)[0] : key
-            ],
-        },
-      })),
+    setPlay: (key, play) =>
+      set((state) => {
+        const getKey =
+          key === "toggle_key" ? Object.keys(state.Isplay)[0] : key;
+        return {
+          Isplay: {
+            [getKey]: play ?? !state.Isplay[getKey],
+          },
+        };
+      }),
   }),
 );
 
@@ -249,16 +249,16 @@ export const useDirectPlayBack = create<
   DirectPlayBackState & DirectPlayBackAction
 >((set) => ({
   IsPlayList: {},
-  setPlayList: (key: string, play: boolean | undefined) =>
-    set((state) => ({
-      IsPlayList: {
-        [key === "unknown" ? Object.keys(state.IsPlayList)[0] : key]:
-          play ||
-          !state.IsPlayList[
-            key === "unknown" ? Object.keys(state.IsPlayList)[0] : key
-          ],
-      },
-    })),
+  setPlayList: (key, play) =>
+    set((state) => {
+      const getKey =
+        key === "toggle_key" ? Object.keys(state.IsPlayList)[0] : key;
+      return {
+        IsPlayList: {
+          [getKey]: play ?? !state.IsPlayList[getKey],
+        },
+      };
+    }),
 }));
 
 export const useRepeatAndCurrentPlayList = create<

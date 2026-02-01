@@ -32,9 +32,9 @@ function ToggleButton({ className }: Props) {
         e.stopPropagation();
       }}
       onClick={() => {
-        // need to use with key value not undefined as firsetkey that get from isplay preversin is undefined and it will not trigger to the toggleElement
-        setPlay("unknown", undefined);
-        setPlayList("unknown", undefined);
+        // toggle
+        setPlay("toggle_key", undefined);
+        setPlayList("toggle_key", undefined);
       }}
     >
       {Isplay ? (

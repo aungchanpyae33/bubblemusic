@@ -12,8 +12,8 @@ const MediaSessionToggle = () => {
     if (!("mediaSession" in navigator)) return;
 
     const handleMediaSession = () => {
-      setPlay("unknown", undefined);
-      setPlayList("unknown", undefined);
+      setPlay("toggle_key", undefined);
+      setPlayList("toggle_key", undefined);
     };
     navigator.mediaSession.setActionHandler("play", handleMediaSession);
     navigator.mediaSession.setActionHandler("pause", handleMediaSession);
