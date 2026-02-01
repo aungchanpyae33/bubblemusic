@@ -8,10 +8,10 @@ import {
 import React, { createContext, ReactNode, useEffect, useRef } from "react";
 
 interface AudioElementContextProps {
-  audioEl: React.RefObject<HTMLAudioElement | null>;
+  audioElRef: React.RefObject<HTMLAudioElement | null>;
 }
 export const AudioElementContext = createContext<AudioElementContextProps>({
-  audioEl: {
+  audioElRef: {
     current: null,
   },
 });
@@ -31,11 +31,11 @@ function AudioWrapper({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  const audioEl = useRef<HTMLAudioElement>(null);
+  const audioElRef = useRef<HTMLAudioElement>(null);
   return (
     <>
       <audio
-        ref={audioEl}
+        ref={audioElRef}
         onLoadedMetadata={(e) => {
           if (value !== undefined) {
             const defaultVol = 1 - value / 100;
@@ -46,7 +46,7 @@ function AudioWrapper({ children }: { children: ReactNode }) {
           }
         }}
       />
-      <AudioElementContext.Provider value={{ audioEl }}>
+      <AudioElementContext.Provider value={{ audioElRef }}>
         {children}
       </AudioElementContext.Provider>
     </>

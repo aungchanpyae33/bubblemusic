@@ -1,33 +1,36 @@
 import { VolumeValueActions } from "@/lib/zustand";
 import IconWrapper from "@/ui/general/IconWrapper";
 import { Volume2, VolumeX } from "lucide-react";
-import React, { RefObject, useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import { volumeContext } from "./ContextVolume";
+import { AudioElementContext } from "../audio/AudioWrapper";
 interface Props extends React.ComponentProps<"button"> {
   value: number;
   setValue: VolumeValueActions["setValue"];
-  dataAudioRef: RefObject<HTMLAudioElement | null>;
 }
-function VolumeMuteButton({ value, setValue, dataAudioRef }: Props) {
+function VolumeMuteButton({ value, setValue }: Props) {
   const [mute, setMute] = useState(100);
   const { setOpen } = useContext(volumeContext);
+  const { audioElRef } = useContext(AudioElementContext);
   return (
     <button
       className="w-[50px]  flex items-center justify-center"
       onClick={() => {
+        const audioEl = audioElRef.current;
+        if (!audioEl) return;
         if (value < 100) {
-          dataAudioRef.current!.volume = 0;
+          audioEl.volume = 0;
           setValue(100);
           setMute(value);
         } else {
           // to prevetn the value to be 0 in initaal state when mute is not modified
           if (mute === 100) {
             const volValue = 1;
-            dataAudioRef.current!.volume = volValue;
+            audioEl.volume = volValue;
             setValue(0);
           } else {
             const volValue = 1 - mute / 100;
-            dataAudioRef.current!.volume = volValue;
+            audioEl.volume = volValue;
             setValue(mute);
           }
         }

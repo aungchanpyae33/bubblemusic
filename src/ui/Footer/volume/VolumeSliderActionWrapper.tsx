@@ -1,13 +1,13 @@
 import { sliderPositionCal } from "@/lib/MediaSource/SliderPositionCal";
 import { VolumeDraggingActions, VolumeValueActions } from "@/lib/zustand";
-import { RefObject } from "react";
+import { RefObject, useContext } from "react";
+import { AudioElementContext } from "../audio/AudioWrapper";
 
 function VolumeSliderActionWrapper({
   sliderRef,
   isPointer,
   isTouchDevice,
   setIsDragging,
-  dataAudioRef,
   setValue,
   children,
 }: {
@@ -15,10 +15,10 @@ function VolumeSliderActionWrapper({
   isPointer: boolean;
   isTouchDevice: boolean;
   setIsDragging: VolumeDraggingActions["setIsDragging"];
-  dataAudioRef: RefObject<HTMLAudioElement | null>;
   setValue: VolumeValueActions["setValue"];
   children: React.ReactNode;
 }) {
+  const { audioElRef } = useContext(AudioElementContext);
   return (
     <div
       className="flex-1 h-full group flex items-center justify-center cursor-pointer touch-none "
@@ -26,38 +26,44 @@ function VolumeSliderActionWrapper({
       {...(isPointer
         ? {
             onPointerDown: (e) => {
+              const audioEl = audioElRef.current;
+              if (!audioEl) return;
               if (!sliderRef.current) return;
               setIsDragging(true);
               const { percentage, seekCalReturn } = sliderPositionCal({
                 sliderRef,
                 e,
               });
-              dataAudioRef!.current!.volume = seekCalReturn;
+              audioEl.volume = seekCalReturn;
               setValue(percentage);
             },
           }
         : isTouchDevice
           ? {
               onTouchStart: (e) => {
+                const audioEl = audioElRef.current;
+                if (!audioEl) return;
                 if (!sliderRef.current) return;
                 setIsDragging(true);
                 const { percentage, seekCalReturn } = sliderPositionCal({
                   sliderRef,
                   e,
                 });
-                dataAudioRef!.current!.volume = seekCalReturn;
+                audioEl.volume = seekCalReturn;
                 setValue(percentage);
               },
             }
           : {
               onMouseDown: (e) => {
+                const audioEl = audioElRef.current;
+                if (!audioEl) return;
                 if (!sliderRef.current) return;
                 setIsDragging(true);
                 const { percentage, seekCalReturn } = sliderPositionCal({
                   sliderRef,
                   e,
                 });
-                dataAudioRef!.current!.volume = seekCalReturn;
+                audioEl.volume = seekCalReturn;
                 setValue(percentage);
               },
             })}

@@ -1,5 +1,5 @@
-import { DataContext } from "@/lib/MediaSource/ContextMedia";
 import { RefObject, useContext, useEffect, useRef } from "react";
+import { AudioElementContext } from "../audio/AudioWrapper";
 
 function getElementByDataId(
   container: HTMLElement | null,
@@ -42,7 +42,7 @@ function PlaceHolderLyricScroll({
   currentIndex: number;
 }) {
   const showScroll = useRef(false);
-  const { dataAudio } = useContext(DataContext);
+  const { audioElRef } = useContext(AudioElementContext);
   useEffect(() => {
     const element = getElementByDataId(lyricRef.current, currentIndex);
     if (
@@ -59,18 +59,18 @@ function PlaceHolderLyricScroll({
   }, [currentIndex, lyricRef]);
 
   useEffect(() => {
-    const copyDataAudio = dataAudio.current;
-    if (!copyDataAudio) return;
+    const copyAudioRef = audioElRef.current;
+    if (!copyAudioRef) return;
     function instantRun() {
       const element = getElementByDataId(lyricRef.current, currentIndex);
       if (!element) return;
       scrollContainerToElement(lyricRef.current, element);
     }
-    copyDataAudio.addEventListener("seeked", instantRun);
+    copyAudioRef.addEventListener("seeked", instantRun);
     return () => {
-      copyDataAudio.removeEventListener("seeked", instantRun);
+      copyAudioRef.removeEventListener("seeked", instantRun);
     };
-  }, [dataAudio, currentIndex, lyricRef]);
+  }, [currentIndex, lyricRef, audioElRef]);
   return null;
 }
 

@@ -26,6 +26,7 @@ import { addRecentlySong } from "@/actions/addRecentSong";
 import { useQueryClient } from "@tanstack/react-query";
 import outputCurrentIndex from "@/lib/OutputCurrentIndex";
 import type { ListSongPage } from "@/database/data-types-return";
+import { AudioElementContext } from "./audio/AudioWrapper";
 
 function PlaceHolderToggleState({
   url,
@@ -40,7 +41,8 @@ function PlaceHolderToggleState({
   const setTimeoutRefForList = useRef<ReturnType<typeof setTimeout> | null>(
     null,
   );
-  const { dataAudio, segNum } = useContext(DataContext);
+  const { segNum } = useContext(DataContext);
+  const { audioElRef } = useContext(AudioElementContext);
   const playListArray = useRepeatAndCurrentPlayList(
     (state: currentSongPlaylist) =>
       Object.values(state.playListArray)[0] || undefined,
@@ -76,29 +78,29 @@ function PlaceHolderToggleState({
   );
   const queryClient = useQueryClient();
   useEffect(() => {
-    const copyDataAudio = dataAudio!.current!;
+    const copyAudioRef = audioElRef.current;
+    if (!copyAudioRef) return;
     function handlePlay() {
-      if (
-        dataAudio.current &&
-        dataAudio.current.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA
-      ) {
+      if (!copyAudioRef) return;
+      if (copyAudioRef.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA) {
         if (Isplay) {
-          if (dataAudio.current.paused) {
-            dataAudio.current.play();
+          if (copyAudioRef.paused) {
+            copyAudioRef.play();
           }
         } else {
-          if (!dataAudio.current.paused) {
-            dataAudio.current.pause();
+          if (!copyAudioRef.paused) {
+            copyAudioRef.pause();
           }
         }
       }
     }
 
     function playNext() {
+      if (!copyAudioRef) return;
       if (isRepeat) {
-        dataAudio!.current!.currentTime = 0;
+        copyAudioRef.currentTime = 0;
         segNum.current = 1;
-        dataAudio!.current!.play();
+        copyAudioRef.play();
         return;
       }
       if (
@@ -164,13 +166,12 @@ function PlaceHolderToggleState({
     }
 
     handlePlay();
-    copyDataAudio.addEventListener("ended", playNext);
+    copyAudioRef.addEventListener("ended", playNext);
     return () => {
-      copyDataAudio.removeEventListener("ended", playNext);
+      copyAudioRef.removeEventListener("ended", playNext);
     };
   }, [
     Isplay,
-    dataAudio,
     setPlay,
     updateSongCu,
     isRepeat,
@@ -181,6 +182,7 @@ function PlaceHolderToggleState({
     url,
     id,
     setPlaylistId,
+    audioElRef,
   ]);
 
   useEffect(() => {

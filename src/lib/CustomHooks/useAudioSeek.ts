@@ -13,6 +13,7 @@ import {
   useSongFunction,
 } from "../zustand";
 import { DataContext } from "../MediaSource/ContextMedia";
+import { AudioElementContext } from "@/ui/Footer/audio/AudioWrapper";
 export interface valueProps {
   value: AudioValueState["value"] | undefined;
 }
@@ -53,7 +54,6 @@ const useAudioSeek = ({
     (state: AudioDraggingActions) => state.setIsDragging,
   );
   const {
-    dataAudio,
     loadNextSegment,
     segNum,
     sege,
@@ -70,9 +70,11 @@ const useAudioSeek = ({
     (state: SongFunctionState) =>
       Object.values(state.Isplay as Record<string, boolean>)[0],
   );
+  const { audioElRef } = useContext(AudioElementContext);
 
   useEffect(() => {
-    const copyDataAudio = dataAudio!.current!;
+    const copyAudioRef = audioElRef.current;
+    if (!copyAudioRef) return;
     let animationFrameId: number;
 
     function handleMove(e: PointerEvent | TouchEvent | MouseEvent) {
@@ -90,7 +92,7 @@ const useAudioSeek = ({
       AudioSeeked({
         per,
         duration,
-        dataAudio,
+        audioElRef,
         sege,
         segNum,
         loadNextSegment,
@@ -101,11 +103,11 @@ const useAudioSeek = ({
       });
     }
     function update() {
-      if (!Isplay || !shouldRun || !copyDataAudio || isDragging) {
+      if (!Isplay || !shouldRun || !copyAudioRef || isDragging) {
         animationFrameId = requestAnimationFrame(update);
         return;
       }
-      const data = (copyDataAudio.currentTime / copyDataAudio.duration) * 100;
+      const data = (copyAudioRef.currentTime / copyAudioRef.duration) * 100;
       const newValue = 100 - data;
       throttledSetValue(newValue);
       animationFrameId = requestAnimationFrame(update);
@@ -138,7 +140,6 @@ const useAudioSeek = ({
       cancelAnimationFrame(animationFrameId);
     };
   }, [
-    dataAudio,
     duration,
     isDragging,
     loadNextSegment,
@@ -156,6 +157,7 @@ const useAudioSeek = ({
     song_time_stamp,
     throttledSetValue,
     Isplay,
+    audioElRef,
   ]);
 
   useEffect(() => {

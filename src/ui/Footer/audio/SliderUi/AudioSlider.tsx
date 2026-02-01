@@ -3,6 +3,7 @@ import AudioSeeked from "@/lib/MediaSource/AudioSeeked";
 import { DataContext } from "@/lib/MediaSource/ContextMedia";
 import { AudioDraggingActions, AudioValueActions } from "@/lib/zustand";
 import { ReactNode, RefObject, useContext } from "react";
+import { AudioElementContext } from "../AudioWrapper";
 interface Props extends React.ComponentProps<"div"> {
   sliderRef: RefObject<HTMLDivElement | null>;
   setIsDragging: AudioDraggingActions["setIsDragging"];
@@ -23,7 +24,6 @@ function AudioSlider({
   className,
 }: Props) {
   const {
-    dataAudio,
     loadNextSegment,
     segNum,
     sege,
@@ -32,7 +32,7 @@ function AudioSlider({
     bufferThreshold,
     song_time_stamp,
   } = useContext(DataContext);
-
+  const { audioElRef } = useContext(AudioElementContext);
   return (
     <div
       className={className}
@@ -68,7 +68,7 @@ function AudioSlider({
           AudioSeeked({
             per,
             duration,
-            dataAudio,
+            audioElRef,
             sege,
             segNum,
             loadNextSegment,

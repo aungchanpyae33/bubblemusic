@@ -9,11 +9,9 @@ import ContextVolume from "./ContextVolume";
 import VolumeContainer from "./VolumeContainer";
 import VolumeToggleButton from "./VolumeToggleButton";
 import { Context } from "@/lib/MediaSource/ContextMediaAudioFull";
-import { DataContext } from "@/lib/MediaSource/ContextMedia";
 import useVolumeSeek from "@/lib/CustomHooks/useVolumeSeek";
 
 function Volume({ isFull }: { isFull: boolean }) {
-  const { dataAudio } = useContext(DataContext);
   const { open } = useContext(Context);
   const isPointer = useMemo(
     () => typeof window !== "undefined" && "onpointerdown" in window,
@@ -30,7 +28,6 @@ function Volume({ isFull }: { isFull: boolean }) {
   const progressRef = useRef<HTMLDivElement | null>(null);
 
   const { value, setValue, isDragging, setIsDragging } = useVolumeSeek({
-    dataAudio,
     sliderRef,
     isPointer,
     isTouchDevice,
@@ -41,18 +38,13 @@ function Volume({ isFull }: { isFull: boolean }) {
     <ContextVolume>
       <VolumeContainer isDragging={isDragging}>
         <div className="flex  w-fit gap-1  flex-1">
-          <VolumeMuteButton
-            value={value}
-            dataAudio={dataAudio}
-            setValue={setValue}
-          />
+          <VolumeMuteButton value={value} setValue={setValue} />
 
           <VolumeSlider
             className="flex  h-full   w-full px-[7px]  md:flex items-center select-none no-select"
             setIsDragging={setIsDragging}
             sliderRef={sliderRef}
             setValue={setValue}
-            dataAudio={dataAudio}
             value={value}
           >
             <VolumeSliderActionWrapper
@@ -60,7 +52,6 @@ function Volume({ isFull }: { isFull: boolean }) {
               isPointer={isPointer}
               isTouchDevice={isTouchDevice}
               setIsDragging={setIsDragging}
-              dataAudio={dataAudio}
               setValue={setValue}
             >
               <div className=" w-full h-[2px] bg-[rgba(255,255,255,0.2)] relative">

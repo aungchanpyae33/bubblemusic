@@ -1,18 +1,19 @@
-import { RefObject, useEffect } from "react";
+import { RefObject, useContext, useEffect } from "react";
 import { playBackRate } from "../../MediaSource/playBackRate";
 import AbortFetch from "../../MediaSource/AbortFetch";
+import { AudioElementContext } from "@/ui/Footer/audio/AudioWrapper";
 
 const MediaSessionSeek = (
   fetching: RefObject<{ isFetch: boolean; fetchingseg: number }>,
   abortController: RefObject<AbortController | null>,
   segNum: RefObject<number>,
-  dataAudio: RefObject<HTMLAudioElement | null>,
   sege: number | undefined,
   loadNextSegment: React.RefObject<(() => Promise<void>) | null>,
   duration: number,
   bufferThreshold: number,
   song_time_stamp: Array<number>,
 ) => {
+  const { audioElRef } = useContext(AudioElementContext);
   // Extract the `value` from the event beforehand to avoid issues with `e` in dependencies
 
   useEffect(() => {
@@ -23,13 +24,14 @@ const MediaSessionSeek = (
 
         // Use the extracted `data`
         const seekSeg = playBackRate({
-          dataAudio,
+          audioElRef,
           data,
           sege,
           duration,
           bufferThreshold,
           song_time_stamp,
         });
+        if (!seekSeg) return;
         AbortFetch(fetching, abortController, seekSeg);
         if (seekSeg !== fetching.current.fetchingseg) {
           segNum.current = seekSeg;
@@ -44,12 +46,12 @@ const MediaSessionSeek = (
     fetching,
     abortController,
     segNum,
-    dataAudio,
     sege,
     loadNextSegment,
     duration,
     bufferThreshold,
     song_time_stamp,
+    audioElRef,
   ]);
 };
 

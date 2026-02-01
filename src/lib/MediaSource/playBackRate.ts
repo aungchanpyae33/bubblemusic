@@ -2,7 +2,7 @@ import { RefObject } from "react";
 import { getRemainingBufferDuration } from "./getRemainBuffer";
 
 interface prop {
-  dataAudio: RefObject<HTMLAudioElement | null>;
+  audioElRef: RefObject<HTMLAudioElement | null>;
   data: number;
   sege: number | undefined;
   duration: number | undefined;
@@ -11,16 +11,17 @@ interface prop {
 }
 
 export function playBackRate({
-  dataAudio,
+  audioElRef,
   data,
   sege,
   duration,
   song_time_stamp,
   bufferThreshold,
 }: prop) {
-  dataAudio.current!.currentTime = data;
+  if (!audioElRef.current) return;
+  audioElRef.current.currentTime = data;
   const { remainingBuffer, segData } = getRemainingBufferDuration(
-    dataAudio,
+    audioElRef,
     song_time_stamp,
   );
   // console.log("10", remainingBuffer);

@@ -10,7 +10,6 @@ function MediaSessionSeekWrapper({
   duration: number;
 }) {
   const {
-    dataAudio,
     loadNextSegment,
     segNum,
     sege,
@@ -23,7 +22,6 @@ function MediaSessionSeekWrapper({
     fetching,
     abortController,
     segNum,
-    dataAudio,
     sege,
     loadNextSegment,
     duration,

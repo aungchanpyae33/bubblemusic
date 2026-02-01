@@ -1,4 +1,4 @@
-import { RefObject, useEffect } from "react";
+import { RefObject, useContext, useEffect } from "react";
 import { sliderPositionCal } from "../MediaSource/SliderPositionCal";
 import {
   useVolumeDragging,
@@ -8,9 +8,9 @@ import {
   VolumeValueActions,
   VolumeValueState,
 } from "../zustand";
+import { AudioElementContext } from "@/ui/Footer/audio/AudioWrapper";
 
 interface audioSeekProp {
-  dataAudio: RefObject<HTMLAudioElement | null>;
   sliderRef: RefObject<HTMLDivElement | null>;
   isPointer: boolean;
   isTouchDevice: boolean;
@@ -24,12 +24,12 @@ interface useAudioSeekReturnType {
 }
 
 const useVolumeSeek = ({
-  dataAudio,
   sliderRef,
   isPointer,
   isTouchDevice,
   shouldRun,
 }: audioSeekProp): useAudioSeekReturnType => {
+  const { audioElRef } = useContext(AudioElementContext);
   const value = useVolumeValue((state: VolumeValueState) => state.value);
   const setValue = useVolumeValue(
     (state: VolumeValueActions) => state.setValue,
@@ -41,13 +41,15 @@ const useVolumeSeek = ({
     (state: VolumeDraggingActions) => state.setIsDragging,
   );
   useEffect(() => {
+    const copyAudioRef = audioElRef.current;
     function handleMove(e: PointerEvent | TouchEvent | MouseEvent) {
+      if (!copyAudioRef) return;
       if (!shouldRun) return;
       const { percentage, seekCalReturn } = sliderPositionCal({
         sliderRef,
         e,
       });
-      dataAudio!.current!.volume = seekCalReturn;
+      copyAudioRef.volume = seekCalReturn;
       setValue(percentage);
     }
     function handleUp() {
@@ -79,7 +81,6 @@ const useVolumeSeek = ({
       document.removeEventListener("mouseup", handleUp);
     };
   }, [
-    dataAudio,
     isDragging,
     sliderRef,
     isPointer,
@@ -87,6 +88,7 @@ const useVolumeSeek = ({
     setValue,
     setIsDragging,
     shouldRun,
+    audioElRef,
   ]);
 
   return { value, setValue, isDragging, setIsDragging };

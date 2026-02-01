@@ -1,6 +1,5 @@
 import { createContext, RefObject } from "react";
 export interface prop {
-  dataAudio: RefObject<HTMLAudioElement | null>;
   duration: number;
   abortController: RefObject<AbortController | null>;
   fetching: RefObject<{ isFetch: boolean; fetchingseg: number }>;
@@ -20,7 +19,6 @@ import { ReactNode } from "react";
 import type { Artist } from "../../../database.types-fest";
 
 export const DataContext = createContext<prop>({
-  dataAudio: { current: null },
   duration: 0,
   abortController: { current: null },
   fetching: { current: { isFetch: false, fetchingseg: 1 } },

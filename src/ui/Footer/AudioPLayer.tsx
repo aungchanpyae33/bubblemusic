@@ -55,18 +55,17 @@ function AudioPlayer({
     (state: SongState) =>
       Object.values(state.songCu as Record<string, string>)[0],
   );
-  const { audioEl } = useContext(AudioElementContext);
+
   const {
     loadNextSegment,
     segNum,
     abortController,
     fetching,
     bufferThreshold,
-  } = useMediaSourceBuffer(url, sege, song_time_stamp, id!, audioEl);
+  } = useMediaSourceBuffer(url, sege, song_time_stamp, id!);
   return (
     <ContextMedia
       data={{
-        dataAudio: audioEl,
         duration,
         abortController,
         fetching,

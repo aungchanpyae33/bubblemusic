@@ -22,10 +22,10 @@ function binarySearchWithTolerance(
   return -1;
 }
 export function getRemainingBufferDuration(
-  dataAudio: RefObject<HTMLAudioElement | null>,
+  audioElRef: RefObject<HTMLAudioElement | null>,
   song_time_stamp: number[],
 ) {
-  const audio = dataAudio.current;
+  const audio = audioElRef.current;
   if (!audio) return { remainingBuffer: 0, segData: -1 };
 
   const buffered = audio.buffered;

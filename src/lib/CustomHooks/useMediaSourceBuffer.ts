@@ -1,10 +1,11 @@
-import React, { useEffect, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { fetchSegment } from "../MediaSource/fetchSegment";
 import { getRemainingBufferDuration } from "../MediaSource/getRemainBuffer";
 import { useRepeatAndCurrentPlayList } from "../zustand";
 import throttle from "../throttle";
 import { fetchInitSegment } from "../MediaSource/fetchInitSegment";
 import { HlsDirectPlay } from "../HlsDirectPlay";
+import { AudioElementContext } from "@/ui/Footer/audio/AudioWrapper";
 const bufferThreshold = 10;
 const mimeType_audio = "audio/mp4";
 const codecs_audio = "mp4a.40.2";
@@ -35,8 +36,8 @@ const useMediaSourceBuffer = (
   sege: number,
   song_time_stamp: Array<number>,
   id: string,
-  dataAudioRef: React.RefObject<HTMLAudioElement | null>,
 ) => {
+  const { audioElRef } = useContext(AudioElementContext);
   const fetchingRef = useRef<FetchingState>({
     isFetch: false,
     fetchingseg: 1,
@@ -62,7 +63,7 @@ const useMediaSourceBuffer = (
   useEffect(() => {
     if (!url) return;
     if (shouldUseNativeHLS()) {
-      HlsDirectPlay(url, dataAudioRef);
+      HlsDirectPlay(url);
       return;
     }
     if (!window.MediaSource) return;
@@ -117,7 +118,7 @@ const useMediaSourceBuffer = (
 
     const loadNextSegment = async () => {
       const { remainingBuffer, segData } = getRemainingBufferDuration(
-        dataAudioRef,
+        audioElRef,
         song_time_stamp,
       );
 
@@ -209,7 +210,7 @@ const useMediaSourceBuffer = (
           updateendLoadNextSegment,
         );
 
-        dataAudioRef.current!.addEventListener(
+        audioElRef.current!.addEventListener(
           "timeupdate",
           throttleLoadNextSegment,
         );
@@ -217,7 +218,7 @@ const useMediaSourceBuffer = (
     };
 
     const clearUpPreviousSong = () => {
-      const audio = dataAudioRef.current;
+      const audio = audioElRef.current;
       if (audio) {
         audio.pause();
         audio.src = "";
@@ -252,7 +253,7 @@ const useMediaSourceBuffer = (
     };
 
     const startUp = () => {
-      dataAudioRef.current!.src = URL.createObjectURL(mediaSourceRef.current!);
+      audioElRef.current!.src = URL.createObjectURL(mediaSourceRef.current!);
       mediaSourceRef.current!.addEventListener("sourceopen", sourceOpen, false);
     };
     mediaSourceRef.current = new MediaSource();
@@ -264,7 +265,7 @@ const useMediaSourceBuffer = (
     return () => {
       clearUpPreviousSong();
     };
-  }, [url, id, dataAudioRef, prefetchSegment, song_time_stamp, sege]);
+  }, [url, id, audioElRef, prefetchSegment, song_time_stamp, sege]);
 
   return {
     segNum: segNumRef,
