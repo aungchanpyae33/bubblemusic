@@ -1,5 +1,5 @@
 import { insertSongtoPlaylist } from "@/actions/addSongsToPlaylist";
-import { navbarList } from "@/database/data";
+import type { UserLibReturn } from "@/database/data-types-return";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const useAddSongMutate = (playlistId: string, cover_url: string | null) => {
@@ -19,24 +19,14 @@ const useAddSongMutate = (playlistId: string, cover_url: string | null) => {
         if (cover_url) {
           queryClient.setQueryData(
             ["user-library"],
-            (
-              oldData:
-                | {
-                    data: {
-                      userLib: Record<string, navbarList> & {
-                        idArray: string[];
-                      };
-                    };
-                    error: null | string;
-                  }
-                | undefined,
-            ) => {
-              if (!oldData) return oldData;
+            (oldData: UserLibReturn | undefined) => {
+              if (!oldData || !oldData.data || !oldData.data.userLib)
+                return oldData;
 
               const updatedUserLib = {
                 ...oldData.data.userLib,
                 [playlistId]: {
-                  ...oldData.data.userLib[playlistId],
+                  ...oldData.data.userLib.byId[playlistId],
                   cover_url,
                 },
               };

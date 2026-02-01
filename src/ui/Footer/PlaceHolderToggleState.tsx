@@ -21,11 +21,11 @@ import {
   useStorePlayListId,
 } from "@/lib/zustand";
 import { useContext, useEffect, useRef } from "react";
-import { listSongsSection } from "@/database/data";
 import { addRecentlyPlayedList } from "@/actions/addRecentPlayedList";
 import { addRecentlySong } from "@/actions/addRecentSong";
 import { useQueryClient } from "@tanstack/react-query";
 import outputCurrentIndex from "@/lib/OutputCurrentIndex";
+import type { ListSongPage } from "@/database/data-types-return";
 
 function PlaceHolderToggleState({
   url,
@@ -44,7 +44,7 @@ function PlaceHolderToggleState({
   const playListArray = useRepeatAndCurrentPlayList(
     (state: currentSongPlaylist) =>
       Object.values(state.playListArray)[0] || undefined,
-  ) as listSongsSection;
+  ) as ListSongPage;
   // console.log(playListArray, "adad");
   const Isplay = useSongFunction(
     (state: SongFunctionState) => Object.values(state.Isplay)[0],
@@ -101,14 +101,20 @@ function PlaceHolderToggleState({
         dataAudio!.current!.play();
         return;
       }
-      if (!playListArray.idArray || playListArray.idArray.length === 0) return;
+      if (
+        !playListArray ||
+        !playListArray.songs ||
+        playListArray.songs.idArray.length === 0
+      )
+        return;
+
       const currentIndex = Math.min(
-        outputCurrentIndex(playListArray.idArray, id),
-        playListArray.idArray.length - 1,
+        outputCurrentIndex(playListArray.songs.idArray, id),
+        playListArray.songs.idArray.length - 1,
       );
       const nextIndex = Math.min(
         currentIndex + 1,
-        playListArray.idArray.length - 1,
+        playListArray.songs.idArray.length - 1,
       );
       if (!isRepeat) {
         const songList = playListArray.songs;
@@ -124,7 +130,7 @@ function PlaceHolderToggleState({
           artists,
           is_lyric,
           cover_url,
-        } = songList[playListArray.idArray[nextIndex]];
+        } = songList.byId[playListArray.songs.idArray[nextIndex]];
         const uniUrl = id;
         if (
           currentIndex >= playListArray.songs.idArray.length - 1 &&

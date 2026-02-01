@@ -1,4 +1,3 @@
-import { Artist } from "@/database/data";
 import { createContext, RefObject } from "react";
 export interface prop {
   dataAudio: RefObject<HTMLAudioElement | null>;
@@ -18,6 +17,7 @@ export interface prop {
 }
 
 import { ReactNode } from "react";
+import type { Artist } from "../../../database.types-fest";
 
 export const DataContext = createContext<prop>({
   dataAudio: { current: null },

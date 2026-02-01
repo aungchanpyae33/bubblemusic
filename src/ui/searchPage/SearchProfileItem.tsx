@@ -1,4 +1,3 @@
-import { SearchProfile } from "@/database/data";
 import ContextSongListContainer from "../playlist/playlistOption/ContextSongListContainer";
 import MoreOption from "../trackComponent/MoreOption";
 import MoreOptionContext from "../trackComponent/MoreOptionContext";
@@ -9,11 +8,12 @@ import ProfileOption from "../general/optionBox/ProfileOption";
 import IconWrapper from "../general/IconWrapper";
 import { User } from "lucide-react";
 import VerticalThreeDots from "../general/icon/VerticalThreeDots";
+import type { listInfo } from "../../../database.types-fest";
 
 interface SearchProfileItemProps {
   description: string;
   index: number;
-  Itemdata: SearchProfile;
+  Itemdata: listInfo;
 }
 function SearchProfileItem({
   description,

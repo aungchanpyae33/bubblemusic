@@ -1,5 +1,8 @@
 import { removeSongsFromPlaylist } from "@/actions/removeSongsFromPlaylist";
-import { listSongsSection, navbarList } from "@/database/data";
+import type {
+  ListSongsReturn,
+  UserLibReturn,
+} from "@/database/data-types-return";
 import { ContextMoreOption } from "@/ui/trackComponent/MoreOptionContext";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useContext } from "react";
@@ -12,40 +15,33 @@ const useRemoveSongMutate = (id: string) => {
       const { data, error } = queryData;
       if (!data || error) return;
       if (!error && data) {
-        const { data: playlistData } = queryClient.getQueryData<{
-          data: { songs: listSongsSection };
-          error: null | string;
-        }>(["playlist", id])!;
+        const queryData = queryClient.getQueryData<ListSongsReturn>([
+          "playlist",
+          id,
+        ]);
 
-        if (!playlistData) return;
+        if (!queryData) return;
+        if (!queryData.data) return;
+        if (!queryData.data.songs) return;
+        const playlistData = queryData.data;
         const { songs } = playlistData;
-        if (!songs) return;
-        const { idArray, songs: scope_songs } = songs;
-        const didFirstIdRemoving = idArray[0] === variables.id;
+        if (!songs.songs) return;
+        const { songs: scope_songs } = songs;
+        const didFirstIdRemoving = scope_songs.idArray[0] === variables.id;
         if (didFirstIdRemoving) {
           queryClient.setQueryData(
             ["user-library"],
-            (
-              oldData:
-                | {
-                    data: {
-                      userLib: Record<string, navbarList> & {
-                        idArray: string[];
-                      };
-                    };
-                    error: null | string;
-                  }
-                | undefined,
-            ) => {
-              if (!oldData) return oldData;
+            (oldData: UserLibReturn | undefined) => {
+              if (!oldData || !oldData.data || !oldData.data.userLib)
+                return oldData;
 
-              const cover_url = idArray[1]
-                ? scope_songs[idArray[1]].cover_url
+              const cover_url = scope_songs.idArray[1]
+                ? scope_songs.byId[scope_songs.idArray[1]].cover_url
                 : null;
               const updatedUserLib = {
                 ...oldData.data.userLib,
                 [id]: {
-                  ...oldData.data.userLib[id],
+                  ...oldData.data.userLib.byId[id],
                   cover_url,
                 },
               };

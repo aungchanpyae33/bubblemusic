@@ -1,5 +1,4 @@
 "use client";
-import { getArtistPageProps } from "@/database/data";
 import {
   currentSongPlaylistAction,
   DirectPlayBackAction,
@@ -22,12 +21,13 @@ import {
 } from "@/lib/zustand";
 import IconWrapper from "../IconWrapper";
 import { Pause, Play } from "lucide-react";
+import type { ListSongPage } from "@/database/data-types-return";
 
 interface ListContainerPlayBackProps {
-  list: getArtistPageProps["songs"];
+  list: ListSongPage;
 }
 function ListContainerPlayBack({ list }: ListContainerPlayBackProps) {
-  const playListId = list!.id;
+  const playListId = list.id;
   const IsPlayList = useDirectPlayBack(
     (state: DirectPlayBackState) => state.IsPlayList[playListId || ""],
   );
@@ -58,8 +58,9 @@ function ListContainerPlayBack({ list }: ListContainerPlayBackProps) {
   const setIsFallBackAudio = useInstantFallBackAudioFull(
     (state: isFallBackAudioActions) => state.setIsFallBackAudio,
   );
-  if (list?.idArray.length === 0) return null; // no render the toggle playback
+  if (!list.songs) return null; // no render the toggle playback
   const handlePlayClick = async () => {
+    if (!list.songs) return null; // no render the toggle playback)
     setIsFallBackAudio(); //fallback dynamic import
     FetchSongsListIdAction(undefined);
     if (list) {
@@ -76,9 +77,9 @@ function ListContainerPlayBack({ list }: ListContainerPlayBackProps) {
         cover_url,
       } = (() => {
         if (playlistId) {
-          return list.songs[id_scope];
+          return list.songs.byId[id_scope];
         }
-        return list.songs[list.idArray[0]];
+        return list.songs.byId[list.songs.idArray[0]];
       })();
       const uniUrl = id;
       setPlayListArray({

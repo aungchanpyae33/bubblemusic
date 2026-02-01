@@ -1,4 +1,4 @@
-import { valueProps } from "@/lib/CustomHooks/AudioSeek";
+import type { valueProps } from "@/lib/CustomHooks/useAudioSeek";
 import { RefObject } from "react";
 
 function AudioProgressbar({

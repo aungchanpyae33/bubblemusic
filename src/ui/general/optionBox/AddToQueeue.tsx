@@ -26,10 +26,13 @@ function AddToQueue() {
   if (!song || !id) return null;
   const uuid = generateUUID();
   const addUniIdSong = {
-    [uuid]: {
-      ...song,
-      id: uuid,
+    byId: {
+      [uuid]: {
+        ...song,
+        id: uuid,
+      },
     },
+    idArray: [uuid],
   };
   const queueSong = addUniIdSong && addUniIdSong;
   function addToQueue() {

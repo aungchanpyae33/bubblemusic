@@ -1,7 +1,7 @@
-import { listInfo } from "@/database/data";
 import { outputRelatedType } from "@/lib/prototypeOuputRelatedType";
 import OfficialBadgeName from "@/ui/albumContainer/OfficialBadgeName";
 import UnderLineLinkHover from "@/ui/general/UnderLineLinkHover";
+import type { listInfo } from "../../../../database.types-fest";
 
 function InfoList({
   type,

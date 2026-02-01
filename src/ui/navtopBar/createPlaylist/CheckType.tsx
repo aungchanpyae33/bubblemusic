@@ -10,8 +10,8 @@ function CheckType({ id }: { id: string }) {
   const { data, error } = queryData || {};
   if (!data || error) return;
   const { userLib } = data;
-
-  const is_public = userLib[id].is_public;
+  if (!userLib) return;
+  const is_public = userLib.byId[id].is_public;
   const checkType = is_public ? "အများ" : "သီးသန့်";
   return (
     <fieldset className=" my-2">

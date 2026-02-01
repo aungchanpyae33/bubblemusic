@@ -1,5 +1,5 @@
-import { SongInfo } from "@/database/data";
 import UnderLineLinkHover from "@/ui/general/UnderLineLinkHover";
+import type { SongInfo } from "../../../../database.types-fest";
 
 function InfoSong({ songInfo }: { songInfo: SongInfo }) {
   const artists = songInfo.artists;

@@ -2,18 +2,20 @@ import SearchContainer from "./SearchContainer";
 import SearchListContainerTitle from "./SearchListContainerTitle";
 import SearchListContainer from "./SearchListContainer";
 import SearchListContainerItem from "./SearchListContainerItem";
-import { getSearchPageReturn } from "@/database/data";
+import type { GetSearchPage } from "@/database/data-types-return";
+
 interface SearchPlaylistProps {
   title: string;
-  playlists: getSearchPageReturn["playlists"];
+  playlists: GetSearchPage["playlists"];
 }
 function SearchPlaylist({ title, playlists }: SearchPlaylistProps) {
+  if (!playlists || playlists.idArray.length === 0) return;
   return (
     <SearchContainer>
       <SearchListContainerTitle title={title} />
       <SearchListContainer>
-        {playlists?.idArray.map((id, index) => {
-          const item = playlists[id];
+        {playlists.idArray.map((id, index) => {
+          const item = playlists.byId[id];
           return (
             <SearchListContainerItem
               key={item.id}

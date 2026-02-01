@@ -1,5 +1,7 @@
-import { listSongsSection } from "@/database/data";
-import excludeCurrentSongs from "@/lib/excludeCurrentSongs";
+import type { ListSongPage } from "@/database/data-types-return";
+import excludeCurrentSongs, {
+  excludeCurrentSongsList,
+} from "@/lib/excludeCurrentSongs";
 import outputCurrentIndex from "@/lib/OutputCurrentIndex";
 import shufflePlaylist from "@/lib/shufflePlaylist";
 import {
@@ -16,14 +18,14 @@ import clsx from "clsx";
 import { Shuffle } from "lucide-react";
 import { useState } from "react";
 interface Props extends React.ComponentProps<"button"> {
-  listSong: listSongsSection;
+  listSong: ListSongPage;
   id: string;
 }
 function AudioFunctionShuffle({ className, listSong, id }: Props) {
   const [isShuffle, setIsShuffle] = useState(false);
   const previousPlayListArray = usePreviousPlayList(
     (state: previousSongPlaylist) => state.previousPlayListArray,
-  ) as listSongsSection;
+  ) as ListSongPage;
 
   const playlistId = useStorePlayListId(
     (state: StorePlayListIdState) => Object.values(state.playlistId)[0] || [],
@@ -37,12 +39,14 @@ function AudioFunctionShuffle({ className, listSong, id }: Props) {
   );
 
   function shuffle() {
-    if (!listSong.idArray || listSong.idArray.length === 0) return;
+    if (!listSong || !listSong.songs || listSong.songs.idArray.length === 0)
+      return;
 
-    const currentIndex = outputCurrentIndex(listSong.idArray, id);
-    const currentSong = listSong.idArray[currentIndex];
+    const currentIndex = outputCurrentIndex(listSong.songs.idArray, id);
+    const currentSong = listSong.songs.idArray[currentIndex];
+
     const excludeCurrentSongsArray = excludeCurrentSongs(
-      listSong,
+      listSong as excludeCurrentSongsList,
       currentIndex,
     );
     const shufflePlaylistOutput = shufflePlaylist(

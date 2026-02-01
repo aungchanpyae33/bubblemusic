@@ -6,13 +6,12 @@ import MoreOptionContext from "../trackComponent/MoreOptionContext";
 import LeadingRelax from "../general/LeadingRelax";
 import DirectPlayButton from "../playlist/DirectPlayButton";
 import Image from "next/image";
-import { listInfo } from "@/database/data";
 import { outputRelatedType } from "@/lib/prototypeOuputRelatedType";
 import UnderLineLinkHover from "../general/UnderLineLinkHover";
 import IconWrapper from "../general/IconWrapper";
 import { Folder } from "lucide-react";
 import VerticalThreeDots from "../general/icon/VerticalThreeDots";
-
+import type { listInfo } from "../../../database.types-fest";
 import { outputRelative } from "@/lib/outputRelative";
 interface SearchListContainerItemProps {
   description: string;

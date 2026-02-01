@@ -1,27 +1,26 @@
 "use server";
-
-import { getPlaylistPageProps } from "@/database/data";
+import type { ListSongsReturn } from "@/database/data-types-return";
 import { createClient } from "@/database/server";
-import { deepMapById } from "@/lib/returnById";
-import type { PostgrestError } from "@supabase/supabase-js";
+import { normalizeById } from "@/lib/returnById";
+
 export const removeSongsFromPlaylist = async ({
   playlistId,
   id,
 }: {
   playlistId: string;
   id: string;
-}): Promise<{
-  data: getPlaylistPageProps | null;
-  error: PostgrestError | unknown | null;
-}> => {
+}): Promise<ListSongsReturn> => {
   try {
     const supabase = await createClient();
-    const { data, error } = (await supabase.rpc("delete_playlist_song", {
+    const { data, error } = await supabase.rpc("delete_playlist_song", {
       p_id: playlistId,
       target_id: id,
-    })) as { data: getPlaylistPageProps | null; error: PostgrestError | null };
-
-    const mappedData = data ? deepMapById(data, ["songs.songs"]) : null;
+    });
+    if (error) throw error;
+    if (!data) throw new Error("not success");
+    const mappedData = {
+      songs: { ...data.songs, songs: normalizeById(data.songs.songs) },
+    };
     return { data: mappedData, error };
   } catch (error) {
     return { data: null, error };

@@ -1,6 +1,7 @@
 import React, { RefObject } from "react";
-import type { tooltipState } from "../CustomHooks/TooltipOverflow";
+
 import { pointerPosition } from "@/ui/general/ToolTip";
+import type { tooltipState } from "../CustomHooks/useTooltipOverflow";
 interface closeTooltipProp {
   setTimeoutRef: RefObject<ReturnType<typeof setTimeout> | null>;
   tooltipShow: tooltipState;

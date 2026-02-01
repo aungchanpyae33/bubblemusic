@@ -1,9 +1,11 @@
 "use client";
 
 import { getUserLibClient } from "@/database/client-data";
-import { navbarList, SongInfo } from "@/database/data";
 import { useQuery } from "@tanstack/react-query";
 import { createContext } from "react";
+import type { SongInfo } from "../../../database.types-fest";
+import type { NavbarList } from "@/database/data-types-return";
+import { NormalizedById } from "@/lib/returnById";
 
 interface songContext {
   song: SongInfo | undefined;
@@ -21,14 +23,12 @@ export const InfoTrackContext = createContext<InfoTrackContextProps>({
 });
 
 function getSourceType(
-  userLib: Record<string, navbarList> & {
-    idArray: string[];
-  },
+  userLib: NormalizedById<NavbarList>,
   source: "create" | "reference" | "none" | undefined,
   id: string | undefined,
 ) {
   if (source) {
-    const { source } = userLib[id || ""] ?? { source: "none" };
+    const { source } = userLib.byId[id || ""] ?? { source: "none" };
     return source;
   }
   return source;
@@ -53,6 +53,7 @@ function ContextInfoTrack({
   const { data, error } = queryData || {};
   if (!data || error) return;
   const { userLib } = data;
+  if (!userLib) return;
   const sourceType = getSourceType(userLib, source, id);
   const value = { id, song, source: sourceType };
   return (

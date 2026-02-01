@@ -23,8 +23,8 @@ function EditContentBox() {
   );
   const [isPending, startTransition] = useTransition();
   const mutation = useEditPlaylistMutate();
-  function handleEdit(id: string, updateName: string, check_type: boolean) {
-    mutation.mutate({ playlistId: id, playlistName: updateName, check_type });
+  function handleEdit(id: string, updateName: string, p_is_public: boolean) {
+    mutation.mutate({ playlistId: id, playlistName: updateName, p_is_public });
   }
   return (
     <Form

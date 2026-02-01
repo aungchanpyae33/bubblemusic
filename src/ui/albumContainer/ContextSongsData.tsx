@@ -1,11 +1,12 @@
 "use client";
-import type { getPlaylistPageProps } from "@/database/data";
+
 import { createContext, type ReactNode } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getPlaylistSongsClient } from "@/database/client-data";
+import type { ListSongPage } from "@/database/data-types-return";
 
 interface SongsDataContextType {
-  songsData: getPlaylistPageProps["songs"];
+  songsData: ListSongPage | null;
 }
 
 export const SongsDataContext = createContext<SongsDataContextType>({
@@ -26,7 +27,6 @@ function ContextSongsData({
   if (queryError) return;
   const { data, error } = queryData || {};
   if (!data || error) {
-    console.error("error");
     return null;
   }
 

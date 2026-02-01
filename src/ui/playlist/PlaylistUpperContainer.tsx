@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { SongListContext } from "./playlistOption/ContextSongListContainer";
 import AlbumImg from "../albumContainer/AlbumImg";
 import InfoList from "../searchPage/topResult/InfoList";
-import { listSongsSection } from "@/database/data";
+import type { ListSongPage } from "@/database/data-types-return";
 
 function PlaylistUpperContainer({
   deviceFromUserAgent,
@@ -20,7 +20,7 @@ function PlaylistUpperContainer({
     | "embedded";
 }) {
   const { name, type, cover_url, is_official, related_id, related_name } =
-    useContext(SongListContext) as listSongsSection;
+    useContext(SongListContext) as ListSongPage;
   return (
     <div
       className={clsx("Container w-full flex  items-center p-5 ", {

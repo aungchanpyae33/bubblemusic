@@ -1,27 +1,25 @@
 "use server";
-
-import { listSongsSection, UserLibMappedProps } from "@/database/data";
+import type { UserLibReturn } from "@/database/data-types-return";
 import { createClient } from "@/database/server";
-import { deepMapById } from "@/lib/returnById";
+import type { listSongsSection } from "../../database.types-fest";
+import { normalizeById } from "@/lib/returnById";
 
 export const addToLibrary = async (
   id: string,
   type: listSongsSection["type"],
-): Promise<{
-  data: UserLibMappedProps | null;
-  error: unknown;
-}> => {
+): Promise<UserLibReturn> => {
   try {
     const supabase = await createClient();
     const { data, error } = await supabase.rpc("add_to_library", {
       p_item_id: id,
       p_item_type: type,
     });
+    if (error) throw error;
+    if (!data) throw new Error("not success");
     const userLib = {
-      userLib: data,
+      userLib: normalizeById(data),
     };
-    const mappedData = deepMapById(userLib, ["userLib"]);
-    return { data: mappedData, error };
+    return { data: userLib, error };
   } catch (error) {
     return { data: null, error };
   }

@@ -7,9 +7,9 @@ import ContextInfoTrack from "@/ui/trackComponent/ContextInfoTrack";
 import MoreOptionContext from "@/ui/trackComponent/MoreOptionContext";
 import TrackItemContainer from "@/ui/trackComponent/TrackItemContainer";
 import MoreOption from "@/ui/trackComponent/MoreOption";
-import { SongInfo } from "@/database/data";
 import ContextLike from "@/ui/trackComponent/ContextLike";
 import VerticalThreeDots from "../icon/VerticalThreeDots";
+import type { SongInfo } from "../../../../database.types-fest";
 
 function SongListItem({ song }: { song: SongInfo }) {
   return (

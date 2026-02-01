@@ -1,4 +1,3 @@
-import { listInfo } from "@/database/data";
 import SongListContainerOption from "../general/optionBox/SongListContainerOption";
 import ContextSongListContainer from "../playlist/playlistOption/ContextSongListContainer";
 import MoreOption from "../trackComponent/MoreOption";
@@ -10,7 +9,7 @@ import SearchItemWrapper from "./SearchItemWrapper";
 import UnderLineLinkHover from "../general/UnderLineLinkHover";
 import { outputRelatedType } from "@/lib/prototypeOuputRelatedType";
 import VerticalThreeDots from "../general/icon/VerticalThreeDots";
-
+import type { listInfo } from "../../../database.types-fest";
 import { outputRelative } from "@/lib/outputRelative";
 
 interface SearchAlbumItemProps {

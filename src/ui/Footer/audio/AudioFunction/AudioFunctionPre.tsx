@@ -1,4 +1,4 @@
-import { listSongsSection } from "@/database/data";
+import type { ListSongPage } from "@/database/data-types-return";
 import outputCurrentIndex from "@/lib/OutputCurrentIndex";
 
 import {
@@ -18,7 +18,7 @@ import IconWrapper from "@/ui/general/IconWrapper";
 import { SkipBack } from "lucide-react";
 
 interface Props extends React.ComponentProps<"button"> {
-  listSong: listSongsSection;
+  listSong: ListSongPage;
   id: string;
 }
 function AudioFunctionPre({ listSong, className, id }: Props) {
@@ -37,8 +37,9 @@ function AudioFunctionPre({ listSong, className, id }: Props) {
   );
 
   function songFunctionPre(id_scope = id) {
-    if (!listSong.songs || listSong.idArray.length === 0) return;
-    const currentIndex = outputCurrentIndex(listSong.idArray, id_scope);
+    if (!listSong || !listSong.songs || listSong.songs.idArray.length === 0)
+      return;
+    const currentIndex = outputCurrentIndex(listSong.songs.idArray, id_scope);
     const songList = listSong.songs;
     if (currentIndex <= 0) return;
     const {
@@ -52,7 +53,7 @@ function AudioFunctionPre({ listSong, className, id }: Props) {
       artists,
       is_lyric,
       cover_url,
-    } = songList[listSong.idArray[currentIndex - 1]];
+    } = songList.byId[listSong.songs.idArray[currentIndex - 1]];
 
     const uniUrl = id;
     updateSongCu({

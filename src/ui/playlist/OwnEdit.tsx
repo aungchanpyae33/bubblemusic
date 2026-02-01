@@ -5,7 +5,6 @@ import {
 } from "@tanstack/react-query";
 import AlbumUpperBackground from "../albumContainer/AlbumUpperBackground";
 import ContextSongListContainer from "./playlistOption/ContextSongListContainer";
-import { listSongsSection } from "@/database/data";
 import ListContainer from "../general/ListContainerOption/ListContainer";
 import ListContainerPlayBack from "../general/ListContainerOption/ListContainerPlayBack";
 import ListContainerAddToLibrary from "../general/ListContainerOption/ListContainerAddToLibrary";
@@ -15,6 +14,7 @@ import SongListContainerOption from "../general/optionBox/SongListContainerOptio
 import EditableAudiosContainer from "../albumContainer/EditableAudiosContainer";
 import PlaylistUpperWrapper from "./PlaylistUpperWrapper";
 import VerticalThreeDots from "../general/icon/VerticalThreeDots";
+import type { ListSongPage } from "@/database/data-types-return";
 import { outputRelative } from "@/lib/outputRelative";
 
 function OwnEdit({
@@ -24,7 +24,7 @@ function OwnEdit({
   description,
 }: {
   queryClient: QueryClient;
-  songs: listSongsSection;
+  songs: ListSongPage;
   id: string;
   description: string;
 }) {

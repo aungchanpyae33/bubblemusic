@@ -1,5 +1,5 @@
-import { Artist } from "@/database/data";
 import { useEffect } from "react";
+import type { Artist } from "../../../../database.types-fest";
 const MediaSessionDes = (name: string, artists: Artist[]) => {
   // console.log(urlSongs)
   useEffect(() => {

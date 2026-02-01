@@ -1,4 +1,3 @@
-import { listInfo, listSongsSection } from "@/database/data";
 import SongListContainerOption from "../general/optionBox/SongListContainerOption";
 import ContextSongListContainer from "../playlist/playlistOption/ContextSongListContainer";
 import MoreOption from "../trackComponent/MoreOption";
@@ -9,12 +8,13 @@ import DirectPlayButton from "../playlist/DirectPlayButton";
 import SearchItemWrapper from "./SearchItemWrapper";
 import UnderLineLinkHover from "../general/UnderLineLinkHover";
 import VerticalThreeDots from "../general/icon/VerticalThreeDots";
+import type { SearchItem } from "../../../database.types-fest";
 import { outputRelative } from "@/lib/outputRelative";
 
 interface SearchArtistItemProps {
   description: string;
   index: number;
-  Itemdata: listInfo;
+  Itemdata: SearchItem;
 }
 function SearchArtistItem({
   description,

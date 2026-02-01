@@ -3,17 +3,17 @@
 import Image from "next/image";
 import { useContext, useRef } from "react";
 import { ContextAlbum } from "./AlbumUpperBackground";
-import { listInfo } from "@/database/data";
 import IconWrapper from "../general/IconWrapper";
 import { Folder } from "lucide-react";
 import useGetDominantColor from "@/lib/CustomHooks/useGetDominantColor";
+import type { listSongsSection } from "../../../database.types-fest";
 
 function AlbumImg({
   cover_url,
   type,
 }: {
   cover_url: string | null;
-  type: listInfo["type"];
+  type: listSongsSection["type"];
 }) {
   const imgRef = useRef<HTMLImageElement | null>(null);
   const { setBgValue } = useContext(ContextAlbum);

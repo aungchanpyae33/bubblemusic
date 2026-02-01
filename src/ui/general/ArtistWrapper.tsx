@@ -1,7 +1,7 @@
-import { Artist } from "@/database/data";
 import UnderLineLinkHover from "./UnderLineLinkHover";
 import ToolTip from "./ToolTip";
 import { twMerge } from "tailwind-merge";
+import type { Artist } from "../../../database.types-fest";
 const baseStyle = " text-sm truncate";
 interface ArtistWrapperProps extends React.ComponentProps<"div"> {
   artists: Artist[];

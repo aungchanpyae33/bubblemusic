@@ -2,7 +2,6 @@ import { TimeFormat } from "@/lib/TimeFormat";
 import ToggleElement from "../Footer/audio/Toggle/ToggleElement";
 import ToolTip from "../general/ToolTip";
 import ToggleHeartButton from "./ToggleHeartButton";
-import { listSongsSection, SongInfo } from "@/database/data";
 import MoreOptionContext from "./MoreOptionContext";
 import MoreOption from "./MoreOption";
 import LeadingRelax from "../general/LeadingRelax";
@@ -13,6 +12,8 @@ import ContextInfoTrack from "./ContextInfoTrack";
 import ContextLike from "./ContextLike";
 import Image from "next/image";
 import VerticalThreeDots from "../general/icon/VerticalThreeDots";
+import type { ListSongPage } from "@/database/data-types-return";
+import type { SongInfo } from "../../../database.types-fest";
 
 function Track({
   listSong,
@@ -21,7 +22,7 @@ function Track({
 }: // roleCell,
 // dataInc,
 {
-  listSong: listSongsSection;
+  listSong: ListSongPage;
   song: SongInfo;
   index: number;
   // roleCell: RefObject<number>;

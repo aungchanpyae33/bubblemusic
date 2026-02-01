@@ -1,4 +1,5 @@
-import { Artist, listSongsSection, SongInfo } from "@/database/data";
+import type { Artist, SongInfo } from "../../database.types-fest";
+import type { ListSongPage } from "@/database/data-types-return";
 import { RefObject } from "react";
 import { createWithEqualityFn as create } from "zustand/traditional";
 import { persist } from "zustand/middleware";
@@ -55,7 +56,7 @@ export interface ShouldFetchSongsListIdAction {
   ) => void;
 }
 export interface currentSongPlaylist {
-  playListArray: listSongsSection | object;
+  playListArray: Record<string, ListSongPage>;
 }
 
 export interface currentSongPlaylistAction {
@@ -66,12 +67,12 @@ export interface currentSongPlaylisthuffleAction {
   shufflePlayListArray: (nweList: currentSongPlaylist["playListArray"]) => void;
 }
 export interface currentAddToQueueAction {
-  currentAddToQueue: (song: Record<string, SongInfo>, id: string[]) => void;
+  currentAddToQueue: (songs: NormalizedById<SongInfo>, id: string[]) => void;
 }
 
 export interface currentAddToNextAction {
   currentAddToNext: (
-    song: Record<string, SongInfo>,
+    songs: NormalizedById<SongInfo>,
     id: string[],
     curId: string,
   ) => void;
@@ -80,7 +81,7 @@ export interface removeFromQueueAction {
   removeFromQueue: (id: string) => void;
 }
 export interface previousSongPlaylist {
-  previousPlayListArray: listSongsSection | object;
+  previousPlayListArray: ListSongPage | object;
 }
 
 export interface resetAction {
@@ -127,14 +128,14 @@ export interface SongFunctionState {
   Isplay: Record<string, boolean | undefined>;
 }
 export interface SongFunctionActions {
-  setPlay: (key: string, play: boolean | undefined) => void;
+  setPlay: (key: string, play: true | undefined) => void;
 }
 
 export interface DirectPlayBackState {
   IsPlayList: Record<string, boolean | undefined>;
 }
 export interface DirectPlayBackAction {
-  setPlayList: (key: string, play: boolean | undefined) => void;
+  setPlayList: (key: string, play: true | undefined) => void;
 }
 export interface AudioValueState {
   value: number;
@@ -274,88 +275,85 @@ export const useRepeatAndCurrentPlayList = create<
     resetAction
 >()((set, get) => ({
   playListArray: {},
+
   setPlayListArray: (newList) =>
     set((state) => {
-      if (Object.keys(newList)[0] !== Object.keys(state.playListArray)[0]) {
-        return { playListArray: { ...newList } };
-      } else {
-        return state.playListArray;
-      }
-    }),
-  shufflePlayListArray: (newList) =>
-    set(() => {
+      const newKey = Object.keys(newList)[0];
+      const oldKey = Object.keys(state.playListArray)[0];
+      if (newKey === oldKey) return state;
       return { playListArray: { ...newList } };
     }),
-  currentAddToQueue: (song, id) =>
+
+  shufflePlayListArray: (newList) =>
+    set(() => ({ playListArray: { ...newList } })),
+
+  currentAddToQueue: (songs, ids) =>
     set((state) => {
-      const playListArray = (Object.values(state.playListArray)[0] ||
-        undefined) as listSongsSection;
-      const playListArrayKey = Object.keys(state.playListArray)[0] as string;
+      const key = Object.keys(state.playListArray)[0];
+      const playlist = state.playListArray[key];
+      if (!playlist?.songs) return state;
 
-      if (playListArray && "songs" in playListArray) {
-        playListArray.songs = { ...playListArray.songs, ...song };
-
-        return {
-          playListArray: {
-            [playListArrayKey || ""]: {
-              ...playListArray,
-              idArray: [...playListArray.idArray, ...id],
+      return {
+        playListArray: {
+          ...state.playListArray,
+          [key]: {
+            ...playlist,
+            songs: {
+              byId: { ...playlist.songs.byId, ...songs.byId },
+              idArray: [...playlist.songs.idArray, ...ids],
             },
           },
-        };
-      } else {
-        return state;
-      }
+        },
+      };
     }),
-  currentAddToNext: (song, id, curId) =>
-    set((state) => {
-      const playListArray = (Object.values(state.playListArray)[0] ||
-        undefined) as listSongsSection;
-      const playListArrayKey = Object.keys(state.playListArray)[0] as string;
 
-      if (playListArray && "songs" in playListArray) {
-        playListArray.songs = { ...playListArray.songs, ...song };
-        const currentIndex = outputCurrentIndex(playListArray.idArray, curId);
-        if (currentIndex === -1) return state;
-        const newSongs = [...playListArray.idArray];
-        newSongs.splice(currentIndex + 1, 0, ...id);
-        return {
-          playListArray: {
-            [playListArrayKey || ""]: {
-              ...playListArray,
-              idArray: newSongs,
+  currentAddToNext: (songs, ids, curId) =>
+    set((state) => {
+      const key = Object.keys(state.playListArray)[0];
+      const playlist = state.playListArray[key];
+      if (!playlist?.songs) return state;
+
+      const currentIndex = outputCurrentIndex(playlist.songs.idArray, curId);
+      if (currentIndex === -1) return state;
+
+      const nextIds = [...playlist.songs.idArray];
+      nextIds.splice(currentIndex + 1, 0, ...ids);
+
+      return {
+        playListArray: {
+          ...state.playListArray,
+          [key]: {
+            ...playlist,
+            songs: {
+              byId: { ...playlist.songs.byId, ...songs.byId },
+              idArray: nextIds,
             },
           },
-        };
-      } else {
-        return state;
-      }
+        },
+      };
     }),
 
   removeFromQueue: (id) =>
     set((state) => {
-      const playListArray = (Object.values(state.playListArray)[0] ||
-        undefined) as listSongsSection;
-      const playListArrayKey = Object.keys(state.playListArray)[0] as string;
+      const key = Object.keys(state.playListArray)[0];
+      const playlist = state.playListArray[key];
+      if (!playlist?.songs) return state;
 
-      if (playListArray && "songs" in playListArray) {
-        delete playListArray.songs[id];
-        const currentIndex = outputCurrentIndex(playListArray.idArray, id);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { [id]: _, ...restById } = playlist.songs.byId;
 
-        if (currentIndex === -1) return state;
-        const newSongs = [...playListArray.idArray];
-        newSongs.splice(currentIndex, 1);
-        return {
-          playListArray: {
-            [playListArrayKey || ""]: {
-              ...playListArray,
-              idArray: newSongs,
+      return {
+        playListArray: {
+          ...state.playListArray,
+          [key]: {
+            ...playlist,
+            songs: {
+              byId: restById,
+              idArray: playlist.songs.idArray.filter((x) => x !== id),
             },
           },
-        };
-      } else {
-        return state;
-      }
+        },
+      };
     }),
   isRepeat: false,
   setRepeat: () => set((state) => ({ isRepeat: !state.isRepeat })),
@@ -374,17 +372,21 @@ export const useRepeatAndCurrentPlayList = create<
 
     const playlistArray = Object.values(
       get().playListArray,
-    )[0] as listSongsSection;
-    const currentIndex = outputCurrentIndex(playlistArray.idArray, id);
+    )[0] as excludeCurrentSongsList;
+
+    const currentIndex = outputCurrentIndex(playlistArray.songs.idArray, id);
 
     const extract = Math.min(
       currentIndex + 1,
-      playlistArray.idArray.length - 1,
+      playlistArray.songs.idArray.length - 1,
     );
     const { id: id_scope, url } =
-      playlistArray.songs[playlistArray.idArray[extract]];
+      playlistArray.songs.byId[playlistArray.songs.idArray[extract]];
 
-    if (currentIndex >= playlistArray.idArray.length - 1 && id === id_scope) {
+    if (
+      currentIndex >= playlistArray.songs.idArray.length - 1 &&
+      id === id_scope
+    ) {
       return prefetchPromiseRef.current;
     }
 
@@ -535,6 +537,8 @@ export const useSongsStoreData = create<addSongProps & addSongAction>(
 );
 
 import outputCurrentIndex from "./OutputCurrentIndex";
+import { excludeCurrentSongsList } from "./excludeCurrentSongs";
+import { NormalizedById } from "./returnById";
 
 export interface songExist {
   playlistId: string;
@@ -643,6 +647,7 @@ export const useSongTrack = create<SongTrackState & SetSongTrackAction>()(
   persist(
     (set) => ({
       songTrack: undefined,
+
       setSongTrack: (songId) =>
         set((state) => {
           if (!songId) return state;
@@ -658,21 +663,19 @@ export const useSongTrack = create<SongTrackState & SetSongTrackAction>()(
 
           if (state.songTrack.count >= 5) {
             return {
-              songTrack: {
-                count: 1,
-                songsId: [songId],
-              },
+              songTrack: { count: 1, songsId: [songId] },
             };
           }
 
           if (state.songTrack.songsId.includes(songId)) {
             return {
               songTrack: {
-                count: ++state.songTrack.count,
+                count: state.songTrack.count + 1,
                 songsId: state.songTrack.songsId,
               },
             };
           }
+
           return {
             songTrack: {
               count: state.songTrack.count + 1,

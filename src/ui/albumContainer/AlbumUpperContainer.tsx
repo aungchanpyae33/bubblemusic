@@ -1,10 +1,11 @@
 import { DeviceCheck } from "@/lib/DeviceCheck";
 import clsx from "clsx";
 import AlbumImg from "./AlbumImg";
-import { listSongsSection } from "@/database/data";
-import InfoList from "../searchPage/topResult/InfoList";
 
-async function AlbumUpperContainer({ songs }: { songs: listSongsSection }) {
+import InfoList from "../searchPage/topResult/InfoList";
+import type { ListSongPage } from "@/database/data-types-return";
+
+async function AlbumUpperContainer({ songs }: { songs: ListSongPage }) {
   const deviceFromUserAgent = await DeviceCheck();
 
   const is_official_exist = songs?.is_official;

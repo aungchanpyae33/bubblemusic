@@ -13,8 +13,10 @@ import type {
   DirectPlayBackAction,
   StorePlayListIdStateAction,
 } from "../../zustand";
-import { Artist, listSongsSection } from "@/database/data";
+
 import outputCurrentIndex from "@/lib/OutputCurrentIndex";
+import type { ListSongPage } from "@/database/data-types-return";
+import type { Artist } from "../../../../database.types-fest";
 
 const MediaSessionButton = (
   id_scope: string,
@@ -29,7 +31,7 @@ const MediaSessionButton = (
   // );
   const playListArray = useRepeatAndCurrentPlayList(
     (state: currentSongPlaylist) => Object.values(state.playListArray)[0] || [],
-  ) as listSongsSection;
+  ) as ListSongPage;
   // console.log(playListArray, "i am playlist");
   const setPlay = useSongFunction(
     (state: SongFunctionActions) => state.setPlay,
@@ -87,9 +89,14 @@ const MediaSessionButton = (
     }
     if ("mediaSession" in navigator) {
       navigator.mediaSession.setActionHandler("previoustrack", () => {
-        if (!playListArray || playListArray.idArray.length === 0) return;
+        if (
+          !playListArray ||
+          !playListArray.songs ||
+          playListArray.songs.idArray.length === 0
+        )
+          return;
         const currentIndex = outputCurrentIndex(
-          playListArray.idArray,
+          playListArray.songs.idArray,
           id_scope,
         );
         if (currentIndex <= 0) return;
@@ -105,7 +112,10 @@ const MediaSessionButton = (
           artists,
           is_lyric,
           cover_url,
-        } = playListArray.songs[playListArray.idArray[currentIndex - 1]];
+        } =
+          playListArray.songs.byId[
+            playListArray.songs.idArray[currentIndex - 1]
+          ];
         MediaSessionButtonTaks({
           url,
           sege,
@@ -120,12 +130,17 @@ const MediaSessionButton = (
         });
       });
       navigator.mediaSession.setActionHandler("nexttrack", () => {
-        if (!playListArray || playListArray.idArray.length === 0) return;
+        if (
+          !playListArray ||
+          !playListArray.songs ||
+          playListArray.songs.idArray.length === 0
+        )
+          return;
         const currentIndex = outputCurrentIndex(
-          playListArray.idArray,
+          playListArray.songs.idArray,
           id_scope,
         );
-        if (currentIndex >= playListArray.idArray.length - 1) return;
+        if (currentIndex >= playListArray.songs.idArray.length - 1) return;
         const {
           url,
           sege,
@@ -137,7 +152,10 @@ const MediaSessionButton = (
           artists,
           is_lyric,
           cover_url,
-        } = playListArray.songs[playListArray.idArray[currentIndex + 1]];
+        } =
+          playListArray.songs.byId[
+            playListArray.songs.idArray[currentIndex + 1]
+          ];
         MediaSessionButtonTaks({
           url,
           sege,

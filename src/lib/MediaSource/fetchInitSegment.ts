@@ -1,5 +1,5 @@
 import { RefObject } from "react";
-import { FetchingState } from "../CustomHooks/MediaSourceBuffer";
+import type { FetchingState } from "../CustomHooks/useMediaSourceBuffer";
 
 export const fetchInitSegment = async (
   url: string,

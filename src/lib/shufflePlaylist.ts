@@ -1,11 +1,11 @@
-import { listSongsSection } from "@/database/data";
+import type { ListSongPage } from "@/database/data-types-return";
 
 const shufflePlaylist = (
   array: string[],
   isShuffle: boolean,
-  listProp: listSongsSection,
+  listProp: ListSongPage,
   currentSongs: string,
-  previousPlayListArray: listSongsSection,
+  previousPlayListArray: ListSongPage,
 ) => {
   const newCopyArray = array.slice();
   for (let i = newCopyArray.length - 1; i > 0; i--) {

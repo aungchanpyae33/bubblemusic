@@ -1,8 +1,8 @@
 import { DeviceCheck } from "@/lib/DeviceCheck";
 import clsx from "clsx";
-import { SongInfo } from "@/database/data";
 import InfoSong from "../searchPage/topResult/InfoSong";
 import AlbumImg from "../albumContainer/AlbumImg";
+import type { SongInfo } from "../../../database.types-fest";
 
 async function TrackUpperContainer({ songs }: { songs: SongInfo }) {
   const deviceFromUserAgent = await DeviceCheck();

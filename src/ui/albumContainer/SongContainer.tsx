@@ -7,12 +7,13 @@ import { SongsDataContext } from "./ContextSongsData";
 
 function SongContainer() {
   const { songsData } = useContext(SongsDataContext);
-
+  if (!songsData || !songsData.songs) return;
+  const songsList = songsData.songs;
   return (
     <tbody className=" ">
-      {songsData &&
-        songsData.idArray.map((id, index) => {
-          const item = songsData.songs[`${id}`];
+      {songsList &&
+        songsList.idArray.map((id, index) => {
+          const item = songsList.byId[`${id}`];
           if (!item) return;
           return (
             //need to test playlist url when click track of toggleElement

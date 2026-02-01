@@ -11,6 +11,7 @@ function AddSongContent() {
   const { data, error } = queryData || {};
   if (!data || error) return;
   const { userLib } = data;
+  if (!userLib) return;
   return (
     <div className=" space-y-4">
       <h2 className=" py-2 border-b border-gray-200">
@@ -19,7 +20,7 @@ function AddSongContent() {
 
       {userLib.idArray.length > 0 &&
         userLib.idArray.map((id) => {
-          const item = userLib[id];
+          const item = userLib.byId[id];
           if (item.source !== "create") return;
           return <AddSongItem key={item.id} playlistSongs={item} />;
         })}

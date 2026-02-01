@@ -22,7 +22,9 @@ async function page(props: { params: Promise<{ track: string }> }) {
   if (!data || error) return;
   const { songs } = data;
   if (!songs) return;
-  const songsInfo = songs?.songs[track];
+  if (!songs.songs) return;
+
+  const songsInfo = songs.songs.byId[track];
 
   return (
     <div className=" w-full">

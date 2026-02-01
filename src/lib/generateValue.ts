@@ -1,13 +1,9 @@
-import {
-  listInfo,
-  listSongsSection,
-  navbarList,
-  SearchProfile,
-} from "@/database/data";
+import type { NavbarList } from "@/database/data-types-return";
+import type { listInfo, listSongsSection } from "../../database.types-fest";
 
 export const generateValue = (
-  isDataExist: navbarList,
-  list: listInfo | SearchProfile | listSongsSection,
+  isDataExist: NavbarList,
+  list: listInfo | listSongsSection,
 ) => {
   if (isDataExist) {
     return { ...list, ...isDataExist };

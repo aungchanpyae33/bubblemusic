@@ -7,7 +7,6 @@ import {
 } from "@/lib/zustand";
 import clsx from "clsx";
 import ToggleElement from "../Footer/audio/Toggle/ToggleElement";
-import { listSongsSection } from "@/database/data";
 import Image from "next/image";
 import MoreOptionContext from "../trackComponent/MoreOptionContext";
 import MoreOption from "../trackComponent/MoreOption";
@@ -23,17 +22,22 @@ import QueueLoader from "./QueueLoader";
 import { motion } from "motion/react";
 import VerticalThreeDots from "../general/icon/VerticalThreeDots";
 import outputCurrentIndex from "@/lib/OutputCurrentIndex";
+import type { ListSongPage } from "@/database/data-types-return";
 function QueueFull() {
   const playListArray = useRepeatAndCurrentPlayList(
     (state: currentSongPlaylist) => Object.values(state.playListArray)[0] || [],
-  ) as listSongsSection;
+  ) as ListSongPage;
   const dataSongId = useSong(
     (state: SongState) => (state.songCu as Record<string, string>).id,
   );
   const scrollRef = useRef<HTMLElement>(null);
-  const currendIndex = outputCurrentIndex(playListArray.idArray, dataSongId);
-  const trimArray = playListArray.idArray.slice(currendIndex);
   const { audioFullRef } = useContext(AudioFullRefContext);
+  if (!playListArray || !playListArray.songs) return;
+  const currendIndex = outputCurrentIndex(
+    playListArray.songs.idArray,
+    dataSongId,
+  );
+  const trimArray = playListArray.songs.idArray.slice(currendIndex);
 
   if (!trimArray?.length) return null;
 
@@ -62,8 +66,9 @@ function QueueFull() {
           className=" will-change-scroll no-scrollbar"
           totalCount={trimArray.length}
           itemContent={(index) => {
+            if (!playListArray || !playListArray.songs) return;
             const id = trimArray[index];
-            const item = playListArray.songs[id];
+            const item = playListArray.songs.byId[id];
             return (
               <div
                 key={item.id}

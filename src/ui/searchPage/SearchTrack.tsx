@@ -9,9 +9,9 @@ import MoreOption from "../trackComponent/MoreOption";
 import TrackItemContainer from "../trackComponent/TrackItemContainer";
 import Image from "next/image";
 import SearchItemWrapper from "./SearchItemWrapper";
-import { SongInfo } from "@/database/data";
 import ContextLike from "../trackComponent/ContextLike";
 import VerticalThreeDots from "../general/icon/VerticalThreeDots";
+import type { SongInfo } from "../../../database.types-fest";
 
 function SearchTrack({
   song,

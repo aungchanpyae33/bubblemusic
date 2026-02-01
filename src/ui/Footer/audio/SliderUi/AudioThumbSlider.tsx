@@ -1,4 +1,4 @@
-import { valueProps } from "@/lib/CustomHooks/AudioSeek";
+import type { valueProps } from "@/lib/CustomHooks/useAudioSeek";
 
 interface Props extends React.ComponentProps<"span"> {
   value: valueProps["value"];

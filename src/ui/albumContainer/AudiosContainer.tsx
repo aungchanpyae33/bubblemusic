@@ -3,7 +3,7 @@ import TableHeadBgChange from "./TableHeadBgChange";
 import TableHead from "./TableHead";
 import IconWrapper from "../general/IconWrapper";
 import { Clock } from "lucide-react";
-import { listSongsSection } from "@/database/data";
+import type { ListSongPage } from "@/database/data-types-return";
 
 export interface urlProp {
   url: string;
@@ -20,13 +20,14 @@ function AudiosContainer({
   listSong,
 }: {
   description: string;
-  listSong: listSongsSection;
+  listSong: ListSongPage;
 }) {
+  const songs = listSong.songs;
   //for accessbility
   // const dataInc = useRef(0);
   // const rowCell = useRef(1);
 
-  return listSong && listSong.idArray.length > 0 ? (
+  return songs && songs.idArray.length > 0 ? (
     <div className=" w-full isolate">
       <h2 className=" p-4 text-xl">{description}</h2>
       <TableHeadBgChange>
@@ -50,17 +51,18 @@ function AudiosContainer({
           </TableHead>
 
           <tbody>
-            {listSong.idArray.map((id, index) => {
-              const item = listSong.songs[`${id}`];
-              return (
-                <Track
-                  key={item.id}
-                  listSong={listSong}
-                  song={item}
-                  index={index}
-                />
-              );
-            })}
+            {songs &&
+              songs.idArray.map((id, index) => {
+                const item = songs.byId[`${id}`];
+                return (
+                  <Track
+                    key={item.id}
+                    listSong={listSong}
+                    song={item}
+                    index={index}
+                  />
+                );
+              })}
           </tbody>
         </table>
       </TableHeadBgChange>

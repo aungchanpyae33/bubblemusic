@@ -23,6 +23,7 @@ function PlaylistFolderContainer({
   const { data, error } = queryData || {};
   if (!data || error || queryError) return;
   const { userLib } = data;
+  if (!userLib) return;
   return (
     <div className=" relative  w-full h-full overflow-hidden">
       <PlaylistFolderContainerLoader
@@ -42,7 +43,7 @@ function PlaylistFolderContainer({
           totalCount={userLib.idArray.length}
           itemContent={(index) => {
             const id = userLib.idArray[index];
-            const item = userLib[id];
+            const item = userLib.byId[id];
             return (
               <div
                 key={item.id}

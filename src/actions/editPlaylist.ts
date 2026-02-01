@@ -1,30 +1,30 @@
 "use server";
 
 import { createClient } from "@/database/server";
-import { deepMapById } from "@/lib/returnById";
+import { normalizeById } from "@/lib/returnById";
 
 export const editPlaylist = async ({
   playlistId,
   playlistName,
-  check_type,
+  p_is_public,
 }: {
   playlistId: string;
   playlistName: string;
-  check_type: boolean;
+  p_is_public: boolean;
 }) => {
   try {
     const supabase = await createClient();
     const { data, error } = await supabase.rpc("edit_playlist", {
       p_playlist_id: playlistId,
       p_new_name: playlistName,
-      check_type,
+      p_is_public,
     });
+    if (error) throw error;
+    if (!data) throw new Error("not success");
     const userLib = {
-      userLib: data,
+      userLib: normalizeById(data),
     };
-
-    const mappedData = data ? deepMapById(userLib, ["userLib"]) : null;
-    return { data: mappedData, error };
+    return { data: userLib, error };
   } catch (error) {
     console.error("Unexpected error:", error);
     return { data: null, error };

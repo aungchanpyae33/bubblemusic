@@ -1,8 +1,8 @@
 import { DeviceCheck } from "@/lib/DeviceCheck";
 import clsx from "clsx";
-import { listInfo } from "@/database/data";
 import OfficialBadgeName from "../albumContainer/OfficialBadgeName";
 import UserImg from "./UserImg";
+import type { listInfo } from "../../../database.types-fest";
 
 async function UserUpperContainer({ profile }: { profile: listInfo }) {
   const deviceFromUserAgent = await DeviceCheck();

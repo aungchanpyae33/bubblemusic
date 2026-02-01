@@ -7,11 +7,10 @@ import MoreOption from "../trackComponent/MoreOption";
 import SongListContainerOption from "../general/optionBox/SongListContainerOption";
 import SonglistContainerWrapper from "./playlistOption/SonglistContainerWrapper";
 import ContextSongListContainer from "./playlistOption/ContextSongListContainer";
-import { listInfo } from "@/database/data";
 import { outputRelatedType } from "@/lib/prototypeOuputRelatedType";
 import NoThankYouPreFetchLink from "../general/NoThankYouPreFetchLink";
 import VerticalThreeDots from "../general/icon/VerticalThreeDots";
-
+import type { listInfo } from "../../../database.types-fest";
 import { outputRelative } from "@/lib/outputRelative";
 
 interface SonglistsContainerProps {

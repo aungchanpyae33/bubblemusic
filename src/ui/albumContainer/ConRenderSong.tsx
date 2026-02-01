@@ -9,9 +9,11 @@ function ConRenderSong({
   empty: ReactNode;
 }) {
   const { songsData } = useContext(SongsDataContext);
+  if (!songsData || !songsData.songs) return;
+  const songsList = songsData.songs;
   // console.log(songsData);
 
-  return songsData && songsData.idArray.length > 0 ? container : empty;
+  return songsList && songsList.idArray.length > 0 ? container : empty;
 }
 
 export default ConRenderSong;

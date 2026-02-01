@@ -1,9 +1,10 @@
-import { get, getRecentReturn } from "@/database/data";
+import { get } from "@/database/data";
 import Container from "@/ui/albumContainer/Container";
 import RecentlyListContainer from "@/ui/albumContainer/RecentlyListContainer";
 import ListItemContainer from "@/ui/general/ListItemContainer/ListItemContainer";
 import ListItemScrollHz from "@/ui/general/ListItemContainer/ListItemScrollHz";
 import TapNavi from "@/ui/Home/TapNavi";
+import type { GetRecent } from "@/database/data-types-return";
 
 async function page() {
   const { data, error } = await get();
@@ -12,8 +13,9 @@ async function page() {
   return (
     <div className="space-y-3">
       <TapNavi />
-      {(Object.keys(data) as string[]).map((itemKey) => {
-        if (data[itemKey].idArray.length < 1) return null;
+      {(Object.keys(data) as (keyof typeof data)[]).map((itemKey) => {
+        if (!data[itemKey]) return;
+        if (data[itemKey] && data[itemKey].idArray.length === 0) return;
         if (itemKey === "trendingSongs") {
           return (
             <ListItemScrollHz description={itemKey} key={itemKey}>
@@ -25,7 +27,7 @@ async function page() {
           return (
             <RecentlyListContainer
               key={itemKey}
-              songs={data[itemKey] as getRecentReturn[keyof getRecentReturn]}
+              songs={data[itemKey] as GetRecent}
               description={itemKey}
             />
           );

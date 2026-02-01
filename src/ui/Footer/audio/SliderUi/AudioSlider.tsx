@@ -1,4 +1,4 @@
-import { valueProps } from "@/lib/CustomHooks/AudioSeek";
+import type { valueProps } from "@/lib/CustomHooks/useAudioSeek";
 import AudioSeeked from "@/lib/MediaSource/AudioSeeked";
 import { DataContext } from "@/lib/MediaSource/ContextMedia";
 import { AudioDraggingActions, AudioValueActions } from "@/lib/zustand";

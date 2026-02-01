@@ -21,15 +21,14 @@ import {
 import React, { RefObject, useRef } from "react";
 import IconWrapper from "../general/IconWrapper";
 import { Pause, Play } from "lucide-react";
-import { getPlaylistPageProps, listSongsSection } from "@/database/data";
-import type { PostgrestError } from "@supabase/supabase-js";
 import { getListDirectClient } from "@/database/client-data";
 import { Database } from "../../../database.types";
+import type {
+  ListSongPage,
+  ListSongsReturn,
+} from "@/database/data-types-return";
 const hasData = async (
-  dataFromFetch: RefObject<Promise<{
-    data: getPlaylistPageProps | null;
-    error: PostgrestError | unknown | null;
-  }> | null>,
+  dataFromFetch: RefObject<Promise<ListSongsReturn> | null>,
   listId: string,
   type: Database["public"]["Enums"]["media_item_type"],
 ) => {
@@ -44,10 +43,7 @@ interface DirectPlayButtonProps extends React.ComponentProps<"div"> {
   type: Database["public"]["Enums"]["media_item_type"];
 }
 function DirectPlayButton({ listId, type, className }: DirectPlayButtonProps) {
-  const dataFromFetch = useRef<Promise<{
-    data: getPlaylistPageProps | null;
-    error: PostgrestError | unknown | null;
-  }> | null>(null);
+  const dataFromFetch = useRef<Promise<ListSongsReturn> | null>(null);
 
   // toggle playlistfolder
   const IsPlayList = useDirectPlayBack(
@@ -62,9 +58,7 @@ function DirectPlayButton({ listId, type, className }: DirectPlayButtonProps) {
   const playlist_songId = playlistId ? playlistId[1] : undefined;
   const playListArray = useRepeatAndCurrentPlayList(
     (state: currentSongPlaylist) =>
-      (state.playListArray as Record<string, listSongsSection | undefined>)[
-        listId
-      ],
+      (state.playListArray as Record<string, ListSongPage | undefined>)[listId],
   );
 
   const setPlaylistId = useStorePlayListId(
@@ -94,7 +88,8 @@ function DirectPlayButton({ listId, type, className }: DirectPlayButtonProps) {
 
     if (error || !data) return;
     const { songs } = data;
-    if (!songs || songs.idArray.length < 1) return;
+
+    if (!songs || !songs.songs || songs.songs.idArray.length === 0) return;
     return songs;
   }
   const handlePlayClick = async () => {
@@ -102,7 +97,7 @@ function DirectPlayButton({ listId, type, className }: DirectPlayButtonProps) {
     //to reset auto fetch key after playing autogenerate playlist,
     FetchSongsListIdAction(undefined);
     const playlistData = !playlistId ? await getData() : playListArray;
-    if (playlistData) {
+    if (playlistData && playlistData.songs) {
       const {
         url,
         sege,
@@ -116,9 +111,9 @@ function DirectPlayButton({ listId, type, className }: DirectPlayButtonProps) {
         cover_url,
       } = (() => {
         if (playlistId && playlist_songId) {
-          return playlistData.songs[playlist_songId];
+          return playlistData.songs.byId[playlist_songId];
         }
-        return playlistData.songs[playlistData.idArray[0]];
+        return playlistData.songs.byId[playlistData.songs.idArray[0]];
       })();
       const uniUrl = id;
       setPlayListArray({

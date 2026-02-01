@@ -1,5 +1,5 @@
-import { Artist } from "@/database/data";
 import MediaSessionDes from "@/lib/CustomHooks/MediaSession/MediaSessionDescription";
+import type { Artist } from "../../../../../database.types-fest";
 
 function MediaSessionDesWrapper({
   name,

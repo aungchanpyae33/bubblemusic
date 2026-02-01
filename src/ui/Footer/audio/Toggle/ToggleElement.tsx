@@ -1,4 +1,5 @@
 "use client";
+import type { ListSongPage } from "@/database/data-types-return";
 import {
   useDirectPlayBack,
   useInstantFallBackAudioFull,
@@ -21,9 +22,10 @@ import type {
 } from "@/lib/zustand";
 import IconWrapper from "@/ui/general/IconWrapper";
 import { Pause, Play } from "lucide-react";
-import { listSongsSection, SongInfo } from "@/database/data";
+import type { SongInfo } from "../../../../../database.types-fest";
+
 interface toggleElementProp extends React.ComponentProps<"button"> {
-  playlistSong: listSongsSection | undefined;
+  playlistSong: ListSongPage | undefined;
   song: SongInfo;
 }
 const ToggleElement = ({
@@ -86,18 +88,18 @@ const ToggleElement = ({
           });
           FetchSongsListIdAction(undefined);
         } else {
-          const data = {
+          const data: ListSongPage = {
             id: playlistId,
             name: "autogenerate",
             is_official: false,
             related_id: "autogenerate",
-            realted_name: "autogenerate",
-            source: "none",
+            related_name: "autogenerate",
             type: "playlist",
+            cover_url: "autogenerate",
             songs: {
-              [uniUrl]: song,
+              byId: { [uniUrl]: song },
+              idArray: [uniUrl],
             },
-            idArray: [uniUrl],
           };
           setPlayListArray({
             [playlistId || ""]: data,

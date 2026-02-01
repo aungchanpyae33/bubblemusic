@@ -25,7 +25,12 @@ function PlayNextQueue() {
 
   if (!song || !id) return null;
   const uuid = generateUUID();
-  const addUniIdSong = { [uuid]: { ...song, id: uuid } };
+  const addUniIdSong = {
+    byId: {
+      [uuid]: { ...song, id: uuid },
+    },
+    idArray: [uuid],
+  };
   const queueSong = addUniIdSong && addUniIdSong;
   function addToNext() {
     currentAddToNext(queueSong, [uuid], id);

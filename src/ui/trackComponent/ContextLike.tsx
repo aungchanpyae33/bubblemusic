@@ -44,7 +44,8 @@ function ContextLike({
     }
     if (!data || error || queryError) return false;
     const { userLike } = data;
-    const isDataExist = userLike[id];
+
+    const isDataExist = userLike ? userLike.byId[id] : false;
     if (isDataExist) return true;
     return false;
   })();

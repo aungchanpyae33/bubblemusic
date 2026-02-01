@@ -37,7 +37,7 @@ function AddSongItem({
   });
 
   const userLib = queryError ? undefined : queryData?.data?.userLib;
-  const playlist = userLib?.[playlistId];
+  const playlist = userLib?.byId[playlistId];
 
   const isListCover = playlist?.cover_url;
   const noExistCover = isListCover ? null : cover_url;

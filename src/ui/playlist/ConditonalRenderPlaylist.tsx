@@ -20,7 +20,8 @@ function ConditonalRenderPlaylist({
   const { data, error } = queryData || {};
   if (!data || error) return;
   const { userLib } = data;
-  const { source } = userLib[id] ?? { source: "none" };
+  if (!userLib) return;
+  const { source } = userLib.byId[id] ?? { source: "none" };
   return source === "create" ? OwnEdit : View;
 }
 
