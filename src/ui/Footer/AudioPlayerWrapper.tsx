@@ -9,13 +9,13 @@ import dynamic from "next/dynamic";
 const AudioPlayerLazy = dynamic(() => import("./AudioPLayer"), {
   // loading: () => <p className=" bg-red-300 h-[50px]">hello</p>,
 });
-function AudioPlayerWrapper({ children }: { children: React.ReactNode }) {
+function AudioPlayerWrapper() {
   const footerRef = useRef<HTMLDivElement | null>(null);
   const isFullBackAudio = useInstantFallBackAudioFull(
     (state: isFallBackAudioState) => state.isFallBackAudio,
   );
   return (
-    <ContextMediaAudioFull footerNaviRef={children}>
+    <ContextMediaAudioFull>
       {isFullBackAudio && (
         <AudioPlayerLazy footerRef={footerRef} start={isFullBackAudio} />
       )}
