@@ -23,8 +23,6 @@ export interface isDraggingProps {
 interface audioSeekProp {
   sliderRef: RefObject<HTMLDivElement | null>;
   duration: number;
-  isPointer: boolean;
-  isTouchDevice: boolean;
   url: string;
   shouldRun: boolean;
 }
@@ -38,8 +36,6 @@ interface useAudioSeekReturnType {
 const useAudioSeek = ({
   sliderRef,
   duration,
-  isPointer,
-  isTouchDevice,
   url,
   shouldRun,
 }: audioSeekProp): useAudioSeekReturnType => {
@@ -77,13 +73,13 @@ const useAudioSeek = ({
     if (!copyAudioRef) return;
     let animationFrameId: number;
 
-    function handleMove(e: PointerEvent | TouchEvent | MouseEvent) {
+    function handleMove(e: PointerEvent) {
       if (!shouldRun) return;
       const { percentage } = sliderPositionCal({ sliderRef, e });
       setValue(percentage);
     }
 
-    function handleUp(e: PointerEvent | TouchEvent | MouseEvent) {
+    function handleUp(e: PointerEvent) {
       if (!shouldRun) return;
 
       setIsDragging(false);
@@ -114,18 +110,8 @@ const useAudioSeek = ({
     }
 
     if (isDragging) {
-      if (isPointer) {
-        document.addEventListener("pointermove", handleMove);
-        document.addEventListener("pointerup", handleUp);
-      } else {
-        if (isTouchDevice) {
-          document.addEventListener("touchmove", handleMove, { passive: true });
-          document.addEventListener("touchend", handleUp, { passive: true });
-        } else {
-          document.addEventListener("mousemove", handleMove);
-          document.addEventListener("mouseup", handleUp);
-        }
-      }
+      document.addEventListener("pointermove", handleMove);
+      document.addEventListener("pointerup", handleUp);
     }
 
     animationFrameId = requestAnimationFrame(update);
@@ -133,10 +119,6 @@ const useAudioSeek = ({
     return () => {
       document.removeEventListener("pointermove", handleMove);
       document.removeEventListener("pointerup", handleUp);
-      document.removeEventListener("touchmove", handleMove);
-      document.removeEventListener("touchend", handleUp);
-      document.removeEventListener("mousemove", handleMove);
-      document.removeEventListener("mouseup", handleUp);
       cancelAnimationFrame(animationFrameId);
     };
   }, [
@@ -148,8 +130,6 @@ const useAudioSeek = ({
     sliderRef,
     abortController,
     fetching,
-    isPointer,
-    isTouchDevice,
     setIsDragging,
     setValue,
     bufferThreshold,

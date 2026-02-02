@@ -1,6 +1,7 @@
 import { ContextMoreOptionStack } from "@/ui/trackComponent/MoreOptionStackContext";
 import { ContextMoreOptionUnique } from "@/ui/trackComponent/MoreOptionUniqueContext";
 import { useContext, useEffect } from "react";
+import { isTouchPointer } from "../isTouchPointer";
 
 function useTriggerButtonSub(
   parentRef: React.RefObject<HTMLButtonElement | null>,
@@ -28,7 +29,7 @@ function useTriggerButtonSub(
 
     function OpenFn(e: PointerEvent) {
       e.stopImmediatePropagation();
-      if (e.pointerType === "touch") return;
+      if (isTouchPointer(e)) return;
       // toggle
       setStack(stackNum);
       setUuidState(uuid);

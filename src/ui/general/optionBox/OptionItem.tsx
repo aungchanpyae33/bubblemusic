@@ -1,3 +1,4 @@
+import { isTouchPointer } from "@/lib/isTouchPointer";
 import { ContextMoreOptionUnique } from "@/ui/trackComponent/MoreOptionUniqueContext";
 import { useContext } from "react";
 
@@ -11,7 +12,7 @@ function OptionItem({
   // to reset unique uuid when hover on not sub option item
   const { setUuidState } = useContext(ContextMoreOptionUnique);
   const handleEnter = (e: React.PointerEvent) => {
-    if (e.pointerType == "touch") return;
+    if (isTouchPointer(e)) return;
     if (isSub) return;
     setUuidState("");
   };

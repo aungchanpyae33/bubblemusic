@@ -5,6 +5,7 @@ import { ContainerContext } from "./ContextContainer";
 import ScrollLeftButton from "./ScrollLeftButton";
 import ScrollRightButton from "./ScrollRightButton";
 import { useScrollArrows } from "@/lib/CustomHooks/useScrollArrow";
+import { isTouchPointer } from "@/lib/isTouchPointer";
 
 function SonglistWrapper({ children }: { children: React.ReactNode }) {
   const { arrowNaviRef, playlistWrapperRef } = useContext(ContainerContext);
@@ -25,11 +26,13 @@ function SonglistWrapper({ children }: { children: React.ReactNode }) {
           updateArrows(e);
         }
       }}
-      onMouseEnter={(e) => {
+      onPointerEnter={(e) => {
+        if (isTouchPointer(e)) return;
         setIsHovered(true);
         updateArrows(e);
       }}
-      onMouseLeave={() => {
+      onPointerLeave={(e) => {
+        if (isTouchPointer(e)) return;
         setIsHovered(false);
         hideArrows();
       }}

@@ -17,7 +17,7 @@ function useOutterClick(
   useEffect(() => {
     const container = ignoreRef.current;
     if (!container) return;
-    function OutterClickFunction(e: MouseEvent | TouchEvent) {
+    function OutterClickFunction(e: MouseEvent) {
       if (
         !parentElement!.current!.contains(e.target as Node) &&
         !ignoreRef?.current?.contains(e.target as HTMLElement)

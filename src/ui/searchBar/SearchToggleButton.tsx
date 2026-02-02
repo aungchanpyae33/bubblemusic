@@ -14,8 +14,7 @@ function SearchToggleButton({
   return (
     <button
       type="button"
-      onMouseDown={(e) => e.preventDefault()}
-      onTouchStart={(e) => e.stopPropagation()}
+      onPointerDown={(e) => e.preventDefault()}
       className={className}
       {...prop}
     >

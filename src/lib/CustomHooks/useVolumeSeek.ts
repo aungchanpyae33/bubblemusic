@@ -12,8 +12,6 @@ import { AudioElementContext } from "@/ui/Footer/audio/AudioWrapper";
 
 interface audioSeekProp {
   sliderRef: RefObject<HTMLDivElement | null>;
-  isPointer: boolean;
-  isTouchDevice: boolean;
   shouldRun: boolean;
 }
 interface useAudioSeekReturnType {
@@ -25,8 +23,6 @@ interface useAudioSeekReturnType {
 
 const useVolumeSeek = ({
   sliderRef,
-  isPointer,
-  isTouchDevice,
   shouldRun,
 }: audioSeekProp): useAudioSeekReturnType => {
   const { audioElRef } = useContext(AudioElementContext);
@@ -42,7 +38,7 @@ const useVolumeSeek = ({
   );
   useEffect(() => {
     const copyAudioRef = audioElRef.current;
-    function handleMove(e: PointerEvent | TouchEvent | MouseEvent) {
+    function handleMove(e: PointerEvent) {
       if (!copyAudioRef) return;
       if (!shouldRun) return;
       const { percentage, seekCalReturn } = sliderPositionCal({
@@ -58,38 +54,15 @@ const useVolumeSeek = ({
     }
 
     if (isDragging) {
-      if (isPointer) {
-        document.addEventListener("pointermove", handleMove);
-        document.addEventListener("pointerup", handleUp);
-      } else {
-        if (isTouchDevice) {
-          document.addEventListener("touchmove", handleMove);
-          document.addEventListener("touchend", handleUp);
-        } else {
-          document.addEventListener("mousemove", handleMove);
-          document.addEventListener("mouseup", handleUp);
-        }
-      }
+      document.addEventListener("pointermove", handleMove);
+      document.addEventListener("pointerup", handleUp);
     }
 
     return () => {
       document.removeEventListener("pointermove", handleMove);
       document.removeEventListener("pointerup", handleUp);
-      document.removeEventListener("touchmove", handleMove);
-      document.removeEventListener("touchend", handleUp);
-      document.removeEventListener("mousemove", handleMove);
-      document.removeEventListener("mouseup", handleUp);
     };
-  }, [
-    isDragging,
-    sliderRef,
-    isPointer,
-    isTouchDevice,
-    setValue,
-    setIsDragging,
-    shouldRun,
-    audioElRef,
-  ]);
+  }, [isDragging, sliderRef, setValue, setIsDragging, shouldRun, audioElRef]);
 
   return { value, setValue, isDragging, setIsDragging };
 };

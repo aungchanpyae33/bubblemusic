@@ -13,24 +13,12 @@ import useVolumeSeek from "@/lib/CustomHooks/useVolumeSeek";
 
 function Volume({ isFull }: { isFull: boolean }) {
   const { open } = useContext(Context);
-  const isPointer = useMemo(
-    () => typeof window !== "undefined" && "onpointerdown" in window,
-    [],
-  );
   const shouldRun = useMemo(() => (isFull ? open : !open), [isFull, open]);
-  const isTouchDevice = useMemo(
-    () =>
-      typeof window !== "undefined" &&
-      ("ontouchstart" in window || navigator.maxTouchPoints > 0),
-    [],
-  );
   const sliderRef = useRef<HTMLDivElement | null>(null);
   const progressRef = useRef<HTMLDivElement | null>(null);
 
   const { value, setValue, isDragging, setIsDragging } = useVolumeSeek({
     sliderRef,
-    isPointer,
-    isTouchDevice,
     shouldRun,
   });
 
@@ -41,7 +29,7 @@ function Volume({ isFull }: { isFull: boolean }) {
           <VolumeMuteButton value={value} setValue={setValue} />
 
           <VolumeSlider
-            className="flex  h-full   w-full px-[7px]  md:flex items-center select-none no-select"
+            className="flex  h-full   w-full px-[7px]  md:flex items-center select-none touch-none no-select"
             setIsDragging={setIsDragging}
             sliderRef={sliderRef}
             setValue={setValue}
@@ -49,8 +37,6 @@ function Volume({ isFull }: { isFull: boolean }) {
           >
             <VolumeSliderActionWrapper
               sliderRef={sliderRef}
-              isPointer={isPointer}
-              isTouchDevice={isTouchDevice}
               setIsDragging={setIsDragging}
               setValue={setValue}
             >

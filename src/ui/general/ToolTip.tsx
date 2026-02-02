@@ -1,10 +1,11 @@
 "use client";
 import { closeTooltip, showToolTipCheck } from "@/lib/ToolTip/showToolTipCheck";
 import clsx from "clsx";
-import { ReactNode, useEffect, useMemo, useRef } from "react";
+import { ReactNode, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import LeadingRelax from "./LeadingRelax";
 import useTooltipOverflow from "@/lib/CustomHooks/useTooltipOverflow";
+import { isTouchPointer } from "@/lib/isTouchPointer";
 
 export interface pointerPosition {
   clientX: number;
@@ -28,17 +29,10 @@ function ToolTip({
     tooltipTargetRef,
   });
   const setTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const isTouchDevice = useMemo(
-    () =>
-      typeof window !== "undefined" &&
-      ("ontouchstart" in window || navigator.maxTouchPoints > 0),
-    [],
-  );
   // onWheel in ReactComponent is not trigger in sometimes as it is passive true by default. so use addeventlistener
   useEffect(() => {
     function closeTooltipFn() {
       closeTooltip({
-        isTouchDevice,
         setTimeoutRef,
         tooltipShow,
         setTooltipShow,
@@ -54,14 +48,14 @@ function ToolTip({
     return () => {
       toolTipRefCopy.removeEventListener("wheel", closeTooltipFn);
     };
-  }, [isTouchDevice, setTooltipShow, tooltipShow]);
+  }, [setTooltipShow, tooltipShow]);
 
   return (
     <div className="group relative w-fit max-w-full cursor-pointer">
       <div
         ref={tooltipTargetRef}
-        onMouseEnter={(e) => {
-          if (isTouchDevice) return;
+        onPointerEnter={(e) => {
+          if (isTouchPointer(e)) return;
           const targetElement = e.currentTarget;
           if (!setTimeoutRef.current) {
             showToolTipCheck({
@@ -76,8 +70,8 @@ function ToolTip({
           }
         }}
         // need to update pointePosition to use for  the function setTimeout
-        onMouseMove={(e) => {
-          if (isTouchDevice) return;
+        onPointerMove={(e) => {
+          if (isTouchPointer(e)) return;
           const { clientX: x, clientY: y } = e;
           pointerPosition.current.clientX = x;
           pointerPosition.current.clientY = y;
@@ -86,14 +80,14 @@ function ToolTip({
         // {...(tooltipShow.show && {
         //   onWheel: (e) => {
         //  above comment is for the past idea to add onwheel on condition
-        onMouseLeave={() =>
+        onPointerLeave={(e) => {
+          if (isTouchPointer(e)) return;
           closeTooltip({
-            isTouchDevice,
             setTimeoutRef,
             tooltipShow,
             setTooltipShow,
-          })
-        }
+          });
+        }}
         className=" truncate"
       >
         {children}

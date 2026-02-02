@@ -6,15 +6,12 @@ interface closeTooltipProp {
   setTimeoutRef: RefObject<ReturnType<typeof setTimeout> | null>;
   tooltipShow: tooltipState;
   setTooltipShow: React.Dispatch<React.SetStateAction<tooltipState>>;
-  isTouchDevice: boolean;
 }
 export function closeTooltip({
-  isTouchDevice,
   setTimeoutRef,
   tooltipShow,
   setTooltipShow,
 }: closeTooltipProp) {
-  if (isTouchDevice) return;
   if (setTimeoutRef.current) {
     clearTimeout(setTimeoutRef.current);
     setTimeoutRef.current = null;
@@ -32,7 +29,7 @@ interface TooltipProps {
   tooltipShow: tooltipState;
   setTooltipShow: React.Dispatch<React.SetStateAction<tooltipState>>;
   targetElement: HTMLDivElement;
-  e: React.WheelEvent<HTMLDivElement> | React.MouseEvent<HTMLDivElement>;
+  e: React.PointerEvent<HTMLDivElement>;
   delay: number;
   pointerPosition: RefObject<pointerPosition>;
 }
@@ -44,7 +41,7 @@ export function isInside(
   const x = pointerPosition!.current!.clientX;
   const y = pointerPosition!.current!.clientY;
   const rect = targetElement.getBoundingClientRect();
-  // need to use updated value from mouemove event , using e will give stale x and stale y
+  // need to use updated value from pointer event , using e will give stale x and stale y
   const isPointerInsideForEnter =
     x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom;
   return isPointerInsideForEnter;

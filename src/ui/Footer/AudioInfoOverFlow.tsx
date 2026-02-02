@@ -1,4 +1,5 @@
 import useOverflowCheck from "@/lib/CustomHooks/useOverFlowCheck";
+import { isTouchPointer } from "@/lib/isTouchPointer";
 import clsx from "clsx";
 import { RefObject } from "react";
 function AudioInfoOverFlow({
@@ -35,7 +36,8 @@ function AudioInfoOverFlow({
           animateItterateRef.current++;
         }
       }}
-      onMouseEnter={() => {
+      onPointerEnter={(e) => {
+        if (isTouchPointer(e)) return;
         //even same anitmate value would make still twice render even though prop is not change
         // first call is change from false to true ,seconde call is change from true to true , may be this is the reaseon to prevent it use check ===
 

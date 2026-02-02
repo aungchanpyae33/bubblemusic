@@ -52,10 +52,7 @@ function FormContainer({
             <button
               className="bg-[#222222]   px-2"
               type="reset"
-              onTouchStart={(e) => {
-                e.preventDefault(); // Prevent focus loss
-              }}
-              onMouseDown={(e) => {
+              onPointerDown={(e) => {
                 e.preventDefault(); // Prevent focus loss
               }}
               onClick={() => {

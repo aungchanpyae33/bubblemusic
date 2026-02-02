@@ -24,10 +24,7 @@ const SearchResultItem = memo(({ title, index, show }: prop) => {
         },
       )}
       key={title}
-      onMouseDown={() => {
-        router.push(`/search?query=${title}`);
-      }}
-      onTouchStart={() => {
+      onPointerDown={() => {
         router.push(`/search?query=${title}`);
       }}
     >

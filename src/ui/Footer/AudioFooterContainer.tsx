@@ -24,9 +24,8 @@ function AudioFooterContainer({
         }
       }}
       // to track initial click elemet , without this  check , if user click the button then hold and release the container that does not have e.stopP will trigger the parent onClick ,
-      onMouseDown={(e) => {
-        // console.log(e.target);
-        initialRef!.current! = e.target as HTMLElement;
+      onPointerDown={(e) => {
+        initialRef.current = e.target as HTMLElement;
       }}
       onClick={(e) => {
         if (e.target === initialRef.current) {

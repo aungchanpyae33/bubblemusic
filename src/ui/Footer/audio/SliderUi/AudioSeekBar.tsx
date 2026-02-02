@@ -8,12 +8,6 @@ import clsx from "clsx";
 import { Context } from "@/lib/MediaSource/ContextMediaAudioFull";
 import type { valueProps } from "@/lib/CustomHooks/useAudioSeek";
 import useAudioSeek from "@/lib/CustomHooks/useAudioSeek";
-export interface eventProp {
-  e:
-    | React.MouseEvent<HTMLInputElement>
-    | React.TouchEvent<HTMLInputElement>
-    | React.KeyboardEvent<HTMLInputElement>;
-}
 interface PropAudioSeek extends React.ComponentProps<"div"> {
   duration: number;
   hideSliderInSmScreen: boolean;
@@ -31,26 +25,14 @@ function AudioSeekBar({
   isFull,
 }: PropAudioSeek) {
   const { open } = useContext(Context);
-  const isPointer = useMemo(
-    () => typeof window !== "undefined" && "onpointerdown" in window,
-    [],
-  );
 
   const shouldRun = useMemo(() => (isFull ? open : !open), [isFull, open]);
 
-  const isTouchDevice = useMemo(
-    () =>
-      typeof window !== "undefined" &&
-      ("ontouchstart" in window || navigator.maxTouchPoints > 0),
-    [],
-  );
   const sliderRef = useRef<HTMLDivElement | null>(null);
   const progressRef = useRef<HTMLDivElement | null>(null);
   const { value, setValue, isDragging, setIsDragging } = useAudioSeek({
     sliderRef,
     duration,
-    isPointer,
-    isTouchDevice,
     url,
     shouldRun,
   });
@@ -61,7 +43,7 @@ function AudioSeekBar({
         <AudioProgressbar value={value} progressRef={progressRef} />
         <AudioThumbSlider
           className={clsx(
-            "absolute group-hover:inline  w-[20px] rounded-full h-[20px] top-1/2 -translate-y-1/2 -translate-x-[10px]",
+            "absolute group-hover:inline  w-[20px] rounded-full h-[20px] top-1/2 -translate-y-1/2  -translate-x-[10px]",
             {
               hidden: !isDragging,
               inline: isDragging,
@@ -78,7 +60,7 @@ function AudioSeekBar({
         setValue={setValue}
         progressRef={progressRef}
         className={clsx(
-          "h-[25px] w-full  items-center px-[7px] select-none no-select",
+          "h-[25px] w-full touch-none   items-center px-[7px] select-none no-select",
           {
             "hidden sm:flex": hideSliderInSmScreen,
             flex: !hideSliderInSmScreen,
@@ -87,8 +69,6 @@ function AudioSeekBar({
       >
         <AudioSliderActionWrapper
           sliderRef={sliderRef}
-          isPointer={isPointer}
-          isTouchDevice={isTouchDevice}
           setIsDragging={setIsDragging}
           setValue={setValue}
         >

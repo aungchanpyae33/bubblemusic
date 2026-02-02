@@ -11,7 +11,7 @@ function AudioProgressbar({
   const output = 100 - value!;
   return (
     <div
-      className="bg-white w-full left-0  absolute top-0 origin-left h-full"
+      className="bg-white  w-full left-0  absolute top-0 origin-left h-full"
       style={{
         transform: `scaleX(${output}%)`,
       }}
