@@ -33,6 +33,7 @@ import NextTopLoader from "nextjs-toploader";
 import AudioWrapper from "@/ui/Footer/audio/AudioWrapper";
 import LibandLikeHyration from "@/lib/HydrationData/LibandLikeHyration";
 import LoadingAudioPlayer from "@/ui/loading/LoadingAudioPlayer";
+import DeviceCheckFetcher from "@/lib/DeviceContext/DeviceCheckFetcher";
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -55,40 +56,42 @@ export default function RootLayout({
         >
           <QueryClientPrv>
             <Suspense fallback={<div>loading......</div>}>
-              <LibandLikeHyration>
-                <NextTopLoader
-                  color="#2299DD"
-                  initialPosition={0.08}
-                  crawlSpeed={200}
-                  height={3}
-                  crawl={true}
-                  showSpinner={false}
-                  easing="ease"
-                  speed={200}
-                  shadow="0 0 10px #2299DD,0 0 5px #2299DD"
-                  template='<div class="bar" role="bar"><div class="peg"></div></div>' // no spinner
-                  zIndex={1600}
-                  showAtBottom={false}
-                />
-                <AudioWrapper>
-                  <BeforeLoad />
-                  <NavBar />
-                  <div className="scr flex flex-1 overflow-hidden relative">
-                    <Main>
-                      {children}
-                      <Footer />
-                    </Main>
-                    <QueueWrapper>
-                      <Queue />
-                    </QueueWrapper>
+              <DeviceCheckFetcher>
+                <LibandLikeHyration>
+                  <NextTopLoader
+                    color="#2299DD"
+                    initialPosition={0.08}
+                    crawlSpeed={200}
+                    height={3}
+                    crawl={true}
+                    showSpinner={false}
+                    easing="ease"
+                    speed={200}
+                    shadow="0 0 10px #2299DD,0 0 5px #2299DD"
+                    template='<div class="bar" role="bar"><div class="peg"></div></div>' // no spinner
+                    zIndex={1600}
+                    showAtBottom={false}
+                  />
+                  <AudioWrapper>
+                    <BeforeLoad />
+                    <NavBar />
+                    <div className="scr flex flex-1 overflow-hidden relative">
+                      <Main>
+                        {children}
+                        <Footer />
+                      </Main>
+                      <QueueWrapper>
+                        <Queue />
+                      </QueueWrapper>
 
-                    <ModalBox />
-                  </div>
-                  <Suspense fallback={<LoadingAudioPlayer />}>
-                    <AudioFooterBar />
-                  </Suspense>
-                </AudioWrapper>
-              </LibandLikeHyration>
+                      <ModalBox />
+                    </div>
+                    <Suspense fallback={<LoadingAudioPlayer />}>
+                      <AudioFooterBar />
+                    </Suspense>
+                  </AudioWrapper>
+                </LibandLikeHyration>
+              </DeviceCheckFetcher>
             </Suspense>
           </QueryClientPrv>
         </ThemeProvider>

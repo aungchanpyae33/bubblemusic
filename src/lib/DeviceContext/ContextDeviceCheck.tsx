@@ -11,10 +11,10 @@ export interface contextProps {
     | "embedded"
     | "desktop";
 }
-export const ContextDevice = createContext<contextProps>({
+export const DeviceContext = createContext<contextProps>({
   device: "mobile",
 });
-function DeviceContextFooter({
+function ContextDeviceCheck({
   device,
   children,
 }: {
@@ -23,8 +23,8 @@ function DeviceContextFooter({
 }) {
   const value = { device };
   return (
-    <ContextDevice.Provider value={value}>{children}</ContextDevice.Provider>
+    <DeviceContext.Provider value={value}>{children}</DeviceContext.Provider>
   );
 }
 
-export default DeviceContextFooter;
+export default ContextDeviceCheck;
