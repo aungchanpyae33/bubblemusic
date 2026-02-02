@@ -58,7 +58,9 @@ function ListContainerPlayBack({ list }: ListContainerPlayBackProps) {
   const setIsFallBackAudio = useInstantFallBackAudioFull(
     (state: isFallBackAudioActions) => state.setIsFallBackAudio,
   );
+
   if (!list.songs) return null; // no render the toggle playback
+  if (list.songs.idArray.length === 0) return;
   const handlePlayClick = async () => {
     if (!list.songs) return null; // no render the toggle playback)
     setIsFallBackAudio(); //fallback dynamic import
