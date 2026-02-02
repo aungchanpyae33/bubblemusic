@@ -1,12 +1,9 @@
 import { RefObject, useLayoutEffect, useRef, useState } from "react";
+import { CSSProperties } from "react";
 import throttle from "../throttle";
 import debounce from "../debounce";
 
-type PositionStyle = {
-  transform: string;
-  height?: string;
-  maxHeight?: string;
-};
+type PositionStyle = CSSProperties;
 
 function calcMenuPosition(
   parentEl: HTMLElement | null,
@@ -36,13 +33,13 @@ function calcMenuPosition(
   }
   const targetRect = parentEl.getBoundingClientRect();
   const containerRect = containerEl.getBoundingClientRect();
+
   const targetTop = targetRect.top;
   const targetLeft = targetRect.left;
   const targetRight = targetRect.right;
   const targetBottom = targetRect.bottom;
   const containerHeight = containerRect.height;
   const containerWidth = containerRect.width;
-
   if (staticDrop) {
     const x = targetRight - containerWidth;
     const y = targetBottom + 4; // add 4 px space below
@@ -171,7 +168,7 @@ export const useToggleContentPosition = ({
       window.removeEventListener("resize", throttledUpdate);
       window.removeEventListener("resize", debouncedUpdate);
     };
-  }, [parentRef, containerRef, staticDrop, staticUp]);
+  }, [parentRef, containerRef, staticUp, staticDrop]);
 
   return [position, setPosition];
 };

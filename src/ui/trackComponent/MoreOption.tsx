@@ -1,16 +1,16 @@
 "use client";
 import { useContext, useRef } from "react";
-import ToggleContent from "./ToggleContent";
 import { ContextMoreOption } from "./MoreOptionContext";
 import { createPortal } from "react-dom";
 import MoreOptionStackContext from "./MoreOptionStackContext";
 import MoreOptionUniqueContext from "./MoreOptionUniqueContext";
+import ToggleContent from "./ToggleContent";
 import { useDisableScroll } from "@/lib/CustomHooks/useDisableScroll";
 interface MoreOptionProps extends React.ComponentProps<"div"> {
   targetElement: React.ReactNode;
   triggerEl: React.ReactNode;
   relativeRoot?: HTMLDivElement | null;
-  staicDrop?: boolean;
+  staticDrop?: boolean;
   staticUp?: boolean;
 }
 function MoreOption({
@@ -18,7 +18,7 @@ function MoreOption({
   triggerEl,
   targetElement,
   relativeRoot,
-  staicDrop,
+  staticDrop,
   staticUp,
 }: MoreOptionProps) {
   const { show, setShow } = useContext(ContextMoreOption);
@@ -35,23 +35,26 @@ function MoreOption({
       >
         {triggerEl}
       </button>
-      {show &&
-        typeof window !== "undefined" &&
-        createPortal(
-          // stack provider for all child from one parent lvl
-          <MoreOptionStackContext>
-            <MoreOptionUniqueContext>
-              <ToggleContent
-                staticDrop={staicDrop}
-                staticUp={staticUp}
-                parentRef={parentRef}
-              >
-                {targetElement}
-              </ToggleContent>
-            </MoreOptionUniqueContext>
-          </MoreOptionStackContext>,
-          relativeRoot ? relativeRoot : document.body,
-        )}
+
+      {show && (
+        <>
+          {createPortal(
+            // stack provider for all child from one parent lvl
+            <MoreOptionStackContext>
+              <MoreOptionUniqueContext>
+                <ToggleContent
+                  staticUp={staticUp}
+                  staticDrop={staticDrop}
+                  parentRef={parentRef}
+                >
+                  {targetElement}
+                </ToggleContent>
+              </MoreOptionUniqueContext>
+            </MoreOptionStackContext>,
+            relativeRoot ? relativeRoot : document.body,
+          )}
+        </>
+      )}
     </div>
   );
 }

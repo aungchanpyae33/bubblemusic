@@ -1,11 +1,12 @@
 import { RelativeData } from "../ContextGoToRelative";
+import OptionButton from "../OptionButton";
 import OptionContainer from "../OptionContainer";
 import OptionItem from "../OptionItem";
 
 function RelativeSubItem({ relative }: { relative: RelativeData }) {
   return (
     <OptionItem>
-      <button className=" px-4">{relative.name}</button>
+      <OptionButton className=" px-4">{relative.name}</OptionButton>
     </OptionItem>
   );
 }

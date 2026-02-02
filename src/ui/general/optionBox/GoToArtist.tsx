@@ -27,7 +27,7 @@ function GoToArtist() {
             <OptionIconEl>
               <IconWrapper size="small" Icon={UserSearch} />
             </OptionIconEl>
-            <OptionText text="go to artist" />
+            <OptionText>go to artist</OptionText>
             <OptionSubArrow>
               <IconWrapper Icon={ChevronRight} />
             </OptionSubArrow>
@@ -50,7 +50,7 @@ function GoToArtist() {
             <IconWrapper size="small" Icon={UserSearch} />
           </OptionIconEl>
 
-          <OptionText text="go to artist " />
+          <OptionText>go to artist </OptionText>
         </NoThankYouPreFetchLink>
       </OptionItem>
     );
