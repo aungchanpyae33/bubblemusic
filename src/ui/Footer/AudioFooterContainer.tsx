@@ -1,14 +1,8 @@
 import { Context } from "@/lib/MediaSource/ContextMediaAudioFull";
 import clsx from "clsx";
-import { RefObject, useContext, useRef } from "react";
+import { useContext, useRef } from "react";
 
-function AudioFooterContainer({
-  children,
-  footerRef,
-}: {
-  children: React.ReactNode;
-  footerRef: RefObject<HTMLDivElement | null>;
-}) {
+function AudioFooterContainer({ children }: { children: React.ReactNode }) {
   const initialRef = useRef<HTMLElement | null>(null);
   const { open, setOpen } = useContext(Context);
   return (
@@ -19,7 +13,6 @@ function AudioFooterContainer({
       tabIndex={0}
       onKeyDown={(e) => {
         if (e.key === "Enter") {
-          footerRef.current?.classList.add("z-50");
           setOpen(!open);
         }
       }}
@@ -29,7 +22,6 @@ function AudioFooterContainer({
       }}
       onClick={(e) => {
         if (e.target === initialRef.current) {
-          footerRef.current?.classList.add("z-50");
           setOpen(!open);
         }
       }}

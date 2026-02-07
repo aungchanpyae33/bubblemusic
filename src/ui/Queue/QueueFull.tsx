@@ -10,9 +10,8 @@ import ToggleElement from "../Footer/audio/Toggle/ToggleElement";
 import Image from "next/image";
 import MoreOptionContext from "../trackComponent/MoreOptionContext";
 import MoreOption from "../trackComponent/MoreOption";
-import { useContext, useRef } from "react";
+import { useRef } from "react";
 import ContextInfoTrack from "../trackComponent/ContextInfoTrack";
-import { AudioFullRefContext } from "../Footer/audioFull/ContextAudioFullRef";
 import ArtistWrapper from "../general/ArtistWrapper";
 import ToolTip from "../general/ToolTip";
 import ContextLike from "../trackComponent/ContextLike";
@@ -31,7 +30,7 @@ function QueueFull() {
     (state: SongState) => (state.songCu as Record<string, string>).id,
   );
   const scrollRef = useRef<HTMLElement>(null);
-  const { audioFullRef } = useContext(AudioFullRefContext);
+
   if (!playListArray || !playListArray.songs) return;
   const currendIndex = outputCurrentIndex(
     playListArray.songs.idArray,
@@ -108,7 +107,6 @@ function QueueFull() {
                       <MoreOptionContext relative={item.artists}>
                         <MoreOption
                           triggerEl={<VerticalThreeDots />}
-                          relativeRoot={audioFullRef.current}
                           targetElement={<QueueItemContainer />}
                         />
                       </MoreOptionContext>

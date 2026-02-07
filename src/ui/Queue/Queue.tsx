@@ -10,13 +10,12 @@ import ToggleElement from "../Footer/audio/Toggle/ToggleElement";
 import Image from "next/image";
 import MoreOptionContext from "../trackComponent/MoreOptionContext";
 import MoreOption from "../trackComponent/MoreOption";
-import { useContext, useRef } from "react";
+import { useRef } from "react";
 import ContextInfoTrack from "../trackComponent/ContextInfoTrack";
 import QueueItemContainer from "./QueueItemContainer";
 import ContextLike from "../trackComponent/ContextLike";
 import ArtistWrapper from "../general/ArtistWrapper";
 import ToolTip from "../general/ToolTip";
-import { AudioFullRefContext } from "../Footer/audioFull/ContextAudioFullRef";
 import QueueLoader from "./QueueLoader";
 import { Virtuoso } from "react-virtuoso";
 import VerticalThreeDots from "../general/icon/VerticalThreeDots";
@@ -27,7 +26,6 @@ function Queue() {
     (state: currentSongPlaylist) => Object.values(state.playListArray)[0] || [],
   ) as ListSongPage;
 
-  const { audioFullRef } = useContext(AudioFullRefContext);
   const dataSongId = useSong(
     (state: SongState) => (state.songCu as Record<string, string>).id,
   );
@@ -109,7 +107,6 @@ function Queue() {
                       <MoreOptionContext relative={item.artists}>
                         <MoreOption
                           triggerEl={<VerticalThreeDots />}
-                          relativeRoot={audioFullRef.current}
                           targetElement={<QueueItemContainer />}
                         />
                       </MoreOptionContext>

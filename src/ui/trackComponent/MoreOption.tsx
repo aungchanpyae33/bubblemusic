@@ -9,7 +9,6 @@ import { useDisableScroll } from "@/lib/CustomHooks/useDisableScroll";
 interface MoreOptionProps extends React.ComponentProps<"div"> {
   targetElement: React.ReactNode;
   triggerEl: React.ReactNode;
-  relativeRoot?: HTMLDivElement | null;
   staticDrop?: boolean;
   staticUp?: boolean;
 }
@@ -17,7 +16,6 @@ function MoreOption({
   className,
   triggerEl,
   targetElement,
-  relativeRoot,
   staticDrop,
   staticUp,
 }: MoreOptionProps) {
@@ -31,7 +29,7 @@ function MoreOption({
         onClick={() => {
           setShow(!show);
         }}
-        className={`w-full h-full flex justify-center ${className}`}
+        className={`w-full h-full  flex justify-center ${className}`}
       >
         {triggerEl}
       </button>
@@ -51,7 +49,7 @@ function MoreOption({
                 </ToggleContent>
               </MoreOptionUniqueContext>
             </MoreOptionStackContext>,
-            relativeRoot ? relativeRoot : document.body,
+            document.body,
           )}
         </>
       )}
