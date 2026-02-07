@@ -12,6 +12,8 @@ import NoThankYouPreFetchLink from "../general/NoThankYouPreFetchLink";
 import VerticalThreeDots from "../general/icon/VerticalThreeDots";
 import type { listInfo } from "../../../database.types-fest";
 import { outputRelative } from "@/lib/outputRelative";
+import IconWrapper from "../general/IconWrapper";
+import { Folder } from "lucide-react";
 
 interface SonglistsContainerProps {
   description: string;
@@ -38,7 +40,7 @@ function SonglistsContainer({
           href={`/${type}/${id}`}
           className=" w-full relative peer  block before:block before:pb-[100%] "
         >
-          {cover_url && (
+          {cover_url ? (
             <Image
               src={cover_url}
               fill
@@ -47,6 +49,13 @@ function SonglistsContainer({
               priority={true}
               className=" group-hover:brightness-75 "
             />
+          ) : (
+            <div className=" absolute inset-0 flex items-center justify-center">
+              <IconWrapper
+                Icon={Folder}
+                className="hover:scale-100   active:scale-100 size-[100px]"
+              />
+            </div>
           )}
         </NoThankYouPreFetchLink>
         <SonglistContainerWrapper className="absolute top-2 right-2">
