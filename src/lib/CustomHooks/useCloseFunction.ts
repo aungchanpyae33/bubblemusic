@@ -26,9 +26,6 @@ function useCloseFunctoion(
           fun(false);
           return;
         }
-        // decrease the stack count because of clicking triiger
-        const newStack = Math.max(0, stack - 1);
-        setStack(newStack);
 
         // stack === 0 means it is the parent component
         // i use open (boolean) only  for parent , inner child state are paired with stack number
@@ -37,6 +34,10 @@ function useCloseFunctoion(
           if (!closeElement) return;
           closeElement.current!.focus();
         }
+
+        // decrease the stack count because of clicking triiger
+        const newStack = Math.max(0, stack - 1);
+        setStack(newStack);
       }
     }
     if (value) {
