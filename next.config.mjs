@@ -8,15 +8,9 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "s3.tebi.io",
+        hostname: "njjvikpbvsfomrpyxnta.supabase.co",
         port: "",
-        pathname: "/test1345/**",
-      },
-      {
-        protocol: "https",
-        hostname: "tebi.bubblemusic.dpdns.org",
-        port: "",
-        pathname: "/**",
+        pathname: "/storage/v1/object/public/bubblemusic/source/**",
       },
     ],
   },
