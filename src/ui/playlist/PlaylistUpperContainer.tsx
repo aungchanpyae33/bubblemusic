@@ -5,47 +5,31 @@ import { SongListContext } from "./playlistOption/ContextSongListContainer";
 import AlbumImg from "../albumContainer/AlbumImg";
 import InfoList from "../searchPage/topResult/InfoList";
 import type { ListSongPage } from "@/database/data-types-return";
+import { DeviceContext } from "@/lib/DeviceContext/ContextDeviceCheck";
 
-function PlaylistUpperContainer({
-  deviceFromUserAgent,
-}: {
-  deviceFromUserAgent:
-    | "mobile"
-    | "tablet"
-    | "desktop"
-    | "console"
-    | "smarttv"
-    | "wearable"
-    | "xr"
-    | "embedded";
-}) {
+function PlaylistUpperContainer() {
+  const { device } = useContext(DeviceContext);
   const { name, type, cover_url, is_official, related_id, related_name } =
     useContext(SongListContext) as ListSongPage;
   return (
     <div
       className={clsx("Container w-full flex  items-center p-5 ", {
-        "flex-col":
-          deviceFromUserAgent === "mobile" || deviceFromUserAgent === "tablet",
-        "gap-4":
-          deviceFromUserAgent === "mobile" || deviceFromUserAgent === "tablet",
-        "gap-8 md:gap-10 lg:gap-12": deviceFromUserAgent === "desktop",
+        "flex-col": device === "mobile" || device === "tablet",
+        "gap-4": device === "mobile" || device === "tablet",
+        "gap-8 md:gap-10 lg:gap-12": device === "desktop",
       })}
     >
       <AlbumImg cover_url={cover_url} type={type} />
       <div
         className={clsx("pt-2 max-w-full space-y-4  truncate flex-1 ", {
-          "self-start ":
-            deviceFromUserAgent === "mobile" ||
-            deviceFromUserAgent === "tablet",
+          "self-start ": device === "mobile" || device === "tablet",
         })}
       >
         <p
           className={clsx("font-black truncate", {
-            "text-3xl md:text-5xl lg:text-6xl":
-              deviceFromUserAgent === "desktop",
+            "text-3xl md:text-5xl lg:text-6xl": device === "desktop",
             "text-2xl md:text-4xl lg:text-6xl ":
-              deviceFromUserAgent === "mobile" ||
-              deviceFromUserAgent === "tablet",
+              device === "mobile" || device === "tablet",
           })}
         >
           {name}

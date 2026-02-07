@@ -12,10 +12,10 @@ import MoreOptionContext from "../trackComponent/MoreOptionContext";
 import MoreOption from "../trackComponent/MoreOption";
 import SongListContainerOption from "../general/optionBox/SongListContainerOption";
 import EditableAudiosContainer from "../albumContainer/EditableAudiosContainer";
-import PlaylistUpperWrapper from "./PlaylistUpperWrapper";
 import VerticalThreeDots from "../general/icon/VerticalThreeDots";
 import type { ListSongPage } from "@/database/data-types-return";
 import { outputRelative } from "@/lib/outputRelative";
+import PlaylistUpperContainer from "./PlaylistUpperContainer";
 
 function OwnEdit({
   queryClient,
@@ -33,7 +33,7 @@ function OwnEdit({
       <div className=" w-full">
         <ContextSongListContainer id={songs.id} list={songs}>
           <AlbumUpperBackground>
-            <PlaylistUpperWrapper />
+            <PlaylistUpperContainer />
           </AlbumUpperBackground>
 
           <ListContainer>
