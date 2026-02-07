@@ -23,15 +23,13 @@ function GoToArtist() {
         stackNum={1}
         triggerEl={
           <OptionItem isSub={true}>
-            <OptionButton isSub={true}>
-              <OptionIconEl>
-                <IconWrapper size="small" Icon={UserSearch} />
-              </OptionIconEl>
-              <OptionText>go to artist</OptionText>
-              <OptionSubArrow>
-                <IconWrapper Icon={ChevronRight} />
-              </OptionSubArrow>
-            </OptionButton>
+            <OptionIconEl>
+              <IconWrapper size="small" Icon={UserSearch} />
+            </OptionIconEl>
+            <OptionText>go to artist</OptionText>
+            <OptionSubArrow>
+              <IconWrapper Icon={ChevronRight} />
+            </OptionSubArrow>
           </OptionItem>
         }
         className="w-full"
