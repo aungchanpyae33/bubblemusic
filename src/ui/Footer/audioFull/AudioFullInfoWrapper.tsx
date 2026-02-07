@@ -64,7 +64,7 @@ function AudioFullInfoWrapper({ children }: { children: React.ReactNode }) {
         )}
         tabIndex={-1}
       >
-        <div className=" w-full h-full lg:grid-rows-[1fr]  grid-rows-[60px_1fr] grid relative">
+        <div className=" w-full h-full grid-rows-[60px_1fr] grid relative">
           <div
             className={clsx(
               "flex gap-x-3   border-b border-seperate-soft       items-center w-full",
