@@ -1,5 +1,4 @@
 "use client";
-import { ContextMoreOption } from "@/ui/trackComponent/MoreOptionContext";
 import { useContext } from "react";
 import { Link2 } from "lucide-react";
 import IconWrapper from "../IconWrapper";
@@ -9,9 +8,9 @@ import {
   SongListContext,
   SongListValue,
 } from "@/ui/playlist/playlistOption/ContextSongListContainer";
+import OptionButton from "../optionBox/OptionButton";
 
 function ShareList() {
-  const { setShow } = useContext(ContextMoreOption);
   const { id, type } = useContext(SongListContext) as SongListValue;
   const handleCopy = async () => {
     const origin = window.location.origin;
@@ -24,18 +23,12 @@ function ShareList() {
 
   return (
     <OptionItem>
-      <button
-        className="flex items-center"
-        onClick={async () => {
-          await handleCopy();
-          setShow(false);
-        }}
-      >
+      <OptionButton className="flex items-center" action={handleCopy}>
         <OptionIconEl>
           <IconWrapper size="small" Icon={Link2} />
         </OptionIconEl>
         <span>share </span>
-      </button>
+      </OptionButton>
     </OptionItem>
   );
 }

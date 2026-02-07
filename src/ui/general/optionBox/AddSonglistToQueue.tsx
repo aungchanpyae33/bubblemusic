@@ -1,4 +1,3 @@
-import { ContextMoreOption } from "@/ui/trackComponent/MoreOptionContext";
 import OptionButton from "./OptionButton";
 import OptionItem from "./OptionItem";
 import { useContext } from "react";
@@ -19,7 +18,6 @@ import {
 import { getSongListClient } from "@/database/client-data";
 
 function AddSonglistToQueue() {
-  const { setShow } = useContext(ContextMoreOption);
   const { id, type } = useContext(SongListContext) as SongListValue;
   const currentAddToQueue = useRepeatAndCurrentPlayList(
     (state: currentAddToQueueAction) => state.currentAddToQueue,
@@ -31,16 +29,16 @@ function AddSonglistToQueue() {
   async function addSongListToQueue() {
     const { data, error } = await getSongListClient(id, type);
 
-    if (!data || error) return;
-    const { songs } = data;
-
-    if (!songs || songs.idArray.length < 1) return null;
-    currentAddToQueue(songs, songs.idArray);
-    setShow(false);
+    if (data && !error) {
+      const { songs } = data;
+      if (songs && songs.idArray.length > 1) {
+        currentAddToQueue(songs, songs.idArray);
+      }
+    }
   }
   return (
     <OptionItem>
-      <OptionButton onClick={addSongListToQueue}>
+      <OptionButton action={addSongListToQueue}>
         <OptionIconEl>
           <IconWrapper size="small" Icon={ListEnd} />
         </OptionIconEl>

@@ -3,7 +3,6 @@ import OptionItem from "./OptionItem";
 import OptionIconEl from "./OptionIconEl";
 import OptionButton from "./OptionButton";
 import IconWrapper from "../IconWrapper";
-import { ContextMoreOption } from "@/ui/trackComponent/MoreOptionContext";
 import { useContext } from "react";
 import {
   currentAddToNextAction,
@@ -19,7 +18,6 @@ import {
 import { getSongListClient } from "@/database/client-data";
 
 function PlayNextQueueSongList() {
-  const { setShow } = useContext(ContextMoreOption);
   const { id, type } = useContext(SongListContext) as SongListValue;
   const currentAddToNext = useRepeatAndCurrentPlayList(
     (state: currentAddToNextAction) => state.currentAddToNext,
@@ -34,11 +32,10 @@ function PlayNextQueueSongList() {
     const { songs } = data;
     if (!songs || songs.idArray.length < 1) return;
     currentAddToNext(songs, songs.idArray, id_scoope);
-    setShow(false);
   }
   return (
     <OptionItem>
-      <OptionButton onClick={addToNextSonglist}>
+      <OptionButton action={addToNextSonglist}>
         <OptionIconEl>
           <IconWrapper size="small" Icon={ListStart} />
         </OptionIconEl>

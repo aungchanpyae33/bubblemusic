@@ -1,5 +1,4 @@
 "use client";
-import { ContextMoreOption } from "@/ui/trackComponent/MoreOptionContext";
 import { useContext } from "react";
 import OptionItem from "./OptionItem";
 import { InfoTrackContext } from "@/ui/trackComponent/ContextInfoTrack";
@@ -12,10 +11,10 @@ import NoThankYouPreFetchLink from "../NoThankYouPreFetchLink";
 function GoToAlbum() {
   const { song } = useContext(InfoTrackContext);
   const albumId = song?.album.id;
-  const { setShow } = useContext(ContextMoreOption);
+
   return (
     <OptionItem>
-      <OptionButton onClick={() => setShow(false)}>
+      <OptionButton>
         <NoThankYouPreFetchLink
           href={`/album/${albumId}`}
           className="flex items-center"

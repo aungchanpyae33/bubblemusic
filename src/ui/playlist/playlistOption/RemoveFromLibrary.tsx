@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import OptionItem from "@/ui/general/optionBox/OptionItem";
 import OptionButton from "@/ui/general/optionBox/OptionButton";
-import { ContextMoreOption } from "@/ui/trackComponent/MoreOptionContext";
 import OptionIconEl from "@/ui/general/optionBox/OptionIconEl";
 import IconWrapper from "@/ui/general/IconWrapper";
 import { BookmarkX } from "lucide-react";
@@ -11,13 +10,10 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 
 function RemoveFromLibraryChild() {
-  const { setShow } = useContext(ContextMoreOption);
-
   const router = useRouter();
   const { id, source } = useContext(SongListContext) as SongListValue;
   const queryClient = useQueryClient();
   async function removeFromLibraryFn() {
-    setShow(false);
     const { data, error } = await removeFromLibrary(
       id,
       source as "create" | "reference",
@@ -39,7 +35,7 @@ function RemoveFromLibraryChild() {
   }
   return (
     <OptionItem>
-      <OptionButton onClick={removeFromLibraryFn}>
+      <OptionButton action={removeFromLibraryFn}>
         <OptionIconEl>
           <IconWrapper size="small" Icon={BookmarkX} />
         </OptionIconEl>

@@ -1,8 +1,6 @@
 "use client";
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { addSongsToPlaylist, useAddSongsToPlaylist } from "@/lib/zustand";
-
-import { ContextMoreOption } from "./MoreOptionContext";
 import OptionItem from "../general/optionBox/OptionItem";
 import { InfoTrackContext } from "./ContextInfoTrack";
 import OptionButton from "../general/optionBox/OptionButton";
@@ -16,17 +14,13 @@ function AddSongButton() {
   const addSongsToPlaylist = useAddSongsToPlaylist(
     (state: addSongsToPlaylist) => state.addSongsToPlaylist,
   );
-  const { setShow } = useContext(ContextMoreOption);
   if (!songId) return null;
-
+  function addSongs() {
+    addSongsToPlaylist({ songId, cover_url });
+  }
   return (
     <OptionItem>
-      <OptionButton
-        onClick={() => {
-          addSongsToPlaylist({ songId, cover_url });
-          setShow(false);
-        }}
-      >
+      <OptionButton action={addSongs}>
         <OptionIconEl>
           <IconWrapper size="small" Icon={ListPlus} />
         </OptionIconEl>

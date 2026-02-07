@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import OptionItem from "@/ui/general/optionBox/OptionItem";
 import OptionButton from "@/ui/general/optionBox/OptionButton";
-import { ContextMoreOption } from "@/ui/trackComponent/MoreOptionContext";
 import OptionIconEl from "@/ui/general/optionBox/OptionIconEl";
 import IconWrapper from "@/ui/general/IconWrapper";
 import { SquarePen } from "lucide-react";
@@ -10,7 +9,6 @@ import { editToPlaylistAction, useEditToPlaylist } from "@/lib/zustand";
 import { SongListContext, SongListValue } from "./ContextSongListContainer";
 
 function EditToPlaylistChild() {
-  const { setShow } = useContext(ContextMoreOption);
   const { id, name } = useContext(SongListContext) as SongListValue;
 
   const EditToPlaylistAction = useEditToPlaylist(
@@ -20,11 +18,10 @@ function EditToPlaylistChild() {
 
   function handleEdit() {
     EditToPlaylistAction({ id, name });
-    setShow(false);
   }
   return (
     <OptionItem>
-      <OptionButton onClick={handleEdit}>
+      <OptionButton action={handleEdit}>
         <OptionIconEl>
           <IconWrapper size="small" Icon={SquarePen} />
         </OptionIconEl>

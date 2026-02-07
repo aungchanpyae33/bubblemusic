@@ -3,11 +3,8 @@ import type {
   ListSongsReturn,
   UserLibReturn,
 } from "@/database/data-types-return";
-import { ContextMoreOption } from "@/ui/trackComponent/MoreOptionContext";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useContext } from "react";
 const useRemoveSongMutate = (id: string) => {
-  const { setShow } = useContext(ContextMoreOption);
   const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: removeSongsFromPlaylist,
@@ -56,7 +53,6 @@ const useRemoveSongMutate = (id: string) => {
         }
         queryClient.setQueryData(["playlist", id], { data, error: null });
       }
-      setShow(false);
     },
   });
   return mutation;

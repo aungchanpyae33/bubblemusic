@@ -22,7 +22,7 @@ function RemoveSongButtonChild() {
 
   return (
     <OptionItem>
-      <OptionButton onClick={handleRemove}>
+      <OptionButton action={handleRemove}>
         <OptionIconEl>
           <IconWrapper size="small" Icon={ListX} />
         </OptionIconEl>

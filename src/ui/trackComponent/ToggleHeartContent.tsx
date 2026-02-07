@@ -40,7 +40,7 @@ function ToggleHeartContent() {
 
   return (
     <OptionItem>
-      <OptionButton onClick={handleLike}>
+      <OptionButton action={handleLike}>
         <OptionIconEl>
           <IconWrapper
             Icon={Heart}

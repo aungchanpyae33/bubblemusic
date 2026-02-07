@@ -1,4 +1,3 @@
-import { ContextMoreOption } from "@/ui/trackComponent/MoreOptionContext";
 import OptionButton from "./OptionButton";
 import OptionItem from "./OptionItem";
 import { useContext } from "react";
@@ -16,7 +15,6 @@ import { InfoTrackContext } from "@/ui/trackComponent/ContextInfoTrack";
 import { generateUUID } from "@/lib/GenerateUUID";
 
 function PlayNextQueue() {
-  const { setShow } = useContext(ContextMoreOption);
   const { song } = useContext(InfoTrackContext);
   const currentAddToNext = useRepeatAndCurrentPlayList(
     (state: currentAddToNextAction) => state.currentAddToNext,
@@ -34,11 +32,10 @@ function PlayNextQueue() {
   const queueSong = addUniIdSong && addUniIdSong;
   function addToNext() {
     currentAddToNext(queueSong, [uuid], id);
-    setShow(false);
   }
   return (
     <OptionItem>
-      <OptionButton onClick={addToNext}>
+      <OptionButton action={addToNext}>
         <OptionIconEl>
           <IconWrapper size="small" Icon={ListStart} />
         </OptionIconEl>

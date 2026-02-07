@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import OptionItem from "@/ui/general/optionBox/OptionItem";
 import OptionButton from "@/ui/general/optionBox/OptionButton";
-import { ContextMoreOption } from "@/ui/trackComponent/MoreOptionContext";
 import OptionIconEl from "@/ui/general/optionBox/OptionIconEl";
 import IconWrapper from "@/ui/general/IconWrapper";
 import { BookmarkPlus } from "lucide-react";
@@ -14,12 +13,10 @@ import {
 } from "@/ui/playlist/playlistOption/ContextSongListContainer";
 
 function AddToLibraryChild() {
-  const { setShow } = useContext(ContextMoreOption);
   const { id, type } = useContext(SongListContext) as SongListValue;
 
   const queryClient = useQueryClient();
   async function addToLibraryFn() {
-    setShow(false);
     const { data, error } = await addToLibrary(id, type);
     if (error) {
       console.log(error);
@@ -34,7 +31,7 @@ function AddToLibraryChild() {
   }
   return (
     <OptionItem>
-      <OptionButton onClick={addToLibraryFn}>
+      <OptionButton action={addToLibraryFn}>
         <OptionIconEl>
           <IconWrapper size="small" Icon={BookmarkPlus} />
         </OptionIconEl>
