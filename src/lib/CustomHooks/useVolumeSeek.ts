@@ -54,13 +54,13 @@ const useVolumeSeek = ({
     }
 
     if (isDragging) {
-      document.addEventListener("pointermove", handleMove);
-      document.addEventListener("pointerup", handleUp);
+      document.body.addEventListener("pointermove", handleMove);
+      document.body.addEventListener("pointerup", handleUp);
     }
 
     return () => {
-      document.removeEventListener("pointermove", handleMove);
-      document.removeEventListener("pointerup", handleUp);
+      document.body.removeEventListener("pointermove", handleMove);
+      document.body.removeEventListener("pointerup", handleUp);
     };
   }, [isDragging, sliderRef, setValue, setIsDragging, shouldRun, audioElRef]);
 

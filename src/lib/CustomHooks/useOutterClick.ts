@@ -34,11 +34,11 @@ function useOutterClick(
       }
     }
     if (value) {
-      document.addEventListener("click", OutterClickFunction);
+      document.body.addEventListener("click", OutterClickFunction);
     }
 
     return () => {
-      document.removeEventListener("click", OutterClickFunction);
+      document.body.removeEventListener("click", OutterClickFunction);
     };
   }, [
     value,

@@ -23,15 +23,15 @@ export function useDisableScroll(show: boolean) {
       }
     }
     if (show) {
-      document.addEventListener("wheel", preventDefault, wheelOpt);
-      document.addEventListener("touchmove", preventDefault, wheelOpt);
-      document.addEventListener("keydown", preventKeyScroll);
+      document.body.addEventListener("wheel", preventDefault, wheelOpt);
+      document.body.addEventListener("touchmove", preventDefault, wheelOpt);
+      document.body.addEventListener("keydown", preventKeyScroll);
     }
     return () => {
-      document.removeEventListener("wheel", preventDefault);
-      document.removeEventListener("touchmove", preventDefault);
+      document.body.removeEventListener("wheel", preventDefault);
+      document.body.removeEventListener("touchmove", preventDefault);
 
-      document.removeEventListener("keydown", preventKeyScroll);
+      document.body.removeEventListener("keydown", preventKeyScroll);
     };
   }, [show]);
 }
