@@ -15,11 +15,12 @@ function useOutterClickSub(
     if (!copyRef) return;
     function OutterClickFunction(e: MouseEvent) {
       // to stop the trigger to the parent outterClick
-      if (e.target !== e.currentTarget) return;
-      e.stopPropagation();
-      if (stack > stackNum) {
-        // by setting stack of the current click portal, it can be determined which sub portal should be open or close(eg: when clicking stack 2 portal , parent stack 1 should not be closed, but when stack 2 portal is open and clicking stack 1 portal , stack 2 should be closed)
-        setStack(stackNum);
+      if (e.target === e.currentTarget) {
+        e.stopPropagation();
+        if (stack > stackNum) {
+          // by setting stack of the current click portal, it can be determined which sub portal should be open or close(eg: when clicking stack 2 portal , parent stack 1 should not be closed, but when stack 2 portal is open and clicking stack 1 portal , stack 2 should be closed)
+          setStack(stackNum);
+        }
       }
     }
 
