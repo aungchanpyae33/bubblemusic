@@ -43,7 +43,7 @@ function ToggleContentFloat({
   });
   // outterclick is to detect click is inside portal and targert parent trigger or not inside when portal is open
   useEnableScroll(containerRef);
-  useOutterClick(show, setShow, parentRef, containerRef);
+  useOutterClick(show, setShow, containerRef);
   useFocusOnOpen(stack === 0, containerRef);
   useCloseFunctoion(show, setShow, parentRef);
 
