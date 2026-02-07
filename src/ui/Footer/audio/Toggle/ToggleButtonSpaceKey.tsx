@@ -28,9 +28,9 @@ function ToggleButtonSpaceKey() {
         setPlayList("toggle_key", undefined);
       }
     };
-    document.addEventListener("keydown", handleKeyDown);
+    document.body.addEventListener("keydown", handleKeyDown);
     return () => {
-      document.removeEventListener("keydown", handleKeyDown);
+      document.body.removeEventListener("keydown", handleKeyDown);
     };
   }, [setPlay, setPlayList, isInputFocus]);
   return null;

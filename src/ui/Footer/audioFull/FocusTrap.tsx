@@ -77,11 +77,11 @@ function FocusTrap({ children, refFocus, open }: Props) {
       }
     }
     if (open === false) return;
-    document.addEventListener("focusout", handleOut);
-    document.addEventListener("keydown", handleKeydown);
+    document.body.addEventListener("focusout", handleOut);
+    document.body.addEventListener("keydown", handleKeydown);
     return () => {
-      document.removeEventListener("focusout", handleOut);
-      document.removeEventListener("keydown", handleKeydown);
+      document.body.removeEventListener("focusout", handleOut);
+      document.body.removeEventListener("keydown", handleKeydown);
     };
   }, [refFocus, open]);
 
