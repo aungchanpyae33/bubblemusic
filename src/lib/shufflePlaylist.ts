@@ -12,11 +12,21 @@ const shufflePlaylist = (
     const n = Math.floor(Math.random() * (i + 1));
     [newCopyArray[i], newCopyArray[n]] = [newCopyArray[n], newCopyArray[i]];
   }
-  return !isShuffle
-    ? {
+
+  function outputShuffle() {
+    if (!isShuffle) {
+      if (!listProp.songs) return previousPlayListArray;
+      const shuffleData = {
         ...listProp,
-        idArray: [currentSongs, ...newCopyArray],
-      }
-    : previousPlayListArray;
+        songs: {
+          byId: listProp.songs.byId,
+          idArray: [currentSongs, ...newCopyArray],
+        },
+      };
+      return shuffleData;
+    }
+    return previousPlayListArray;
+  }
+  return outputShuffle();
 };
 export default shufflePlaylist;
