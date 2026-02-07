@@ -14,7 +14,7 @@ function SearchResult({ data, inputRef }: prop) {
   const [arrow] = useNaviSearch({ run: false, number: -1 }, inputRef, data);
 
   return (
-    <div className="SearchResult w-full absolute bg-[#222222] rounded-md -bottom-1 translate-y-full  border border-neutral-200 border-opacity-25  py-3  shadow-md shadow-overlay text-start">
+    <div className="SearchResult w-full absolute bg-surface-1 rounded-md -bottom-1 translate-y-full  border border-borderFull border-opacity-25  p-1   shadow-md shadow-overlay text-start">
       {data?.map((item: Movie, index: number) => (
         <SearchResultItem
           key={item.id}

@@ -30,7 +30,7 @@ function Track({
 }) {
   return (
     <tr
-      className=" transition-colors isolate -z-10 duration-150  [&:has(:focus-visible)]:ring-4 h-[72px] p-3  hover:bg-[#1E2328] group
+      className=" transition-colors isolate -z-10 duration-150  [&:has(:focus-visible)]:ring-4 h-[72px] p-3  hover:bg-surface-2 group
       "
       //fallback -z if isolate is not supported
       // tabIndex={0}
@@ -46,16 +46,22 @@ function Track({
       // }}
     >
       <td className="w-[50px] pl-2  relative   ">
-        <div className="size-[50px] group-hover:brightness-75 relative">
+        <div className="size-[50px] relative">
           {song.cover_url && (
-            <Image src={song.cover_url} fill alt="img" sizes="50px" />
+            <Image
+              src={song.cover_url}
+              className="group-hover:brightness-75"
+              fill
+              alt="img"
+              sizes="50px"
+            />
           )}
+          <ToggleElement
+            playlistSong={listSong}
+            song={song}
+            className=" z-10 has-hover:hidden has-hover:group-hover:block brightness-100 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+          />
         </div>
-        <ToggleElement
-          playlistSong={listSong}
-          song={song}
-          className=" z-10 has-hover:hidden has-hover:group-hover:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-        />
       </td>
 
       <td className=" max-w-[200px] px-2  ">

@@ -18,11 +18,11 @@ function QueueLoader({
           key={i}
           className="flex gap-x-2   p-1 group animate-pulse items-stretch"
         >
-          <div className="size-[50px] bg-[#333333] relative"></div>
+          <div className="size-[50px] bg-placeholder relative"></div>
 
           <div className="flex-1 flex-col overflow-hidden flex justify-center gap-1">
-            <div className=" w-16 h-3 rounded-md bg-[#333333]"></div>
-            <div className=" w-28 h-3 rounded-md bg-[#333333]"></div>
+            <div className=" w-16 h-3 rounded-md bg-placeholder"></div>
+            <div className=" w-28 h-3 rounded-md bg-placeholder"></div>
           </div>
 
           <div className="w-[30px] flex items-center">

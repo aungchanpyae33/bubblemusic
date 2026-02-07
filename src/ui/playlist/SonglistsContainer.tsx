@@ -70,7 +70,7 @@ function SonglistsContainer({
           className=" absolute z-10 bottom-4 right-2  has-hover:transition-[transform,opacity,background-color] has-hover:duration-150 has-hover:group-hover:-translate-y-2 has-hover:opacity-0 has-hover:peer-focus:-translate-y-2  has-hover:peer-focus:opacity-100 
       has-hover:focus:-translate-y-2 
       has-hover:focus:opacity-100 
-      has-hover:group-hover:opacity-100  p-2 bg-[#222222]"
+      has-hover:group-hover:opacity-100  p-2 bg-surface-1"
         />
       </div>
 
@@ -86,7 +86,7 @@ function SonglistsContainer({
           <UnderLineLinkHover
             href={`/${relatedType}/${related_id}`}
             prefetch={false}
-            className=" block leading-relaxed w-full truncate text-start text-sm text-zinc-400 "
+            className=" block leading-relaxed w-full truncate text-start text-sm text-ink-400 "
           >
             {related_name}
           </UnderLineLinkHover>

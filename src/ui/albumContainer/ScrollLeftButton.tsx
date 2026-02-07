@@ -15,7 +15,7 @@ function ScrollLeftButton() {
     >
       <IconWrapper
         size="medium"
-        className="text-white/70 bg-[#222222] hover:bg-[#333333] rounded-full size-14 hover:text-white"
+        className="text-foreground/70 bg-surface-1 hover:bg-surface-2 hover:-translate-x-1 transition-transform duration-200 rounded-full size-14 hover:text-foreground"
         Icon={ChevronLeft}
       />
     </button>

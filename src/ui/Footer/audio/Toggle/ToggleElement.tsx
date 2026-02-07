@@ -140,9 +140,9 @@ const ToggleElement = ({
     >
       <span className=" flex justify-center">
         {song.url === songCuUrl && Isplay ? (
-          <IconWrapper className="fill-white" Icon={Pause} size="medium" />
+          <IconWrapper className="fill-foreground" Icon={Pause} size="medium" />
         ) : (
-          <IconWrapper className="fill-white" Icon={Play} size="medium" />
+          <IconWrapper className="fill-foreground" Icon={Play} size="medium" />
         )}
       </span>
     </button>

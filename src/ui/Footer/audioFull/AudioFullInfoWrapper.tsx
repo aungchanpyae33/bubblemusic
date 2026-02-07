@@ -45,20 +45,18 @@ function AudioFullInfoWrapper({ children }: { children: React.ReactNode }) {
           )}
         >
           <div className="flex items-start  p-1 justify-center flex-col ">
-            <p className={clsx(" text-zinc-100  text-xl lg:text-2xl")}>
-              {name}
-            </p>
+            <p className={clsx("text-xl lg:text-2xl")}>{name}</p>
 
             <ArtistWrapper
               artists={artists}
-              className="text-zinc-100  lg:text-xl text-base"
+              className=" text-ink-400  lg:text-xl text-base"
             />
           </div>
         </div>
       </div>
       <div
         className={clsx(
-          " bg-[#222222]  will-change-transform  left-auto   lg:w-[50%] w-full  inset-0  absolute     shadow-md   transition-[opacity,transform] duration-500",
+          " bg-section  will-change-transform  left-auto   lg:w-[50%] w-full  inset-0  absolute     shadow-md   transition-[opacity,transform] duration-500",
           {
             "translate-y-0": showBlock.open,
             "translate-y-[103%]": !showBlock.open,
@@ -69,11 +67,13 @@ function AudioFullInfoWrapper({ children }: { children: React.ReactNode }) {
         <div className=" w-full h-full lg:grid-rows-[1fr]  grid-rows-[60px_1fr] grid relative">
           <div
             className={clsx(
-              "flex lg:hidden gap-x-3   border-b border-white      items-center w-full",
+              "flex gap-x-3   border-b border-seperate-soft       items-center w-full",
             )}
           >
             <div
-              className={clsx("relative border-b border-white  size-[60px]")}
+              className={clsx(
+                "relative border-b border-seperate-soft  size-[60px]",
+              )}
             >
               {cover_url && (
                 <Image
@@ -111,8 +111,8 @@ function AudioFullInfoWrapper({ children }: { children: React.ReactNode }) {
             )}
           </AnimatePresence>
 
-          <LyricPaddingBlock className=" absolute top-[60px] w-full h-[4px]  bg-[#222222]" />
-          <LyricPaddingBlock className="absolute bottom-0 w-full h-[4px]  bg-[#222222]" />
+          <LyricPaddingBlock className=" absolute top-[60px] w-full h-[4px]  bg-section" />
+          <LyricPaddingBlock className="absolute bottom-0 w-full h-[4px]  bg-section" />
         </div>
       </div>
     </div>

@@ -5,7 +5,8 @@ import { createContext } from "react";
 interface Props extends React.ComponentProps<"div"> {
   children: React.ReactNode;
 }
-const baseColor = [51, 51, 51];
+// rgb of surface 1
+const baseColor = [60, 60, 60];
 interface contextProps {
   bgValue: number[];
   setBgValue: React.Dispatch<SetStateAction<number[]>>;
@@ -17,7 +18,6 @@ export const ContextAlbum = createContext<contextProps>({
 
 function AlbumUpperBackground({ children }: Props) {
   const [bgValue, setBgValue] = useState<number[]>(baseColor);
-  // bg-[rgb(51,51,51)]
   const R = bgValue[0];
   const G = bgValue[1];
   const B = bgValue[2];

@@ -9,7 +9,7 @@ function NavSideLinkNotOpen({ children, hrefString }: NavSideLinkNotOpenProps) {
   return (
     <NoThankYouPreFetchLink
       href={hrefString}
-      className="hidden hover:bg-[#333333] active:brightness-90   md:flex justify-center"
+      className="hidden hover:bg-surface-2 active:brightness-90   md:flex justify-center"
     >
       {children}
     </NoThankYouPreFetchLink>

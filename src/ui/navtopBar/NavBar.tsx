@@ -6,7 +6,7 @@ import Logo from "../icon/Logo";
 import NoThankYouPreFetchLink from "../general/NoThankYouPreFetchLink";
 function NavBar() {
   return (
-    <nav className="navBarContainer flex w-full   h-[70px] z-10   items-center justify-between border-opacity-15 bg-[#0A0A0A] border-b border-neutral-200 ">
+    <nav className="navBarContainer bg-section flex w-full   h-[70px] z-10   items-center justify-between border-opacity-15  border-b border-seperate-soft ">
       <Suspense fallback={<div className=" w-[160px] h-[70px]"></div>}>
         <div className="flex  w-[160px]">
           <NavSideBar />

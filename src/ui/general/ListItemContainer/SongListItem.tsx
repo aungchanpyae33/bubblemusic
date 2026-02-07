@@ -13,7 +13,7 @@ import type { SongInfo } from "../../../../database.types-fest";
 
 function SongListItem({ song }: { song: SongInfo }) {
   return (
-    <div className="h-[60px] w-[300px] rounded-sm outline outline-slate-200   flex items-center group  gap-3">
+    <div className="h-[60px] w-[300px] rounded-sm outline outline-borderFull   flex items-center group  gap-3">
       <div className="w-[50px] pl-2 group">
         <div className="size-[50px] group-hover:brightness-75 relative">
           {song.cover_url && (

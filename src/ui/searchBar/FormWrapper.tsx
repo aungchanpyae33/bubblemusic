@@ -21,7 +21,7 @@ function FormWrapper({ children, inputRef, show }: FormWrapperProps) {
     <Form
       action={goSearch}
       className={clsx(
-        "w-full px-2  hidden sm:flex h-[70px] bg-inherit  top-0 left-0  absolute items-center  sm:w-auto md:bg-transparent sm:h-auto  sm:static  sm:flex-none sm:items-start",
+        "w-full px-2 hidden sm:flex h-[70px] bg-inherit  top-0 left-0  absolute items-center  sm:w-auto md:bg-transparent sm:h-auto  sm:static  sm:flex-none sm:items-start",
         {
           unhide: show,
         },

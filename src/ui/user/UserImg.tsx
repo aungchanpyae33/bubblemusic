@@ -12,7 +12,7 @@ function UserImg({ cover_url }: { cover_url: string | null }) {
   useGetDominantColor({ setBgValue, imgRef, cover_url });
   return (
     <div
-      className=" lg:w-[250px] rounded overflow-hidden md:w-[200px] shrink-0 w-[180px]  aspect-square  object-cover relative bg-[#222222]
+      className=" lg:w-[250px] rounded overflow-hidden md:w-[200px] shrink-0 w-[180px]  aspect-square  object-cover relative bg-placeholder
     "
     >
       {cover_url ? (

@@ -25,8 +25,8 @@ function TitleInput({ initValue }: { initValue?: string }) {
           onAnimationEnd={() => {
             setShake({ setUpShake: false, setUp: false });
           }}
-          className={clsx("text-zinc-400", {
-            "animate-headshake text-zinc-50": shake.setUpShake,
+          className={clsx("text-ink-400", {
+            "animate-headshake text-ink-50": shake.setUpShake,
           })}
         >
           {`${value.length}/100`}
@@ -56,7 +56,7 @@ function TitleInput({ initValue }: { initValue?: string }) {
           onFocus={() => setIsInputFocus(true)}
           onBlur={() => setIsInputFocus(false)}
           maxLength={100}
-          className="h-[40px]  bg-blue w-full p-2 text-base rounded bg-[#222222] border border-neutral-200 border-opacity-25"
+          className="h-[40px]  bg-surface-1 w-full p-2 text-base rounded ring-1 ring-borderFull"
         />
       </span>
     </>

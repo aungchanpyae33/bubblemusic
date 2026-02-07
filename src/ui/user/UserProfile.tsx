@@ -17,7 +17,7 @@ function UserProfile({
       <MoreOptionContext>
         <MoreOption
           triggerEl={
-            <div className=" size-[45px] flex bg-[#333333] items-center justify-center rounded-full">
+            <div className=" size-[45px] flex bg-surface-1  hover:scale-105   active:scale-90 items-center justify-center rounded-full">
               {userName}
             </div>
           }

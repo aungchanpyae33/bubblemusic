@@ -72,12 +72,12 @@ function AudioSeekBar({
           setIsDragging={setIsDragging}
           setValue={setValue}
         >
-          <div className=" w-full h-[2.5px]    bg-[rgba(255,255,255,0.2)] relative">
+          <div className=" w-full h-[2.5px]    bg-surface-1 relative">
             <AudioProgressbar value={value} progressRef={progressRef} />
 
             <AudioThumbSlider
               className={clsx(
-                "absolute group-hover:inline  w-[14px] rounded-full h-[14px] top-1/2 -translate-y-1/2 -translate-x-[7px] bg-white",
+                "absolute group-hover:inline  w-[14px] rounded-full h-[14px] top-1/2 -translate-y-1/2 -translate-x-[7px] bg-foreground",
                 {
                   hidden: !isDragging,
                   inline: isDragging,

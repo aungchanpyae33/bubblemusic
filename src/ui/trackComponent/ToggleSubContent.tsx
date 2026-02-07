@@ -81,7 +81,7 @@ function ToggleSubContentMobile({
             ease: "easeInOut",
           }}
           className={clsx(
-            " fixed z-10  bottom-5 p-2 overflow-hidden rounded-md left-2 right-2 bg-neutral-900",
+            " fixed z-50  bottom-5 p-2 overflow-hidden rounded-md left-2 right-2 bg-pop",
             {
               hidden: stackNum !== stack && uuidState !== "",
             },
@@ -117,12 +117,9 @@ function ToggleSubContentMobile({
           transition={{ ease: "easeInOut" }}
           onClick={onCloseAnimation}
           aria-hidden
-          className={clsx(
-            "fixed  top-0 left-0 bottom-0 right-0 bg-red-900/30",
-            {
-              hidden: stackNum !== stack && uuidState !== "",
-            },
-          )}
+          className={clsx("fixed  top-0 left-0 bottom-0 right-0 bg-overlay", {
+            hidden: stackNum !== stack && uuidState !== "",
+          })}
         ></motion.div>
       </FocusTrap>
     </div>
@@ -147,7 +144,7 @@ function ToggleSubContentFloat({
     <FocusTrap refFocus={containerRef}>
       <div
         className={clsx(
-          " fixed  z-30 max-w-full bg-pop   overflow-auto max-h-full   border-opacity-25 border border-bordersoft left-0 top-0 p-1 rounded-md",
+          " fixed  z-50 max-w-full bg-pop   overflow-auto max-h-full   border-opacity-25 border border-borderFull left-0 top-0 p-1 rounded-md",
         )}
         ref={containerRef}
         style={position}

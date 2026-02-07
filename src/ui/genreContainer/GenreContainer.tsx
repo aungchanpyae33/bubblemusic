@@ -6,7 +6,7 @@ function GenreContainer({ description }: { description: string }) {
   return (
     <NoThankYouPreFetchLink
       href={`genre/${description}`}
-      className="col-span-6 md:col-span-4 lg:col-span-3 size-[300px] bg-blue-600 shrink-0 relative flex"
+      className="col-span-6 md:col-span-4 lg:col-span-3 size-[300px] shrink-0 relative flex"
     >
       {/* <Image
         src="https://s3.tebi.io/test1345/timo-volz-ZlFKIG6dApg-unsplash%20%281%29.jpg"

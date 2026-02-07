@@ -38,7 +38,7 @@ function ToggleHeartButton({ songId }: { songId: string }) {
         Icon={Heart}
         size="small"
         className={clsx("", {
-          "fill-white": isLike,
+          "fill-foreground": isLike,
         })}
       />
     </button>

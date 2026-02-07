@@ -20,7 +20,7 @@ function AudioFunctionRepeat({ className }: React.ComponentProps<"button">) {
         Icon={Repeat}
         size="small"
         className={clsx("", {
-          "text-orange-300": isRepeat,
+          "text-warning-300": isRepeat,
         })}
       />
     </button>

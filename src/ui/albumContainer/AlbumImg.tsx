@@ -20,7 +20,7 @@ function AlbumImg({
   useGetDominantColor({ setBgValue, imgRef, cover_url });
   return (
     <div
-      className=" lg:w-[250px] rounded overflow-hidden md:w-[200px] shrink-0 w-[180px]  aspect-square  object-cover relative bg-[#222222]
+      className=" lg:w-[250px] rounded overflow-hidden md:w-[200px] shrink-0 w-[180px]  aspect-square  object-cover relative bg-placeholder
     "
     >
       {cover_url ? (
@@ -32,14 +32,14 @@ function AlbumImg({
           fill
           alt="singer song"
         />
-      ) : type === "playlist" ? (
+      ) : (
         <div className=" absolute inset-0 flex items-center justify-center">
           <IconWrapper
             Icon={Folder}
             className="hover:scale-100   active:scale-100 size-[100px]"
           />
         </div>
-      ) : null}
+      )}
     </div>
   );
 }

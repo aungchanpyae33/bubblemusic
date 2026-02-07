@@ -23,8 +23,8 @@ function SearchProfileItem({
   const { id, name, cover_url } = Itemdata;
   return (
     <SearchItemWrapper>
-      <div className="w-[50px]  relative group  ">
-        <div className="size-[50px] rounded-full overflow-hidden relative bg-[#333333] group-hover:bg-[#222222]">
+      <div className="w-[50px]   relative group  ">
+        <div className="size-[50px] rounded-full overflow-hidden relative bg-placeholder">
           {cover_url ? (
             <Image src={cover_url} fill alt="img" sizes="50px" />
           ) : (

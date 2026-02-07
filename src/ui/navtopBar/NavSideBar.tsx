@@ -7,7 +7,7 @@ async function NavSideBar() {
   // const deviceFromUserAgent = await DeviceCheck();
 
   return (
-    <div className="w-[70px] bg-[#0A0A0A]">
+    <div className="w-[70px] bg-section ">
       <NavList
         childrenLogo={<Logo width={90} height={70} />}
         childrenExplore={

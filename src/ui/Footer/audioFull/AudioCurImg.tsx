@@ -14,7 +14,7 @@ function AudioCurImg() {
   return (
     <div
       className={clsx(
-        " w-full pb-[100%] aspect-square shrink-0 grow-0  bg-[#333333]  overflow-hidden relative",
+        " w-full pb-[100%] aspect-square shrink-0 grow-0  bg-placeholder  overflow-hidden relative",
       )}
     >
       {cover_url && (

@@ -46,7 +46,7 @@ function ToggleHeartContent() {
             Icon={Heart}
             size="small"
             className={clsx("", {
-              "fill-white": isLike,
+              "fill-foreground": isLike,
             })}
           />
         </OptionIconEl>

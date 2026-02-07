@@ -72,7 +72,7 @@ function ListContainerAddToLibrary() {
         <IconWrapper
           size="exLarge"
           Icon={BookmarkX}
-          className=" fill-[#3664ba]"
+          className=" fill-brand"
         />
       )}
     </button>

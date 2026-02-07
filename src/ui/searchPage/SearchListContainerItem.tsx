@@ -28,7 +28,7 @@ function SearchListContainerItem({
   return (
     <SearchItemWrapper>
       <div className="w-[50px]  relative group  ">
-        <div className="size-[50px] group-hover:brightness-75 relative">
+        <div className="size-[50px] group-hover:brightness-75 relative bg-placeholder">
           {cover_url ? (
             <Image src={cover_url} fill alt="img" sizes="50px" />
           ) : (
@@ -58,7 +58,7 @@ function SearchListContainerItem({
           <UnderLineLinkHover
             href={`${relatedType}/${related_id}`}
             prefetch={false}
-            className=" block leading-relaxed w-full truncate text-start text-sm text-zinc-400 "
+            className=" block leading-relaxed w-full truncate text-start text-sm text-ink-400 "
           >
             {related_name}
           </UnderLineLinkHover>

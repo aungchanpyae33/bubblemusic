@@ -49,7 +49,7 @@ function ToggleContentFloat({
     <FocusTrap refFocus={containerRef}>
       <div
         className={clsx(
-          " fixed z-30 overflow-auto max-w-full  bg-pop max-h-full border border-bordersoft left-0 top-0 p-1 rounded-md",
+          " fixed z-50 overflow-auto max-w-full  bg-pop max-h-full border border-borderFull left-0 top-0 p-1 rounded-md",
         )}
         ref={containerRef}
         tabIndex={-1}
@@ -124,7 +124,7 @@ function ToggleContentMobile({
             ease: "easeInOut",
           }}
           className={clsx(
-            " fixed z-10 p-2   bottom-5 left-2 right-2 overflow-hidden rounded-md bg-neutral-900",
+            " fixed z-50 p-2   bottom-5 left-2 right-2 overflow-hidden rounded-md bg-pop",
             {
               hidden: uuidState !== "",
             },
@@ -159,12 +159,9 @@ function ToggleContentMobile({
           transition={{ ease: "easeInOut" }}
           onClick={onCloseAnimation}
           aria-hidden
-          className={clsx(
-            "fixed  top-0 left-0 bottom-0 right-0 bg-red-900/30",
-            {
-              hidden: uuidState !== "",
-            },
-          )}
+          className={clsx("fixed  top-0 left-0 bottom-0 right-0 bg-overlay", {
+            hidden: uuidState !== "",
+          })}
         ></motion.div>
       </FocusTrap>
     </div>

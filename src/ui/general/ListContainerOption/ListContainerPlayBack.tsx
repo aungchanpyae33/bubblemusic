@@ -113,7 +113,7 @@ function ListContainerPlayBack({ list }: ListContainerPlayBackProps) {
   };
   return (
     <button
-      className="p-2 bg-[#3664ba]  rounded-full"
+      className="p-2 bg-brand  rounded-full"
       onClick={(e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -121,9 +121,9 @@ function ListContainerPlayBack({ list }: ListContainerPlayBackProps) {
       }}
     >
       {IsPlayList ? (
-        <IconWrapper className="fill-white" size="medium" Icon={Pause} />
+        <IconWrapper className="fill-foreground" size="medium" Icon={Pause} />
       ) : (
-        <IconWrapper className="fill-white" size="medium" Icon={Play} />
+        <IconWrapper className="fill-foreground" size="medium" Icon={Play} />
       )}
     </button>
   );

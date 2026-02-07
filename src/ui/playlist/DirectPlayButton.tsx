@@ -156,9 +156,9 @@ function DirectPlayButton({ listId, type, className }: DirectPlayButtonProps) {
       }}
     >
       {IsPlayList ? (
-        <IconWrapper className="fill-white" size="medium" Icon={Pause} />
+        <IconWrapper className="fill-foreground" size="medium" Icon={Pause} />
       ) : (
-        <IconWrapper className="fill-white" size="medium" Icon={Play} />
+        <IconWrapper className="fill-foreground" size="medium" Icon={Play} />
       )}
     </button>
   );

@@ -97,7 +97,7 @@ function ToolTip({
         createPortal(
           <div
             className={clsx(
-              "fixed max-w-[450px] z-30 md:max-w-[550px] w-max  pointer-events-none px-2 p-1 text-sm bg-[#2A2A2A] border border-divided  shadow-[0_4px_8px_rgba(0,0,0,0.3)]",
+              "fixed max-w-[450px] z-50 md:max-w-[550px] w-max  pointer-events-none px-2 p-1 text-sm bg-pop border border-borderFull rounded",
             )}
             ref={toolTipRef}
             style={tooltipShow.toolTipPosition}

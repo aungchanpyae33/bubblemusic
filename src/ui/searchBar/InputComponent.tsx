@@ -20,7 +20,7 @@ function InputComponent({ inputRef, setShow, setValue }: InputComponentProps) {
         <span className="sr-only">Search</span>
       </label>
       <input
-        className="placeholder:text-slate-400 placeholder:leading-relaxed block bg-blue w-full h-[40px]  pl-4 shadow-sm focus:outline-none text-base bg-[#222222]"
+        className="placeholder:text-ink-400 placeholder:leading-relaxed block bg-surface-1 w-full h-[40px]  pl-4 shadow-sm focus:outline-none text-base"
         placeholder="ရှာဖွေမည်"
         type="search"
         id="search"

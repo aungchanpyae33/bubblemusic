@@ -11,7 +11,7 @@ interface SubOptionToggleProps<T> extends React.ComponentProps<"div"> {
   children: React.ReactNode;
 }
 const baseStyle =
-  "z-50 bg-zinc-800 p-3 rounded-md border border-zinc-500 w-[400px] absolute max-h-[95vh] overflow-y-auto  top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]";
+  "z-50 bg-pop p-3 rounded-md border border-borderFull w-[400px] absolute max-h-[95vh] overflow-y-auto  top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]";
 function SubOptionToggle<T>({
   children,
   selector,
@@ -23,7 +23,7 @@ function SubOptionToggle<T>({
   useSetFocusMounted({ refFocus: refFocus });
   return (
     <div
-      className=" fixed  inset-0 z-40 bg-black/50"
+      className=" fixed  inset-0 z-50 bg-overlay"
       onClick={() => addSongsToPlaylist({})}
     >
       <FocusTrap refFocus={refFocus}>

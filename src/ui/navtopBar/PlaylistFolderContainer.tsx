@@ -47,14 +47,14 @@ function PlaylistFolderContainer({
             return (
               <div
                 key={item.id}
-                className="p-2 hover:bg-[#333333] bg-[#0A0A0A]"
+                className="p-2 bg-section hover:bg-surface-2  "
               >
                 <NoThankYouPreFetchLink
                   href={`/${item.type}/${item.id}`}
                   className=" h-[50px] leading-relaxed  flex items-center gap-x-2"
                   onClick={() => setOpen(false)}
                 >
-                  <div className="size-[50px] bg-[#333333] relative  cursor-pointer">
+                  <div className="size-[50px] bg-placeholder relative  cursor-pointer">
                     {item.cover_url ? (
                       <Image
                         src={item.cover_url}

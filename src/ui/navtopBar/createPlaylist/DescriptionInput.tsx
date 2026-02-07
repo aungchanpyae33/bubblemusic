@@ -51,8 +51,7 @@ function DescriptionInput({ initValue }: { initValue?: string }) {
           onFocus={() => setIsInputFocus(true)}
           onBlur={() => setIsInputFocus(false)}
           maxLength={300}
-          className="p-2 bg-blue w-full h-[150px] resize-none text-base bg-[#222222]
-                          invalid:outline invalid:outline-red-900  border border-neutral-200 border-opacity-25 rounded"
+          className="p-2 bg-surface-1 w-full h-[150px] resize-none text-base ring-1 ring-borderFull rounded"
           id="playlistDescription"
         />
       </span>

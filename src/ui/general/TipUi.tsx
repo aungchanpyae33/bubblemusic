@@ -9,7 +9,7 @@ function TipUi({ controls }: { controls: DragControls }) {
       }}
       className="h-5 cursor-default  w-full flex items-center justify-center "
     >
-      <div className=" h-[6px] w-20 cursor-grab touch-none rounded-full bg-neutral-700 active:cursor-grabbing"></div>
+      <div className=" h-[6px] w-20 cursor-grab touch-none rounded-full bg-surface-1 active:cursor-grabbing"></div>
     </button>
   );
 }

@@ -40,13 +40,13 @@ function Volume({ isFull }: { isFull: boolean }) {
               setIsDragging={setIsDragging}
               setValue={setValue}
             >
-              <div className=" w-full h-[2px] bg-[rgba(255,255,255,0.2)] relative">
+              <div className=" w-full h-[2px] bg-surface-1 relative">
                 <AudioProgressbar value={value} progressRef={progressRef} />
 
                 <AudioThumbSlider
                   value={value}
                   className={clsx(
-                    "absolute  w-[14px] rounded-full h-[14px] top-1/2 -translate-y-1/2  -translate-x-[7px] bg-white",
+                    "absolute  w-[14px] rounded-full h-[14px] top-1/2 -translate-y-1/2  -translate-x-[7px] bg-foreground",
                   )}
                 />
               </div>

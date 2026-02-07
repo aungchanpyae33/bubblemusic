@@ -39,7 +39,7 @@ async function UserUpperContainer({ profile }: { profile: listInfo }) {
           {is_official_exist && <OfficialBadgeName />}
         </p>
         <div className="flex items-center ">
-          <span className=" border text-base lg:text-lg font-medium p-1 mr-2">
+          <span className=" border border-borderFull text-base lg:text-lg font-medium p-1 mr-2">
             {profile.type.toUpperCase()}
           </span>
         </div>

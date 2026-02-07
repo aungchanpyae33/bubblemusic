@@ -51,7 +51,7 @@ function PlaylistUpperContainer({
           {name}
         </p>
         <div className="flex items-center ">
-          <span className=" border text-base lg:text-lg font-medium p-1 mr-2">
+          <span className=" border text-base lg:text-lg border-borderFull font-medium p-1 mr-2">
             {type.toUpperCase()}
           </span>
           <span className=" flex">

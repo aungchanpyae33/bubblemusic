@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { useRouter } from "nextjs-toploader/app";
 
-import React, { memo } from "react";
+import { memo } from "react";
 interface prop {
   title: string;
   index: number;
@@ -18,9 +18,9 @@ const SearchResultItem = memo(({ title, index, show }: prop) => {
   return (
     <div
       className={clsx(
-        "hover:bg-[#333333] pl-[85px] sm:pl-4  pr-2 h-[40px] flex items-center cursor-pointer",
+        "hover:bg-surface-2 pl-[85px] rounded sm:pl-4  pr-2 h-[40px] flex items-center cursor-pointer",
         {
-          "bg-[#333333]": show,
+          "bg-surface-2": show,
         },
       )}
       key={title}

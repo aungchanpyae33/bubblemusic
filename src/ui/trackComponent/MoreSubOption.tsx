@@ -10,27 +10,29 @@ import { generateUUID } from "@/lib/GenerateUUID";
 interface MoreOptionProps extends React.ComponentProps<"button"> {
   targetElement: React.ReactNode;
   triggerEl: React.ReactNode;
-  relativeRoot?: HTMLDivElement | null;
   stackNum: number;
 }
 function MoreSubOption({
   className,
   targetElement,
   triggerEl,
-  relativeRoot,
   stackNum,
 }: MoreOptionProps) {
   const parentRef = useRef<HTMLButtonElement>(null);
   const uuid = useMemo(() => generateUUID(), []);
   const [stayShow] = useTriggerButtonSub(parentRef, stackNum, uuid);
   useDisableScroll(stayShow);
+
   return (
     <div>
       <button
         ref={parentRef}
-        className={clsx(`w-full h-full flex justify-center ${className}`, {
-          "bg-[#444444]": stayShow,
-        })}
+        className={clsx(
+          `w-full h-full bg-surface-2 flex justify-center ${className}`,
+          {
+            "bg-transparent": !stayShow,
+          },
+        )}
       >
         {triggerEl}
       </button>
@@ -47,7 +49,7 @@ function MoreSubOption({
                 {targetElement}
               </ToggleSubContent>
             </MoreOptionUniqueContext>,
-            relativeRoot ? relativeRoot : document.body,
+            document.body,
           )}
         </>
       )}

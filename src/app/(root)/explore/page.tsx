@@ -22,7 +22,7 @@ async function page() {
                 <span>hello</span>
                 <span>hello hi</span>
               </div>
-              <div className=" w-[60px] h-full bg-slate-400 flex items-center justify-center">
+              <div className=" w-[60px] h-full bg-placeholder flex items-center justify-center">
                 dot
               </div>
             </div>
@@ -39,7 +39,7 @@ async function page() {
                 <span>hello</span>
                 <span>hello hi</span>
               </div>
-              <div className=" w-[60px] h-full bg-slate-400 flex items-center justify-center">
+              <div className=" w-[60px] h-full bg-placeholder flex items-center justify-center">
                 dot
               </div>
             </div>
@@ -56,7 +56,7 @@ async function page() {
                 <span>hello</span>
                 <span>hello hi</span>
               </div>
-              <div className=" w-[60px] h-full bg-slate-400 flex items-center justify-center">
+              <div className=" w-[60px] h-full bg-placeholder flex items-center justify-center">
                 dot
               </div>
             </div>
@@ -73,77 +73,7 @@ async function page() {
                 <span>hello</span>
                 <span>hello hi</span>
               </div>
-              <div className=" w-[60px] h-full bg-slate-400 flex items-center justify-center">
-                dot
-              </div>
-            </div>
-          </div>
-          <div className=" w-[90%] max-w-[400px] min-w-[350px]   h-full flex flex-col gap-2 justify-between">
-            <div className="h-[60px] outline outline-slate-200  w-full flex gap-3">
-              <div className="  w-[60px] h-full relative">
-                <Image
-                  src="https://s3.tebi.io/test1345/timo-volz-ZlFKIG6dApg-unsplash%20%281%29.jpg"
-                  fill
-                  alt="this is image element"
-                  priority={true}
-                />
-              </div>
-              <div className=" flex-1 flex flex-col justify-center">
-                <span>hello</span>
-                <span>hello hi</span>
-              </div>
-              <div className=" w-[60px] h-full bg-slate-400 flex items-center justify-center">
-                dot
-              </div>
-            </div>
-            <div className="h-[60px] outline outline-slate-200  w-full flex gap-3">
-              <div className="  w-[60px] h-full relative">
-                <Image
-                  src="https://s3.tebi.io/test1345/timo-volz-ZlFKIG6dApg-unsplash%20%281%29.jpg"
-                  fill
-                  alt="this is image element"
-                  priority={true}
-                />
-              </div>
-              <div className=" flex-1 flex flex-col justify-center">
-                <span>hello</span>
-                <span>hello hi</span>
-              </div>
-              <div className=" w-[60px] h-full bg-slate-400 flex items-center justify-center">
-                dot
-              </div>
-            </div>
-            <div className="h-[60px] outline outline-slate-200  w-full flex gap-3">
-              <div className="  w-[60px] h-full relative">
-                <Image
-                  src="https://s3.tebi.io/test1345/timo-volz-ZlFKIG6dApg-unsplash%20%281%29.jpg"
-                  fill
-                  alt="this is image element"
-                  priority={true}
-                />
-              </div>
-              <div className=" flex-1 flex flex-col justify-center">
-                <span>hello</span>
-                <span>hello hi</span>
-              </div>
-              <div className=" w-[60px] h-full bg-slate-400 flex items-center justify-center">
-                dot
-              </div>
-            </div>
-            <div className="h-[60px] outline outline-slate-200  w-full flex gap-3">
-              <div className="  w-[60px] h-full relative">
-                <Image
-                  src="https://s3.tebi.io/test1345/timo-volz-ZlFKIG6dApg-unsplash%20%281%29.jpg"
-                  fill
-                  alt="this is image element"
-                  priority={true}
-                />
-              </div>
-              <div className=" flex-1 flex flex-col justify-center">
-                <span>hello</span>
-                <span>hello hi</span>
-              </div>
-              <div className=" w-[60px] h-full bg-slate-400 flex items-center justify-center">
+              <div className=" w-[60px] h-full bg-placeholder flex items-center justify-center">
                 dot
               </div>
             </div>
@@ -162,7 +92,7 @@ async function page() {
                 <span>hello</span>
                 <span>hello hi</span>
               </div>
-              <div className=" w-[60px] h-full bg-slate-400 flex items-center justify-center">
+              <div className=" w-[60px] h-full bg-placeholder flex items-center justify-center">
                 dot
               </div>
             </div>
@@ -179,7 +109,7 @@ async function page() {
                 <span>hello</span>
                 <span>hello hi</span>
               </div>
-              <div className=" w-[60px] h-full bg-slate-400 flex items-center justify-center">
+              <div className=" w-[60px] h-full bg-placeholder flex items-center justify-center">
                 dot
               </div>
             </div>
@@ -196,7 +126,7 @@ async function page() {
                 <span>hello</span>
                 <span>hello hi</span>
               </div>
-              <div className=" w-[60px] h-full bg-slate-400 flex items-center justify-center">
+              <div className=" w-[60px] h-full bg-placeholder flex items-center justify-center">
                 dot
               </div>
             </div>
@@ -213,7 +143,7 @@ async function page() {
                 <span>hello</span>
                 <span>hello hi</span>
               </div>
-              <div className=" w-[60px] h-full bg-slate-400 flex items-center justify-center">
+              <div className=" w-[60px] h-full bg-placeholder flex items-center justify-center">
                 dot
               </div>
             </div>
@@ -232,7 +162,7 @@ async function page() {
                 <span>hello</span>
                 <span>hello hi</span>
               </div>
-              <div className=" w-[60px] h-full bg-slate-400 flex items-center justify-center">
+              <div className=" w-[60px] h-full bg-placeholder flex items-center justify-center">
                 dot
               </div>
             </div>
@@ -249,7 +179,7 @@ async function page() {
                 <span>hello</span>
                 <span>hello hi</span>
               </div>
-              <div className=" w-[60px] h-full bg-slate-400 flex items-center justify-center">
+              <div className=" w-[60px] h-full bg-placeholder flex items-center justify-center">
                 dot
               </div>
             </div>
@@ -266,7 +196,7 @@ async function page() {
                 <span>hello</span>
                 <span>hello hi</span>
               </div>
-              <div className=" w-[60px] h-full bg-slate-400 flex items-center justify-center">
+              <div className=" w-[60px] h-full bg-placeholder flex items-center justify-center">
                 dot
               </div>
             </div>
@@ -283,7 +213,77 @@ async function page() {
                 <span>hello</span>
                 <span>hello hi</span>
               </div>
-              <div className=" w-[60px] h-full bg-slate-400 flex items-center justify-center">
+              <div className=" w-[60px] h-full bg-placeholder flex items-center justify-center">
+                dot
+              </div>
+            </div>
+          </div>
+          <div className=" w-[90%] max-w-[400px] min-w-[350px]   h-full flex flex-col gap-2 justify-between">
+            <div className="h-[60px] outline outline-slate-200  w-full flex gap-3">
+              <div className="  w-[60px] h-full relative">
+                <Image
+                  src="https://s3.tebi.io/test1345/timo-volz-ZlFKIG6dApg-unsplash%20%281%29.jpg"
+                  fill
+                  alt="this is image element"
+                  priority={true}
+                />
+              </div>
+              <div className=" flex-1 flex flex-col justify-center">
+                <span>hello</span>
+                <span>hello hi</span>
+              </div>
+              <div className=" w-[60px] h-full bg-placeholder flex items-center justify-center">
+                dot
+              </div>
+            </div>
+            <div className="h-[60px] outline outline-slate-200  w-full flex gap-3">
+              <div className="  w-[60px] h-full relative">
+                <Image
+                  src="https://s3.tebi.io/test1345/timo-volz-ZlFKIG6dApg-unsplash%20%281%29.jpg"
+                  fill
+                  alt="this is image element"
+                  priority={true}
+                />
+              </div>
+              <div className=" flex-1 flex flex-col justify-center">
+                <span>hello</span>
+                <span>hello hi</span>
+              </div>
+              <div className=" w-[60px] h-full bg-placeholder flex items-center justify-center">
+                dot
+              </div>
+            </div>
+            <div className="h-[60px] outline outline-slate-200  w-full flex gap-3">
+              <div className="  w-[60px] h-full relative">
+                <Image
+                  src="https://s3.tebi.io/test1345/timo-volz-ZlFKIG6dApg-unsplash%20%281%29.jpg"
+                  fill
+                  alt="this is image element"
+                  priority={true}
+                />
+              </div>
+              <div className=" flex-1 flex flex-col justify-center">
+                <span>hello</span>
+                <span>hello hi</span>
+              </div>
+              <div className=" w-[60px] h-full bg-placeholder flex items-center justify-center">
+                dot
+              </div>
+            </div>
+            <div className="h-[60px] outline outline-slate-200  w-full flex gap-3">
+              <div className="  w-[60px] h-full relative">
+                <Image
+                  src="https://s3.tebi.io/test1345/timo-volz-ZlFKIG6dApg-unsplash%20%281%29.jpg"
+                  fill
+                  alt="this is image element"
+                  priority={true}
+                />
+              </div>
+              <div className=" flex-1 flex flex-col justify-center">
+                <span>hello</span>
+                <span>hello hi</span>
+              </div>
+              <div className=" w-[60px] h-full bg-placeholder flex items-center justify-center">
                 dot
               </div>
             </div>

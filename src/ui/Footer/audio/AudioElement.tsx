@@ -33,7 +33,7 @@ function AudioElement({
         )}
         duration={duration}
         key={url}
-        className="w-full h-[3px] sm:hidden bg-[rgba(255,255,255,0.2)] relative"
+        className="w-full h-[3px] sm:hidden bg-surface-1 relative"
       />
       {children}
     </div>

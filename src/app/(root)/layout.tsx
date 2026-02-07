@@ -59,7 +59,7 @@ export default function RootLayout({
               <DeviceCheckFetcher>
                 <LibandLikeHyration>
                   <NextTopLoader
-                    color="#2299DD"
+                    color="var(--loader)"
                     initialPosition={0.08}
                     crawlSpeed={200}
                     height={3}
@@ -67,7 +67,7 @@ export default function RootLayout({
                     showSpinner={false}
                     easing="ease"
                     speed={200}
-                    shadow="0 0 10px #2299DD,0 0 5px #2299DD"
+                    shadow="0 0 10px var(--loader),0 0 5px var(--loader)"
                     template='<div class="bar" role="bar"><div class="peg"></div></div>' // no spinner
                     zIndex={1600}
                     showAtBottom={false}

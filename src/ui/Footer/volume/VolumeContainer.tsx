@@ -26,8 +26,8 @@ function VolumeContainer({
       className={clsx(
         "absolute group-hover:lg:bg-inherit  h-full    lg:static lg:w-full lg:flex right-0  w-full",
         {
-          "flex bg-[#222222] lg:bg-inherit": isDragging,
-          "flex   bg-[#222222]": open,
+          "flex bg-surface-2 lg:bg-inherit": isDragging,
+          "flex   bg-surface-2": open,
           hidden: !open,
         },
       )}

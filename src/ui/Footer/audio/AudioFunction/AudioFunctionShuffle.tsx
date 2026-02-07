@@ -69,7 +69,7 @@ function AudioFunctionShuffle({ className, listSong, id }: Props) {
         Icon={Shuffle}
         size="small"
         className={clsx("", {
-          "text-orange-300": isShuffle,
+          "text-warning-300": isShuffle,
         })}
       />
     </button>

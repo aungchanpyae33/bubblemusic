@@ -48,7 +48,7 @@ function SearchAlbumItem({
           <UnderLineLinkHover
             href={`${relatedType}/${related_id}`}
             prefetch={false}
-            className=" block leading-relaxed w-full truncate text-start text-sm text-zinc-400 "
+            className=" block leading-relaxed w-full truncate text-start text-sm text-ink-400 "
           >
             {related_name}
           </UnderLineLinkHover>

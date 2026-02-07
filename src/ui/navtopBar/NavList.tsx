@@ -26,7 +26,7 @@ function NavList({
   const [open, setOpen] = useState(false);
   return (
     <div className=" w-full  ">
-      <ul className="fixed w-[70px]  top-0  box-border left-0 h-[70px] md:h-full flex  flex-col gap-x-1   rounded-b-sm">
+      <ul className="fixed w-[70px] top-0  box-border left-0 h-[70px] md:h-full flex  flex-col gap-x-1   rounded-b-sm">
         <button
           onClick={() => {
             setOpen(!open);
@@ -41,7 +41,7 @@ function NavList({
           <IconWrapper size="large" Icon={Menu} />
         </button>
 
-        <div className=" h-full border-r border-opacity-15    border-neutral-200">
+        <div className=" h-full border-r border-seperate-soft">
           <NavSideLinkNotOpen hrefString="/explore">
             {childrenExplore}
           </NavSideLinkNotOpen>
@@ -99,7 +99,7 @@ function NavList({
         </div>
       </NavListUlWrapper>
 
-      {open && <OverLay setOpen={setOpen} className="bg-black/50" />}
+      {open && <OverLay setOpen={setOpen} className="bg-overlay" />}
     </div>
   );
 }

@@ -87,8 +87,9 @@ function AudioPlayer({
             initial={{ y: "100%" }}
             animate={{ y: 0 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className={clsx("w-full   relative flex   h-[70px]")}
-            ref={footerRef}
+            className={clsx(
+              "w-full will-change-transform bg-section    relative flex   h-[70px]",
+            )}
           >
             <MediaSessionDesWrapper name={name} artists={artists} />
             <PlaceHolderToggleState url={url} id={id}>
@@ -146,12 +147,12 @@ function AudioPlayer({
                               onKeyDown={(e) => e.stopPropagation()}
                             >
                               <AudioFunctionShuffle
-                                className="text-white/70 hover:text-white  p-1  sm:inline-block text-sm md:text-base hidden"
+                                className="text-foreground/70 hover:text-foreground  p-1  sm:inline-block text-sm md:text-base hidden"
                                 listSong={playListArray}
                                 id={id}
                               />
                               <AudioFunctionPre
-                                className="text-white/70 hover:text-white  p-1  sm:inline-block text-sm md:text-base hidden"
+                                className="text-foreground/70 hover:text-foreground  p-1  sm:inline-block text-sm md:text-base hidden"
                                 id={id}
                                 listSong={playListArray}
                               />
@@ -159,9 +160,9 @@ function AudioPlayer({
                               <AudioFunctionNext
                                 id={id}
                                 listSong={playListArray}
-                                className="text-white/70 hover:text-white  p-1 text-sm md:text-base"
+                                className="text-foreground/70 hover:text-foreground  p-1 text-sm md:text-base"
                               />
-                              <AudioFunctionRepeat className="text-white/70 hover:text-white  p-1  sm:inline-block text-sm md:text-base hidden" />
+                              <AudioFunctionRepeat className="text-foreground/70 hover:text-foreground  p-1  sm:inline-block text-sm md:text-base hidden" />
                             </div>
                           );
                         }}

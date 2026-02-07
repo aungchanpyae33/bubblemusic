@@ -14,7 +14,7 @@ function AddSongContent() {
   if (!userLib) return;
   return (
     <div className=" space-y-4">
-      <h2 className=" py-2 border-b border-gray-200">
+      <h2 className=" py-2 border-b border-seperate-soft">
         Add Songs to the Playlist
       </h2>
 

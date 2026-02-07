@@ -35,7 +35,7 @@ function TrackToggleLike({ songId }: { songId: string }) {
         Icon={Heart}
         size="exLarge"
         className={clsx("", {
-          "fill-white": isLike,
+          "fill-foreground": isLike,
         })}
       />
     </button>

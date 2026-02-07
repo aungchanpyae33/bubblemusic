@@ -24,7 +24,7 @@ function NavListUlWrapper({
       <MoreOptionStackContext>
         <ul
           className={clsx(
-            "fixed bg-[#0A0A0A] border-r border-opacity-15 border-neutral-200  top-0 z-40 box-border w-[280px]  max-w-[280px]  left-0 h-full flex duration-200   transition-[transform,visibility] flex-col gap-1  rounded-b-sm",
+            "fixed bg-section border-r border-seperate-soft  top-0 z-40 box-border w-[280px]  max-w-[280px]  left-0 h-full flex duration-200   transition-[transform,visibility] flex-col gap-1  rounded-b-sm",
             {
               // to remove from tab order
               "-translate-x-full invisible": !open,
@@ -35,7 +35,7 @@ function NavListUlWrapper({
           aria-hidden={!open}
           tabIndex={0}
         >
-          <li className="h-[70px] relative   flex border-b border-opacity-15 border-neutral-200">
+          <li className="h-[70px] relative   flex border-b border-seperate-soft">
             <NavSidebarToggle setOpen={setOpen} open={open} />
             <button
               className={clsx(

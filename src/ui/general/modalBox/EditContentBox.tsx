@@ -49,11 +49,11 @@ function EditContentBox() {
       id="createPlaylist"
     >
       <fieldset className="flex flex-col gap-2 items-start">
-        <legend className="text-lg font-semibold flex w-full justify-between items-center  text-white mb-4">
+        <legend className="text-lg font-semibold flex w-full justify-between items-center  text-foreground mb-4">
           <h3 className="">သီချင်းစာရင်း အသစ်</h3>
           <button
             type="button"
-            className=" bg-transparent transition-colors  duration-200 hover:bg-[#333333] p-1 rounded-full flex items-center justify-center"
+            className=" bg-transparent transition-colors  duration-200 hover:bg-surface-2 p-1 rounded-full flex items-center justify-center"
             onClick={() => {
               editToPlaylistAction({});
             }}
