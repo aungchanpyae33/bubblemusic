@@ -180,9 +180,10 @@ const useMediaSourceBuffer = (
     };
 
     const sourceOpen = async () => {
+      if (!mediaSourceRef.current) return;
       if (sourceBufferRef.current === null) {
         sourceBufferRef.current =
-          mediaSourceRef.current!.addSourceBuffer(mimeCodec_audio);
+          mediaSourceRef.current.addSourceBuffer(mimeCodec_audio);
         if (url === prefetchedUrlRef.current && prefetchPromiseRef.current) {
           if (
             sourceBufferRef.current?.buffered &&
@@ -191,7 +192,7 @@ const useMediaSourceBuffer = (
           ) {
             const data = await checkFeching();
             if (!data) return;
-            sourceBufferRef.current!.appendBuffer(data[0]);
+            sourceBufferRef.current.appendBuffer(data[0]);
           }
         } else {
           await fetchInitSegment(
@@ -204,13 +205,13 @@ const useMediaSourceBuffer = (
             initAbortControllerRef,
           );
         }
-
-        sourceBufferRef.current!.addEventListener(
+        if (!sourceBufferRef.current) return;
+        sourceBufferRef.current.addEventListener(
           "updateend",
           updateendLoadNextSegment,
         );
-
-        audioElRef.current!.addEventListener(
+        if (!audioElRef.current) return;
+        audioElRef.current.addEventListener(
           "timeupdate",
           throttleLoadNextSegment,
         );
@@ -253,8 +254,10 @@ const useMediaSourceBuffer = (
     };
 
     const startUp = () => {
-      audioElRef.current!.src = URL.createObjectURL(mediaSourceRef.current!);
-      mediaSourceRef.current!.addEventListener("sourceopen", sourceOpen, false);
+      if (!audioElRef.current) return;
+      if (!mediaSourceRef.current) return;
+      audioElRef.current.src = URL.createObjectURL(mediaSourceRef.current);
+      mediaSourceRef.current.addEventListener("sourceopen", sourceOpen, false);
     };
     mediaSourceRef.current = new MediaSource();
     startUp();
