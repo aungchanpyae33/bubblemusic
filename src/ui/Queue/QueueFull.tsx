@@ -97,7 +97,7 @@ function QueueFull() {
                   <ArtistWrapper artists={item.artists} />
                 </div>
 
-                <div className="w-[30px] flex items-center">
+                <div className="w-[55px] flex items-center justify-center">
                   <ContextInfoTrack
                     id={undefined}
                     source={undefined}

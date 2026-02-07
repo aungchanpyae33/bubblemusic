@@ -24,8 +24,8 @@ function DescriptionInput({ initValue }: { initValue?: string }) {
           onAnimationEnd={() => {
             setShake({ setUpShake: false, setUp: false });
           }}
-          className={clsx("text-zinc-400", {
-            "animate-headshake text-zinc-50": shake.setUpShake,
+          className={clsx("text-ink-400", {
+            "animate-headshake text-ink-50": shake.setUpShake,
           })}
         >
           {`${textValue.length}/300`}
