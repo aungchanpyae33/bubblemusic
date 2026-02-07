@@ -17,6 +17,7 @@ import { DeviceContext } from "@/lib/DeviceContext/ContextDeviceCheck";
 import useFocusOnOpen from "@/lib/CustomHooks/useFocusOnOpen";
 import TipUi from "../general/TipUi";
 import FocusTrap from "../Footer/audioFull/FocusTrap";
+import { useEnableScroll } from "@/lib/CustomHooks/useEnableScroll";
 
 interface ToggleSubContentMobileProps extends React.ComponentProps<"div"> {
   children: React.ReactNode;
@@ -137,6 +138,7 @@ function ToggleSubContentFloat({
     parentRef,
     containerRef,
   });
+  useEnableScroll(containerRef);
   // outterclickSub is to detect only click is inside portal and targert parent trigger
   useOutterClickSub(containerRef, stackNum);
   useFocusOnOpen(stayShow, containerRef);

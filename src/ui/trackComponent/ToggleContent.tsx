@@ -16,6 +16,7 @@ import useFocusOnOpen from "@/lib/CustomHooks/useFocusOnOpen";
 import FocusTrap from "../Footer/audioFull/FocusTrap";
 import TipUi from "../general/TipUi";
 import { DeviceContext } from "@/lib/DeviceContext/ContextDeviceCheck";
+import { useEnableScroll } from "@/lib/CustomHooks/useEnableScroll";
 
 interface ToggleContentProps extends React.ComponentProps<"div"> {
   parentRef: RefObject<HTMLButtonElement | null>;
@@ -41,6 +42,7 @@ function ToggleContentFloat({
     staticUp,
   });
   // outterclick is to detect click is inside portal and targert parent trigger or not inside when portal is open
+  useEnableScroll(containerRef);
   useOutterClick(show, setShow, parentRef, containerRef);
   useFocusOnOpen(stack === 0, containerRef);
   useCloseFunctoion(show, setShow, parentRef);
