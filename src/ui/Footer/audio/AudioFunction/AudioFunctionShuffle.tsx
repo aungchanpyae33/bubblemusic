@@ -63,7 +63,7 @@ function AudioFunctionShuffle({ className, listSong, id }: Props) {
     setIsShuffle(!isShuffle);
   }
   return (
-    <button className={className} onClick={() => shuffle()}>
+    <button className={className} onClick={shuffle}>
       {/* {isShuffle ? "unSh" : "Shu"} */}
       <IconWrapper
         Icon={Shuffle}
