@@ -28,7 +28,7 @@ function MoreSubOption({
       <button
         ref={parentRef}
         className={clsx(
-          `w-full h-full bg-surface-2 flex justify-center ${className}`,
+          `w-full h-full bg-surface-2 rounded-md flex justify-center ${className}`,
           {
             "bg-transparent": !stayShow,
           },
