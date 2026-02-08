@@ -1,11 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { useContext, useRef } from "react";
-import { ContextAlbum } from "./AlbumUpperBackground";
+import { useRef } from "react";
 import IconWrapper from "../general/IconWrapper";
 import { Folder } from "lucide-react";
-import useGetDominantColor from "@/lib/CustomHooks/useGetDominantColor";
 import type { listSongsSection } from "../../../database.types-fest";
 
 function AlbumImg({
@@ -16,8 +14,6 @@ function AlbumImg({
   type: listSongsSection["type"];
 }) {
   const imgRef = useRef<HTMLImageElement | null>(null);
-  const { setBgValue } = useContext(ContextAlbum);
-  useGetDominantColor({ setBgValue, imgRef, cover_url });
   return (
     <div
       className=" lg:w-[250px] rounded overflow-hidden md:w-[200px] shrink-0 w-[180px]  aspect-square  object-cover relative bg-placeholder

@@ -1,5 +1,4 @@
 import { getUserPage } from "@/database/data";
-import AlbumUpperBackground from "@/ui/albumContainer/AlbumUpperBackground";
 import Container from "@/ui/albumContainer/Container";
 import VerticalThreeDots from "@/ui/general/icon/VerticalThreeDots";
 import ListContainer from "@/ui/general/ListContainerOption/ListContainer";
@@ -19,10 +18,7 @@ async function page(props: { params: Promise<{ slug: string }> }) {
   if (!playlists || !profile) return;
   return (
     <div className=" w-full">
-      <AlbumUpperBackground>
-        <UserUpperContainer profile={profile} />
-      </AlbumUpperBackground>
-
+      <UserUpperContainer profile={profile} />
       <ListContainer className="h-[50px]">
         <div>
           <ContextSongListContainer id={profile.id} list={profile}>
