@@ -13,7 +13,7 @@ function PlaylistUpperContainer() {
     useContext(SongListContext) as ListSongPage;
   return (
     <div
-      className={clsx("Container w-full flex  items-center p-5 ", {
+      className={clsx("Container w-full bg-section flex  items-center p-5 ", {
         "flex-col": device === "mobile" || device === "tablet",
         "gap-4": device === "mobile" || device === "tablet",
         "gap-8 md:gap-10 lg:gap-12": device === "desktop",

@@ -10,7 +10,7 @@ async function UserUpperContainer({ profile }: { profile: listInfo }) {
   const is_official_exist = profile?.is_official;
   return (
     <div
-      className={clsx("Container w-full flex  items-center p-5 ", {
+      className={clsx("Container w-full flex bg-section items-center p-5 ", {
         "flex-col":
           deviceFromUserAgent === "mobile" || deviceFromUserAgent === "tablet",
         "gap-4":

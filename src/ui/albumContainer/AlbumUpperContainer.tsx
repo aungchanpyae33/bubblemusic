@@ -11,7 +11,7 @@ async function AlbumUpperContainer({ songs }: { songs: ListSongPage }) {
   const is_official_exist = songs?.is_official;
   return (
     <div
-      className={clsx("Container w-full flex  items-center p-5 ", {
+      className={clsx("Container bg-section w-full flex  items-center p-5 ", {
         "flex-col":
           deviceFromUserAgent === "mobile" || deviceFromUserAgent === "tablet",
         "gap-4":
