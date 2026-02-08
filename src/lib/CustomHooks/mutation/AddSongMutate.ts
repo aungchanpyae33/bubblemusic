@@ -25,9 +25,12 @@ const useAddSongMutate = (playlistId: string, cover_url: string | null) => {
 
               const updatedUserLib = {
                 ...oldData.data.userLib,
-                [playlistId]: {
-                  ...oldData.data.userLib.byId[playlistId],
-                  cover_url,
+                byId: {
+                  ...oldData.data.userLib.byId,
+                  [playlistId]: {
+                    ...oldData.data.userLib.byId[playlistId],
+                    cover_url,
+                  },
                 },
               };
               return {
