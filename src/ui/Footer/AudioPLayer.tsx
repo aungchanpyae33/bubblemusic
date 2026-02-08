@@ -91,13 +91,13 @@ function AudioPlayer({ start }: { start: boolean }) {
               {/* this is for space key to toggle play and pause */}
             </PlaceHolderToggleState>
             <PlaceHolderTrackUser />
+            <AudioFull
+              url={url}
+              id={id}
+              duration={duration}
+              toggleRef={toggleRef}
+            />
             <AudioFooterContainer>
-              <AudioFull
-                url={url}
-                id={id}
-                duration={duration}
-                toggleRef={toggleRef}
-              />
               <div className=" w-full sm:w-[25%]   md:w-[25%] max-w-[375px]  flex items-center">
                 <AudioDisplayFooter song_cover={cover_url} />
                 {/* without it will just changing data for audioinfo */}
