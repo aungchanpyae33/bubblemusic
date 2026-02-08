@@ -1,6 +1,5 @@
 import { Context } from "@/lib/MediaSource/ContextMediaAudioFull";
 import { useContext, useRef } from "react";
-import AudioFullBackGround from "./AudioFullBackGround";
 import AudioFunctionButton from "../audio/AudioFunction/AudioFunctionButton";
 import AudioFunctionShuffle from "../audio/AudioFunction/AudioFunctionShuffle";
 import AudioFunctionPre from "../audio/AudioFunction/AudioFunctionPre";
@@ -15,7 +14,6 @@ import Volume from "../volume/Volume";
 import AudioCurImg from "./AudioCurImg";
 import { X } from "lucide-react";
 import IconWrapper from "@/ui/general/IconWrapper";
-import clsx from "clsx";
 import FocusTrap from "./FocusTrap";
 import LyricToggleBtn from "./LyricToggleBtn";
 import QueueToggle from "./QueueToggle";
@@ -36,7 +34,7 @@ function AudioFull({
 }) {
   const { open, setOpen } = useContext(Context);
   const refFocus = useRef<HTMLDivElement | null>(null);
-
+  console.log(open);
   useCloseFunctoionForFull(open, setOpen, toggleRef, refFocus);
   return (
     <AnimatePresence>
@@ -55,13 +53,11 @@ function AudioFull({
                   mass: 0.6,
                 },
               }}
-              className={clsx("fixed will-change-transform inset-0 z-50", {})}
+              className="fixed will-change-transform inset-0 z-50"
             >
               <FocusTrap refFocus={refFocus}>
-                <AudioFullBackGround
-                  className={clsx(
-                    "w-full h-full  flex flex-col items-center justify-center   ",
-                  )}
+                <div
+                  className="w-full h-full  flex flex-col items-center justify-center bg-background relative"
                   ref={refFocus}
                 >
                   <div className="mx-auto w-[90%] h-[55px] min-h-[55px] max-h-[55px]  flex items-center sticky top-0">
@@ -79,7 +75,7 @@ function AudioFull({
                   <AudioFullInfoWrapper>
                     <AudioCurImg />
                   </AudioFullInfoWrapper>
-                  <div className=" h-[20%] py-2  shrink-0  w-[90%]  inset-x-0 mx-auto sticky bottom-0">
+                  <div className=" h-[20%]  p-2  shrink-0  w-[98%] md:w-[90%]  rounded-md  inset-x-0 mx-auto sticky bottom-0">
                     <div className="audioFunctionContainer  flex  flex-col flex-1 h-full gap-y-10 items-center justify-center">
                       <div className="BottomContainer w-full static top-0 left-0 items-center ">
                         <div className="  w-full flex items-center relative">
@@ -145,7 +141,7 @@ function AudioFull({
                       </div>
                     </div>
                   </div>
-                </AudioFullBackGround>
+                </div>
               </FocusTrap>
             </motion.div>,
             document.body,

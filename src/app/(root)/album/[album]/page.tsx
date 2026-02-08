@@ -1,6 +1,5 @@
 import { getAlbumSongs } from "@/database/data";
 import { outputRelative } from "@/lib/outputRelative";
-import AlbumUpperBackground from "@/ui/albumContainer/AlbumUpperBackground";
 import AlbumUpperContainer from "@/ui/albumContainer/AlbumUpperContainer";
 import AudiosContainer from "@/ui/albumContainer/AudiosContainer";
 import VerticalThreeDots from "@/ui/general/icon/VerticalThreeDots";
@@ -11,8 +10,6 @@ import SongListContainerOption from "@/ui/general/optionBox/SongListContainerOpt
 import ContextSongListContainer from "@/ui/playlist/playlistOption/ContextSongListContainer";
 import MoreOption from "@/ui/trackComponent/MoreOption";
 import MoreOptionContext from "@/ui/trackComponent/MoreOptionContext";
-import { Suspense } from "react";
-// import Track from "@/ui/trackComponent/Track";
 
 async function page(props: { params: Promise<{ album: string }> }) {
   const params = await props.params;
@@ -23,11 +20,7 @@ async function page(props: { params: Promise<{ album: string }> }) {
   if (!songs) return;
   return (
     <div className=" w-full">
-      <AlbumUpperBackground>
-        <Suspense fallback={<p>nice</p>}>
-          <AlbumUpperContainer songs={songs} />
-        </Suspense>
-      </AlbumUpperBackground>
+      <AlbumUpperContainer songs={songs} />
       <ContextSongListContainer id={songs.id} list={songs}>
         <ListContainer>
           <ListContainerPlayBack list={songs} />

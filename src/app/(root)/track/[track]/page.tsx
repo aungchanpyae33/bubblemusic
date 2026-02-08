@@ -1,5 +1,4 @@
 import { getSongTrack } from "@/database/data";
-import AlbumUpperBackground from "@/ui/albumContainer/AlbumUpperBackground";
 import AlbumUpperContainer from "@/ui/albumContainer/AlbumUpperContainer";
 import AudiosContainer from "@/ui/albumContainer/AudiosContainer";
 import VerticalThreeDots from "@/ui/general/icon/VerticalThreeDots";
@@ -13,7 +12,6 @@ import TrackItemContainer from "@/ui/trackComponent/TrackItemContainer";
 import TrackToggleLike from "@/ui/trackComponent/TrackToggleLike";
 
 // import PlaceHolderTrackInstantPlay from "@/ui/Footer/PlaceHolderTrackInstantPlay";
-import { Suspense } from "react";
 
 async function page(props: { params: Promise<{ track: string }> }) {
   const { track } = await props.params;
@@ -28,12 +26,7 @@ async function page(props: { params: Promise<{ track: string }> }) {
 
   return (
     <div className=" w-full">
-      <AlbumUpperBackground>
-        <Suspense fallback={<p>nice</p>}>
-          <AlbumUpperContainer songs={songs} />
-        </Suspense>
-      </AlbumUpperBackground>
-
+      <AlbumUpperContainer songs={songs} />
       <ContextInfoTrack id={songsInfo?.id} source={undefined} song={songsInfo}>
         <ContextLike id={songsInfo!.song_id}>
           <ListContainer>

@@ -1,4 +1,3 @@
-import AlbumUpperBackground from "../albumContainer/AlbumUpperBackground";
 import AlbumUpperContainer from "../albumContainer/AlbumUpperContainer";
 import ContextSongListContainer from "./playlistOption/ContextSongListContainer";
 import ListContainer from "../general/ListContainerOption/ListContainer";
@@ -14,9 +13,7 @@ import { outputRelative } from "@/lib/outputRelative";
 function View({ songs }: { songs: ListSongPage }) {
   return (
     <div className=" w-full">
-      <AlbumUpperBackground>
-        <AlbumUpperContainer songs={songs} />
-      </AlbumUpperBackground>
+      <AlbumUpperContainer songs={songs} />
       <ContextSongListContainer id={songs.id} list={songs}>
         <ListContainer>
           <ListContainerPlayBack list={songs} />

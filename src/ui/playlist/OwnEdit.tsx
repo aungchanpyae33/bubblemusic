@@ -3,7 +3,6 @@ import {
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
-import AlbumUpperBackground from "../albumContainer/AlbumUpperBackground";
 import ContextSongListContainer from "./playlistOption/ContextSongListContainer";
 import ListContainer from "../general/ListContainerOption/ListContainer";
 import ListContainerPlayBack from "../general/ListContainerOption/ListContainerPlayBack";
@@ -32,9 +31,7 @@ function OwnEdit({
     <HydrationBoundary state={dehydrate(queryClient)}>
       <div className=" w-full">
         <ContextSongListContainer id={songs.id} list={songs}>
-          <AlbumUpperBackground>
-            <PlaylistUpperContainer />
-          </AlbumUpperBackground>
+          <PlaylistUpperContainer />
 
           <ListContainer>
             <ListContainerPlayBack list={songs} />
