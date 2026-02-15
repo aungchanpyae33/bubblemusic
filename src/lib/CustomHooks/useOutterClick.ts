@@ -8,13 +8,18 @@ function useOutterClick(
   value: boolean,
   fun: React.Dispatch<React.SetStateAction<boolean>>,
   ignoreRef: RefObject<HTMLDivElement | null>,
+  parentRef: RefObject<HTMLButtonElement | null>,
 ) {
   const { setStack } = useContext(ContextMoreOptionStack);
 
   const { setUuidState } = useContext(ContextMoreOptionUnique);
   // if it pass to reach it , it is outside click
   useEffect(() => {
-    function OutterClickFunction() {
+    function OutterClickFunction(e: MouseEvent) {
+      const target = e.target as Node | null;
+
+      if (!parentRef.current || !target) return;
+      if (parentRef.current?.contains(target)) return;
       fun(false);
     }
     if (value) {
@@ -24,13 +29,14 @@ function useOutterClick(
     return () => {
       document.body.removeEventListener("click", OutterClickFunction);
     };
-  }, [fun, value]);
+  }, [fun, parentRef, value]);
 
   // handle toggle content click ,
   useEffect(() => {
     const copyRef = ignoreRef.current;
     if (!copyRef) return;
     function Close(e: MouseEvent) {
+      console.log("hello bro");
       if (e.target === e.currentTarget) {
         e.stopPropagation();
         setUuidState("");
