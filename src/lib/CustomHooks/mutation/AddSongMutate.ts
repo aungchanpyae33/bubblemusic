@@ -1,8 +1,12 @@
 import { insertSongtoPlaylist } from "@/actions/addSongsToPlaylist";
 import type { UserLibReturn } from "@/database/data-types-return";
+import { songExistAction, useIsExistSongs } from "@/lib/zustand";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const useAddSongMutate = (playlistId: string, cover_url: string | null) => {
+  const setIsSongExist = useIsExistSongs(
+    (state: songExistAction) => state.setIsSongExist,
+  );
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
@@ -43,6 +47,9 @@ const useAddSongMutate = (playlistId: string, cover_url: string | null) => {
           );
         }
       }
+    },
+    onSettled: () => {
+      setIsSongExist({});
     },
   });
 

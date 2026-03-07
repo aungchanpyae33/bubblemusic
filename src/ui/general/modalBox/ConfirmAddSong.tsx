@@ -30,12 +30,6 @@ function ConfirmAddSong() {
       songId,
     });
   }
-  useEffect(() => {
-    if (mutation.isSuccess) {
-      setIsSongExist({});
-      mutation.reset();
-    }
-  }, [mutation, setIsSongExist]);
   return (
     <NotiBox>
       <p>{w("songAlreadyExist")}</p>
