@@ -5,6 +5,7 @@ import EmailItem from "./ProfileItems/EmailItem";
 import ProfileItem from "./ProfileItems/ProfileItem";
 import LogoutItem from "./ProfileItems/LogoutItem";
 import ThemeSwitchItem from "./ProfileItems/ThemeSwitch/ThemeSwitchItem";
+import LanguageSwitchItem from "./ProfileItems/LanguageSwitch/LanguagaeSwtichItem";
 
 function UserProfileContainer({ user }: { user: JwtPayload }) {
   const name = user.user_metadata.first_name + user.user_metadata.last_name;
@@ -15,8 +16,9 @@ function UserProfileContainer({ user }: { user: JwtPayload }) {
       <NameItem name={name} />
       <EmailItem email={email} />
       <ProfileItem id={id} />
-      <LogoutItem />
       <ThemeSwitchItem />
+      <LanguageSwitchItem />
+      <LogoutItem />
     </OptionContainer>
   );
 }
