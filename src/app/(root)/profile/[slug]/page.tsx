@@ -33,7 +33,7 @@ async function page(props: { params: Promise<{ slug: string }> }) {
       </ListContainer>
 
       {playlists && (
-        <Container songs={playlists} description="Public Playlist" />
+        <Container songs={playlists} description="publicPlaylist" />
       )}
     </div>
   );

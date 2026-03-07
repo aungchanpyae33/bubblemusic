@@ -42,7 +42,9 @@ async function page(props: { params: Promise<{ artist: string }> }) {
         </ContextSongListContainer>
       )}
       <div className=" space-y-3">
-        {songs && <AudiosContainer description="top songs" listSong={songs} />}
+        {songs && (
+          <AudiosContainer description="topSongsArtist" listSong={songs} />
+        )}
         {albums && <Container songs={albums} description="album" />}
       </div>
     </div>

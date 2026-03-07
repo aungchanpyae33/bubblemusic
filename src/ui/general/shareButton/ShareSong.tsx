@@ -7,8 +7,11 @@ import { InfoTrackContext } from "@/ui/trackComponent/ContextInfoTrack";
 import OptionItem from "../optionBox/OptionItem";
 import OptionIconEl from "../optionBox/OptionIconEl";
 import OptionButton from "../optionBox/OptionButton";
+import { useTranslations } from "next-intl";
+import OptionText from "../optionBox/OptionText";
 
 function ShareSong() {
+  const b = useTranslations("block");
   const { song } = useContext(InfoTrackContext);
   const songId = song?.song_id;
   const handleCopy = async () => {
@@ -27,7 +30,7 @@ function ShareSong() {
         <OptionIconEl>
           <IconWrapper size="small" Icon={Link2} />
         </OptionIconEl>
-        <span>share </span>
+        <OptionText>{b("share")}</OptionText>
       </OptionButton>
     </OptionItem>
   );

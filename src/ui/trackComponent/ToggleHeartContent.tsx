@@ -10,8 +10,11 @@ import OptionItem from "../general/optionBox/OptionItem";
 import { InfoTrackContext } from "./ContextInfoTrack";
 import OptionButton from "../general/optionBox/OptionButton";
 import { LikeContext } from "./ContextLike";
+import { useTranslations } from "next-intl";
+import OptionText from "../general/optionBox/OptionText";
 
 function ToggleHeartContent() {
+  const b = useTranslations("block");
   const { song } = useContext(InfoTrackContext);
   const { isLike, setLikeAction } = useContext(LikeContext);
   if (!song) return;
@@ -50,7 +53,9 @@ function ToggleHeartContent() {
             })}
           />
         </OptionIconEl>
-        <span>{isLike ? "Remove like" : "Add like"}</span>
+        <OptionText>
+          {isLike ? b("like.removeLike") : b("like.addLike")}
+        </OptionText>
       </OptionButton>
     </OptionItem>
   );

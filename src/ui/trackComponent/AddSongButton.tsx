@@ -7,7 +7,10 @@ import OptionButton from "../general/optionBox/OptionButton";
 import OptionIconEl from "../general/optionBox/OptionIconEl";
 import { ListPlus } from "lucide-react";
 import IconWrapper from "../general/IconWrapper";
+import { useTranslations } from "next-intl";
+import OptionText from "../general/optionBox/OptionText";
 function AddSongButton() {
+  const b = useTranslations("block");
   const { song } = useContext(InfoTrackContext);
   const songId = song?.song_id;
   const cover_url = song?.cover_url;
@@ -24,7 +27,7 @@ function AddSongButton() {
         <OptionIconEl>
           <IconWrapper size="small" Icon={ListPlus} />
         </OptionIconEl>
-        <span>Add to the playlist</span>
+        <OptionText>{b("addToPlaylist")}</OptionText>
       </OptionButton>
     </OptionItem>
   );

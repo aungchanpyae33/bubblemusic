@@ -2,7 +2,9 @@
 import AddSongItem from "./AddSongItem";
 import { useQuery } from "@tanstack/react-query";
 import { getUserLibClient } from "@/database/client-data";
+import { useTranslations } from "next-intl";
 function AddSongContent() {
+  const m = useTranslations("ModalBox");
   const { data: queryData, error: queryError } = useQuery({
     queryKey: ["user-library"],
     queryFn: () => getUserLibClient(),
@@ -15,7 +17,7 @@ function AddSongContent() {
   return (
     <div className=" space-y-4">
       <h2 className=" py-2 border-b border-seperate-soft">
-        Add Songs to the Playlist
+        {m("addSongToPlaylist.title")}
       </h2>
 
       {userLib.idArray.length > 0 &&

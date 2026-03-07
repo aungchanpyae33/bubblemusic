@@ -7,8 +7,11 @@ import { Disc } from "lucide-react";
 import IconWrapper from "../IconWrapper";
 import OptionButton from "./OptionButton";
 import NoThankYouPreFetchLink from "../NoThankYouPreFetchLink";
+import { useTranslations } from "next-intl";
+import OptionText from "./OptionText";
 
 function GoToAlbum() {
+  const b = useTranslations("block");
   const { song } = useContext(InfoTrackContext);
   const albumId = song?.album.id;
 
@@ -23,7 +26,7 @@ function GoToAlbum() {
             <IconWrapper size="small" Icon={Disc} />
           </OptionIconEl>
 
-          <span>go to the album </span>
+          <OptionText>{b("goToAlbum")}</OptionText>
         </NoThankYouPreFetchLink>
       </OptionButton>
     </OptionItem>

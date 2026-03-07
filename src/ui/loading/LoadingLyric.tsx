@@ -1,4 +1,7 @@
+import { useTranslations } from "next-intl";
+
 function LoadingLyric() {
+  const l = useTranslations("Loading");
   return (
     <div className="flex flex-col gap-5 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center justify-center">
       <div className="flex space-x-2">
@@ -16,8 +19,7 @@ function LoadingLyric() {
         />
       </div>
       <span className="whitespace-nowrap animate-pulse">
-        {" "}
-        သီချင်းစာသားကို ရယူနေပါသည်...
+        {l("loadingLyric")}
       </span>
     </div>
   );

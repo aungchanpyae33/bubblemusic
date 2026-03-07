@@ -2,8 +2,10 @@ import Track from "../trackComponent/Track";
 import TableHeadBgChange from "./TableHeadBgChange";
 import TableHead from "./TableHead";
 import IconWrapper from "../general/IconWrapper";
-import { Clock } from "lucide-react";
+import { Clock, Ghost } from "lucide-react";
 import type { ListSongPage } from "@/database/data-types-return";
+import { getTranslations } from "next-intl/server";
+import ListGeneralHeader from "./ListGeneralHeader";
 
 export interface urlProp {
   url: string;
@@ -15,13 +17,17 @@ export interface playlistProp {
   playlistId: string;
   song: urlProp[];
 }
-function AudiosContainer({
+async function AudiosContainer({
   description,
   listSong,
 }: {
   description: string;
   listSong: ListSongPage;
 }) {
+  const [b, l] = await Promise.all([
+    await getTranslations("block"),
+    await getTranslations("ListTitle"),
+  ]);
   const songs = listSong.songs;
   //for accessbility
   // const dataInc = useRef(0);
@@ -29,14 +35,16 @@ function AudiosContainer({
 
   return songs && songs.idArray.length > 0 ? (
     <div className=" w-full isolate">
-      <h2 className=" p-4 text-xl">{description}</h2>
+      <ListGeneralHeader>{l(description)}</ListGeneralHeader>
       <TableHeadBgChange>
-        <table className="w-full isolate">
+        <table className="w-full isolate my-3">
           <TableHead>
             <tr className="text-left">
               <th className=" w-14 p-2  text-center">#</th>
-              <th className="p-2">ခေါင်းစဉ်</th>
-              <th className=" p-2 hidden lg:table-cell ">အယ်လ်ဘမ်</th>
+              <th className="p-2">{b("listHeader.title")}</th>
+              <th className=" p-2 hidden lg:table-cell ">
+                {b("listHeader.album")}
+              </th>
               <th className=" p-2 w-20 hidden sm:table-cell  text-center">
                 <span className="flex justify-center">
                   <IconWrapper
@@ -68,7 +76,10 @@ function AudiosContainer({
       </TableHeadBgChange>
     </div>
   ) : (
-    <div> oops there is a empty </div>
+    <div className=" border border-seperate-soft flex items-center justify-center gap-3  rounded-lg  p-3 my-3 min-h-36">
+      <IconWrapper Icon={Ghost} size="exLarge" />
+      <span>{b("emptySongList")}</span>
+    </div>
   );
 }
 

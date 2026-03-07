@@ -16,8 +16,11 @@ import {
   SongListValue,
 } from "@/ui/playlist/playlistOption/ContextSongListContainer";
 import { getSongListClient } from "@/database/client-data";
+import { useTranslations } from "next-intl";
+import OptionText from "./OptionText";
 
 function PlayNextQueueSongList() {
+  const b = useTranslations("block");
   const { id, type } = useContext(SongListContext) as SongListValue;
   const currentAddToNext = useRepeatAndCurrentPlayList(
     (state: currentAddToNextAction) => state.currentAddToNext,
@@ -39,7 +42,7 @@ function PlayNextQueueSongList() {
         <OptionIconEl>
           <IconWrapper size="small" Icon={ListStart} />
         </OptionIconEl>
-        <span>Add to play next </span>
+        <OptionText>{b("addToPlayNext")}</OptionText>
       </OptionButton>
     </OptionItem>
   );

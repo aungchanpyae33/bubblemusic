@@ -9,8 +9,11 @@ import {
   SongListValue,
 } from "@/ui/playlist/playlistOption/ContextSongListContainer";
 import OptionButton from "../optionBox/OptionButton";
+import OptionText from "../optionBox/OptionText";
+import { useTranslations } from "next-intl";
 
 function ShareList() {
+  const b = useTranslations("block");
   const { id, type } = useContext(SongListContext) as SongListValue;
   const handleCopy = async () => {
     const origin = window.location.origin;
@@ -27,7 +30,7 @@ function ShareList() {
         <OptionIconEl>
           <IconWrapper size="small" Icon={Link2} />
         </OptionIconEl>
-        <span>share </span>
+        <OptionText>{b("share")}</OptionText>
       </OptionButton>
     </OptionItem>
   );

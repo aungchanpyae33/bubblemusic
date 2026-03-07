@@ -1,9 +1,10 @@
+import { useTranslations } from "next-intl";
+
 function ErrorLyric() {
+  const e = useTranslations("Error");
   return (
     <div className="flex    absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full items-center justify-center">
-      <span className=" text-lg">
-        သီချင်းစာသားကို ရယူရာတွင် အခက်အခဲရှိခဲ့ပါသည်
-      </span>
+      <span className=" text-lg">{e("errorLyric")}</span>
     </div>
   );
 }

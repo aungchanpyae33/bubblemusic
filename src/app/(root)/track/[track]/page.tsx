@@ -44,7 +44,7 @@ async function page(props: { params: Promise<{ track: string }> }) {
         </ContextLike>
       </ContextInfoTrack>
 
-      <AudiosContainer description="Song" listSong={songs} />
+      <AudiosContainer description="track" listSong={songs} />
     </div>
   );
 }

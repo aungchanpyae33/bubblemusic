@@ -13,8 +13,11 @@ import {
   useSong,
 } from "@/lib/zustand";
 import { generateUUID } from "@/lib/GenerateUUID";
+import { useTranslations } from "next-intl";
+import OptionText from "./OptionText";
 
 function AddToQueue() {
+  const b = useTranslations("block");
   const { song } = useContext(InfoTrackContext);
   const currentAddToQueue = useRepeatAndCurrentPlayList(
     (state: currentAddToQueueAction) => state.currentAddToQueue,
@@ -43,7 +46,7 @@ function AddToQueue() {
           <IconWrapper size="small" Icon={ListEnd} />
         </OptionIconEl>
 
-        <span>add to the queeue </span>
+        <OptionText>{b("addToQueue")}</OptionText>
       </OptionButton>
     </OptionItem>
   );

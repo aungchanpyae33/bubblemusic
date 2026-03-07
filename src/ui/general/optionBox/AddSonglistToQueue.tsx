@@ -16,8 +16,11 @@ import {
   SongListValue,
 } from "@/ui/playlist/playlistOption/ContextSongListContainer";
 import { getSongListClient } from "@/database/client-data";
+import { useTranslations } from "next-intl";
+import OptionText from "./OptionText";
 
 function AddSonglistToQueue() {
+  const b = useTranslations("block");
   const { id, type } = useContext(SongListContext) as SongListValue;
   const currentAddToQueue = useRepeatAndCurrentPlayList(
     (state: currentAddToQueueAction) => state.currentAddToQueue,
@@ -42,8 +45,7 @@ function AddSonglistToQueue() {
         <OptionIconEl>
           <IconWrapper size="small" Icon={ListEnd} />
         </OptionIconEl>
-
-        <span>add to the queeue </span>
+        <OptionText>{b("addToQueue")}</OptionText>
       </OptionButton>
     </OptionItem>
   );

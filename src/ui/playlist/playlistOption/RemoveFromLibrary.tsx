@@ -8,8 +8,12 @@ import { removeFromLibrary } from "@/actions/removeFromLibrary";
 import { SongListContext, SongListValue } from "./ContextSongListContainer";
 import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
+import OptionText from "@/ui/general/optionBox/OptionText";
+import type { GetRecent } from "@/database/data-types-return";
 
 function RemoveFromLibraryChild() {
+  const b = useTranslations("block");
   const router = useRouter();
   const { id, source } = useContext(SongListContext) as SongListValue;
   const queryClient = useQueryClient();
@@ -23,10 +27,36 @@ function RemoveFromLibraryChild() {
       console.log("something wrong", error);
     } else {
       if (data) {
+        if (source === "create") {
+          const currentRecentData = queryClient.getQueryData<GetRecent>([
+            "recentlyPlayed",
+          ]);
+          if (currentRecentData) {
+            const removeId = id;
+
+            // Check existence first
+            const exists = currentRecentData.byId[removeId];
+
+            if (exists) {
+              const updatedRecentData = {
+                ...currentRecentData,
+                byId: { ...currentRecentData.byId },
+                idArray: currentRecentData.idArray.filter(
+                  (itemId) => itemId !== removeId,
+                ),
+              };
+
+              delete updatedRecentData.byId[removeId];
+
+              queryClient.setQueryData(["recentlyPlayed"], updatedRecentData);
+            }
+          }
+        }
         queryClient.setQueryData(["user-library"], {
           data,
           error: null,
         });
+
         if (source === "create") {
           router.push("/");
         }
@@ -39,7 +69,7 @@ function RemoveFromLibraryChild() {
         <OptionIconEl>
           <IconWrapper size="small" Icon={BookmarkX} />
         </OptionIconEl>
-        <span>Remove from library</span>
+        <OptionText>{b("removeFromLibrary")}</OptionText>
       </OptionButton>
     </OptionItem>
   );

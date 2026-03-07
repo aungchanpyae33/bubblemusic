@@ -7,8 +7,11 @@ import { SquarePen } from "lucide-react";
 
 import { editToPlaylistAction, useEditToPlaylist } from "@/lib/zustand";
 import { SongListContext, SongListValue } from "./ContextSongListContainer";
+import { useTranslations } from "next-intl";
+import OptionText from "@/ui/general/optionBox/OptionText";
 
 function EditToPlaylistChild() {
+  const b = useTranslations("block");
   const { id, name } = useContext(SongListContext) as SongListValue;
 
   const EditToPlaylistAction = useEditToPlaylist(
@@ -25,7 +28,7 @@ function EditToPlaylistChild() {
         <OptionIconEl>
           <IconWrapper size="small" Icon={SquarePen} />
         </OptionIconEl>
-        <span>edit the playlist</span>
+        <OptionText>{b("editPlaylist")}</OptionText>
       </OptionButton>
     </OptionItem>
   );

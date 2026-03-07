@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "../../globals.css";
 import NavBar from "@/ui/navtopBar/NavBar";
+import { NextIntlClientProvider } from "next-intl";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -55,43 +56,45 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <QueryClientPrv>
-            <Suspense fallback={<div>loading......</div>}>
-              <DeviceCheckFetcher>
-                <LibandLikeHyration>
-                  <NextTopLoader
-                    color="var(--loader)"
-                    initialPosition={0.08}
-                    crawlSpeed={200}
-                    height={3}
-                    crawl={true}
-                    showSpinner={false}
-                    easing="ease"
-                    speed={200}
-                    shadow="0 0 10px var(--loader),0 0 5px var(--loader)"
-                    template='<div class="bar" role="bar"><div class="peg"></div></div>' // no spinner
-                    zIndex={1600}
-                    showAtBottom={false}
-                  />
-                  <AudioWrapper>
-                    <BeforeLoad />
-                    <NavBar />
-                    <div className="scr flex flex-1 overflow-hidden relative">
-                      <Main>
-                        {children}
-                        <Footer />
-                      </Main>
-                      <QueueWrapper>
-                        <Queue />
-                      </QueueWrapper>
+            <Suspense fallback={<div>loading....</div>}>
+              <NextIntlClientProvider>
+                <DeviceCheckFetcher>
+                  <LibandLikeHyration>
+                    <NextTopLoader
+                      color="var(--loader)"
+                      initialPosition={0.08}
+                      crawlSpeed={200}
+                      height={3}
+                      crawl={true}
+                      showSpinner={false}
+                      easing="ease"
+                      speed={200}
+                      shadow="0 0 10px var(--loader),0 0 5px var(--loader)"
+                      template='<div class="bar" role="bar"><div class="peg"></div></div>' // no spinner
+                      zIndex={1600}
+                      showAtBottom={false}
+                    />
+                    <AudioWrapper>
+                      <BeforeLoad />
+                      <NavBar />
+                      <div className="scr flex flex-1 overflow-hidden relative">
+                        <Main>
+                          {children}
+                          <Footer />
+                        </Main>
+                        <QueueWrapper>
+                          <Queue />
+                        </QueueWrapper>
 
-                      <ModalBox />
-                    </div>
-                    <Suspense fallback={<LoadingAudioPlayer />}>
-                      <AudioFooterBar />
-                    </Suspense>
-                  </AudioWrapper>
-                </LibandLikeHyration>
-              </DeviceCheckFetcher>
+                        <ModalBox />
+                      </div>
+                      <Suspense fallback={<LoadingAudioPlayer />}>
+                        <AudioFooterBar />
+                      </Suspense>
+                    </AudioWrapper>
+                  </LibandLikeHyration>
+                </DeviceCheckFetcher>
+              </NextIntlClientProvider>
             </Suspense>
           </QueryClientPrv>
         </ThemeProvider>

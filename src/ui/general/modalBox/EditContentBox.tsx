@@ -13,8 +13,10 @@ import {
 import { useTransition } from "react";
 import useEditPlaylistMutate from "@/lib/CustomHooks/mutation/EditPlaylistMutate";
 import CheckType from "@/ui/navtopBar/createPlaylist/CheckType";
+import { useTranslations } from "next-intl";
 
 function EditContentBox() {
+  const b = useTranslations("block");
   const { id, name } = useEditToPlaylist(
     (state: editToPlaylist) => state.editToPlaylist,
   ) as editToPlaylistProps;
@@ -50,7 +52,7 @@ function EditContentBox() {
     >
       <fieldset className="flex flex-col gap-2 items-start">
         <legend className="text-lg font-semibold flex w-full justify-between items-center  text-foreground mb-4">
-          <h3 className="">သီချင်းစာရင်း အသစ်</h3>
+          <h3 className="">{b("newPlaylist")}</h3>
           <button
             type="button"
             className=" bg-transparent transition-colors  duration-200 hover:bg-surface-2 p-1 rounded-full flex items-center justify-center"

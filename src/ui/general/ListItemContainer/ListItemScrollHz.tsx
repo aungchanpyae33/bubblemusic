@@ -1,15 +1,21 @@
+import ListGeneralHeader from "@/ui/albumContainer/ListGeneralHeader";
+import { getTranslations } from "next-intl/server";
 import React from "react";
 
-function ListItemScrollHz({
+async function ListItemScrollHz({
   children,
   description,
 }: {
   children: React.ReactNode;
   description: string;
 }) {
+  const l = await getTranslations("ListTitle");
   return (
     <div className="">
-      <h3 className=" px-4"> {description}</h3>
+      <div className="px-4">
+        <ListGeneralHeader> {l(description)}</ListGeneralHeader>
+      </div>
+
       <div className="flex overflow-auto no-scrollbar  p-4 gap-5 will-change-scroll ">
         {children}
       </div>

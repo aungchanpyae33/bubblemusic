@@ -13,6 +13,7 @@ import type {
   SearchSong,
   SongInfo,
 } from "../../../../database.types-fest";
+import { getTranslations } from "next-intl/server";
 
 function isListInfo(obj: SearchItem | SearchSong): obj is SearchItem {
   return (
@@ -26,12 +27,13 @@ async function TopResult({
 }: {
   topResult: GetSearchPage["top_result"];
 }) {
+  const l = await getTranslations("ListTitle");
   const deviceFromUserAgent = await DeviceCheck();
   if (!topResult) return;
   return (
     <SearchContainer className="bg-section">
       <div className=" max-w-[700px] p-2 px-4  flex flex-col  gap-4 rounded-lg ">
-        <h1 className=" text-xl ">Top result</h1>
+        <h1 className=" text-xl ">{b("searchPage.topResult")}</h1>
         <div className=" flex items-center gap-5">
           <div
             className=" lg:w-[170px] rounded overflow-hidden w-[130px] shrink-0   aspect-square  object-cover relative bg-placeholder
@@ -80,8 +82,9 @@ async function TopResult({
           </p>
         </div>
         <div>
+          {/* will fix later after adding type in songInfo */}
           <span className=" border text-base lg:text-lg font-medium p-1 mr-2">
-            {topResult.type?.toUpperCase()}
+            {l(topResult.type)}
           </span>
           {topResult.type === "track" && (
             <InfoSong songInfo={topResult as SongInfo} />

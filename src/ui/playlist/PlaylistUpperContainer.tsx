@@ -6,8 +6,10 @@ import AlbumImg from "../albumContainer/AlbumImg";
 import InfoList from "../searchPage/topResult/InfoList";
 import type { ListSongPage } from "@/database/data-types-return";
 import { DeviceContext } from "@/lib/DeviceContext/ContextDeviceCheck";
+import { useTranslations } from "next-intl";
 
 function PlaylistUpperContainer() {
+  const l = useTranslations("ListTitle");
   const { device } = useContext(DeviceContext);
   const { name, type, cover_url, is_official, related_id, related_name } =
     useContext(SongListContext) as ListSongPage;
@@ -36,7 +38,7 @@ function PlaylistUpperContainer() {
         </p>
         <div className="flex items-center ">
           <span className=" border text-base lg:text-lg border-borderFull font-medium p-1 mr-2">
-            {type.toUpperCase()}
+            {l(type)}
           </span>
           <span className=" flex">
             <InfoList

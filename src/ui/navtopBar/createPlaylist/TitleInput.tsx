@@ -1,8 +1,10 @@
 import { focusStateAction, useNotInputFocus } from "@/lib/zustand";
 import clsx from "clsx";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 function TitleInput({ initValue }: { initValue?: string }) {
+  const b = useTranslations("block");
   const [value, setValue] = useState(initValue ? initValue : "");
   const setIsInputFocus = useNotInputFocus(
     (state: focusStateAction) => state.setIsInputFocus,
@@ -16,7 +18,7 @@ function TitleInput({ initValue }: { initValue?: string }) {
     <>
       <div className=" flex w-full justify-between">
         <label htmlFor="playlistname" className="leading-relaxed">
-          ခေါင်းစဉ်
+          {b("playlistForm.title")}
         </label>
         <span
           onAnimationStart={() => {

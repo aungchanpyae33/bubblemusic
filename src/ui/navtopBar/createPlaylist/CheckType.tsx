@@ -1,7 +1,9 @@
 import { getUserLibClient } from "@/database/client-data";
 import { useQuery } from "@tanstack/react-query";
+import { useTranslations } from "next-intl";
 
 function CheckType({ id }: { id: string }) {
+  const b = useTranslations("block");
   const { data: queryData, error: queryError } = useQuery({
     queryKey: ["user-library"],
     queryFn: () => getUserLibClient(),
@@ -12,12 +14,14 @@ function CheckType({ id }: { id: string }) {
   const { userLib } = data;
   if (!userLib) return;
   const is_public = userLib.byId[id].is_public;
-  const checkType = is_public ? "အများ" : "သီးသန့်";
+  const checkType = is_public
+    ? b("playlistForm.public")
+    : b("playlistForm.private");
   return (
     <fieldset className=" my-2">
-      <legend className="mb-2 font-medium">မြင်သာမှု</legend>
+      <legend className="mb-2 font-medium">{b("playlistForm.privacy")}</legend>
       <div className="flex flex-wrap gap-2">
-        {["အများ", "သီးသန့်"].map((check) => {
+        {[b("playlistForm.public"), b("playlistForm.private")].map((check) => {
           return (
             <label key={check} className="cursor-pointer">
               <input

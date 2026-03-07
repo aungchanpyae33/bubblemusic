@@ -13,7 +13,9 @@ import {
   useStorePlayListId,
 } from "@/lib/zustand";
 import { useTopLoader } from "nextjs-toploader";
+import { useTranslations } from "next-intl";
 function LogoutItem() {
+  const b = useTranslations("block");
   const router = useRouter();
   const loader = useTopLoader();
   const resetAllStores = async () => {
@@ -31,7 +33,7 @@ function LogoutItem() {
         <OptionIconEl>
           <IconWrapper size="small" Icon={LogOut} />
         </OptionIconEl>
-        <OptionText>logout</OptionText>
+        <OptionText>{b("logout")}</OptionText>
       </OptionButton>
     </OptionItem>
   );

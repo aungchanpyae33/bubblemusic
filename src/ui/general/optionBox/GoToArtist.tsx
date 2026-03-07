@@ -11,8 +11,10 @@ import OptionText from "./OptionText";
 import OptionSubArrow from "./OptionSubArrow";
 import RelativeSubOption from "./subOption/RelativeSubOption";
 import OptionButton from "./OptionButton";
+import { useTranslations } from "next-intl";
 
 function GoToArtist() {
+  const b = useTranslations("block");
   const { relative } = useContext(GoToRelativeContext);
   if (!relative) return;
   // check if is array (usually comefrom track where song has more than one singer)
@@ -26,7 +28,7 @@ function GoToArtist() {
             <OptionIconEl>
               <IconWrapper size="small" Icon={UserSearch} />
             </OptionIconEl>
-            <OptionText>go to artist</OptionText>
+            <OptionText>{b("goToArtist")} </OptionText>
             <OptionSubArrow>
               <IconWrapper Icon={ChevronRight} />
             </OptionSubArrow>
@@ -49,7 +51,7 @@ function GoToArtist() {
               <IconWrapper size="small" Icon={UserSearch} />
             </OptionIconEl>
 
-            <OptionText>go to artist </OptionText>
+            <OptionText>{b("goToArtist")} </OptionText>
           </OptionButton>
         </NoThankYouPreFetchLink>
       </OptionItem>

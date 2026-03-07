@@ -3,8 +3,10 @@ import clsx from "clsx";
 import OfficialBadgeName from "../albumContainer/OfficialBadgeName";
 import UserImg from "./UserImg";
 import type { listInfo } from "../../../database.types-fest";
+import { getTranslations } from "next-intl/server";
 
 async function UserUpperContainer({ profile }: { profile: listInfo }) {
+  const l = await getTranslations("ListTitle");
   const deviceFromUserAgent = await DeviceCheck();
 
   const is_official_exist = profile?.is_official;
@@ -40,7 +42,7 @@ async function UserUpperContainer({ profile }: { profile: listInfo }) {
         </p>
         <div className="flex items-center ">
           <span className=" border border-borderFull text-base lg:text-lg font-medium p-1 mr-2">
-            {profile.type.toUpperCase()}
+            {l(profile.type)}
           </span>
         </div>
       </div>

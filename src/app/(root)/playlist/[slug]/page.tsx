@@ -23,7 +23,7 @@ async function page(props: { params: Promise<{ slug: string }> }) {
           queryClient={queryClient}
           songs={songs}
           id={params.slug}
-          description={"hello"}
+          description={"playlist"}
         />
       }
       View={<View songs={songs} />}

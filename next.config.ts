@@ -1,5 +1,6 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+import createNextIntlPlugin from "next-intl/plugin";
+import type { NextConfig } from "next";
+const nextConfig: NextConfig = {
   cacheComponents: true,
 
   // reactStrictMode: false,
@@ -16,4 +17,5 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+const withNextIntl = createNextIntlPlugin();
+export default withNextIntl(nextConfig);

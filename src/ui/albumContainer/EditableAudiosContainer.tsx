@@ -2,9 +2,11 @@ import SongContainer from "./SongContainer";
 import TableHeadBgChange from "./TableHeadBgChange";
 import TableHead from "./TableHead";
 import IconWrapper from "../general/IconWrapper";
-import { Clock } from "lucide-react";
+import { Clock, Ghost } from "lucide-react";
 import ContextSongsData from "./ContextSongsData";
 import ConRenderSong from "./ConRenderSong";
+import { getTranslations } from "next-intl/server";
+import ListGeneralHeader from "./ListGeneralHeader";
 export interface urlProp {
   url: string;
   duration: number;
@@ -15,13 +17,17 @@ export interface playlistProp {
   playlistId: string;
   song: urlProp[];
 }
-function EditableAudiosContainer({
+async function EditableAudiosContainer({
   playlistId,
   description,
 }: {
   playlistId: string;
   description: string;
 }) {
+  const [b, l] = await Promise.all([
+    await getTranslations("block"),
+    await getTranslations("ListTitle"),
+  ]);
   //for accessbility
   // const dataInc = useRef(0);
   // const rowCell = useRef(1);
@@ -29,32 +35,42 @@ function EditableAudiosContainer({
     <ContextSongsData playlistId={playlistId}>
       <ConRenderSong
         container={
-          <TableHeadBgChange>
-            <table className="w-full isolate">
-              <TableHead>
-                <tr className="text-left">
-                  <th className=" w-14 p-2  text-center">#</th>
-                  <th className="p-2">ခေါင်းစဉ်</th>
-                  <th className=" p-2 hidden lg:table-cell ">အယ်လ်ဘမ်</th>
+          <div className=" w-full isolate">
+            <ListGeneralHeader>{l(description)}</ListGeneralHeader>
+            <TableHeadBgChange>
+              <table className="w-full isolate">
+                <TableHead>
+                  <tr className="text-left">
+                    <th className=" w-14 p-2  text-center">#</th>
+                    <th className="p-2">{b("listHeader.title")}</th>
+                    <th className=" p-2 hidden lg:table-cell ">
+                      {b("listHeader.album")}
+                    </th>
 
-                  <th className=" p-2 w-20 hidden sm:table-cell  text-center">
-                    <span className="flex justify-center">
-                      <IconWrapper
-                        Icon={Clock}
-                        size="small"
-                        className=" text-right"
-                      />
-                    </span>
-                  </th>
-                  <th className=" p-2">#</th>
-                </tr>
-              </TableHead>
+                    <th className=" p-2 w-20 hidden sm:table-cell  text-center">
+                      <span className="flex justify-center">
+                        <IconWrapper
+                          Icon={Clock}
+                          size="small"
+                          className=" text-right"
+                        />
+                      </span>
+                    </th>
+                    <th className=" p-2 text-end">#</th>
+                  </tr>
+                </TableHead>
 
-              <SongContainer />
-            </table>
-          </TableHeadBgChange>
+                <SongContainer />
+              </table>
+            </TableHeadBgChange>
+          </div>
         }
-        empty={<div> oops there is a empty </div>}
+        empty={
+          <div className=" border border-seperate-soft flex items-center justify-center gap-3  rounded-lg  p-3 my-3 min-h-36">
+            <IconWrapper Icon={Ghost} size="exLarge" />
+            <span>{b("emptySongList")}</span>
+          </div>
+        }
       />
     </ContextSongsData>
   );

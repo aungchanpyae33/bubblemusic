@@ -9,9 +9,11 @@ import {
   useAddSongsToPlaylist,
   useIsExistSongs,
 } from "@/lib/zustand";
-import { useEffect } from "react";
+import NotiBox from "../NotiBox/NotiBox";
+import { useTranslations } from "next-intl";
 
 function ConfirmAddSong() {
+  const w = useTranslations("Warning");
   const { playlistId, songId } = useIsExistSongs(
     (state: isSongExist) => state.isSongExist,
   ) as songExist;
@@ -35,13 +37,22 @@ function ConfirmAddSong() {
     }
   }, [mutation, setIsSongExist]);
   return (
-    <span>
-      <button onClick={handleAdd}>
-        {" "}
-        songs is already exist! do you want to add?
-      </button>
-      <button onClick={() => setIsSongExist({})}> do not add</button>
-    </span>
+    <NotiBox>
+      <p>{w("songAlreadyExist")}</p>
+
+      <div className=" w-full flex justify-end gap-3">
+        <button
+          className="bg-surface-1 p-2 rounded-lg"
+          onClick={() => setIsSongExist({})}
+        >
+          {" "}
+          {w("cancel")}
+        </button>
+        <button className="bg-surface-1 p-2 rounded-lg" onClick={handleAdd}>
+          {w("add")}
+        </button>
+      </div>
+    </NotiBox>
   );
 }
 

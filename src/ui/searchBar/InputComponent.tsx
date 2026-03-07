@@ -1,19 +1,24 @@
 import { useContext } from "react";
 import { ContextToggle } from "./ToggleContext";
 import { focusStateAction, useNotInputFocus } from "@/lib/zustand";
-import { useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 interface InputComponentProps {
   inputRef: React.RefObject<HTMLInputElement | null>;
-  setValue: React.Dispatch<React.SetStateAction<string | null>>;
+  value: string;
+  setValue: React.Dispatch<React.SetStateAction<string>>;
   setShow: React.Dispatch<React.SetStateAction<boolean>>;
 }
-function InputComponent({ inputRef, setShow, setValue }: InputComponentProps) {
+function InputComponent({
+  inputRef,
+  setShow,
+  value,
+  setValue,
+}: InputComponentProps) {
+  const b = useTranslations("block");
   const { setOpen } = useContext(ContextToggle);
   const setIsInputFocus = useNotInputFocus(
     (state: focusStateAction) => state.setIsInputFocus,
   );
-  const searchParams = useSearchParams();
-  const defaultValueRef = searchParams.get("query") || "";
   return (
     <>
       <label htmlFor="search">
@@ -21,14 +26,14 @@ function InputComponent({ inputRef, setShow, setValue }: InputComponentProps) {
       </label>
       <input
         className="placeholder:text-ink-400 placeholder:leading-relaxed block bg-surface-1 w-full h-[40px]  pl-4 shadow-sm focus:outline-none text-base"
-        placeholder="ရှာဖွေမည်"
+        placeholder={b("searchInputPlaceholder")}
         type="search"
         id="search"
         name="query"
         required
         autoComplete="off"
         spellCheck="false"
-        defaultValue={defaultValueRef}
+        value={value}
         ref={inputRef}
         onBlur={() => {
           setOpen(false);

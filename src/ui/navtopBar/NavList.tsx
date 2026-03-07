@@ -9,6 +9,7 @@ import IconWrapper from "../general/IconWrapper";
 import NavSideLinkNotOpen from "./NavSideLinkNotOpen";
 import PlaylistAdd from "./PlaylistAdd";
 import PlaylistFolderContainer from "./PlaylistFolderContainer";
+import { useTranslations } from "next-intl";
 
 interface childrenProp {
   childrenExplore: ReactNode;
@@ -22,7 +23,7 @@ function NavList({
   childrenPlaylist,
   childrenLogo,
 }: childrenProp) {
-  // console.log("render");
+  const b = useTranslations("block");
   const [open, setOpen] = useState(false);
   return (
     <div className=" w-full  ">
@@ -66,7 +67,7 @@ function NavList({
           <NavSideLink
             url="/explore"
             icon="icon"
-            desp="စုံလင်စွာရှာဖွေရန်"
+            desp={b("navLink.exploreDescription")}
             open={open}
             setOpen={setOpen}
           >
@@ -75,7 +76,7 @@ function NavList({
           <NavSideLink
             url="/live"
             icon="icon"
-            desp="တိုက်ရိုက်လိုက်ဖ်"
+            desp={b("navLink.liveDescription")}
             open={open}
             setOpen={setOpen}
           >

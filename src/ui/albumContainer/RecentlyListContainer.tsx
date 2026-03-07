@@ -6,6 +6,8 @@ import SonglistWrapper from "./SonglistWrapper";
 import { useQuery } from "@tanstack/react-query";
 import { getRecentClient } from "@/database/client-data";
 import type { GetRecent } from "@/database/data-types-return";
+import { useTranslations } from "next-intl";
+import ListGeneralHeader from "./ListGeneralHeader";
 function RecentlyListContainer({
   songs,
   description,
@@ -13,6 +15,7 @@ function RecentlyListContainer({
   songs: GetRecent;
   description: string;
 }) {
+  const l = useTranslations("ListTitle");
   const { data, error } = useQuery({
     queryKey: ["recentlyPlayed"],
     queryFn: () => getRecentClient(),
@@ -23,7 +26,7 @@ function RecentlyListContainer({
   return (
     <ContextContainer>
       <div aria-label="song name is" className=" justify-between px-4  flex ">
-        <h3>{description}</h3>
+        <ListGeneralHeader>{l(description)} </ListGeneralHeader>
         <ArrowNaviContainer />
       </div>
       <div className="relative z-0 max-w-fit">

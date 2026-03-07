@@ -11,10 +11,12 @@ import {
   SongListContext,
   SongListValue,
 } from "@/ui/playlist/playlistOption/ContextSongListContainer";
+import { useTranslations } from "next-intl";
+import OptionText from "./OptionText";
 
 function AddToLibraryChild() {
   const { id, type } = useContext(SongListContext) as SongListValue;
-
+  const b = useTranslations("block");
   const queryClient = useQueryClient();
   async function addToLibraryFn() {
     const { data, error } = await addToLibrary(id, type);
@@ -35,7 +37,7 @@ function AddToLibraryChild() {
         <OptionIconEl>
           <IconWrapper size="small" Icon={BookmarkPlus} />
         </OptionIconEl>
-        <span>Add to the library</span>
+        <OptionText>{b("addToLibrary")}</OptionText>
       </OptionButton>
     </OptionItem>
   );

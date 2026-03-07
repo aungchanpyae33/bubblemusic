@@ -1,0 +1,130 @@
+{
+  "block": {
+    "tapNavi": {
+      "like": "Like",
+      "energetic": "Energetic",
+      "heartbreak": "Heartbreak",
+      "happy": "Happy",
+      "sleep": "Sleep",
+      "relax": "Relax",
+      "rock": "Rock",
+      "kpop": "K pop"
+    },
+    "login": "Login",
+    "signUp": "Sign Up",
+    "logout": "Logout",
+    "profile": {
+      "title": "profile"
+    },
+    "theme": "Theme",
+    "light": "light",
+    "dark": "dark",
+    "deviceTheme": "device theme",
+    "changeLanguage": "Language",
+    "en": "English",
+    "my": "မြန်မာ",
+    "like": {
+      "addLike": "Add like",
+      "removeLike": "Remove like"
+    },
+    "removeFromPlaylist": "Remove from playlist",
+    "addToPlaylist": "Add To playlist",
+    "removeFromQueue": "Remove from queue",
+    "removeFromLibrary": "Remove from library",
+    "editPlaylist": "Edit to playlist",
+    "addToQueue": "Add to  queue",
+    "addToPlayNext": "Add to play next",
+    "addToLibrary": "Add to library",
+    "goToAlbum": "Go to Album",
+    "goToArtist": "Go to Artist",
+
+    "share": "Share",
+    "searchPage": {
+      "topResult": "Top Result",
+      "searchResultFor": "Search results for {searchKeyword}"
+    },
+    "searchInputPlaceholder": "search",
+    "noExistLyric": "Lyrics not available yet.",
+    "create": "Create",
+    "newPlaylist": "New Playlist",
+    "navLink": {
+      "exploreDescription": "Explore",
+      "liveDescription": "Live"
+    },
+    "emptySongList": "There is no track in the playlist",
+    "playlistForm": {
+      "title": "Title",
+      "privacy": "Privacy",
+      "public": "public",
+      "private": "private"
+    },
+    "listHeader": {
+      "title": "Title",
+      "album": "Album"
+    }
+  },
+
+  "ModalBox": {
+    "addSongToPlaylist": {
+      "title": " Add Songs to the Playlist"
+    }
+  },
+  "Loading": {
+    "loadingLyric": "Loading the lyric..."
+  },
+  "Error": {
+    "errorLyric": "There was an error retrieving the lyrics"
+  },
+  "Warning": {
+    "notice": "Notice",
+    "songAlreadyExist": "Songs is already exist. Do you want to add?",
+    "add": "Add",
+    "cancel": "Cancel"
+  },
+  "Footer": {
+    "aboutTitle": "About This Project",
+    "aboutDescription": "This music streaming bubble web app is a personal web application project created to demonstrate TypeScript, React, and Next.js. It is designed with a simple and user-friendly interface that allows users to listen to music, save songs, and even listen together with others.",
+
+    "disclaimer": "⚠️ Disclaimer - This project is a non-commercial personal demonstration project. I do not own or claim copyright for any songs or images stored or used in this application. All media content is used strictly for demonstration purposes. I only own the source code written for this project.",
+
+    "techTitle": "Technologies Used",
+
+    "contactTitle": "Contact",
+    "contactDescription": "I am currently looking for new opportunities.",
+
+    "copyright": "© 2025 AungChanPyae. All rights reserved.",
+    "demoNote": "This project was created for demonstration purposes only."
+  },
+  "ListTitle": {
+    "topMix": "Top Mix",
+    "topPlaylistWeek": "Top Playlists This Week",
+    "topAlbumWeek": "Top Albums This Week",
+    "topArtistWeek": "Top Artists This Week",
+    "artistForYou": "Artists For You",
+    "albumForYou": "Albums For You",
+    "playlistForYou": "Playlists For You",
+    "recentlyPlayed": "Recently Played",
+    "trendingSongs": "Trending Songs",
+    "publicPlaylist": "Public Playlists",
+    "album": "Album",
+    "artist": "Artist",
+    "playlist": "Playlist",
+    "track": "Song",
+    "profile": "Profile",
+    "topSongsArtist": "Popular Songs"
+  },
+  "Auth": {
+    "createAccount": "Create a new Account",
+    "loginAccount": "Login to an Account",
+    "email": "email",
+    "emailPlaceholder": "email@example.com",
+    "password": "Password",
+    "passwordPlaceholder": "password",
+    "login": "Login",
+    "signUp": "Sign Up",
+    "noAcc": "Don't have an account? <link>Register here</link>",
+    "alreadyAcc": "Already have an account? <link>Log in here</link>",
+    "signUpSuccess": "Verify your email",
+    "signUpSuccessContent": "Sign-up successful! Please check your email to confirm your account. If you don’t see it, check your spam folder."
+  }
+}

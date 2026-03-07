@@ -7,8 +7,10 @@ import OptionText from "@/ui/general/optionBox/OptionText";
 import MoreSubOption from "@/ui/trackComponent/MoreSubOption";
 import { ChevronRight, Palette } from "lucide-react";
 import ThemeSwitchSubItem from "./ThemeSwitchSubOption";
+import { useTranslations } from "next-intl";
 
 function ThemeSwitchItem() {
+  const b = useTranslations("block");
   return (
     <MoreSubOption
       stackNum={1}
@@ -17,7 +19,7 @@ function ThemeSwitchItem() {
           <OptionIconEl>
             <IconWrapper size="small" Icon={Palette} />
           </OptionIconEl>
-          <OptionText>Theme</OptionText>
+          <OptionText>{b("theme")}</OptionText>
           <OptionSubArrow>
             <IconWrapper Icon={ChevronRight} />
           </OptionSubArrow>

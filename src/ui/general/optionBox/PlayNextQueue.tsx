@@ -13,8 +13,11 @@ import {
 } from "@/lib/zustand";
 import { InfoTrackContext } from "@/ui/trackComponent/ContextInfoTrack";
 import { generateUUID } from "@/lib/GenerateUUID";
+import { useTranslations } from "next-intl";
+import OptionText from "./OptionText";
 
 function PlayNextQueue() {
+  const b = useTranslations("block");
   const { song } = useContext(InfoTrackContext);
   const currentAddToNext = useRepeatAndCurrentPlayList(
     (state: currentAddToNextAction) => state.currentAddToNext,
@@ -39,7 +42,7 @@ function PlayNextQueue() {
         <OptionIconEl>
           <IconWrapper size="small" Icon={ListStart} />
         </OptionIconEl>
-        <span>Add to play next </span>
+        <OptionText>{b("addToPlayNext")}</OptionText>
       </OptionButton>
     </OptionItem>
   );

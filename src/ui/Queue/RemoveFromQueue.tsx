@@ -12,8 +12,11 @@ import {
   useRepeatAndCurrentPlayList,
   useSong,
 } from "@/lib/zustand";
+import { useTranslations } from "next-intl";
+import OptionText from "../general/optionBox/OptionText";
 
 function RemoveFromQueue() {
+  const b = useTranslations("block");
   const { song } = useContext(InfoTrackContext);
   const removeFromQueue = useRepeatAndCurrentPlayList(
     (state: removeFromQueueAction) => state.removeFromQueue,
@@ -37,7 +40,7 @@ function RemoveFromQueue() {
           <IconWrapper size="small" Icon={ListMinus} />
         </OptionIconEl>
 
-        <span>remove from queue </span>
+        <OptionText>{b("removeFromQueue")} </OptionText>
       </OptionButton>
     </OptionItem>
   );

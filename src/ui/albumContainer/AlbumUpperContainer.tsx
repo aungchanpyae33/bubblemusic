@@ -4,8 +4,10 @@ import AlbumImg from "./AlbumImg";
 
 import InfoList from "../searchPage/topResult/InfoList";
 import type { ListSongPage } from "@/database/data-types-return";
+import { getTranslations } from "next-intl/server";
 
 async function AlbumUpperContainer({ songs }: { songs: ListSongPage }) {
+  const l = await getTranslations("ListTitle");
   const deviceFromUserAgent = await DeviceCheck();
 
   const is_official_exist = songs?.is_official;
@@ -40,7 +42,7 @@ async function AlbumUpperContainer({ songs }: { songs: ListSongPage }) {
         </p>
         <div className="flex items-center ">
           <span className=" border border-borderFull text-base lg:text-lg font-medium p-1 mr-2">
-            {songs.type.toUpperCase()}
+            {l(`${songs.type}`)}
           </span>
           <span className=" flex">
             <InfoList

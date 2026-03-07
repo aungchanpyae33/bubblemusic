@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ReactNode } from "react";
+import { ReactNode, Suspense } from "react";
 import "../../../globals.css";
 import { Geist } from "next/font/google";
 import { ThemeProvider } from "next-themes";
@@ -22,6 +22,8 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 import NextTopLoader from "nextjs-toploader";
+import DeviceCheckFetcher from "@/lib/DeviceContext/DeviceCheckFetcher";
+import { NextIntlClientProvider } from "next-intl";
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
@@ -46,7 +48,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <Suspense fallback={<div>loading...</div>}>
+            <NextIntlClientProvider>
+              <DeviceCheckFetcher>{children}</DeviceCheckFetcher>
+            </NextIntlClientProvider>
+          </Suspense>
         </ThemeProvider>
       </body>
     </html>

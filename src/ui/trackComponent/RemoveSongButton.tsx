@@ -7,8 +7,11 @@ import OptionIconEl from "../general/optionBox/OptionIconEl";
 import IconWrapper from "../general/IconWrapper";
 import { ListX } from "lucide-react";
 import useRemoveSongMutate from "@/lib/CustomHooks/mutation/RemoveSongMutate";
+import { useTranslations } from "next-intl";
+import OptionText from "../general/optionBox/OptionText";
 
 function RemoveSongButtonChild() {
+  const b = useTranslations("block");
   const { id, song } = useContext(InfoTrackContext);
   const id_scope = song?.id;
 
@@ -27,7 +30,7 @@ function RemoveSongButtonChild() {
           <IconWrapper size="small" Icon={ListX} />
         </OptionIconEl>
 
-        <span>remove from playlist </span>
+        <OptionText>{b("removeFromPlaylist")}</OptionText>
       </OptionButton>
     </OptionItem>
   );
