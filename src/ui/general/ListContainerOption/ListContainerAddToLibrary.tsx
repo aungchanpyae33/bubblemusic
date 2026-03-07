@@ -12,6 +12,7 @@ import {
 } from "@/ui/playlist/playlistOption/ContextSongListContainer";
 import { useRouter } from "nextjs-toploader/app";
 import { useTopLoader } from "nextjs-toploader";
+import type { GetRecent } from "@/database/data-types-return";
 
 interface ListContainerAddToLibraryProps {
   id: string;
@@ -37,7 +38,6 @@ function isAdd(source: Database["public"]["Enums"]["media_source_type"]) {
 
 function ListContainerAddToLibrary() {
   const { id, type, source } = useContext(SongListContext) as SongListValue;
-
   const router = useRouter();
   const loader = useTopLoader();
   const queryClient = useQueryClient();
@@ -47,12 +47,37 @@ function ListContainerAddToLibrary() {
   }, [source]);
   async function ActionToLibraryFn() {
     loader.start();
-    setItemSource(!itemSource);
+    setItemSource(itemSource);
     const { data, error } = await modifyLib({ id, type, source });
     if (error) {
       loader.done();
     } else {
       if (data) {
+        if (source === "create") {
+          const currentRecentData = queryClient.getQueryData<GetRecent>([
+            "recentlyPlayed",
+          ]);
+          if (currentRecentData) {
+            const removeId = id;
+
+            // Check existence first
+            const exists = currentRecentData.byId[removeId];
+
+            if (exists) {
+              const updatedRecentData = {
+                ...currentRecentData,
+                byId: { ...currentRecentData.byId },
+                idArray: currentRecentData.idArray.filter(
+                  (itemId) => itemId !== removeId,
+                ),
+              };
+
+              delete updatedRecentData.byId[removeId];
+
+              queryClient.setQueryData(["recentlyPlayed"], updatedRecentData);
+            }
+          }
+        }
         queryClient.setQueryData(["user-library"], {
           data,
           error: null,
@@ -69,11 +94,7 @@ function ListContainerAddToLibrary() {
       {itemSource ? (
         <IconWrapper size="exLarge" Icon={BookmarkPlus} className="" />
       ) : (
-        <IconWrapper
-          size="exLarge"
-          Icon={BookmarkX}
-          className=" fill-brand"
-        />
+        <IconWrapper size="exLarge" Icon={BookmarkX} className=" fill-brand" />
       )}
     </button>
   );
