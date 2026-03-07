@@ -1,13 +1,13 @@
 import NavList from "./NavList";
 import { Compass, ListMusic, Radio } from "lucide-react";
 import IconWrapper from "../general/IconWrapper";
-import Logo from "../icon/Logo";
+import Logo from "./Logo";
 
 async function NavSideBar() {
   return (
     <div className="w-[70px] bg-section ">
       <NavList
-        childrenLogo={<Logo width={90} height={70} />}
+        childrenLogo={<Logo />}
         childrenExplore={
           <div className=" w-[70px] max-w-[70px] h-[70px]   flex items-center justify-center     ">
             <IconWrapper size="large" Icon={Compass} />
