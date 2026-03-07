@@ -31,6 +31,7 @@ import PlaceHolderFetchQueue from "./PlaceHolderFetchQueue";
 import PlaceHolderTrackUser from "./PlaceHolderTrackUser";
 import ToolTip from "../general/ToolTip";
 import useMediaSourceBuffer from "@/lib/CustomHooks/useMediaSourceBuffer";
+import LoadingAudioPlayer from "../loading/LoadingAudioPlayer";
 function AudioPlayer({ start }: { start: boolean }) {
   const toggleRef = useRef<HTMLButtonElement | null>(null);
   const {
@@ -187,9 +188,7 @@ function AudioPlayer({ start }: { start: boolean }) {
             </AudioFooterContainer>
           </motion.div>
         ) : (
-          <div className="fixed bottom-0 left-0 right-0  backdrop-blur-sm border-t border-seperate-soft p-4">
-            loading audio player
-          </div>
+          <LoadingAudioPlayer />
         )}
       </AnimatePresence>
     </ContextMedia>
