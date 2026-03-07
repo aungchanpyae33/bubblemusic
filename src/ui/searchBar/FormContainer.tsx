@@ -7,11 +7,13 @@ import IconWrapper from "../general/IconWrapper";
 function FormContainer({
   children,
   inputRef,
+  value,
   setValue,
 }: {
   children: React.ReactNode;
   inputRef: React.RefObject<HTMLInputElement | null>;
-  setValue: React.Dispatch<React.SetStateAction<string | null>>;
+  value: string;
+  setValue: React.Dispatch<React.SetStateAction<string>>;
 }) {
   const [show, setShow] = useState(false);
   //auto focus the input
@@ -45,6 +47,7 @@ function FormContainer({
               }}
             />
             <InputComponent
+              value={value}
               inputRef={inputRef}
               setValue={setValue}
               setShow={setShow}

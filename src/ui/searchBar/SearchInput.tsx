@@ -4,10 +4,13 @@ import { useQuery } from "@tanstack/react-query";
 import SearchResult from "./SearchResult";
 import FormContainer from "./FormContainer";
 import SearchResultWrapper from "./SearchResultWrapper";
+import { useSearchParams } from "next/navigation";
 
 function SearchInput() {
+  const searchParams = useSearchParams();
+  const defaultValue = searchParams.get("query") || "";
   const inputRef = useRef<HTMLInputElement>(null);
-  const [value, setValue] = useState<string | null>(null);
+  const [value, setValue] = useState(defaultValue);
   const searchAbortController = useRef<AbortController | null>(null);
 
   async function fetchInput(params: string | null) {
@@ -37,7 +40,7 @@ function SearchInput() {
   // [todo] need to return error component
   if (error) return;
   return (
-    <FormContainer inputRef={inputRef} setValue={setValue}>
+    <FormContainer inputRef={inputRef} value={value} setValue={setValue}>
       {data.length > 0 && (
         <SearchResultWrapper>
           <SearchResult data={data} inputRef={inputRef} />
