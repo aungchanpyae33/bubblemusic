@@ -3,10 +3,10 @@ import SearchListContainerTitle from "./SearchListContainerTitle";
 import SearchListContainer from "./SearchListContainer";
 import SearchArtistItem from "./SearchArtistItem";
 import type { GetSearchPage } from "@/database/data-types-return";
-import type { SearchItem } from "../../../database.types-fest";
+import type { listInfo, SearchItem } from "../../../database.types-fest";
 
 interface SearchArtistProps {
-  title: string;
+  title: Extract<listInfo["type"], "artist">;
   artists: GetSearchPage["artists"];
 }
 

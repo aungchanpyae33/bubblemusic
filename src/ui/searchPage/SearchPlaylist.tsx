@@ -3,9 +3,10 @@ import SearchListContainerTitle from "./SearchListContainerTitle";
 import SearchListContainer from "./SearchListContainer";
 import SearchListContainerItem from "./SearchListContainerItem";
 import type { GetSearchPage } from "@/database/data-types-return";
+import type { listInfo } from "../../../database.types-fest";
 
 interface SearchPlaylistProps {
-  title: string;
+  title: Extract<listInfo["type"], "playlist">;
   playlists: GetSearchPage["playlists"];
 }
 function SearchPlaylist({ title, playlists }: SearchPlaylistProps) {
