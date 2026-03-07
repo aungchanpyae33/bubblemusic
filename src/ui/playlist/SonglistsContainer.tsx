@@ -50,7 +50,7 @@ function SonglistsContainer({
               className=" group-hover:brightness-75 "
             />
           ) : (
-            <div className=" absolute inset-0 flex items-center justify-center">
+            <div className=" absolute inset-0 bg-placeholder flex items-center justify-center">
               <IconWrapper
                 Icon={Folder}
                 className="hover:scale-100   active:scale-100 size-[100px]"
