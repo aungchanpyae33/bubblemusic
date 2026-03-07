@@ -80,12 +80,12 @@ export const getSimilarSongQueueClient = async (
     songId: id,
   });
   const signal = abortController!.current!.signal;
-  console.log("sdo");
+
   try {
     const fetchData = await fetch(`/api/getSimilarSong?${params}`, {
       signal,
     });
-    console.log("dnl");
+
     const { data, error } = (await fetchData.json()) as FetchSongsReturn;
     return { data, error };
   } catch (err) {

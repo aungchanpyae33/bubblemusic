@@ -55,7 +55,6 @@ function AudioInfoOverFlow({
             });
           }
           if (!animate) {
-            // console.log(animate);
             setanimatie(true);
           }
         }

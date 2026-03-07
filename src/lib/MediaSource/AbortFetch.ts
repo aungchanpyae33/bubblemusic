@@ -7,7 +7,6 @@ const AbortFetch = (
 ) => {
   if (fetching.current.isFetch) {
     if (abortController.current && fetching.current.fetchingseg !== seekSeg) {
-      // console.log(seekSeg, fetching.current.fetchingseg);
       abortController.current.abort("seeked");
       abortController.current = new AbortController();
       fetching.current.isFetch = false;

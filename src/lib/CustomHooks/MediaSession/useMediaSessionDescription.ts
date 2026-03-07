@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import type { Artist } from "../../../../database.types-fest";
 const useMediaSessionDes = (name: string, artists: Artist[]) => {
-  // console.log(urlSongs)
   useEffect(() => {
     if ("mediaSession" in navigator) {
       navigator.mediaSession.metadata = new MediaMetadata({

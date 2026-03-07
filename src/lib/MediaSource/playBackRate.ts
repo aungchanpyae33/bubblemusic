@@ -24,7 +24,7 @@ export function playBackRate({
     audioElRef,
     song_time_stamp,
   );
-  // console.log("10", remainingBuffer);
+
   //only return updated the segNum with conditional to prevent segment chagne to previous already loaded segment
   // if already buffered. return segData , if not return dataG by conditional check to make sure that no additional load on if there was already loaded buffer segments
 
@@ -47,6 +47,5 @@ export function playBackRate({
   //data + 1 means already loaded buffer
   //  in this case SegeData -1 is equal to the segData + 1 which is data of the segments that has loaded buffer
   const datag = segPosition === segData - 1 ? segPosition + 1 : segPosition;
-  // console.log(datag, "dataG");
   return datag;
 }

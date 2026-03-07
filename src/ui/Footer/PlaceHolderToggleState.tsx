@@ -47,7 +47,6 @@ function PlaceHolderToggleState({
     (state: currentSongPlaylist) =>
       Object.values(state.playListArray)[0] || undefined,
   ) as ListSongPage;
-  // console.log(playListArray, "adad");
   const Isplay = useSongFunction(
     (state: SongFunctionState) => Object.values(state.Isplay)[0],
   );
@@ -222,7 +221,7 @@ function PlaceHolderToggleState({
       setTimeoutRef.current = setTimeout(async () => {
         if (setTimeoutRef.current) {
           await addRecentlySong(song_id);
-          // if (error) console.log(error);
+
           setSongTrack(song_id);
         }
       }, 10000);

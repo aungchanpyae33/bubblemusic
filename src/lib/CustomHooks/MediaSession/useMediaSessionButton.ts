@@ -29,7 +29,7 @@ const useMediaSessionButton = (id_scope: string) => {
   const playListArray = useRepeatAndCurrentPlayList(
     (state: currentSongPlaylist) => Object.values(state.playListArray)[0] || [],
   ) as ListSongPage;
-  // console.log(playListArray, "i am playlist");
+
   const setPlay = useSongFunction(
     (state: SongFunctionActions) => state.setPlay,
   );

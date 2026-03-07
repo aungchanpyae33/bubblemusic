@@ -12,7 +12,6 @@ interface LinkProps {
   children: ReactNode;
 }
 function NavSideLink({ url, icon, desp, open, setOpen, children }: LinkProps) {
-  // console.log("render navsidebarlink");
   return (
     <li className="h-[70px] ">
       <NoThankYouPreFetchLink

@@ -4,8 +4,6 @@ import IconWrapper from "../general/IconWrapper";
 import Logo from "../icon/Logo";
 
 async function NavSideBar() {
-  // const deviceFromUserAgent = await DeviceCheck();
-
   return (
     <div className="w-[70px] bg-section ">
       <NavList

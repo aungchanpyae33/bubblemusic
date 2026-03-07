@@ -102,7 +102,7 @@ export const getSearchPage = async (
     });
     if (error) throw error;
     if (!data) throw new Error("not found");
-    console.log(data.top_result);
+
     // leave top result
     const mappedData = {
       ...data,
@@ -126,7 +126,7 @@ export const getPlaylistSongs = async (
     const { data, error } = await supabase.rpc("get_playlist_page", {
       p_id: playlistId,
     });
-    console.log(data);
+
     if (error) throw error;
     if (!data) throw new Error("not found");
 

@@ -13,9 +13,6 @@ function useCloseFunctoionForFull(
         fun(false);
         closeElement.current!.focus();
       }
-      if (e.key === "Tab") {
-        console.log("yes");
-      }
     }
     if (value) {
       copyRef.focus();

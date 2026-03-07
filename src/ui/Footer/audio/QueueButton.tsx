@@ -7,7 +7,6 @@ function QueueButton() {
   const setIsQueue = useOnlyOneSider(
     (state: queueStateAction) => state.setIsQueue,
   );
-  // console.log("queue", isQueue);
   return (
     <button
       className=" p-1 hidden md:inline-block"

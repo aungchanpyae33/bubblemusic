@@ -34,7 +34,7 @@ function AudioFull({
 }) {
   const { open, setOpen } = useContext(Context);
   const refFocus = useRef<HTMLDivElement | null>(null);
-  console.log(open);
+
   useCloseFunctoionForFull(open, setOpen, toggleRef, refFocus);
   return (
     <AnimatePresence>

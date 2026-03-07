@@ -11,7 +11,6 @@ function ConRenderSong({
   const { songsData } = useContext(SongsDataContext);
   if (!songsData || !songsData.songs) return;
   const songsList = songsData.songs;
-  // console.log(songsData);
 
   return songsList && songsList.idArray.length > 0 ? container : empty;
 }

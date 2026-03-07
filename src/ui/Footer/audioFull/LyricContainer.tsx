@@ -5,7 +5,6 @@ import { motion } from "motion/react";
 function LyricContainer({ type }: { type: "lyric" | "queue" | undefined }) {
   const lyricRef = useRef<HTMLDivElement>(null);
   const dynamic = type === "lyric";
-  console.log("bo");
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }}

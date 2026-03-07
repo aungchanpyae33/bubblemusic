@@ -36,7 +36,6 @@ function useOutterClick(
     const copyRef = ignoreRef.current;
     if (!copyRef) return;
     function Close(e: MouseEvent) {
-      console.log("hello bro");
       if (e.target === e.currentTarget) {
         e.stopPropagation();
         setUuidState("");

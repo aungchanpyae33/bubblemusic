@@ -45,7 +45,7 @@ const useRemoveSongMutate = (id: string) => {
                   },
                 },
               };
-              console.log(updatedUserLib);
+
               return {
                 data: {
                   userLib: updatedUserLib,
