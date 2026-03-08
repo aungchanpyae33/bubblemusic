@@ -12,8 +12,8 @@ export type listInfo = {
   id: string;
   name: string;
   cover_url: string | null;
-  related_id?: string;
-  related_name?: string;
+  related_id: string;
+  related_name: string;
   type: Database["public"]["Enums"]["media_item_type"];
   play_count?: number;
   played_at?: string;
@@ -43,7 +43,7 @@ export interface SongInfo {
   sege: number;
   duration: number;
   is_lyric: boolean;
-  type?: "track";
+  type: "track";
   song_time_stamp: number[];
   play_count?: number;
   artists: Artist[];
