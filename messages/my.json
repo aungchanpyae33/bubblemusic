@@ -39,7 +39,6 @@
     "goToArtist": "အဆိုတော်သို့ သွားမည်",
     "share": "မျှဝေမည်",
     "searchPage": {
-      "topResult": "ထိပ်တန်းရလဒ်",
       "searchResultFor": "{searchKeyword} အတွက် ရှာဖွေမှု ရလဒ်များ"
     },
     "searchInputPlaceholder": "ရှာဖွေမည်",
@@ -109,7 +108,8 @@
     "playlist": "သီချင်းစာရင်း",
     "track": "သီချင်း",
     "profile": "ပရိုလ်ဖိုင်",
-    "topSongsArtist": "လူကြိုက်များသော သီချင်းများ"
+    "topSongsArtist": "လူကြိုက်များသော သီချင်းများ",
+    "topResult": "ထိပ်တန်းရလဒ်"
   },
   "Auth": {
     "createAccount": "အကောင့်အသစ်ပြုလုပ်ရန်",

@@ -40,7 +40,6 @@
 
     "share": "Share",
     "searchPage": {
-      "topResult": "Top Result",
       "searchResultFor": "Search results for {searchKeyword}"
     },
     "searchInputPlaceholder": "search",
@@ -111,6 +110,7 @@
     "playlist": "Playlist",
     "track": "Song",
     "profile": "Profile",
+    "topResult": "Top Result",
     "topSongsArtist": "Popular Songs"
   },
   "Auth": {

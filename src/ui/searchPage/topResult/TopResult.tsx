@@ -33,7 +33,7 @@ async function TopResult({
   return (
     <SearchContainer className="bg-section">
       <div className=" max-w-[700px] p-2 px-4  flex flex-col  gap-4 rounded-lg ">
-        <h1 className=" text-xl ">{b("searchPage.topResult")}</h1>
+        <h1 className=" text-xl ">{l("topResult")}</h1>
         <div className=" flex items-center gap-5">
           <div
             className=" lg:w-[170px] rounded overflow-hidden w-[130px] shrink-0   aspect-square  object-cover relative bg-placeholder
