@@ -4,7 +4,6 @@ import { useContext, useMemo, useRef, useTransition } from "react";
 import Form from "next/form";
 import FocusTrap from "../Footer/audioFull/FocusTrap";
 import TitleInput from "./createPlaylist/TitleInput";
-import DescriptionInput from "./createPlaylist/DescriptionInput";
 import SubmitButton from "./createPlaylist/SubmitButton";
 import InitCreateButton from "./createPlaylist/InitCreateButton";
 import { insertDataAction } from "@/actions/createPlaylist";
@@ -83,7 +82,6 @@ function PlaylistAdd({ stackNum }: { stackNum: number }) {
                   </legend>
                   <TitleInput />
                   <CheckTypeCreate />
-                  <DescriptionInput />
                   <SubmitButton isPending={isPending} />
                 </fieldset>
               </Form>

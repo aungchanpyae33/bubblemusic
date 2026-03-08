@@ -1,7 +1,6 @@
 import { X } from "lucide-react";
 import IconWrapper from "../IconWrapper";
 import TitleInput from "@/ui/navtopBar/createPlaylist/TitleInput";
-import DescriptionInput from "@/ui/navtopBar/createPlaylist/DescriptionInput";
 import SubmitButton from "@/ui/navtopBar/createPlaylist/SubmitButton";
 import Form from "next/form";
 import {
@@ -66,8 +65,6 @@ function EditContentBox() {
         <input type="text" name="id" defaultValue={id} hidden />
         <TitleInput initValue={name} />
         <CheckType id={id} />
-
-        <DescriptionInput initValue="vloo" />
         <SubmitButton isPending={isPending} />
       </fieldset>
     </Form>
