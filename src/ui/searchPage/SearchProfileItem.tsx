@@ -11,15 +11,9 @@ import VerticalThreeDots from "../general/icon/VerticalThreeDots";
 import type { listInfo } from "../../../database.types-fest";
 
 interface SearchProfileItemProps {
-  description: string;
-  index: number;
   Itemdata: listInfo;
 }
-function SearchProfileItem({
-  description,
-  index,
-  Itemdata,
-}: SearchProfileItemProps) {
+function SearchProfileItem({ Itemdata }: SearchProfileItemProps) {
   const { id, name, cover_url } = Itemdata;
   return (
     <SearchItemWrapper>

@@ -9,10 +9,8 @@ import { Virtuoso } from "react-virtuoso";
 import PlaylistFolderContainerLoader from "./PlaylistFolderContainerLoader";
 
 function PlaylistFolderContainer({
-  open,
   setOpen,
 }: {
-  open: boolean;
   setOpen: React.Dispatch<SetStateAction<boolean>>;
 }) {
   const { data: queryData, error: queryError } = useQuery({

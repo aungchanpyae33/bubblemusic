@@ -66,7 +66,6 @@ function NavList({
 
           <NavSideLink
             url="/explore"
-            icon="icon"
             desp={b("navLink.exploreDescription")}
             open={open}
             setOpen={setOpen}
@@ -75,7 +74,6 @@ function NavList({
           </NavSideLink>
           <NavSideLink
             url="/live"
-            icon="icon"
             desp={b("navLink.liveDescription")}
             open={open}
             setOpen={setOpen}
@@ -83,20 +81,14 @@ function NavList({
             {childrenLive}
           </NavSideLink>
           <div className="h-[50px] flex items-center justify-between  ">
-            <NavSideLink
-              url="/library"
-              icon="icon"
-              desp=""
-              open={open}
-              setOpen={setOpen}
-            >
+            <NavSideLink url="/library" desp="" open={open} setOpen={setOpen}>
               <div className=" w-[70px] flex items-center  justify-center">
                 <IconWrapper size="large" Icon={ListMusic} />
               </div>
             </NavSideLink>
             <PlaylistAdd stackNum={1} />
           </div>
-          <PlaylistFolderContainer open={open} setOpen={setOpen} />
+          <PlaylistFolderContainer setOpen={setOpen} />
         </div>
       </NavListUlWrapper>
 

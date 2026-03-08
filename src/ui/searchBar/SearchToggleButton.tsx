@@ -3,11 +3,9 @@ import IconWrapper from "../general/IconWrapper";
 import { ArrowLeft, Search } from "lucide-react";
 interface SearchToggleButtonProps extends React.ComponentProps<"button"> {
   show: boolean;
-  setShow: React.Dispatch<React.SetStateAction<boolean>>;
 }
 function SearchToggleButton({
   show,
-  setShow,
   className,
   ...prop
 }: SearchToggleButtonProps) {

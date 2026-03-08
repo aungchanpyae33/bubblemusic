@@ -13,17 +13,7 @@ import ContextLike from "../trackComponent/ContextLike";
 import VerticalThreeDots from "../general/icon/VerticalThreeDots";
 import type { SongInfo } from "../../../database.types-fest";
 
-function SearchTrack({
-  song,
-  index,
-}: // roleCell,
-// dataInc,
-{
-  song: SongInfo;
-  index: number;
-  // roleCell: RefObject<number>;
-  // dataInc: RefObject<number>;
-}) {
+function SearchTrack({ song }: { song: SongInfo }) {
   return (
     <SearchItemWrapper>
       <div className="w-[50px]  relative group  ">

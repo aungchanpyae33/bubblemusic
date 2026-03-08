@@ -2,7 +2,6 @@ import SongListContainerOption from "../general/optionBox/SongListContainerOptio
 import ContextSongListContainer from "../playlist/playlistOption/ContextSongListContainer";
 import MoreOption from "../trackComponent/MoreOption";
 import MoreOptionContext from "../trackComponent/MoreOptionContext";
-import LeadingRelax from "../general/LeadingRelax";
 import Image from "next/image";
 import DirectPlayButton from "../playlist/DirectPlayButton";
 import SearchItemWrapper from "./SearchItemWrapper";
@@ -13,15 +12,9 @@ import type { listInfo } from "../../../database.types-fest";
 import { outputRelative } from "@/lib/outputRelative";
 
 interface SearchAlbumItemProps {
-  description: string;
-  index: number;
   Itemdata: listInfo;
 }
-function SearchAlbumItem({
-  description,
-  index,
-  Itemdata,
-}: SearchAlbumItemProps) {
+function SearchAlbumItem({ Itemdata }: SearchAlbumItemProps) {
   const { id, name, type, related_id, related_name, cover_url } = Itemdata;
   const relatedType = outputRelatedType(type);
   return (

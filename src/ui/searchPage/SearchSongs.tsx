@@ -17,15 +17,9 @@ function SearchSongs({
     <SearchContainer>
       <SearchListContainerTitle title={title} />
       <SearchListContainer>
-        {songs.idArray.map((id, index) => {
+        {songs.idArray.map((id) => {
           const item = songs.byId[id];
-          return (
-            <SearchTrack
-              key={item.id}
-              song={item as SearchSong}
-              index={index}
-            />
-          );
+          return <SearchTrack key={item.id} song={item as SearchSong} />;
         })}
       </SearchListContainer>
     </SearchContainer>

@@ -16,15 +16,10 @@ function SearchArtist({ title, artists }: SearchArtistProps) {
     <SearchContainer>
       <SearchListContainerTitle title={title} />
       <SearchListContainer>
-        {artists.idArray.map((id, index) => {
+        {artists.idArray.map((id) => {
           const item = artists.byId[id];
           return (
-            <SearchArtistItem
-              key={item.id}
-              description="test"
-              index={index}
-              Itemdata={item as SearchItem}
-            />
+            <SearchArtistItem key={item.id} Itemdata={item as SearchItem} />
           );
         })}
       </SearchListContainer>

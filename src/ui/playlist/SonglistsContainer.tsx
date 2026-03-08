@@ -16,16 +16,11 @@ import IconWrapper from "../general/IconWrapper";
 import { Folder } from "lucide-react";
 
 interface SonglistsContainerProps {
-  description: string;
   index: number;
   list: listInfo;
 }
 
-function SonglistsContainer({
-  description,
-  index,
-  list,
-}: SonglistsContainerProps) {
+function SonglistsContainer({ index, list }: SonglistsContainerProps) {
   const { id, name, related_id, related_name, cover_url, type } = list;
   const relatedType = outputRelatedType(type);
   return (

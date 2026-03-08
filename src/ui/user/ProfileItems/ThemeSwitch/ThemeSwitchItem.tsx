@@ -1,5 +1,4 @@
 import IconWrapper from "@/ui/general/IconWrapper";
-import OptionButton from "@/ui/general/optionBox/OptionButton";
 import OptionIconEl from "@/ui/general/optionBox/OptionIconEl";
 import OptionItem from "@/ui/general/optionBox/OptionItem";
 import OptionSubArrow from "@/ui/general/optionBox/OptionSubArrow";

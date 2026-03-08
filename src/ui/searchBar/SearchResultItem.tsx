@@ -4,7 +4,6 @@ import { useRouter } from "nextjs-toploader/app";
 import { memo } from "react";
 interface prop {
   title: string;
-  index: number;
   // arrow: {
   //   run: boolean;
   //   number: number;
@@ -12,7 +11,7 @@ interface prop {
   show: boolean;
 }
 //[later] : reactcompiler -> stable
-const SearchResultItem = memo(({ title, index, show }: prop) => {
+const SearchResultItem = memo(({ title, show }: prop) => {
   const router = useRouter();
 
   return (

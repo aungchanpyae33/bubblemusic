@@ -14,16 +14,9 @@ function SearchProfile({ title, profiles }: SearchProfileProps) {
     <SearchContainer>
       <SearchListContainerTitle title={title} />
       <SearchListContainer>
-        {profiles.idArray.map((id, index) => {
+        {profiles.idArray.map((id) => {
           const item = profiles.byId[id];
-          return (
-            <SearchProfileItem
-              key={item.id}
-              description="test"
-              index={index}
-              Itemdata={item}
-            />
-          );
+          return <SearchProfileItem key={item.id} Itemdata={item} />;
         })}
       </SearchListContainer>
     </SearchContainer>

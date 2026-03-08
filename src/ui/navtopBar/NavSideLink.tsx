@@ -5,13 +5,12 @@ import NoThankYouPreFetchLink from "../general/NoThankYouPreFetchLink";
 
 interface LinkProps {
   url: string;
-  icon: string;
   desp: string;
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   children: ReactNode;
 }
-function NavSideLink({ url, icon, desp, open, setOpen, children }: LinkProps) {
+function NavSideLink({ url, desp, open, setOpen, children }: LinkProps) {
   return (
     <li className="h-[70px] ">
       <NoThankYouPreFetchLink

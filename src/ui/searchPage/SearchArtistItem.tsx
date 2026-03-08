@@ -11,15 +11,9 @@ import type { SearchItem } from "../../../database.types-fest";
 import { outputRelative } from "@/lib/outputRelative";
 
 interface SearchArtistItemProps {
-  description: string;
-  index: number;
   Itemdata: SearchItem;
 }
-function SearchArtistItem({
-  description,
-  index,
-  Itemdata,
-}: SearchArtistItemProps) {
+function SearchArtistItem({ Itemdata }: SearchArtistItemProps) {
   const { id, name, type, related_id, related_name, cover_url } = Itemdata;
   return (
     <SearchItemWrapper>

@@ -26,7 +26,6 @@ function FormContainer({
     <div className="w-[80%]  sm:max-w-[500px] lg:max-w-[600px] mx-auto">
       <SearchToggleButton
         show={show}
-        setShow={setShow}
         className="sm:hidden bg-surface-1    p-2 rounded-full"
         onClick={() => {
           setShow(true);
@@ -40,7 +39,6 @@ function FormContainer({
           >
             <SearchToggleButton
               show={show}
-              setShow={setShow}
               className="sm:hidden flex justify-center items-center bg-surface-1 border-r border-seperate-hard border-opacity-15  text-ink-400 hover:text-foreground w-[70px] "
               onClick={() => {
                 setShow(false);
@@ -50,7 +48,6 @@ function FormContainer({
               value={value}
               inputRef={inputRef}
               setValue={setValue}
-              setShow={setShow}
             />
             <button
               className="bg-surface-1   px-2"

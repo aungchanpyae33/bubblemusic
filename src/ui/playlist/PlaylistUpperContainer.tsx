@@ -21,7 +21,7 @@ function PlaylistUpperContainer() {
         "gap-8 md:gap-10 lg:gap-12": device === "desktop",
       })}
     >
-      <AlbumImg cover_url={cover_url} type={type} />
+      <AlbumImg cover_url={cover_url} />
       <div
         className={clsx("pt-2 max-w-full space-y-4  truncate flex-1 ", {
           "self-start ": device === "mobile" || device === "tablet",

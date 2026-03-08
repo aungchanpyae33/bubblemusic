@@ -21,7 +21,7 @@ async function AlbumUpperContainer({ songs }: { songs: ListSongPage }) {
         "gap-8 md:gap-10 lg:gap-12": deviceFromUserAgent === "desktop",
       })}
     >
-      <AlbumImg cover_url={songs.cover_url} type={songs.type} />
+      <AlbumImg cover_url={songs.cover_url} />
       <div
         className={clsx("pt-2 max-w-full space-y-4  truncate flex-1 ", {
           "self-start ":

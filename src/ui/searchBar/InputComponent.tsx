@@ -6,14 +6,8 @@ interface InputComponentProps {
   inputRef: React.RefObject<HTMLInputElement | null>;
   value: string;
   setValue: React.Dispatch<React.SetStateAction<string>>;
-  setShow: React.Dispatch<React.SetStateAction<boolean>>;
 }
-function InputComponent({
-  inputRef,
-  setShow,
-  value,
-  setValue,
-}: InputComponentProps) {
+function InputComponent({ inputRef, value, setValue }: InputComponentProps) {
   const b = useTranslations("block");
   const { setOpen } = useContext(ContextToggle);
   const setIsInputFocus = useNotInputFocus(

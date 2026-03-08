@@ -34,12 +34,7 @@ function RecentlyListContainer({
           {data.idArray.map((id, index) => {
             const item = data.byId[`${id}`];
             return (
-              <SonglistsContainer
-                index={index}
-                key={item.id}
-                list={item}
-                description={description}
-              />
+              <SonglistsContainer index={index} key={item.id} list={item} />
             );
           })}
         </SonglistWrapper>

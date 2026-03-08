@@ -3,7 +3,6 @@ import SongListContainerOption from "../general/optionBox/SongListContainerOptio
 import ContextSongListContainer from "../playlist/playlistOption/ContextSongListContainer";
 import MoreOption from "../trackComponent/MoreOption";
 import MoreOptionContext from "../trackComponent/MoreOptionContext";
-import LeadingRelax from "../general/LeadingRelax";
 import DirectPlayButton from "../playlist/DirectPlayButton";
 import Image from "next/image";
 import { outputRelatedType } from "@/lib/prototypeOuputRelatedType";
@@ -14,15 +13,9 @@ import VerticalThreeDots from "../general/icon/VerticalThreeDots";
 import type { listInfo } from "../../../database.types-fest";
 import { outputRelative } from "@/lib/outputRelative";
 interface SearchListContainerItemProps {
-  description: string;
-  index: number;
   Itemdata: listInfo;
 }
-function SearchListContainerItem({
-  description,
-  index,
-  Itemdata,
-}: SearchListContainerItemProps) {
+function SearchListContainerItem({ Itemdata }: SearchListContainerItemProps) {
   const { id, name, type, related_id, related_name, cover_url } = Itemdata;
   const relatedType = outputRelatedType(type);
   return (

@@ -15,16 +15,9 @@ function SearchPlaylist({ title, playlists }: SearchPlaylistProps) {
     <SearchContainer>
       <SearchListContainerTitle title={title} />
       <SearchListContainer>
-        {playlists.idArray.map((id, index) => {
+        {playlists.idArray.map((id) => {
           const item = playlists.byId[id];
-          return (
-            <SearchListContainerItem
-              key={item.id}
-              description="test"
-              index={index}
-              Itemdata={item}
-            />
-          );
+          return <SearchListContainerItem key={item.id} Itemdata={item} />;
         })}
       </SearchListContainer>
     </SearchContainer>

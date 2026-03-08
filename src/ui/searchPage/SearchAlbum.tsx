@@ -17,16 +17,9 @@ function SearchAlbum({ title, albums }: SearchAlbumProps) {
     <SearchContainer>
       <SearchListContainerTitle title={title} />
       <SearchListContainer>
-        {albums.idArray.map((id, index) => {
+        {albums.idArray.map((id) => {
           const item = albums.byId[id];
-          return (
-            <SearchAlbumItem
-              key={item.id}
-              description="test"
-              index={index}
-              Itemdata={item}
-            />
-          );
+          return <SearchAlbumItem key={item.id} Itemdata={item} />;
         })}
       </SearchListContainer>
     </SearchContainer>

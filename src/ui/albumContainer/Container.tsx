@@ -30,7 +30,6 @@ async function Container({
                 index={index}
                 key={item.id}
                 list={item as listInfo}
-                description={description}
               />
             );
           })}

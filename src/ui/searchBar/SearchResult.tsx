@@ -19,7 +19,6 @@ function SearchResult({ data, inputRef }: prop) {
         <SearchResultItem
           key={item.id}
           title={item.name}
-          index={index}
           show={index === arrow.number && !arrow.run}
         />
       ))}
