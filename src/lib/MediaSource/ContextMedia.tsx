@@ -1,4 +1,4 @@
-import { createContext, RefObject } from "react";
+import { createContext, RefObject, useContext } from "react";
 export interface prop {
   duration: number;
   abortController: RefObject<AbortController | null>;
@@ -18,21 +18,15 @@ export interface prop {
 import { ReactNode } from "react";
 import type { Artist } from "../../../database.types-fest";
 
-export const DataContext = createContext<prop>({
-  duration: 0,
-  abortController: { current: null },
-  fetching: { current: { isFetch: false, fetchingseg: 1 } },
-  segNum: { current: 1 },
-  song_time_stamp: [],
-  loadNextSegment: { current: async () => {} },
-  sege: undefined,
-  bufferThreshold: 0,
-  song_id: "",
-  is_lyric: false,
-  name: "",
-  artists: [],
-  cover_url: "",
-});
+export const DataContext = createContext<prop | undefined>(undefined);
+
+export const useDataContext = () => {
+  const context = useContext(DataContext);
+  if (context === undefined) {
+    throw new Error("useDataContext must be used within a DataContext.Provider");
+  }
+  return context;
+};
 function ContextMedia({ children, data }: { children: ReactNode; data: prop }) {
   const value = { ...data };
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;

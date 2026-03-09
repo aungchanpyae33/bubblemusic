@@ -1,6 +1,6 @@
-import { ContextMoreOptionStack } from "@/ui/trackComponent/MoreOptionStackContext";
-import { ContextMoreOptionUnique } from "@/ui/trackComponent/MoreOptionUniqueContext";
-import { useContext, useEffect } from "react";
+import { useMoreOptionStackContext } from "@/ui/trackComponent/MoreOptionStackContext";
+import { useMoreOptionUniqueContext } from "@/ui/trackComponent/MoreOptionUniqueContext";
+import { useEffect } from "react";
 import { isTouchPointer } from "../isTouchPointer";
 
 function useTriggerButtonSub(
@@ -8,8 +8,8 @@ function useTriggerButtonSub(
   stackNum: number,
   uuid: string,
 ) {
-  const { stack, setStack } = useContext(ContextMoreOptionStack);
-  const { uuidState, setUuidState } = useContext(ContextMoreOptionUnique);
+  const { stack, setStack } = useMoreOptionStackContext();
+  const { uuidState, setUuidState } = useMoreOptionUniqueContext();
 
   useEffect(() => {
     const triggerBtn = parentRef.current;

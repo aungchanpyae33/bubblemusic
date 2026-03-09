@@ -2,13 +2,12 @@
 import { Heart } from "lucide-react";
 import IconWrapper from "../general/IconWrapper";
 import clsx from "clsx";
-import { useContext } from "react";
 import { addLike } from "@/actions/addLike";
 import { removeLike } from "@/actions/removeLike";
-import { LikeContext } from "./ContextLike";
+import { useLikeContext } from "./ContextLike";
 
 function TrackToggleLike({ songId }: { songId: string }) {
-  const { isLike, setLikeAction } = useContext(LikeContext);
+  const { isLike, setLikeAction } = useLikeContext();
   const addLikeAction = addLike.bind(null, songId);
   const removeLikeAction = removeLike.bind(null, songId);
   async function handleLike() {

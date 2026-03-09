@@ -1,11 +1,11 @@
-import { ReactNode, useContext, useMemo, useRef } from "react";
+import { ReactNode, useMemo, useRef } from "react";
 
 import AudioThumbSlider from "./AudioThumbSlider";
 import AudioProgressbar from "./AudioProgressbar";
 import AudioSliderActionWrapper from "./AudioSliderActionWrapper";
 import AudioSlider from "./AudioSlider";
 import clsx from "clsx";
-import { Context } from "@/lib/MediaSource/ContextMediaAudioFull";
+import { useMediaAudioFullContext } from "@/lib/MediaSource/ContextMediaAudioFull";
 import type { valueProps } from "@/lib/CustomHooks/useAudioSeek";
 import useAudioSeek from "@/lib/CustomHooks/useAudioSeek";
 interface PropAudioSeek extends React.ComponentProps<"div"> {
@@ -24,7 +24,7 @@ function AudioSeekBar({
   url,
   isFull,
 }: PropAudioSeek) {
-  const { open } = useContext(Context);
+  const { open } = useMediaAudioFullContext();
 
   const shouldRun = useMemo(() => (isFull ? open : !open), [isFull, open]);
 

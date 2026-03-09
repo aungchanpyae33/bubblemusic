@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import OptionItem from "@/ui/general/optionBox/OptionItem";
 import OptionButton from "@/ui/general/optionBox/OptionButton";
 import OptionIconEl from "@/ui/general/optionBox/OptionIconEl";
@@ -8,14 +7,13 @@ import { BookmarkPlus } from "lucide-react";
 import { addToLibrary } from "@/actions/AddToLibrary";
 import { useQueryClient } from "@tanstack/react-query";
 import {
-  SongListContext,
-  SongListValue,
+  useSongListContext,
 } from "@/ui/playlist/playlistOption/ContextSongListContainer";
 import { useTranslations } from "next-intl";
 import OptionText from "./OptionText";
 
 function AddToLibraryChild() {
-  const { id, type } = useContext(SongListContext) as SongListValue;
+  const { id, type } = useSongListContext();
   const b = useTranslations("block");
   const queryClient = useQueryClient();
   async function addToLibraryFn() {
@@ -44,7 +42,7 @@ function AddToLibraryChild() {
 }
 
 function AddToLibrary() {
-  const { source } = useContext(SongListContext) as SongListValue;
+  const { source } = useSongListContext();
 
   if (source !== "none") return null;
   return <AddToLibraryChild />;

@@ -1,8 +1,8 @@
-import { ReactNode, useContext } from "react";
+import { ReactNode } from "react";
 import AudioSeekBar from "./SliderUi/AudioSeekBar";
 // import AudioSeekBarWrapper from "./AudioSeekBarWrapper";
 import TimeIndicatorCur from "./Time/TimeIndicatorCur";
-import { DataContext } from "@/lib/MediaSource/ContextMedia";
+import { useDataContext } from "@/lib/MediaSource/ContextMedia";
 export interface PropTime {
   cur: number;
   durationTime: number | undefined;
@@ -16,7 +16,7 @@ function AudioElement({
   url: string;
   isFull: boolean;
 }) {
-  const { duration } = useContext(DataContext);
+  const { duration } = useDataContext();
 
   return (
     <div className=" w-full flex items-center ">

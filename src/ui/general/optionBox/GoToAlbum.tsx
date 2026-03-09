@@ -1,7 +1,6 @@
 "use client";
-import { useContext } from "react";
 import OptionItem from "./OptionItem";
-import { InfoTrackContext } from "@/ui/trackComponent/ContextInfoTrack";
+import { useInfoTrackContext } from "@/ui/trackComponent/ContextInfoTrack";
 import OptionIconEl from "./OptionIconEl";
 import { Disc } from "lucide-react";
 import IconWrapper from "../IconWrapper";
@@ -12,7 +11,7 @@ import OptionText from "./OptionText";
 
 function GoToAlbum() {
   const b = useTranslations("block");
-  const { song } = useContext(InfoTrackContext);
+  const { song } = useInfoTrackContext();
   const albumId = song?.album.id;
 
   return (

@@ -1,10 +1,9 @@
 import IconWrapper from "@/ui/general/IconWrapper";
-import { ContextMoreOptionStack } from "@/ui/trackComponent/MoreOptionStackContext";
+import { useMoreOptionStackContext } from "@/ui/trackComponent/MoreOptionStackContext";
 import { Plus } from "lucide-react";
-import { useContext } from "react";
 
 function InitCreateButton({ stackNum }: { stackNum: number }) {
-  const { setStack } = useContext(ContextMoreOptionStack);
+  const { setStack } = useMoreOptionStackContext();
   return (
     <button
       className="mr-2"

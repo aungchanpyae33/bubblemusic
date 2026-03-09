@@ -1,6 +1,6 @@
 import Form from "next/form";
-import { ReactNode, useContext } from "react";
-import { ContextToggle } from "./ToggleContext";
+import { ReactNode } from "react";
+import { useToggleContext } from "./ToggleContext";
 import clsx from "clsx";
 interface FormWrapperProps {
   children: ReactNode;
@@ -9,7 +9,7 @@ interface FormWrapperProps {
 }
 import { useRouter } from "nextjs-toploader/app";
 function FormWrapper({ children, inputRef, show }: FormWrapperProps) {
-  const { setOpen } = useContext(ContextToggle);
+  const { setOpen } = useToggleContext();
   const router = useRouter();
   function goSearch(FormData: FormData) {
     setOpen(false);

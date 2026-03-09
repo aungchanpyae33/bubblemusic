@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, type ReactNode } from "react";
+import { createContext, type ReactNode, useContext } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getPlaylistSongsClient } from "@/database/client-data";
 import type { ListSongPage } from "@/database/data-types-return";
@@ -9,9 +9,19 @@ interface SongsDataContextType {
   songsData: ListSongPage | null;
 }
 
-export const SongsDataContext = createContext<SongsDataContextType>({
-  songsData: null,
-});
+export const SongsDataContext = createContext<SongsDataContextType | undefined>(
+  undefined,
+);
+
+export const useSongsDataContext = () => {
+  const context = useContext(SongsDataContext);
+  if (context === undefined) {
+    throw new Error(
+      "useSongsDataContext must be used within a SongsDataContext.Provider",
+    );
+  }
+  return context;
+};
 
 function ContextSongsData({
   playlistId,

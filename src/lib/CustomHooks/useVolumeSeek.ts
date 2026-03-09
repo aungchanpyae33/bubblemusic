@@ -1,4 +1,4 @@
-import { RefObject, useContext, useEffect } from "react";
+import { RefObject, useEffect } from "react";
 import { sliderPositionCal } from "../MediaSource/SliderPositionCal";
 import {
   useVolumeDragging,
@@ -8,7 +8,7 @@ import {
   VolumeValueActions,
   VolumeValueState,
 } from "../zustand";
-import { AudioElementContext } from "@/ui/Footer/audio/AudioWrapper";
+import { useAudioElementContext } from "@/ui/Footer/audio/AudioWrapper";
 
 interface audioSeekProp {
   sliderRef: RefObject<HTMLDivElement | null>;
@@ -25,7 +25,7 @@ const useVolumeSeek = ({
   sliderRef,
   shouldRun,
 }: audioSeekProp): useAudioSeekReturnType => {
-  const { audioElRef } = useContext(AudioElementContext);
+  const { audioElRef } = useAudioElementContext();
   const value = useVolumeValue((state: VolumeValueState) => state.value);
   const setValue = useVolumeValue(
     (state: VolumeValueActions) => state.setValue,

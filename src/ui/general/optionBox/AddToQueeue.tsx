@@ -1,10 +1,9 @@
 import OptionButton from "./OptionButton";
 import OptionItem from "./OptionItem";
-import { useContext } from "react";
 import { ListEnd } from "lucide-react";
 import IconWrapper from "../IconWrapper";
 import OptionIconEl from "./OptionIconEl";
-import { InfoTrackContext } from "@/ui/trackComponent/ContextInfoTrack";
+import { useInfoTrackContext } from "@/ui/trackComponent/ContextInfoTrack";
 import {
   currentAddToQueueAction,
   SongDetail,
@@ -18,7 +17,7 @@ import OptionText from "./OptionText";
 
 function AddToQueue() {
   const b = useTranslations("block");
-  const { song } = useContext(InfoTrackContext);
+  const { song } = useInfoTrackContext();
   const currentAddToQueue = useRepeatAndCurrentPlayList(
     (state: currentAddToQueueAction) => state.currentAddToQueue,
   );

@@ -1,6 +1,6 @@
 import clsx from "clsx";
-import { useContext, useEffect, useRef } from "react";
-import { volumeContext } from "./ContextVolume";
+import { useEffect, useRef } from "react";
+import { useVolumeContext } from "./ContextVolume";
 
 function VolumeContainer({
   children,
@@ -10,7 +10,7 @@ function VolumeContainer({
   isDragging: boolean;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const { open, setOpen } = useContext(volumeContext);
+  const { open, setOpen } = useVolumeContext();
   useEffect(() => {
     if (!isDragging) {
       setOpen(false);

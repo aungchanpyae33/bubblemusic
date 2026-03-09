@@ -1,7 +1,7 @@
-import React, { RefObject, useContext, useEffect } from "react";
-import { DeviceContext } from "../DeviceContext/ContextDeviceCheck";
-import { ContextMoreOptionStack } from "@/ui/trackComponent/MoreOptionStackContext";
-import { ContextMoreOptionUnique } from "@/ui/trackComponent/MoreOptionUniqueContext";
+import React, { RefObject, useEffect } from "react";
+import { useDeviceContext } from "../DeviceContext/ContextDeviceCheck";
+import { useMoreOptionStackContext } from "@/ui/trackComponent/MoreOptionStackContext";
+import { useMoreOptionUniqueContext } from "@/ui/trackComponent/MoreOptionUniqueContext";
 
 // this function do close the portal when escape is pressed , it also manage the stack for inner child components
 function useCloseFunctoion(
@@ -11,9 +11,9 @@ function useCloseFunctoion(
     | ((value: boolean) => void),
   closeElement?: RefObject<HTMLButtonElement | null>,
 ) {
-  const { device } = useContext(DeviceContext);
-  const { stack, setStack } = useContext(ContextMoreOptionStack);
-  const { setUuidState } = useContext(ContextMoreOptionUnique);
+  const { device } = useDeviceContext();
+  const { stack, setStack } = useMoreOptionStackContext();
+  const { setUuidState } = useMoreOptionUniqueContext();
   // stack are 0 === parent , 1 === child , 2 === grand child etc..
   useEffect(() => {
     function closeSearch(e: KeyboardEvent) {
@@ -33,6 +33,7 @@ function useCloseFunctoion(
           fun(false);
           if (!closeElement) return;
           closeElement.current!.focus();
+          return;
         }
 
         // decrease the stack count because of clicking triiger

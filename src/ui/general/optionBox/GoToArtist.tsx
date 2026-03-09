@@ -1,11 +1,10 @@
 "use client";
-import { useContext } from "react";
 import OptionItem from "./OptionItem";
 import OptionIconEl from "./OptionIconEl";
 import IconWrapper from "../IconWrapper";
 import { ChevronRight, UserSearch } from "lucide-react";
 import NoThankYouPreFetchLink from "../NoThankYouPreFetchLink";
-import { GoToRelativeContext } from "./ContextGoToRelative";
+import { useGoToRelativeContext } from "./ContextGoToRelative";
 import MoreSubOption from "@/ui/trackComponent/MoreSubOption";
 import OptionText from "./OptionText";
 import OptionSubArrow from "./OptionSubArrow";
@@ -15,7 +14,7 @@ import { useTranslations } from "next-intl";
 
 function GoToArtist() {
   const b = useTranslations("block");
-  const { relative } = useContext(GoToRelativeContext);
+  const { relative } = useGoToRelativeContext();
   if (!relative) return;
   // check if is array (usually comefrom track where song has more than one singer)
   if (Array.isArray(relative) && relative.length > 1) {

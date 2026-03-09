@@ -1,6 +1,5 @@
 import OptionButton from "./OptionButton";
 import OptionItem from "./OptionItem";
-import { useContext } from "react";
 import { ListStart } from "lucide-react";
 import IconWrapper from "../IconWrapper";
 import OptionIconEl from "./OptionIconEl";
@@ -11,14 +10,14 @@ import {
   useRepeatAndCurrentPlayList,
   useSong,
 } from "@/lib/zustand";
-import { InfoTrackContext } from "@/ui/trackComponent/ContextInfoTrack";
+import { useInfoTrackContext } from "@/ui/trackComponent/ContextInfoTrack";
 import { generateUUID } from "@/lib/GenerateUUID";
 import { useTranslations } from "next-intl";
 import OptionText from "./OptionText";
 
 function PlayNextQueue() {
   const b = useTranslations("block");
-  const { song } = useContext(InfoTrackContext);
+  const { song } = useInfoTrackContext();
   const currentAddToNext = useRepeatAndCurrentPlayList(
     (state: currentAddToNextAction) => state.currentAddToNext,
   );

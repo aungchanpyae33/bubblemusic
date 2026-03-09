@@ -1,4 +1,4 @@
-import { useContext, useMemo, useRef } from "react";
+import { useMemo, useRef } from "react";
 import AudioThumbSlider from "../audio/SliderUi/AudioThumbSlider";
 import AudioProgressbar from "../audio/SliderUi/AudioProgressbar";
 import VolumeSlider from "./VolumeSlider";
@@ -8,11 +8,11 @@ import VolumeMuteButton from "./VolumeMuteButton";
 import ContextVolume from "./ContextVolume";
 import VolumeContainer from "./VolumeContainer";
 import VolumeToggleButton from "./VolumeToggleButton";
-import { Context } from "@/lib/MediaSource/ContextMediaAudioFull";
+import { useMediaAudioFullContext } from "@/lib/MediaSource/ContextMediaAudioFull";
 import useVolumeSeek from "@/lib/CustomHooks/useVolumeSeek";
 
 function Volume({ isFull }: { isFull: boolean }) {
-  const { open } = useContext(Context);
+  const { open } = useMediaAudioFullContext();
   const shouldRun = useMemo(() => (isFull ? open : !open), [isFull, open]);
   const sliderRef = useRef<HTMLDivElement | null>(null);
   const progressRef = useRef<HTMLDivElement | null>(null);

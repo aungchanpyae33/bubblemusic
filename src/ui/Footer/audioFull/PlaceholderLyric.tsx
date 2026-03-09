@@ -1,6 +1,6 @@
-import { DataContext } from "@/lib/MediaSource/ContextMedia";
+import { useDataContext } from "@/lib/MediaSource/ContextMedia";
 import { AudioValueState, useAudioValue } from "@/lib/zustand";
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import type { LyricData } from "../../../../database.types-fest";
 // currentIndex updater placeholder that run 1s everytime from value
 function PlaceholderLyric({
@@ -10,7 +10,7 @@ function PlaceholderLyric({
   lyric: LyricData;
   setCurrentIndex: React.Dispatch<React.SetStateAction<number>>;
 }) {
-  const { duration } = useContext(DataContext);
+  const { duration } = useDataContext();
   const value = useAudioValue((state: AudioValueState) => state.value);
   const secReturn = value;
   const data = 100 - secReturn;

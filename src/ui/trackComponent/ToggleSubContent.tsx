@@ -1,4 +1,4 @@
-import { RefObject, useContext, useRef } from "react";
+import { RefObject, useRef } from "react";
 import clsx from "clsx";
 
 import {
@@ -8,12 +8,12 @@ import {
   useMotionValue,
 } from "motion/react";
 
-import { ContextMoreOption } from "./MoreOptionContext";
-import { ContextMoreOptionStack } from "./MoreOptionStackContext";
-import { ContextMoreOptionUnique } from "./MoreOptionUniqueContext";
+import { useMoreOptionContext } from "./MoreOptionContext";
+import { useMoreOptionStackContext } from "./MoreOptionStackContext";
+import { useMoreOptionUniqueContext } from "./MoreOptionUniqueContext";
 import { useToggleContentPosition } from "@/lib/CustomHooks/useToggleContentPosition";
 import useOutterClickSub from "@/lib/CustomHooks/useOutterClickSub";
-import { DeviceContext } from "@/lib/DeviceContext/ContextDeviceCheck";
+import { useDeviceContext } from "@/lib/DeviceContext/ContextDeviceCheck";
 import useFocusOnOpen from "@/lib/CustomHooks/useFocusOnOpen";
 import TipUi from "../general/TipUi";
 import FocusTrap from "../Footer/audioFull/FocusTrap";
@@ -35,10 +35,10 @@ function ToggleSubContentMobile({
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [scope, animate] = useAnimate();
   const y = useMotionValue(0);
-  const { setShow } = useContext(ContextMoreOption);
-  const { setStack, stack } = useContext(ContextMoreOptionStack);
+  const { setShow } = useMoreOptionContext();
+  const { setStack, stack } = useMoreOptionStackContext();
   const controls = useDragControls();
-  const { uuidState } = useContext(ContextMoreOptionUnique);
+  const { uuidState } = useMoreOptionUniqueContext();
 
   // the reason i am not reseting setUuidState is to avoaid showing hidden class in toggleContent parent
 
@@ -171,7 +171,7 @@ function ToggleSubContent({
   stackNum,
   stayShow,
 }: ToggleSubContentProps) {
-  const { device } = useContext(DeviceContext);
+  const { device } = useDeviceContext();
   return device !== "mobile" ? (
     <ToggleSubContentFloat
       parentRef={parentRef}

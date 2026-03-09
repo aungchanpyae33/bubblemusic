@@ -1,10 +1,10 @@
-import { Context } from "@/lib/MediaSource/ContextMediaAudioFull";
+import { useMediaAudioFullContext } from "@/lib/MediaSource/ContextMediaAudioFull";
 import IconWrapper from "@/ui/general/IconWrapper";
 import { Maximize } from "lucide-react";
-import React, { useContext } from "react";
+import React from "react";
 type Props = React.ComponentProps<"button">;
 function FullToggleButton({ ref }: Props) {
-  const { open, setOpen } = useContext(Context);
+  const { open, setOpen } = useMediaAudioFullContext();
 
   return (
     <button

@@ -1,5 +1,4 @@
 "use client";
-import { useContext } from "react";
 import { removeLike } from "@/actions/removeLike";
 import { addLike } from "@/actions/addLike";
 import OptionIconEl from "../general/optionBox/OptionIconEl";
@@ -7,16 +6,16 @@ import IconWrapper from "../general/IconWrapper";
 import { Heart } from "lucide-react";
 import clsx from "clsx";
 import OptionItem from "../general/optionBox/OptionItem";
-import { InfoTrackContext } from "./ContextInfoTrack";
+import { useInfoTrackContext } from "./ContextInfoTrack";
 import OptionButton from "../general/optionBox/OptionButton";
-import { LikeContext } from "./ContextLike";
+import { useLikeContext } from "./ContextLike";
 import { useTranslations } from "next-intl";
 import OptionText from "../general/optionBox/OptionText";
 
 function ToggleHeartContent() {
   const b = useTranslations("block");
-  const { song } = useContext(InfoTrackContext);
-  const { isLike, setLikeAction } = useContext(LikeContext);
+  const { song } = useInfoTrackContext();
+  const { isLike, setLikeAction } = useLikeContext();
   if (!song) return;
   const songId = song.song_id;
 

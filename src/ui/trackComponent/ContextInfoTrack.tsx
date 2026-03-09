@@ -2,7 +2,7 @@
 
 import { getUserLibClient } from "@/database/client-data";
 import { useQuery } from "@tanstack/react-query";
-import { createContext } from "react";
+import { createContext, useContext } from "react";
 import type { SongInfo } from "../../../database.types-fest";
 import type { NavbarList } from "@/database/data-types-return";
 import { NormalizedById } from "@/lib/returnById";
@@ -16,11 +16,19 @@ interface InfoTrackContextProps extends songContext {
   source?: "create" | "reference" | "none";
 }
 
-export const InfoTrackContext = createContext<InfoTrackContextProps>({
-  id: "",
-  source: "none",
-  song: undefined,
-});
+export const InfoTrackContext = createContext<InfoTrackContextProps | undefined>(
+  undefined,
+);
+
+export const useInfoTrackContext = () => {
+  const context = useContext(InfoTrackContext);
+  if (context === undefined) {
+    throw new Error(
+      "useInfoTrackContext must be used within a InfoTrackContext.Provider",
+    );
+  }
+  return context;
+};
 
 function getSourceType(
   userLib: NormalizedById<NavbarList>,

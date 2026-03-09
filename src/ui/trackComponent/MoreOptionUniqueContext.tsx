@@ -1,6 +1,12 @@
 "use client";
 // uuid context store for unique option button
-import { createContext, ReactNode, SetStateAction, useState } from "react";
+import {
+  createContext,
+  ReactNode,
+  SetStateAction,
+  useContext,
+  useState,
+} from "react";
 
 interface ContextMoreOptionValue {
   uuidState: string;
@@ -10,10 +16,19 @@ interface ContextMoreOptionValue {
 interface MoreOptionUniqueContextProps {
   children: ReactNode;
 }
-export const ContextMoreOptionUnique = createContext<ContextMoreOptionValue>({
-  uuidState: "",
-  setUuidState: () => {},
-});
+export const ContextMoreOptionUnique = createContext<
+  ContextMoreOptionValue | undefined
+>(undefined);
+
+export const useMoreOptionUniqueContext = () => {
+  const context = useContext(ContextMoreOptionUnique);
+  if (context === undefined) {
+    throw new Error(
+      "useMoreOptionUniqueContext must be used within a ContextMoreOptionUnique.Provider",
+    );
+  }
+  return context;
+};
 
 function MoreOptionUniqueContext({ children }: MoreOptionUniqueContextProps) {
   const [uuidState, setUuidState] = useState("");

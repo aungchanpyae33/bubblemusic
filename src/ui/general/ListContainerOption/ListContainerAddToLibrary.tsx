@@ -3,12 +3,11 @@ import { BookmarkPlus, BookmarkX } from "lucide-react";
 import IconWrapper from "../IconWrapper";
 import { addToLibrary } from "@/actions/AddToLibrary";
 import { Database } from "../../../../database.types";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { removeFromLibrary } from "@/actions/removeFromLibrary";
 import { useQueryClient } from "@tanstack/react-query";
 import {
-  SongListContext,
-  SongListValue,
+  useSongListContext,
 } from "@/ui/playlist/playlistOption/ContextSongListContainer";
 import { useRouter } from "nextjs-toploader/app";
 import { useTopLoader } from "nextjs-toploader";
@@ -37,7 +36,7 @@ function isAdd(source: Database["public"]["Enums"]["media_source_type"]) {
 }
 
 function ListContainerAddToLibrary() {
-  const { id, type, source } = useContext(SongListContext) as SongListValue;
+  const { id, type, source } = useSongListContext();
   const router = useRouter();
   const loader = useTopLoader();
   const queryClient = useQueryClient();

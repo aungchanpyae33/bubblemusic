@@ -1,11 +1,10 @@
 import IconWrapper from "@/ui/general/IconWrapper";
 import { Volume2, VolumeX } from "lucide-react";
-import { useContext } from "react";
-import { volumeContext } from "./ContextVolume";
+import { useVolumeContext } from "./ContextVolume";
 import clsx from "clsx";
 
 function VolumeToggleButton({ value }: { value: number }) {
-  const { open, setOpen } = useContext(volumeContext);
+  const { open, setOpen } = useVolumeContext();
   return (
     <button
       className={clsx("lg:hidden", {

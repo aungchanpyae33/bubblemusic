@@ -1,6 +1,5 @@
-import { DeviceContext } from "@/lib/DeviceContext/ContextDeviceCheck";
-import { ContextMoreOption } from "@/ui/trackComponent/MoreOptionContext";
-import { useContext } from "react";
+import { useDeviceContext } from "@/lib/DeviceContext/ContextDeviceCheck";
+import { useMoreOptionContext } from "@/ui/trackComponent/MoreOptionContext";
 import { twMerge } from "tailwind-merge";
 
 interface OptionButtonProps extends React.ComponentProps<"button"> {
@@ -16,8 +15,8 @@ function OptionButton({
   isSub,
   ...props
 }: OptionButtonProps) {
-  const { setShow } = useContext(ContextMoreOption);
-  const { device } = useContext(DeviceContext);
+  const { setShow } = useMoreOptionContext();
+  const { device } = useDeviceContext();
   function handlClick() {
     if (isSub) return;
     if (device !== "mobile") setShow(false);

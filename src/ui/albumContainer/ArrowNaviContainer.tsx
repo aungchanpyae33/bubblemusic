@@ -1,9 +1,8 @@
 "use client";
-import { useContext } from "react";
-import { ContainerContext } from "./ContextContainer";
+import { useContainerContext } from "./ContextContainer";
 
 function ArrowNaviContainer() {
-  const { arrowNaviRef } = useContext(ContainerContext);
+  const { arrowNaviRef } = useContainerContext();
   return <div className=" flex gap-1" ref={arrowNaviRef}></div>;
 }
 

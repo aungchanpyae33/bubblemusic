@@ -1,9 +1,9 @@
 import type { valueProps } from "@/lib/CustomHooks/useAudioSeek";
 import AudioSeeked from "@/lib/MediaSource/AudioSeeked";
-import { DataContext } from "@/lib/MediaSource/ContextMedia";
+import { useDataContext } from "@/lib/MediaSource/ContextMedia";
 import { AudioDraggingActions, AudioValueActions } from "@/lib/zustand";
-import { ReactNode, RefObject, useContext } from "react";
-import { AudioElementContext } from "../AudioWrapper";
+import { ReactNode, RefObject } from "react";
+import { useAudioElementContext } from "../AudioWrapper";
 interface Props extends React.ComponentProps<"div"> {
   sliderRef: RefObject<HTMLDivElement | null>;
   setIsDragging: AudioDraggingActions["setIsDragging"];
@@ -31,8 +31,8 @@ function AudioSlider({
     fetching,
     bufferThreshold,
     song_time_stamp,
-  } = useContext(DataContext);
-  const { audioElRef } = useContext(AudioElementContext);
+  } = useDataContext();
+  const { audioElRef } = useAudioElementContext();
   return (
     <div
       className={className}

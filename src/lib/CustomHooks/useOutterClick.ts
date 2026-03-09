@@ -1,6 +1,6 @@
-import { ContextMoreOptionStack } from "@/ui/trackComponent/MoreOptionStackContext";
-import { ContextMoreOptionUnique } from "@/ui/trackComponent/MoreOptionUniqueContext";
-import React, { RefObject, useContext, useEffect } from "react";
+import { useMoreOptionStackContext } from "@/ui/trackComponent/MoreOptionStackContext";
+import { useMoreOptionUniqueContext } from "@/ui/trackComponent/MoreOptionUniqueContext";
+import React, { RefObject, useEffect } from "react";
 
 // this function handles clicks outside the component to close it
 
@@ -10,9 +10,9 @@ function useOutterClick(
   ignoreRef: RefObject<HTMLDivElement | null>,
   parentRef: RefObject<HTMLButtonElement | null>,
 ) {
-  const { setStack } = useContext(ContextMoreOptionStack);
+  const { setStack } = useMoreOptionStackContext();
 
-  const { setUuidState } = useContext(ContextMoreOptionUnique);
+  const { setUuidState } = useMoreOptionUniqueContext();
   // if it pass to reach it , it is outside click
   useEffect(() => {
     function OutterClickFunction(e: MouseEvent) {

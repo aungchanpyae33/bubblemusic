@@ -1,9 +1,8 @@
 "use client";
-import { useContext } from "react";
 
 import { Link2 } from "lucide-react";
 import IconWrapper from "../IconWrapper";
-import { InfoTrackContext } from "@/ui/trackComponent/ContextInfoTrack";
+import { useInfoTrackContext } from "@/ui/trackComponent/ContextInfoTrack";
 import OptionItem from "../optionBox/OptionItem";
 import OptionIconEl from "../optionBox/OptionIconEl";
 import OptionButton from "../optionBox/OptionButton";
@@ -12,7 +11,7 @@ import OptionText from "../optionBox/OptionText";
 
 function ShareSong() {
   const b = useTranslations("block");
-  const { song } = useContext(InfoTrackContext);
+  const { song } = useInfoTrackContext();
   const songId = song?.song_id;
   const handleCopy = async () => {
     const origin = window.location.origin;

@@ -1,5 +1,5 @@
-import { ContextMoreOptionStack } from "@/ui/trackComponent/MoreOptionStackContext";
-import { RefObject, useContext, useEffect } from "react";
+import { useMoreOptionStackContext } from "@/ui/trackComponent/MoreOptionStackContext";
+import { RefObject, useEffect } from "react";
 
 // this function handles clicks inside the sub component to manage the stack , it does not manage the outter click of main parent element
 function useOutterClickSub(
@@ -7,7 +7,7 @@ function useOutterClickSub(
   stackNum: number,
   isMobile?: boolean,
 ) {
-  const { stack, setStack } = useContext(ContextMoreOptionStack);
+  const { stack, setStack } = useMoreOptionStackContext();
   // stack are 0 === parent , 1 === child , 2 === grand child etc..
   //toggle sub content (open,close) based on stack number
   useEffect(() => {

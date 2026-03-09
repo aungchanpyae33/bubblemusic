@@ -1,4 +1,4 @@
-import { DataContext } from "@/lib/MediaSource/ContextMedia";
+import { useDataContext } from "@/lib/MediaSource/ContextMedia";
 import {
   currentSongPlaylist,
   DirectPlayBackAction,
@@ -20,13 +20,13 @@ import {
   useSongTrack,
   useStorePlayListId,
 } from "@/lib/zustand";
-import { useContext, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { addRecentlyPlayedList } from "@/actions/addRecentPlayedList";
 import { addRecentlySong } from "@/actions/addRecentSong";
 import { useQueryClient } from "@tanstack/react-query";
 import outputCurrentIndex from "@/lib/OutputCurrentIndex";
 import type { ListSongPage } from "@/database/data-types-return";
-import { AudioElementContext } from "./audio/AudioWrapper";
+import { useAudioElementContext } from "./audio/AudioWrapper";
 
 function PlaceHolderToggleState({
   url,
@@ -41,8 +41,8 @@ function PlaceHolderToggleState({
   const setTimeoutRefForList = useRef<ReturnType<typeof setTimeout> | null>(
     null,
   );
-  const { segNum } = useContext(DataContext);
-  const { audioElRef } = useContext(AudioElementContext);
+  const { segNum } = useDataContext();
+  const { audioElRef } = useAudioElementContext();
   const playListArray = useRepeatAndCurrentPlayList(
     (state: currentSongPlaylist) =>
       Object.values(state.playListArray)[0] || undefined,

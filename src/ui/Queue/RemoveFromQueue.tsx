@@ -3,8 +3,7 @@ import IconWrapper from "../general/IconWrapper";
 import OptionButton from "../general/optionBox/OptionButton";
 import OptionIconEl from "../general/optionBox/OptionIconEl";
 import OptionItem from "../general/optionBox/OptionItem";
-import { useContext } from "react";
-import { InfoTrackContext } from "../trackComponent/ContextInfoTrack";
+import { useInfoTrackContext } from "../trackComponent/ContextInfoTrack";
 import {
   removeFromQueueAction,
   SongDetail,
@@ -17,7 +16,7 @@ import OptionText from "../general/optionBox/OptionText";
 
 function RemoveFromQueue() {
   const b = useTranslations("block");
-  const { song } = useContext(InfoTrackContext);
+  const { song } = useInfoTrackContext();
   const removeFromQueue = useRepeatAndCurrentPlayList(
     (state: removeFromQueueAction) => state.removeFromQueue,
   );

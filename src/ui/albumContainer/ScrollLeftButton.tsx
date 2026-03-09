@@ -2,11 +2,10 @@
 import { ChevronLeft } from "lucide-react";
 import IconWrapper from "../general/IconWrapper";
 import ScrollHorizontal from "@/lib/ScrollHorizontal";
-import { useContext } from "react";
-import { ContainerContext } from "./ContextContainer";
+import { useContainerContext } from "./ContextContainer";
 
 function ScrollLeftButton() {
-  const { playlistWrapperRef } = useContext(ContainerContext);
+  const { playlistWrapperRef } = useContainerContext();
   return (
     <button
       onClick={() => ScrollHorizontal("left", playlistWrapperRef)}

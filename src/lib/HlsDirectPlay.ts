@@ -1,8 +1,7 @@
-import { AudioElementContext } from "@/ui/Footer/audio/AudioWrapper";
-import { useContext } from "react";
+import { useAudioElementContext } from "@/ui/Footer/audio/AudioWrapper";
 
 export const HlsDirectPlay = (url: string) => {
-  const { audioElRef } = useContext(AudioElementContext);
+  const { audioElRef } = useAudioElementContext();
   if (!audioElRef!.current) return;
   const m3u8Url = url.replace("init.mp4", "media.m3u8");
   audioElRef.current.load();

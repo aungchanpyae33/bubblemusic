@@ -32,6 +32,7 @@ import PlaceHolderTrackUser from "./PlaceHolderTrackUser";
 import ToolTip from "../general/ToolTip";
 import useMediaSourceBuffer from "@/lib/CustomHooks/useMediaSourceBuffer";
 import LoadingAudioPlayer from "../loading/LoadingAudioPlayer";
+import MoreOptionStackContext from "../trackComponent/MoreOptionStackContext";
 function AudioPlayer({ start }: { start: boolean }) {
   const toggleRef = useRef<HTMLButtonElement | null>(null);
   const {
@@ -92,12 +93,15 @@ function AudioPlayer({ start }: { start: boolean }) {
               {/* this is for space key to toggle play and pause */}
             </PlaceHolderToggleState>
             <PlaceHolderTrackUser />
-            <AudioFull
-              url={url}
-              id={id}
-              duration={duration}
-              toggleRef={toggleRef}
-            />
+            <MoreOptionStackContext>
+              <AudioFull
+                url={url}
+                id={id}
+                duration={duration}
+                toggleRef={toggleRef}
+              />
+            </MoreOptionStackContext>
+
             <AudioFooterContainer>
               <div className=" w-full sm:w-[25%]   md:w-[25%] max-w-[375px]  flex items-center">
                 <AudioDisplayFooter song_cover={cover_url} />

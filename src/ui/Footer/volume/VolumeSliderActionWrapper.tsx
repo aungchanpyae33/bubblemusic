@@ -1,7 +1,7 @@
 import { sliderPositionCal } from "@/lib/MediaSource/SliderPositionCal";
 import { VolumeDraggingActions, VolumeValueActions } from "@/lib/zustand";
-import { RefObject, useContext } from "react";
-import { AudioElementContext } from "../audio/AudioWrapper";
+import { RefObject } from "react";
+import { useAudioElementContext } from "../audio/AudioWrapper";
 
 function VolumeSliderActionWrapper({
   sliderRef,
@@ -14,7 +14,7 @@ function VolumeSliderActionWrapper({
   setValue: VolumeValueActions["setValue"];
   children: React.ReactNode;
 }) {
-  const { audioElRef } = useContext(AudioElementContext);
+  const { audioElRef } = useAudioElementContext();
   return (
     <div
       className="flex-1 h-full group flex items-center justify-center cursor-pointer touch-none "

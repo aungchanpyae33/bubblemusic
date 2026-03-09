@@ -1,5 +1,5 @@
-import { Context } from "@/lib/MediaSource/ContextMediaAudioFull";
-import { useContext, useRef } from "react";
+import { useMediaAudioFullContext } from "@/lib/MediaSource/ContextMediaAudioFull";
+import { useRef } from "react";
 import AudioFunctionButton from "../audio/AudioFunction/AudioFunctionButton";
 import AudioFunctionShuffle from "../audio/AudioFunction/AudioFunctionShuffle";
 import AudioFunctionPre from "../audio/AudioFunction/AudioFunctionPre";
@@ -18,8 +18,8 @@ import FocusTrap from "./FocusTrap";
 import LyricToggleBtn from "./LyricToggleBtn";
 import QueueToggle from "./QueueToggle";
 import { AnimatePresence, motion } from "motion/react";
-import useCloseFunctoionForFull from "@/lib/CustomHooks/useCloseFunctionForFull";
 import { createPortal } from "react-dom";
+import useCloseFunctoionStack from "@/lib/CustomHooks/useCloseFunctionStack";
 
 function AudioFull({
   url,
@@ -32,10 +32,10 @@ function AudioFull({
   duration: number;
   toggleRef: React.RefObject<HTMLButtonElement | null>;
 }) {
-  const { open, setOpen } = useContext(Context);
+  const { open, setOpen } = useMediaAudioFullContext();
   const refFocus = useRef<HTMLDivElement | null>(null);
 
-  useCloseFunctoionForFull(open, setOpen, toggleRef, refFocus);
+  useCloseFunctoionStack(open, setOpen, toggleRef);
   return (
     <AnimatePresence>
       {open && (

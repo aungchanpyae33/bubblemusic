@@ -1,10 +1,9 @@
 "use client";
-import { useContext } from "react";
-import { ContextTableHead } from "./TableHeadBgChange";
+import { useTableHeadContext } from "./TableHeadBgChange";
 import clsx from "clsx";
 
 function TableHead({ children }: { children: React.ReactNode }) {
-  const { isStuck } = useContext(ContextTableHead);
+  const { isStuck } = useTableHeadContext();
   return (
     <thead
       className={clsx(

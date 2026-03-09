@@ -1,6 +1,6 @@
 import { VolumeDraggingActions, VolumeValueActions } from "@/lib/zustand";
-import React, { useContext } from "react";
-import { AudioElementContext } from "../audio/AudioWrapper";
+import React from "react";
+import { useAudioElementContext } from "../audio/AudioWrapper";
 
 interface Props extends React.ComponentProps<"div"> {
   setIsDragging: VolumeDraggingActions["setIsDragging"];
@@ -17,7 +17,7 @@ function VolumeSlider({
   children,
   className,
 }: Props) {
-  const { audioElRef } = useContext(AudioElementContext);
+  const { audioElRef } = useAudioElementContext();
   return (
     <div
       className={className}

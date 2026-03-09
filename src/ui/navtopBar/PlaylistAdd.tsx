@@ -1,6 +1,6 @@
 import { X } from "lucide-react";
 import IconWrapper from "../general/IconWrapper";
-import { useContext, useMemo, useRef, useTransition } from "react";
+import { useMemo, useRef, useTransition } from "react";
 import Form from "next/form";
 import FocusTrap from "../Footer/audioFull/FocusTrap";
 import TitleInput from "./createPlaylist/TitleInput";
@@ -9,14 +9,14 @@ import InitCreateButton from "./createPlaylist/InitCreateButton";
 import { insertDataAction } from "@/actions/createPlaylist";
 import { useQueryClient } from "@tanstack/react-query";
 import CheckTypeCreate from "./createPlaylist/CheckTypeCreate";
-import { ContextMoreOptionStack } from "../trackComponent/MoreOptionStackContext";
+import { useMoreOptionStackContext } from "../trackComponent/MoreOptionStackContext";
 import useFocusOnOpen from "@/lib/CustomHooks/useFocusOnOpen";
 import { useTranslations } from "next-intl";
 
 function PlaylistAdd({ stackNum }: { stackNum: number }) {
   const b = useTranslations("block");
   const queryClient = useQueryClient();
-  const { stack, setStack } = useContext(ContextMoreOptionStack);
+  const { stack, setStack } = useMoreOptionStackContext();
   const formParentRef = useRef<HTMLDivElement>(null);
   const [isPending, startTransition] = useTransition();
   // is it sub child permanant stack num is equl or less than current stack?

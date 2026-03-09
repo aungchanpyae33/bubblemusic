@@ -1,5 +1,5 @@
-import { RefObject, useContext, useEffect, useRef } from "react";
-import { AudioElementContext } from "../audio/AudioWrapper";
+import { RefObject, useEffect, useRef } from "react";
+import { useAudioElementContext } from "../audio/AudioWrapper";
 
 function getElementByDataId(
   container: HTMLElement | null,
@@ -42,7 +42,7 @@ function PlaceHolderLyricScroll({
   currentIndex: number;
 }) {
   const showScroll = useRef(false);
-  const { audioElRef } = useContext(AudioElementContext);
+  const { audioElRef } = useAudioElementContext();
   useEffect(() => {
     const element = getElementByDataId(lyricRef.current, currentIndex);
     if (

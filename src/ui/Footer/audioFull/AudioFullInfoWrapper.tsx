@@ -1,12 +1,12 @@
 import clsx from "clsx";
 import { AnimatePresence } from "motion/react";
 import { ShowBlock, ShowBlockAction, useShowBlock } from "@/lib/zustand";
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import LyricContainer from "./LyricContainer";
 import QueueFull from "@/ui/Queue/QueueFull";
 import CloseShowBlockBtn from "./CloseShowBlockBtn";
 import Image from "next/image";
-import { DataContext } from "@/lib/MediaSource/ContextMedia";
+import { useDataContext } from "@/lib/MediaSource/ContextMedia";
 import ArtistWrapper from "@/ui/general/ArtistWrapper";
 import ToolTip from "@/ui/general/ToolTip";
 import LyricPaddingBlock from "./LyricPaddingBlock";
@@ -15,7 +15,7 @@ function AudioFullInfoWrapper({ children }: { children: React.ReactNode }) {
   const setShowBlock = useShowBlock(
     (state: ShowBlockAction) => state.setShowBlock,
   );
-  const { name, artists, cover_url } = useContext(DataContext);
+  const { name, artists, cover_url } = useDataContext();
   useEffect(() => {
     return () => {
       setShowBlock(undefined);

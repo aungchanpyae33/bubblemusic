@@ -1,11 +1,11 @@
-import { useContext, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { fetchSegment } from "../MediaSource/fetchSegment";
 import { getRemainingBufferDuration } from "../MediaSource/getRemainBuffer";
 import { useRepeatAndCurrentPlayList } from "../zustand";
 import throttle from "../throttle";
 import { fetchInitSegment } from "../MediaSource/fetchInitSegment";
 import { HlsDirectPlay } from "../HlsDirectPlay";
-import { AudioElementContext } from "@/ui/Footer/audio/AudioWrapper";
+import { useAudioElementContext } from "@/ui/Footer/audio/AudioWrapper";
 const bufferThreshold = 10;
 const mimeType_audio = "audio/mp4";
 const codecs_audio = "mp4a.40.2";
@@ -37,7 +37,7 @@ const useMediaSourceBuffer = (
   song_time_stamp: Array<number>,
   id: string,
 ) => {
-  const { audioElRef } = useContext(AudioElementContext);
+  const { audioElRef } = useAudioElementContext();
   const fetchingRef = useRef<FetchingState>({
     isFetch: false,
     fetchingseg: 1,

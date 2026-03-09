@@ -3,6 +3,7 @@ import {
   createContext,
   SetStateAction,
   useEffect,
+  useContext,
   useRef,
   useState,
 } from "react";
@@ -11,10 +12,19 @@ interface contextProps {
   isStuck: boolean;
   setIsStuck: React.Dispatch<SetStateAction<boolean>>;
 }
-export const ContextTableHead = createContext<contextProps>({
-  isStuck: false,
-  setIsStuck: () => {},
-});
+export const ContextTableHead = createContext<contextProps | undefined>(
+  undefined,
+);
+
+export const useTableHeadContext = () => {
+  const context = useContext(ContextTableHead);
+  if (context === undefined) {
+    throw new Error(
+      "useTableHeadContext must be used within a ContextTableHead.Provider",
+    );
+  }
+  return context;
+};
 
 function TableHeadBgChange({ children }: { children: React.ReactNode }) {
   const [isStuck, setIsStuck] = useState(false);

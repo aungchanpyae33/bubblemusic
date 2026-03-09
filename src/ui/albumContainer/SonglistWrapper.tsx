@@ -1,14 +1,14 @@
 "use client";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import { ContainerContext } from "./ContextContainer";
+import { useContainerContext } from "./ContextContainer";
 import ScrollLeftButton from "./ScrollLeftButton";
 import ScrollRightButton from "./ScrollRightButton";
 import { useScrollArrows } from "@/lib/CustomHooks/useScrollArrow";
 import { isTouchPointer } from "@/lib/isTouchPointer";
 
 function SonglistWrapper({ children }: { children: React.ReactNode }) {
-  const { arrowNaviRef, playlistWrapperRef } = useContext(ContainerContext);
+  const { arrowNaviRef, playlistWrapperRef } = useContainerContext();
   const [portalTarget, setPortalTarget] = useState<HTMLElement | null>(null);
 
   const { showLeft, showRight, updateArrows, hideArrows } = useScrollArrows();

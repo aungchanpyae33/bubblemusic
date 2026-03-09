@@ -1,12 +1,11 @@
 "use client";
-import { useContext } from "react";
 
 import Track from "../trackComponent/Track";
 
-import { SongsDataContext } from "./ContextSongsData";
+import { useSongsDataContext } from "./ContextSongsData";
 
 function SongContainer() {
-  const { songsData } = useContext(SongsDataContext);
+  const { songsData } = useSongsDataContext();
   if (!songsData || !songsData.songs) return;
   const songsList = songsData.songs;
   return (

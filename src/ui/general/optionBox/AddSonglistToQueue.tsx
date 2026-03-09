@@ -1,6 +1,5 @@
 import OptionButton from "./OptionButton";
 import OptionItem from "./OptionItem";
-import { useContext } from "react";
 import { ListEnd } from "lucide-react";
 import IconWrapper from "../IconWrapper";
 import OptionIconEl from "./OptionIconEl";
@@ -12,8 +11,7 @@ import {
   useSong,
 } from "@/lib/zustand";
 import {
-  SongListContext,
-  SongListValue,
+  useSongListContext,
 } from "@/ui/playlist/playlistOption/ContextSongListContainer";
 import { getSongListClient } from "@/database/client-data";
 import { useTranslations } from "next-intl";
@@ -21,7 +19,7 @@ import OptionText from "./OptionText";
 
 function AddSonglistToQueue() {
   const b = useTranslations("block");
-  const { id, type } = useContext(SongListContext) as SongListValue;
+  const { id, type } = useSongListContext();
   const currentAddToQueue = useRepeatAndCurrentPlayList(
     (state: currentAddToQueueAction) => state.currentAddToQueue,
   );

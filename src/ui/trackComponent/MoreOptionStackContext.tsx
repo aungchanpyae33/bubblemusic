@@ -1,6 +1,12 @@
 "use client";
 // stack context to manage the stack number for more option and its sub more option component
-import { createContext, ReactNode, SetStateAction, useState } from "react";
+import {
+  createContext,
+  ReactNode,
+  SetStateAction,
+  useContext,
+  useState,
+} from "react";
 
 interface ContextMoreOptionValue {
   stack: number;
@@ -10,10 +16,19 @@ interface ContextMoreOptionValue {
 interface MoreOptionStackContextProps {
   children: ReactNode;
 }
-export const ContextMoreOptionStack = createContext<ContextMoreOptionValue>({
-  stack: 0,
-  setStack: () => {},
-});
+export const ContextMoreOptionStack = createContext<
+  ContextMoreOptionValue | undefined
+>(undefined);
+
+export const useMoreOptionStackContext = () => {
+  const context = useContext(ContextMoreOptionStack);
+  if (context === undefined) {
+    throw new Error(
+      "useMoreOptionStackContext must be used within a ContextMoreOptionStack.Provider",
+    );
+  }
+  return context;
+};
 
 function MoreOptionStackContext({ children }: MoreOptionStackContextProps) {
   const [stack, setStack] = useState(0);

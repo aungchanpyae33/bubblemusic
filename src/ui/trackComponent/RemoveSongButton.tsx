@@ -1,7 +1,6 @@
 "use client";
-import { useContext } from "react";
 import OptionItem from "../general/optionBox/OptionItem";
-import { InfoTrackContext } from "./ContextInfoTrack";
+import { useInfoTrackContext } from "./ContextInfoTrack";
 import OptionButton from "../general/optionBox/OptionButton";
 import OptionIconEl from "../general/optionBox/OptionIconEl";
 import IconWrapper from "../general/IconWrapper";
@@ -12,7 +11,7 @@ import OptionText from "../general/optionBox/OptionText";
 
 function RemoveSongButtonChild() {
   const b = useTranslations("block");
-  const { id, song } = useContext(InfoTrackContext);
+  const { id, song } = useInfoTrackContext();
   const id_scope = song?.id;
 
   const mutation = useRemoveSongMutate(id!);
@@ -37,7 +36,7 @@ function RemoveSongButtonChild() {
 }
 
 function RemoveSongButton() {
-  const { source } = useContext(InfoTrackContext);
+  const { source } = useInfoTrackContext();
   if (source !== "create") return null;
   return <RemoveSongButtonChild />;
 }

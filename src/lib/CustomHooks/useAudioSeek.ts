@@ -1,4 +1,4 @@
-import { RefObject, useContext, useEffect, useMemo } from "react";
+import { RefObject, useEffect, useMemo } from "react";
 import throttle from "../throttle";
 import { seekCal, sliderPositionCal } from "../MediaSource/SliderPositionCal";
 import AudioSeeked from "../MediaSource/AudioSeeked";
@@ -12,8 +12,8 @@ import {
   useAudioValue,
   useSongFunction,
 } from "../zustand";
-import { DataContext } from "../MediaSource/ContextMedia";
-import { AudioElementContext } from "@/ui/Footer/audio/AudioWrapper";
+import { useDataContext } from "../MediaSource/ContextMedia";
+import { useAudioElementContext } from "@/ui/Footer/audio/AudioWrapper";
 export interface valueProps {
   value: AudioValueState["value"] | undefined;
 }
@@ -57,7 +57,7 @@ const useAudioSeek = ({
     fetching,
     bufferThreshold,
     song_time_stamp,
-  } = useContext(DataContext);
+  } = useDataContext();
   const throttledSetValue = useMemo(
     () => throttle((val: number) => setValue(val), 1000),
     [setValue],
@@ -66,7 +66,7 @@ const useAudioSeek = ({
     (state: SongFunctionState) =>
       Object.values(state.Isplay as Record<string, boolean>)[0],
   );
-  const { audioElRef } = useContext(AudioElementContext);
+  const { audioElRef } = useAudioElementContext();
 
   useEffect(() => {
     const copyAudioRef = audioElRef.current;

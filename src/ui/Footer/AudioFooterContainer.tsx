@@ -1,10 +1,10 @@
-import { Context } from "@/lib/MediaSource/ContextMediaAudioFull";
+import { useMediaAudioFullContext } from "@/lib/MediaSource/ContextMediaAudioFull";
 import clsx from "clsx";
-import { useContext, useRef } from "react";
+import { useRef } from "react";
 
 function AudioFooterContainer({ children }: { children: React.ReactNode }) {
   const initialRef = useRef<HTMLElement | null>(null);
-  const { open, setOpen } = useContext(Context);
+  const { open, setOpen } = useMediaAudioFullContext();
   return (
     // <div className="cursor-not-allowed">
     // in chrome , when use top-0 and -translate-x- that is close and bigger the parent height make a little edge between , not found in firefox , use -top parent height

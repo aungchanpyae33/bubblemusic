@@ -1,11 +1,10 @@
-import { useContext } from "react";
 import OptionItem from "@/ui/general/optionBox/OptionItem";
 import OptionButton from "@/ui/general/optionBox/OptionButton";
 import OptionIconEl from "@/ui/general/optionBox/OptionIconEl";
 import IconWrapper from "@/ui/general/IconWrapper";
 import { BookmarkX } from "lucide-react";
 import { removeFromLibrary } from "@/actions/removeFromLibrary";
-import { SongListContext, SongListValue } from "./ContextSongListContainer";
+import { useSongListContext } from "./ContextSongListContainer";
 import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
@@ -15,7 +14,7 @@ import type { GetRecent } from "@/database/data-types-return";
 function RemoveFromLibraryChild() {
   const b = useTranslations("block");
   const router = useRouter();
-  const { id, source } = useContext(SongListContext) as SongListValue;
+  const { id, source } = useSongListContext();
   const queryClient = useQueryClient();
   async function removeFromLibraryFn() {
     const { data, error } = await removeFromLibrary(
@@ -76,7 +75,7 @@ function RemoveFromLibraryChild() {
 }
 
 function RemoveFromLibrary() {
-  const { source } = useContext(SongListContext) as SongListValue;
+  const { source } = useSongListContext();
   if (source === "none") return null;
   return <RemoveFromLibraryChild />;
 }

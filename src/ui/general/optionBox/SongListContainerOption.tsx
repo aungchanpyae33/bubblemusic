@@ -2,15 +2,13 @@
 import AlbumContainerOption from "@/ui/album/AlbumContainerOption";
 import ArtistContainerOption from "@/ui/artist/ArtistContainerOption";
 import {
-  SongListContext,
-  SongListValue,
+  useSongListContext,
 } from "@/ui/playlist/playlistOption/ContextSongListContainer";
 import PlaylistContainerOption from "@/ui/playlist/playlistOption/PlaylistContainerOption";
-import { useContext } from "react";
 import ProfileOption from "./ProfileOption";
 
 function SongListContainerOption() {
-  const { type } = useContext(SongListContext) as SongListValue;
+  const { type } = useSongListContext();
   if (type === "playlist") return <PlaylistContainerOption />;
   if (type === "album") return <AlbumContainerOption />;
   if (type === "artist") return <ArtistContainerOption />;

@@ -1,7 +1,7 @@
-import { RefObject, useContext, useEffect } from "react";
+import { RefObject, useEffect } from "react";
 import { playBackRate } from "../../MediaSource/playBackRate";
 import AbortFetch from "../../MediaSource/AbortFetch";
-import { AudioElementContext } from "@/ui/Footer/audio/AudioWrapper";
+import { useAudioElementContext } from "@/ui/Footer/audio/AudioWrapper";
 
 const useMediaSessionSeek = (
   fetching: RefObject<{ isFetch: boolean; fetchingseg: number }>,
@@ -13,7 +13,7 @@ const useMediaSessionSeek = (
   bufferThreshold: number,
   song_time_stamp: Array<number>,
 ) => {
-  const { audioElRef } = useContext(AudioElementContext);
+  const { audioElRef } = useAudioElementContext();
   // Extract the `value` from the event beforehand to avoid issues with `e` in dependencies
 
   useEffect(() => {

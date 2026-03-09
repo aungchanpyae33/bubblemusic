@@ -1,4 +1,9 @@
-import React, { createContext, SetStateAction, useState } from "react";
+import React, {
+  createContext,
+  SetStateAction,
+  useContext,
+  useState,
+} from "react";
 
 interface ContextVolumeProps {
   children: React.ReactNode;
@@ -7,10 +12,17 @@ interface contextProps {
   open: boolean;
   setOpen: React.Dispatch<SetStateAction<boolean>>;
 }
-export const volumeContext = createContext<contextProps>({
-  open: false,
-  setOpen: () => {},
-});
+export const volumeContext = createContext<contextProps | undefined>(undefined);
+
+export const useVolumeContext = () => {
+  const context = useContext(volumeContext);
+  if (context === undefined) {
+    throw new Error(
+      "useVolumeContext must be used within a volumeContext.Provider",
+    );
+  }
+  return context;
+};
 function ContextVolume({ children }: ContextVolumeProps) {
   const [open, setOpen] = useState(false);
   const value = { open, setOpen };

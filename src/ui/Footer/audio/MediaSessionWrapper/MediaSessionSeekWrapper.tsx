@@ -1,6 +1,6 @@
 import useMediaSessionSeek from "@/lib/CustomHooks/MediaSession/useMediaSessionSeek";
-import { DataContext } from "@/lib/MediaSource/ContextMedia";
-import { ReactNode, useContext } from "react";
+import { useDataContext } from "@/lib/MediaSource/ContextMedia";
+import { ReactNode } from "react";
 
 function MediaSessionSeekWrapper({
   children,
@@ -17,7 +17,7 @@ function MediaSessionSeekWrapper({
     fetching,
     bufferThreshold,
     song_time_stamp,
-  } = useContext(DataContext);
+  } = useDataContext();
   useMediaSessionSeek(
     fetching,
     abortController,

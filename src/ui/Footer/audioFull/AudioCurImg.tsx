@@ -1,10 +1,9 @@
 import clsx from "clsx";
 import Image from "next/image";
-import { useContext } from "react";
-import { DataContext } from "@/lib/MediaSource/ContextMedia";
+import { useDataContext } from "@/lib/MediaSource/ContextMedia";
 
 function AudioCurImg() {
-  const { cover_url } = useContext(DataContext);
+  const { cover_url } = useDataContext();
 
   return (
     <div

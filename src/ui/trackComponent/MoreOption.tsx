@@ -1,6 +1,6 @@
 "use client";
-import { useContext, useRef } from "react";
-import { ContextMoreOption } from "./MoreOptionContext";
+import { useRef } from "react";
+import { useMoreOptionContext } from "./MoreOptionContext";
 import { createPortal } from "react-dom";
 import MoreOptionStackContext from "./MoreOptionStackContext";
 import MoreOptionUniqueContext from "./MoreOptionUniqueContext";
@@ -19,7 +19,7 @@ function MoreOption({
   staticDrop,
   staticUp,
 }: MoreOptionProps) {
-  const { show, setShow } = useContext(ContextMoreOption);
+  const { show, setShow } = useMoreOptionContext();
   const parentRef = useRef<HTMLButtonElement>(null);
   useDisableScroll(show);
   return (

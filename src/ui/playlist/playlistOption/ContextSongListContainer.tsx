@@ -2,7 +2,7 @@
 import { getUserLibClient } from "@/database/client-data";
 import { generateValue } from "@/lib/generateValue";
 import { useQuery } from "@tanstack/react-query";
-import { createContext } from "react";
+import { createContext, useContext } from "react";
 
 import { Database } from "../../../../database.types";
 import type {
@@ -15,11 +15,24 @@ export type SongListValue = (listInfo | listSongsSection) & {
 };
 
 // Default context value
-export const SongListContext = createContext<SongListValue | object>({});
+export const SongListContext = createContext<SongListValue | undefined>(
+  undefined,
+);
 interface ContextSongListContainerProps extends React.ComponentProps<"div"> {
   id: string;
   list: listInfo | listSongsSection;
 }
+
+export const useSongListContext = () => {
+  const context = useContext(SongListContext);
+  if (context === undefined) {
+    throw new Error(
+      "useSongListContext must be used within a SongListContext.Provider",
+    );
+  }
+  return context;
+};
+
 function ContextSongListContainer({
   id,
   children,

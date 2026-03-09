@@ -1,10 +1,10 @@
 "use client";
 import clsx from "clsx";
-import { RefObject, useContext, useState } from "react";
+import { RefObject, useState } from "react";
 import PlaceholderLyric from "./PlaceholderLyric";
 import { useQuery } from "@tanstack/react-query";
 import { getLyricClient } from "@/database/client-data";
-import { DataContext } from "@/lib/MediaSource/ContextMedia";
+import { useDataContext } from "@/lib/MediaSource/ContextMedia";
 import LoadingLyric from "@/ui/loading/LoadingLyric";
 import ErrorLyric from "@/ui/Error/ErrorLyric";
 import NoExistLyric from "@/ui/NoExist/NoExistLyric";
@@ -17,8 +17,7 @@ function Lyric({
   lyricShow: boolean;
   lyricRef: RefObject<HTMLDivElement | null>;
 }) {
-  const { is_lyric } = useContext(DataContext);
-  const { song_id } = useContext(DataContext);
+  const { is_lyric, song_id } = useDataContext();
   const [currentIndex, setCurrentIndex] = useState(0);
   const {
     data: lyricResult,

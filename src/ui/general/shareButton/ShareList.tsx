@@ -1,12 +1,10 @@
 "use client";
-import { useContext } from "react";
 import { Link2 } from "lucide-react";
 import IconWrapper from "../IconWrapper";
 import OptionItem from "../optionBox/OptionItem";
 import OptionIconEl from "../optionBox/OptionIconEl";
 import {
-  SongListContext,
-  SongListValue,
+  useSongListContext,
 } from "@/ui/playlist/playlistOption/ContextSongListContainer";
 import OptionButton from "../optionBox/OptionButton";
 import OptionText from "../optionBox/OptionText";
@@ -14,7 +12,7 @@ import { useTranslations } from "next-intl";
 
 function ShareList() {
   const b = useTranslations("block");
-  const { id, type } = useContext(SongListContext) as SongListValue;
+  const { id, type } = useSongListContext();
   const handleCopy = async () => {
     const origin = window.location.origin;
     try {

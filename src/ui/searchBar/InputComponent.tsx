@@ -1,5 +1,4 @@
-import { useContext } from "react";
-import { ContextToggle } from "./ToggleContext";
+import { useToggleContext } from "./ToggleContext";
 import { focusStateAction, useNotInputFocus } from "@/lib/zustand";
 import { useTranslations } from "next-intl";
 interface InputComponentProps {
@@ -9,7 +8,7 @@ interface InputComponentProps {
 }
 function InputComponent({ inputRef, value, setValue }: InputComponentProps) {
   const b = useTranslations("block");
-  const { setOpen } = useContext(ContextToggle);
+  const { setOpen } = useToggleContext();
   const setIsInputFocus = useNotInputFocus(
     (state: focusStateAction) => state.setIsInputFocus,
   );

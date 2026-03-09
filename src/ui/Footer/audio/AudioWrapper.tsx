@@ -5,16 +5,30 @@ import {
   useVolumeValue,
   VolumeValueState,
 } from "@/lib/zustand";
-import React, { createContext, ReactNode, useEffect, useRef } from "react";
+import React, {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useRef,
+} from "react";
 
 interface AudioElementContextProps {
   audioElRef: React.RefObject<HTMLAudioElement | null>;
 }
-export const AudioElementContext = createContext<AudioElementContextProps>({
-  audioElRef: {
-    current: null,
-  },
-});
+export const AudioElementContext = createContext<
+  AudioElementContextProps | undefined
+>(undefined);
+
+export const useAudioElementContext = () => {
+  const context = useContext(AudioElementContext);
+  if (context === undefined) {
+    throw new Error(
+      "useAudioElementContext must be used within a AudioElementContext",
+    );
+  }
+  return context;
+};
 
 function AudioWrapper({ children }: { children: ReactNode }) {
   const attchVol = useRef(false);

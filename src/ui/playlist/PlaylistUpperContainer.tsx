@@ -1,18 +1,16 @@
 "use client";
 import clsx from "clsx";
-import { useContext } from "react";
-import { SongListContext } from "./playlistOption/ContextSongListContainer";
+import { useSongListContext } from "./playlistOption/ContextSongListContainer";
 import AlbumImg from "../albumContainer/AlbumImg";
 import InfoList from "../searchPage/topResult/InfoList";
-import type { ListSongPage } from "@/database/data-types-return";
-import { DeviceContext } from "@/lib/DeviceContext/ContextDeviceCheck";
+import { useDeviceContext } from "@/lib/DeviceContext/ContextDeviceCheck";
 import { useTranslations } from "next-intl";
 
 function PlaylistUpperContainer() {
   const l = useTranslations("ListTitle");
-  const { device } = useContext(DeviceContext);
+  const { device } = useDeviceContext();
   const { name, type, cover_url, is_official, related_id, related_name } =
-    useContext(SongListContext) as ListSongPage;
+    useSongListContext();
   return (
     <div
       className={clsx("Container w-full bg-section flex  items-center p-5 ", {

@@ -7,17 +7,22 @@ import {
   useLikeActionStore,
 } from "@/lib/zustand";
 import { useQuery } from "@tanstack/react-query";
-import { createContext } from "react";
+import { createContext, useContext } from "react";
 
 interface LikeContextProps {
   isLike: boolean;
   setLikeAction: (value: Record<string, boolean>) => void;
 }
 
-export const LikeContext = createContext<LikeContextProps>({
-  isLike: false,
-  setLikeAction: () => {},
-});
+export const LikeContext = createContext<LikeContextProps | undefined>(undefined);
+
+export const useLikeContext = () => {
+  const context = useContext(LikeContext);
+  if (context === undefined) {
+    throw new Error("useLikeContext must be used within a LikeContext.Provider");
+  }
+  return context;
+};
 function ContextLike({
   children,
   id,

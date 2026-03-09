@@ -1,6 +1,6 @@
 "use client";
-import { ReactNode, useContext } from "react";
-import { SongsDataContext } from "./ContextSongsData";
+import { ReactNode } from "react";
+import { useSongsDataContext } from "./ContextSongsData";
 function ConRenderSong({
   container,
   empty,
@@ -8,7 +8,7 @@ function ConRenderSong({
   container: ReactNode;
   empty: ReactNode;
 }) {
-  const { songsData } = useContext(SongsDataContext);
+  const { songsData } = useSongsDataContext();
   if (!songsData || !songsData.songs) return;
   const songsList = songsData.songs;
 

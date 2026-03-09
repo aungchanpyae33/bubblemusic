@@ -1,21 +1,21 @@
-import { RefObject, useContext, useRef } from "react";
+import { RefObject, useRef } from "react";
 import clsx from "clsx";
-import { ContextMoreOption } from "./MoreOptionContext";
-import { ContextMoreOptionStack } from "./MoreOptionStackContext";
+import { useMoreOptionContext } from "./MoreOptionContext";
+import { useMoreOptionStackContext } from "./MoreOptionStackContext";
 import {
   motion,
   useAnimate,
   useDragControls,
   useMotionValue,
 } from "motion/react";
-import { ContextMoreOptionUnique } from "./MoreOptionUniqueContext";
+import { useMoreOptionUniqueContext } from "./MoreOptionUniqueContext";
 import { useToggleContentPosition } from "@/lib/CustomHooks/useToggleContentPosition";
 import useOutterClick from "@/lib/CustomHooks/useOutterClick";
 import useCloseFunctoion from "@/lib/CustomHooks/useCloseFunction";
 import useFocusOnOpen from "@/lib/CustomHooks/useFocusOnOpen";
 import FocusTrap from "../Footer/audioFull/FocusTrap";
 import TipUi from "../general/TipUi";
-import { DeviceContext } from "@/lib/DeviceContext/ContextDeviceCheck";
+import { useDeviceContext } from "@/lib/DeviceContext/ContextDeviceCheck";
 import { useEnableScroll } from "@/lib/CustomHooks/useEnableScroll";
 
 interface ToggleContentProps extends React.ComponentProps<"div"> {
@@ -31,8 +31,8 @@ function ToggleContentFloat({
   staticUp,
   children,
 }: ToggleContentProps) {
-  const { show, setShow } = useContext(ContextMoreOption);
-  const { stack } = useContext(ContextMoreOptionStack);
+  const { show, setShow } = useMoreOptionContext();
+  const { stack } = useMoreOptionStackContext();
 
   const containerRef = useRef<HTMLDivElement>(null);
   const [position] = useToggleContentPosition({
@@ -75,11 +75,11 @@ function ToggleContentMobile({
   children: ToggleContentProps["children"];
 }) {
   const [scope, animate] = useAnimate();
-  const { show, setShow } = useContext(ContextMoreOption);
+  const { show, setShow } = useMoreOptionContext();
   const controls = useDragControls();
   const y = useMotionValue(0);
-  const { stack, setStack } = useContext(ContextMoreOptionStack);
-  const { uuidState } = useContext(ContextMoreOptionUnique);
+  const { stack, setStack } = useMoreOptionStackContext();
+  const { uuidState } = useMoreOptionUniqueContext();
   const containerRef = useRef<HTMLDivElement>(null);
 
   // the reason i am not reseting setUuidState is to avoaid showing hidden class in toggleContent parent
@@ -176,7 +176,7 @@ function ToggleContent({
   staticUp,
   children,
 }: ToggleContentProps) {
-  const { device } = useContext(DeviceContext);
+  const { device } = useDeviceContext();
 
   return device !== "mobile" ? (
     <ToggleContentFloat

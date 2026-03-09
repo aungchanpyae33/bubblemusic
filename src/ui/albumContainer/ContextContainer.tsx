@@ -1,15 +1,22 @@
 "use client";
-import { createContext, ReactNode, RefObject, useRef } from "react";
+import { createContext, ReactNode, RefObject, useContext, useRef } from "react";
 
 interface prop {
   playlistWrapperRef: RefObject<HTMLDivElement | null>;
   arrowNaviRef: RefObject<HTMLDivElement | null>;
 }
 
-export const ContainerContext = createContext<prop>({
-  playlistWrapperRef: { current: null },
-  arrowNaviRef: { current: null },
-});
+export const ContainerContext = createContext<prop | undefined>(undefined);
+
+export const useContainerContext = () => {
+  const context = useContext(ContainerContext);
+  if (context === undefined) {
+    throw new Error(
+      "useContainerContext must be used within a ContainerContext.Provider",
+    );
+  }
+  return context;
+};
 
 function ContextContainer({ children }: { children: ReactNode }) {
   const playlistWrapperRef = useRef<HTMLDivElement | null>(null);
