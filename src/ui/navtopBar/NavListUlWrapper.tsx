@@ -32,7 +32,6 @@ function NavListUlWrapper({
             },
           )}
           ref={ulRef}
-          aria-hidden={!open}
           tabIndex={0}
         >
           <li className="h-[70px] relative   flex border-b border-seperate-soft">
