@@ -29,15 +29,7 @@ async function AlbumUpperContainer({ songs }: { songs: ListSongPage }) {
             deviceFromUserAgent === "tablet",
         })}
       >
-        <p
-          className={clsx("font-black truncate", {
-            "text-3xl md:text-5xl lg:text-6xl":
-              deviceFromUserAgent === "desktop",
-            "text-2xl md:text-4xl lg:text-6xl ":
-              deviceFromUserAgent === "mobile" ||
-              deviceFromUserAgent === "tablet",
-          })}
-        >
+        <p className="font-black truncate text-2xl md:text-3xl lg:text-4xl">
           {songs.name}
         </p>
         <div className="flex items-center ">

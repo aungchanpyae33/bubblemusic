@@ -27,13 +27,7 @@ function PlaylistUpperContainer() {
           "self-start ": device === "mobile" || device === "tablet",
         })}
       >
-        <p
-          className={clsx("font-black truncate", {
-            "text-3xl md:text-5xl lg:text-6xl": device === "desktop",
-            "text-2xl md:text-4xl lg:text-6xl ":
-              device === "mobile" || device === "tablet",
-          })}
-        >
+        <p className="font-black truncate text-2xl md:text-3xl lg:text-4xl">
           {name}
         </p>
         <div className="flex items-center ">

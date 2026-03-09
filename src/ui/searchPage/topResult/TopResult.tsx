@@ -2,8 +2,6 @@ import Image from "next/image";
 import InfoSong from "./InfoSong";
 import InfoList from "./InfoList";
 import SearchContainer from "../SearchContainer";
-import clsx from "clsx";
-import { DeviceCheck } from "@/lib/DeviceCheck";
 import UnderLineLinkHover from "@/ui/general/UnderLineLinkHover";
 import IconWrapper from "@/ui/general/IconWrapper";
 import { Folder, User } from "lucide-react";
@@ -28,7 +26,6 @@ async function TopResult({
   topResult: GetSearchPage["top_result"];
 }) {
   const l = await getTranslations("ListTitle");
-  const deviceFromUserAgent = await DeviceCheck();
   if (!topResult) return;
   return (
     <SearchContainer className="bg-section">
@@ -63,15 +60,7 @@ async function TopResult({
               </div>
             ) : null}
           </div>
-          <p
-            className={clsx("font-black truncate", {
-              "text-3xl md:text-5xl lg:text-6xl":
-                deviceFromUserAgent === "desktop",
-              "text-2xl md:text-4xl lg:text-6xl ":
-                deviceFromUserAgent === "mobile" ||
-                deviceFromUserAgent === "tablet",
-            })}
-          >
+          <p className="font-black truncate text-2xl md:text-3xl lg:text-4xl">
             <UnderLineLinkHover
               href={`${topResult.type}/${topResult.id}`}
               prefetch={false}
@@ -82,7 +71,6 @@ async function TopResult({
           </p>
         </div>
         <div>
-          {/* will fix later after adding type in songInfo */}
           <span className=" border text-base lg:text-lg font-medium p-1 mr-2">
             {l(topResult.type)}
           </span>

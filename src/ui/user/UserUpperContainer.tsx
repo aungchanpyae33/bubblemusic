@@ -28,15 +28,7 @@ async function UserUpperContainer({ profile }: { profile: listInfo }) {
             deviceFromUserAgent === "tablet",
         })}
       >
-        <p
-          className={clsx("font-black truncate", {
-            "text-3xl md:text-5xl lg:text-6xl":
-              deviceFromUserAgent === "desktop",
-            "text-2xl md:text-4xl lg:text-6xl ":
-              deviceFromUserAgent === "mobile" ||
-              deviceFromUserAgent === "tablet",
-          })}
-        >
+        <p className="font-black truncate text-2xl md:text-3xl lg:text-4xl">
           {profile.name}
           {is_official_exist && <OfficialBadgeName />}
         </p>
