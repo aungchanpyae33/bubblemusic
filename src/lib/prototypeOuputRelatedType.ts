@@ -5,6 +5,6 @@ export const outputRelatedType = (
 ) => {
   if (type === "playlist") return "profile";
   if (type === "album") return "artist";
-  if (type === "artist") return null;
   if (type === "track") return "artist";
+  return null;
 };
