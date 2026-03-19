@@ -1,14 +1,16 @@
 import { useToggleContext } from "./ToggleContext";
 import { focusStateAction, useNotInputFocus } from "@/lib/zustand";
 import { useTranslations } from "next-intl";
+import { useSearchParams } from "next/navigation";
 interface InputComponentProps {
   inputRef: React.RefObject<HTMLInputElement | null>;
-  value: string;
   setValue: React.Dispatch<React.SetStateAction<string>>;
 }
-function InputComponent({ inputRef, value, setValue }: InputComponentProps) {
+function InputComponent({ inputRef, setValue }: InputComponentProps) {
   const b = useTranslations("block");
   const { setOpen } = useToggleContext();
+  const searchParams = useSearchParams();
+  const defaultValue = searchParams.get("query") || "";
   const setIsInputFocus = useNotInputFocus(
     (state: focusStateAction) => state.setIsInputFocus,
   );
@@ -18,7 +20,7 @@ function InputComponent({ inputRef, value, setValue }: InputComponentProps) {
         <span className="sr-only">Search</span>
       </label>
       <input
-        className="placeholder:text-ink-400 placeholder:leading-relaxed block bg-surface-1 w-full h-[40px]  pl-4 shadow-sm focus:outline-none text-base"
+        className="placeholder:text-ink-400 block bg-surface-1 w-full h-[40px]  pl-4 shadow-sm focus:outline-none text-base"
         placeholder={b("searchInputPlaceholder")}
         type="search"
         id="search"
@@ -26,7 +28,7 @@ function InputComponent({ inputRef, value, setValue }: InputComponentProps) {
         required
         autoComplete="off"
         spellCheck="false"
-        value={value}
+        defaultValue={defaultValue}
         ref={inputRef}
         onBlur={() => {
           setOpen(false);
@@ -35,6 +37,13 @@ function InputComponent({ inputRef, value, setValue }: InputComponentProps) {
         }}
         onFocus={() => {
           setOpen(true);
+          setValue((pre) => {
+            if (!inputRef.current) return pre;
+            if (pre !== inputRef.current.value) {
+              return inputRef.current.value;
+            }
+            return pre;
+          });
           // setShow(true);
           setIsInputFocus(true);
         }}

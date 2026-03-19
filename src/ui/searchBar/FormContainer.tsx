@@ -7,12 +7,10 @@ import IconWrapper from "../general/IconWrapper";
 function FormContainer({
   children,
   inputRef,
-  value,
   setValue,
 }: {
   children: React.ReactNode;
   inputRef: React.RefObject<HTMLInputElement | null>;
-  value: string;
   setValue: React.Dispatch<React.SetStateAction<string>>;
 }) {
   const [show, setShow] = useState(false);
@@ -44,25 +42,23 @@ function FormContainer({
                 setShow(false);
               }}
             />
-            <InputComponent
-              value={value}
-              inputRef={inputRef}
-              setValue={setValue}
-            />
+            <InputComponent inputRef={inputRef} setValue={setValue} />
             <button
               className="bg-surface-1   px-2"
-              type="reset"
+              type="button"
               onPointerDown={(e) => {
                 e.preventDefault(); // Prevent focus loss
               }}
               onClick={() => {
+                if (!inputRef.current) return;
+                inputRef.current.value = "";
                 setValue("");
               }}
             >
               <IconWrapper
                 size="large"
                 Icon={X}
-                className="rounded-full scale-100 text-ink-400 hover:text-foreground hover:scale-105 transition-[scale] duration-200  "
+                className="rounded-full text-ink-400 hover:text-foreground"
               />
             </button>
           </div>
