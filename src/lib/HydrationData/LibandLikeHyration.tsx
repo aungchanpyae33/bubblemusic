@@ -9,12 +9,12 @@ import { ReactNode } from "react";
 async function LibandLikeHyration({ children }: { children: ReactNode }) {
   const queryClient = new QueryClient();
   await Promise.all([
-    await queryClient.prefetchQuery({
+    queryClient.prefetchQuery({
       queryKey: ["user-library"],
       queryFn: getUserLib,
       gcTime: Infinity,
     }),
-    await queryClient.prefetchQuery({
+    queryClient.prefetchQuery({
       queryKey: ["liked-id"],
       queryFn: getLikedId,
       gcTime: Infinity,
