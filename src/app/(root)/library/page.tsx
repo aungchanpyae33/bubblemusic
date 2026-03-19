@@ -6,7 +6,7 @@ async function page() {
     <div className="space-y-3 py-4">
       <div className=" w-full   ">
         {/* need to do seemore feature */}
-        <h1 className="px-4 leading-relaxed">
+        <h1 className="px-4">
           <span>နှစ်သက်သောသီချင်းများ</span>
           <span></span>
         </h1>

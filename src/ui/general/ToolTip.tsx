@@ -3,7 +3,6 @@ import { closeTooltip, showToolTipCheck } from "@/lib/ToolTip/showToolTipCheck";
 import clsx from "clsx";
 import { ReactNode, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
-import LeadingRelax from "./LeadingRelax";
 import useTooltipOverflow from "@/lib/CustomHooks/useTooltipOverflow";
 import { isTouchPointer } from "@/lib/isTouchPointer";
 
@@ -102,7 +101,7 @@ function ToolTip({
             ref={toolTipRef}
             style={tooltipShow.toolTipPosition}
           >
-            <LeadingRelax>{tooltipContent}</LeadingRelax>
+            {tooltipContent}
           </div>,
           document.body,
         )}
