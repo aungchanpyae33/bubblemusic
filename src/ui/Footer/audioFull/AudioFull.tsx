@@ -12,14 +12,14 @@ import TimeIndicatorCur from "../audio/Time/TimeIndicatorCur";
 import AudioFullInfoWrapper from "./AudioFullInfoWrapper";
 import Volume from "../volume/Volume";
 import AudioCurImg from "./AudioCurImg";
-import { X } from "lucide-react";
-import IconWrapper from "@/ui/general/IconWrapper";
 import FocusTrap from "./FocusTrap";
 import LyricToggleBtn from "./LyricToggleBtn";
 import QueueToggle from "./QueueToggle";
 import { AnimatePresence, motion } from "motion/react";
 import { createPortal } from "react-dom";
 import useCloseFunctoionStack from "@/lib/CustomHooks/useCloseFunctionStack";
+import FullCloseBtn from "./FullCloseBtn";
+import FullThreeDots from "./FullThreeDots";
 
 function AudioFull({
   url,
@@ -60,16 +60,9 @@ function AudioFull({
                   className="w-full h-full  flex flex-col items-center justify-center bg-background relative"
                   ref={refFocus}
                 >
-                  <div className="mx-auto w-[90%] h-[55px] min-h-[55px] max-h-[55px]  flex items-center sticky top-0">
-                    <button
-                      className="  transition-colors  duration-200 bg-surface-1 hover:bg-surface-2 p-1 rounded-full flex items-center justify-center"
-                      onClick={() => {
-                        toggleRef.current?.focus();
-                        setOpen(!open);
-                      }}
-                    >
-                      <IconWrapper size="large" Icon={X} />
-                    </button>
+                  <div className="mx-auto  w-[90%] h-[55px] min-h-[55px] max-h-[55px]  flex items-center justify-between sticky top-0">
+                    <FullCloseBtn setOpen={setOpen} toggleRef={toggleRef} />
+                    <FullThreeDots />
                   </div>
 
                   <AudioFullInfoWrapper>
@@ -105,9 +98,7 @@ function AudioFull({
                           <LyricToggleBtn />
                         </div>
                         <AudioFunctionButton>
-                          {/* in jsx when use arrow and {} , react expect to return elemetn , if it does not have  return ,  implicitly returns void, or undefined, so, react think nothing to render  */}
                           {(playListArray) => (
-                            // return element
                             <div
                               className="flex flex-1  justify-center gap-5"
                               onClick={(e) => e.stopPropagation()}

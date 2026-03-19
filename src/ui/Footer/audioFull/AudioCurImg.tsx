@@ -1,26 +1,18 @@
-import clsx from "clsx";
 import Image from "next/image";
 import { useDataContext } from "@/lib/MediaSource/ContextMedia";
 
 function AudioCurImg() {
-  const { cover_url } = useDataContext();
+  const { cover_url, name } = useDataContext();
 
   return (
-    <div
-      className={clsx(
-        " w-full pb-[100%] aspect-square shrink-0 grow-0  bg-placeholder  overflow-hidden relative",
-      )}
-    >
-      {cover_url && (
-        <Image
-          priority={true}
-          src={cover_url}
-          sizes="300px"
-          alt="this is image element"
-          fill
-        />
-      )}
-    </div>
+    <Image
+      priority={true}
+      src={cover_url}
+      sizes="384px"
+      fill
+      alt={`cover art image of song called ${name}`}
+      className=" object-scale-down"
+    />
   );
 }
 
