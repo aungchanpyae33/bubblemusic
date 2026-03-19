@@ -1,3 +1,4 @@
+import { Locale } from "@/i18n/request";
 import IconWrapper from "@/ui/general/IconWrapper";
 import OptionButton from "@/ui/general/optionBox/OptionButton";
 import OptionContainer from "@/ui/general/optionBox/OptionContainer";
@@ -9,7 +10,7 @@ import { useRouter } from "nextjs-toploader/app";
 import { useEffect } from "react";
 
 type LanOption = {
-  id: "en" | "my";
+  id: Locale;
 };
 
 function CheckMark({ id }: { id: LanOption["id"] }) {
