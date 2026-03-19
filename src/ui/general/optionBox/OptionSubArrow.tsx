@@ -1,11 +1,7 @@
 import { ReactNode } from "react";
 
 function OptionSubArrow({ children }: { children: ReactNode }) {
-  return (
-    <div className=" absolute flex items-center  h-full right-0">
-      {children}
-    </div>
-  );
+  return <div className="w-fit flex items-center h-full">{children}</div>;
 }
 
 export default OptionSubArrow;

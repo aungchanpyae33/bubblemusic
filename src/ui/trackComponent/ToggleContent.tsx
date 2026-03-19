@@ -57,7 +57,7 @@ function ToggleContentFloat({
         tabIndex={-1}
         style={position}
       >
-        <div className="min-w-[200px]">{children}</div>
+        <div className="min-w-[200px] max-w-[260px]">{children}</div>
         {/* to avoid re-render cause of position */}
       </div>
     </FocusTrap>
@@ -152,7 +152,7 @@ function ToggleContentMobile({
           }}
         >
           <TipUi controls={controls} />
-          <div className="min-w-[200px]">{children}</div>
+          <div className="  w-full">{children}</div>
         </motion.div>
         <motion.div
           id="backDrop"
