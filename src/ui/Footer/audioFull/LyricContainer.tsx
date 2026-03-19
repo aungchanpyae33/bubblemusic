@@ -7,8 +7,8 @@ function LyricContainer({ type }: { type: "lyric" | "queue" | undefined }) {
   const dynamic = type === "lyric";
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
       exit={{ opacity: 0, y: -10 }}
       transition={{ duration: 0.3 }}
       ref={lyricRef}
