@@ -10,11 +10,9 @@ function Footer() {
           <h3 className="text-foreground font-bold text-lg">
             {f("aboutTitle")}
           </h3>
-          <p className="text-ink-400 text-sm leading-relaxed">
-            {f("aboutDescription")}
-          </p>
+          <p className="text-ink-400 text-sm">{f("aboutDescription")}</p>
           <div className="bg-section p-3 rounded-md border border-borderFull">
-            <p className="text-warning-400 text-sm font-medium leading-relaxed">
+            <p className="text-warning-400 text-sm font-medium">
               {f("disclaimer")}
             </p>
           </div>
@@ -68,9 +66,7 @@ function Footer() {
           <h3 className="text-foreground font-bold text-lg">
             {f("contactTitle")}
           </h3>
-          <p className="text-ink-400 text-sm leading-relaxed">
-            {f("contactDescription")}
-          </p>
+          <p className="text-ink-400 text-sm">{f("contactDescription")} hi</p>
           <div className="flex flex-col space-y-3">
             <Link
               target="_"

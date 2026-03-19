@@ -1,10 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-* {
-  line-height: 1.625;
+
+@layer utilities {
+  /* leading-relaxed (for myanmar language , this is necessary)
+  As tailwind text-* has its own line-height
+  */
+  .text-sm {
+    line-height: 1.625;
+  }
+  .text-base {
+    line-height: 1.625;
+  }
+  .text-xs {
+    line-height: 1.625;
+  }
 }
+
 @layer base {
+  html,
+  body {
+    line-height: 1.625;
+  }
   :root {
     --background: #e1e1e1;
     --foreground: #2c2a2a;

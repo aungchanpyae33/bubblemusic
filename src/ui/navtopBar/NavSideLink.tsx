@@ -25,9 +25,7 @@ function NavSideLink({ url, desp, open, setOpen, children }: LinkProps) {
             "flex w-[150px] min-w-[150px] max-w-[150px] items-center    justify-start h-full",
           )}
         >
-          {desp !== "" && (
-            <div className=" truncate leading-relaxed ">{desp}</div>
-          )}
+          {desp !== "" && <div className=" truncate">{desp}</div>}
         </div>
       </NoThankYouPreFetchLink>
     </li>

@@ -17,9 +17,7 @@ function TitleInput({ initValue }: { initValue?: string }) {
   return (
     <>
       <div className=" flex w-full justify-between">
-        <label htmlFor="playlistname" className="leading-relaxed">
-          {b("playlistForm.title")}
-        </label>
+        <label htmlFor="playlistname">{b("playlistForm.title")}</label>
         <span
           onAnimationStart={() => {
             setShake({ setUpShake: true, setUp: true });
