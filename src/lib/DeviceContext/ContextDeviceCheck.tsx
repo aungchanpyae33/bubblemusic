@@ -1,17 +1,10 @@
 "use client";
 import { createContext, ReactNode, useContext } from "react";
-export interface contextProps {
-  device:
-    | "mobile"
-    | "tablet"
-    | "console"
-    | "smarttv"
-    | "wearable"
-    | "xr"
-    | "embedded"
-    | "desktop";
+import { DeviceFromUserAgentReturn } from "../DeviceCheck";
+export interface DeviceContextProps {
+  device: DeviceFromUserAgentReturn;
 }
-export const DeviceContext = createContext<contextProps | undefined>(undefined);
+const DeviceContext = createContext<DeviceContextProps | undefined>(undefined);
 
 export const useDeviceContext = () => {
   const context = useContext(DeviceContext);
@@ -26,7 +19,7 @@ function ContextDeviceCheck({
   device,
   children,
 }: {
-  device: contextProps["device"];
+  device: DeviceContextProps["device"];
   children: ReactNode;
 }) {
   const value = { device };

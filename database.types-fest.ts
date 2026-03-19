@@ -76,13 +76,17 @@ export interface ArtistInfo extends ListSongs {
   albums: listInfo[] | null;
 }
 
+export type MediaItemType = Enums<"media_item_type">;
+export type MediaItemSource = Enums<"media_source_type">;
 export interface UserInfo {
   profile: listInfo;
   playlists: listInfo[];
 }
-// Add priority to your existing types for search results
-export type SearchSong = SongInfo & { priority: number };
-export type SearchItem = listInfo & { priority: number };
+
+export type SearchSong = SongInfo;
+export type SearchItem = Omit<listInfo, "type"> & {
+  type: Exclude<listInfo["type"], "track">;
+};
 
 export type SearchDropdownResult = {
   // top_result can be a song or any other media item

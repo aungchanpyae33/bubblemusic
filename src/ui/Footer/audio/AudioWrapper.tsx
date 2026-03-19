@@ -16,9 +16,9 @@ import React, {
 interface AudioElementContextProps {
   audioElRef: React.RefObject<HTMLAudioElement | null>;
 }
-export const AudioElementContext = createContext<
-  AudioElementContextProps | undefined
->(undefined);
+const AudioElementContext = createContext<AudioElementContextProps | undefined>(
+  undefined,
+);
 
 export const useAudioElementContext = () => {
   const context = useContext(AudioElementContext);

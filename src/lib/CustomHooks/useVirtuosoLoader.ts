@@ -24,7 +24,7 @@ export const useVirtuosoLoader = ({
     if (!container) return;
 
     const clientHeight = container.clientHeight;
-    const itemHeight = 60;
+    const itemHeight = 62;
     const maxItem = Math.ceil(clientHeight / itemHeight) + 1;
     const autualItem = length;
     const countData = Math.min(autualItem, maxItem);

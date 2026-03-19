@@ -14,7 +14,7 @@ import EditableAudiosContainer from "../albumContainer/EditableAudiosContainer";
 import VerticalThreeDots from "../general/icon/VerticalThreeDots";
 import type { ListSongPage } from "@/database/data-types-return";
 import { outputRelative } from "@/lib/outputRelative";
-import PlaylistUpperContainer from "./PlaylistUpperContainer";
+import PlaylistUpperWrapper from "./PlaylistUpperWrapper";
 
 function OwnEdit({
   queryClient,
@@ -31,8 +31,7 @@ function OwnEdit({
     <HydrationBoundary state={dehydrate(queryClient)}>
       <div className=" w-full">
         <ContextSongListContainer id={songs.id} list={songs}>
-          <PlaylistUpperContainer />
-
+          <PlaylistUpperWrapper />
           <ListContainer>
             <ListContainerPlayBack list={songs} />
             <ListContainerAddToLibrary />

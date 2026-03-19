@@ -11,7 +11,7 @@ function InfoSong({ songInfo }: { songInfo: SongInfo }) {
           <UnderLineLinkHover
             href={`/artist/${item.id}`}
             prefetch={false}
-            className="ml-1 text-lg font-black   leading-relaxed w-full truncate text-start"
+            className="ml-1 text-lg inline font-black"
           >
             {item.name}
           </UnderLineLinkHover>

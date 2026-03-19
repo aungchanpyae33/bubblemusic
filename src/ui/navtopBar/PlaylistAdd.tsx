@@ -8,10 +8,10 @@ import SubmitButton from "./createPlaylist/SubmitButton";
 import InitCreateButton from "./createPlaylist/InitCreateButton";
 import { insertDataAction } from "@/actions/createPlaylist";
 import { useQueryClient } from "@tanstack/react-query";
-import CheckTypeCreate from "./createPlaylist/CheckTypeCreate";
 import { useMoreOptionStackContext } from "../trackComponent/MoreOptionStackContext";
 import useFocusOnOpen from "@/lib/CustomHooks/useFocusOnOpen";
 import { useTranslations } from "next-intl";
+import CheckTypeCreate from "./createPlaylist/CheckType/CheckTypeCreate";
 
 function PlaylistAdd({ stackNum }: { stackNum: number }) {
   const b = useTranslations("block");

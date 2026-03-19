@@ -2,21 +2,22 @@
 import { BookmarkPlus, BookmarkX } from "lucide-react";
 import IconWrapper from "../IconWrapper";
 import { addToLibrary } from "@/actions/AddToLibrary";
-import { Database } from "../../../../database.types";
 import { useEffect, useState } from "react";
 import { removeFromLibrary } from "@/actions/removeFromLibrary";
 import { useQueryClient } from "@tanstack/react-query";
-import {
-  useSongListContext,
-} from "@/ui/playlist/playlistOption/ContextSongListContainer";
+import { useSongListContext } from "@/ui/playlist/playlistOption/ContextSongListContainer";
 import { useRouter } from "nextjs-toploader/app";
 import { useTopLoader } from "nextjs-toploader";
 import type { GetRecent } from "@/database/data-types-return";
+import type {
+  MediaItemSource,
+  MediaItemType,
+} from "../../../../database.types-fest";
 
 interface ListContainerAddToLibraryProps {
   id: string;
-  type: Database["public"]["Enums"]["media_item_type"];
-  source: Database["public"]["Enums"]["media_source_type"];
+  type: MediaItemType;
+  source: MediaItemSource;
 }
 
 async function modifyLib({ id, type, source }: ListContainerAddToLibraryProps) {
@@ -27,7 +28,7 @@ async function modifyLib({ id, type, source }: ListContainerAddToLibraryProps) {
   }
 }
 
-function isAdd(source: Database["public"]["Enums"]["media_source_type"]) {
+function isAdd(source: MediaItemSource) {
   if (source === "create" || source === "reference") {
     return false;
   } else {

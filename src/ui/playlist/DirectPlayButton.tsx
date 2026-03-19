@@ -19,18 +19,18 @@ import {
   useStorePlayListId,
 } from "@/lib/zustand";
 import React, { RefObject, useRef } from "react";
-import IconWrapper from "../general/IconWrapper";
 import { Pause, Play } from "lucide-react";
 import { getListDirectClient } from "@/database/client-data";
-import { Database } from "../../../database.types";
 import type {
   ListSongPage,
   ListSongsReturn,
 } from "@/database/data-types-return";
+import TogglePlayButton from "../general/TogglePlayButton/TogglePlayButton";
+import { MediaItemType } from "../../../database.types-fest";
 const hasData = async (
   dataFromFetch: RefObject<Promise<ListSongsReturn> | null>,
   listId: string,
-  type: Database["public"]["Enums"]["media_item_type"],
+  type: MediaItemType,
 ) => {
   if (!dataFromFetch.current) {
     dataFromFetch.current = getListDirectClient(listId, type);
@@ -40,7 +40,7 @@ const hasData = async (
 
 interface DirectPlayButtonProps extends React.ComponentProps<"div"> {
   listId: string;
-  type: Database["public"]["Enums"]["media_item_type"];
+  type: MediaItemType;
 }
 function DirectPlayButton({ listId, type, className }: DirectPlayButtonProps) {
   const dataFromFetch = useRef<Promise<ListSongsReturn> | null>(null);
@@ -155,11 +155,12 @@ function DirectPlayButton({ listId, type, className }: DirectPlayButtonProps) {
         handlePlayClick();
       }}
     >
-      {IsPlayList ? (
-        <IconWrapper className="fill-foreground" size="medium" Icon={Pause} />
-      ) : (
-        <IconWrapper className="fill-foreground" size="medium" Icon={Play} />
-      )}
+      <TogglePlayButton
+        isPlay={IsPlayList}
+        pauseIcon={Pause}
+        playIcon={Play}
+        size="medium"
+      />
     </button>
   );
 }

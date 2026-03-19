@@ -70,6 +70,7 @@ function AudioPlayer({ start }: { start: boolean }) {
         sege,
         bufferThreshold,
         song_id,
+        id,
         is_lyric,
         name,
         artists,

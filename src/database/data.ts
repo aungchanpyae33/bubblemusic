@@ -1,7 +1,7 @@
 import { createClient } from "./server";
 
 import { normalizeById } from "@/lib/returnById";
-import type { Database } from "../../database.types-fest";
+import type { MediaItemType } from "../../database.types-fest";
 import {
   ArtistPageReturn,
   FetchSongsReturn,
@@ -224,10 +224,7 @@ export const getUserPage = async (userId: string): Promise<UserPageReturn> => {
   }
 };
 
-const fetchSongListByType = async (
-  id: string,
-  type: Database["public"]["Enums"]["media_item_type"],
-) => {
+const fetchSongListByType = async (id: string, type: MediaItemType) => {
   try {
     const supabase = await createClient();
     if (type === "playlist") {
@@ -252,7 +249,7 @@ const fetchSongListByType = async (
 
 export const getSongList = async (
   id: string,
-  type: Database["public"]["Enums"]["media_item_type"],
+  type: MediaItemType,
 ): Promise<FetchSongsReturn> => {
   try {
     const { data, error } = await fetchSongListByType(id, type);
@@ -267,10 +264,7 @@ export const getSongList = async (
   }
 };
 
-const fetchListDirectByType = async (
-  id: string,
-  type: Database["public"]["Enums"]["media_item_type"],
-) => {
+const fetchListDirectByType = async (id: string, type: MediaItemType) => {
   try {
     const supabase = await createClient();
     if (type === "playlist") {
@@ -295,7 +289,7 @@ const fetchListDirectByType = async (
 
 export const getListDirect = async (
   id: string,
-  type: Database["public"]["Enums"]["media_item_type"],
+  type: MediaItemType,
 ): Promise<ListSongsReturn> => {
   try {
     const { data, error } = await fetchListDirectByType(id, type);

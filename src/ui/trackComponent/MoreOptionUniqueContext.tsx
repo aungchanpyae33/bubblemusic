@@ -16,7 +16,7 @@ interface ContextMoreOptionValue {
 interface MoreOptionUniqueContextProps {
   children: ReactNode;
 }
-export const ContextMoreOptionUnique = createContext<
+const ContextMoreOptionUnique = createContext<
   ContextMoreOptionValue | undefined
 >(undefined);
 

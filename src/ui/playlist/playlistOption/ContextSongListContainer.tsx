@@ -2,25 +2,23 @@
 import { getUserLibClient } from "@/database/client-data";
 import { generateValue } from "@/lib/generateValue";
 import { useQuery } from "@tanstack/react-query";
-import { createContext, useContext } from "react";
-
-import { Database } from "../../../../database.types";
+import { createContext, ReactNode, useContext } from "react";
 import type {
   listInfo,
   listSongsSection,
+  MediaItemSource,
 } from "../../../../database.types-fest";
 
 export type SongListValue = (listInfo | listSongsSection) & {
-  source: Database["public"]["Enums"]["media_source_type"];
+  source: MediaItemSource;
 };
 
 // Default context value
-export const SongListContext = createContext<SongListValue | undefined>(
-  undefined,
-);
-interface ContextSongListContainerProps extends React.ComponentProps<"div"> {
+const SongListContext = createContext<SongListValue | undefined>(undefined);
+interface ContextSongListContainerProps {
   id: string;
   list: listInfo | listSongsSection;
+  children: ReactNode;
 }
 
 export const useSongListContext = () => {

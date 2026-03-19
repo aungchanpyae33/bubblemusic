@@ -16,7 +16,7 @@ interface InfoTrackContextProps extends songContext {
   source?: "create" | "reference" | "none";
 }
 
-export const InfoTrackContext = createContext<InfoTrackContextProps | undefined>(
+const InfoTrackContext = createContext<InfoTrackContextProps | undefined>(
   undefined,
 );
 
@@ -32,25 +32,25 @@ export const useInfoTrackContext = () => {
 
 function getSourceType(
   userLib: NormalizedById<NavbarList>,
-  source: "create" | "reference" | "none" | undefined,
+  inPage: boolean | undefined,
   id: string | undefined,
 ) {
-  if (source) {
+  if (inPage) {
     const { source } = userLib.byId[id || ""] ?? { source: "none" };
     return source;
   }
-  return source;
+  return undefined;
 }
 //source is optional and it is only required when we want to remove songs from library in Page like playlist page
 function ContextInfoTrack({
   children,
   id,
-  source,
+  inPage,
   song,
 }: {
   children: React.ReactNode;
-  id: string | undefined;
-  source?: "create" | "reference" | "none";
+  id?: string;
+  inPage?: boolean;
   song: SongInfo | undefined;
 }) {
   const { data: queryData, error: queryError } = useQuery({
@@ -62,7 +62,7 @@ function ContextInfoTrack({
   if (!data || error) return;
   const { userLib } = data;
   if (!userLib) return;
-  const sourceType = getSourceType(userLib, source, id);
+  const sourceType = getSourceType(userLib, inPage, id);
   const value = { id, song, source: sourceType };
   return (
     <InfoTrackContext.Provider value={value}>

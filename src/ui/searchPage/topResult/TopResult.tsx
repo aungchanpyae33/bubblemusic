@@ -1,24 +1,11 @@
-import Image from "next/image";
 import InfoSong from "./InfoSong";
 import InfoList from "./InfoList";
 import SearchContainer from "../SearchContainer";
 import UnderLineLinkHover from "@/ui/general/UnderLineLinkHover";
-import IconWrapper from "@/ui/general/IconWrapper";
-import { Folder, User } from "lucide-react";
 import type { GetSearchPage } from "@/database/data-types-return";
-import type {
-  SearchItem,
-  SearchSong,
-  SongInfo,
-} from "../../../../database.types-fest";
 import { getTranslations } from "next-intl/server";
-
-function isListInfo(obj: SearchItem | SearchSong): obj is SearchItem {
-  return (
-    obj &&
-    (obj.type === "album" || obj.type === "artist" || obj.type === "playlist")
-  );
-}
+import ListImage from "@/ui/ListContainer/ListImage";
+import ListUpperName from "@/ui/ListContainer/ListUpperName";
 
 async function TopResult({
   topResult,
@@ -29,55 +16,35 @@ async function TopResult({
   if (!topResult) return;
   return (
     <SearchContainer className="bg-section">
-      <div className=" max-w-[700px] p-2 px-4  flex flex-col  gap-4 rounded-lg ">
-        <h1 className=" text-xl ">{l("topResult")}</h1>
+      <div className=" max-w-[700px] p-2   flex flex-col  gap-4 rounded-lg ">
+        <h1 className=" text-xl font-bold ">{l("topResult")}</h1>
         <div className=" flex items-center gap-5">
-          <div
-            className=" lg:w-[170px] rounded overflow-hidden w-[130px] shrink-0   aspect-square  object-cover relative bg-placeholder
-              "
-          >
-            {topResult.cover_url ? (
-              <Image
-                src={topResult.cover_url}
-                priority={true}
-                sizes="(min-width: 1024px) 250px, (min-width: 768px) 200px, 180px"
-                fill
-                alt="singer song"
-              />
-            ) : topResult.type === "profile" ? (
-              <div className=" absolute inset-0 flex items-center justify-center">
-                <IconWrapper
-                  Icon={User}
-                  className="hover:scale-100   active:scale-100 size-[50px]"
-                />
-              </div>
-            ) : topResult.type === "playlist" ? (
-              <div className=" absolute inset-0 flex items-center justify-center">
-                <IconWrapper
-                  Icon={Folder}
-                  className="hover:scale-100   active:scale-100 size-[50px]"
-                />
-              </div>
-            ) : null}
-          </div>
-          <p className="font-black truncate text-2xl md:text-3xl lg:text-4xl">
-            <UnderLineLinkHover
-              href={`${topResult.type}/${topResult.id}`}
-              prefetch={false}
-              className=" block leading-relaxed w-full truncate text-start  "
-            >
-              {topResult.name}
-            </UnderLineLinkHover>
-          </p>
+          <ListImage
+            type={topResult.type}
+            cover_url={topResult.cover_url}
+            name={topResult.name}
+            className=" w-[130px] md:w-[150px] lg:w-[170px]"
+          />
+          <ListUpperName>
+            {topResult.type !== "track" ? (
+              <UnderLineLinkHover href={`${topResult.type}/${topResult.id}`}>
+                {topResult.name}
+              </UnderLineLinkHover>
+            ) : (
+              <UnderLineLinkHover
+                href={`${topResult.type}/${topResult.song_id}`}
+              >
+                {topResult.name}
+              </UnderLineLinkHover>
+            )}
+          </ListUpperName>
         </div>
-        <div>
+        <div className=" flex items-center">
           <span className=" border text-base lg:text-lg font-medium p-1 mr-2">
             {l(topResult.type)}
           </span>
-          {topResult.type === "track" && (
-            <InfoSong songInfo={topResult as SongInfo} />
-          )}
-          {topResult && isListInfo(topResult) && (
+          {topResult.type === "track" && <InfoSong songInfo={topResult} />}
+          {topResult.type !== "track" && (
             <InfoList
               type={topResult.type}
               related_id={topResult.related_id}

@@ -98,24 +98,6 @@
 
 /* hide for now , use browser default scrollbar */
 
-.thinScrollbar {
-  scrollbar-width: thin;
-}
-
-/* Chrome, Edge, and Safari */
-
-.thinScrollbar::-webkit-scrollbar {
-  width: 15px;
-}
-
-.thinScrollbar::-webkit-scrollbar-track {
-  border-radius: 5px;
-}
-
-.thinScrollbar::-webkit-scrollbar-thumb {
-  border-radius: 14px;
-  border: 3px solid;
-}
 .scrolllock {
   pointer-events: none;
   /* filter: blur(4px); */
@@ -145,3 +127,42 @@
 }
 
 /* hide scrollbar */
+
+/* base scrollbar theme */
+
+/* Always reserve space but keep it "invisible" */
+.scroll-container {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent; /* Firefox: thumb track */
+  transition: scrollbar-color 0.3s ease;
+}
+
+.scroll-container:hover {
+  scrollbar-color: var(--foreground) transparent; /* Firefox: thumb track (zinc-300) */
+}
+
+/* Webkit (Chrome, Safari, Edge) */
+.scroll-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scroll-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+  background-color: transparent; /* Invisible by default */
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+  transition: background-color 0.3s ease;
+}
+
+/* Show thumb on hover of the parent div */
+.scroll-container:hover::-webkit-scrollbar-thumb {
+  background-color: var(--foreground); /* zinc-300 */
+}
+
+.scroll-container::-webkit-scrollbar-thumb:hover {
+  background-color: var(--ink-400); /* zinc-400 */
+}

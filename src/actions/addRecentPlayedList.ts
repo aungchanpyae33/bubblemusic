@@ -1,13 +1,13 @@
 "use server";
 
 import { createClient } from "@/database/server";
-import { Database } from "../../database.types";
 import { normalizeById } from "@/lib/returnById";
 import type { GetRecentReturn } from "@/database/data-types-return";
+import type { MediaItemType } from "../../database.types-fest";
 
 export const addRecentlyPlayedList = async (
   id: string,
-  type: Database["public"]["Enums"]["media_item_type"],
+  type: MediaItemType,
 ): Promise<GetRecentReturn> => {
   try {
     const supabase = await createClient();

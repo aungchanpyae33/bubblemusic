@@ -1,9 +1,9 @@
 import { getSongTrack } from "@/database/data";
-import AlbumUpperContainer from "@/ui/albumContainer/AlbumUpperContainer";
 import AudiosContainer from "@/ui/albumContainer/AudiosContainer";
 import VerticalThreeDots from "@/ui/general/icon/VerticalThreeDots";
 import ListContainer from "@/ui/general/ListContainerOption/ListContainer";
 import ListContainerPlayBack from "@/ui/general/ListContainerOption/ListContainerPlayBack";
+import ListUpperWrapper from "@/ui/ListContainer/ListUpperWrapper";
 import ContextInfoTrack from "@/ui/trackComponent/ContextInfoTrack";
 import ContextLike from "@/ui/trackComponent/ContextLike";
 import MoreOption from "@/ui/trackComponent/MoreOption";
@@ -26,12 +26,12 @@ async function page(props: { params: Promise<{ track: string }> }) {
 
   return (
     <div className=" w-full">
-      <AlbumUpperContainer songs={songs} />
-      <ContextInfoTrack id={songsInfo?.id} source={undefined} song={songsInfo}>
-        <ContextLike id={songsInfo!.song_id}>
+      <ListUpperWrapper list={songs} />
+      <ContextInfoTrack song={songsInfo}>
+        <ContextLike id={songsInfo.song_id}>
           <ListContainer>
             <ListContainerPlayBack list={songs} />
-            <TrackToggleLike songId={songsInfo!.song_id} />
+            <TrackToggleLike songId={songsInfo.song_id} />
             <div>
               <MoreOptionContext relative={songsInfo.artists}>
                 <MoreOption

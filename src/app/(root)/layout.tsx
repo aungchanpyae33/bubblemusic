@@ -35,6 +35,7 @@ import AudioWrapper from "@/ui/Footer/audio/AudioWrapper";
 import LibandLikeHyration from "@/lib/HydrationData/LibandLikeHyration";
 import LoadingAudioPlayer from "@/ui/loading/LoadingAudioPlayer";
 import DeviceCheckFetcher from "@/lib/DeviceContext/DeviceCheckFetcher";
+import QueueNotFullScreen from "@/ui/Queue/QueueNotFullScreen";
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -83,7 +84,7 @@ export default function RootLayout({
                           <Footer />
                         </Main>
                         <QueueWrapper>
-                          <Queue />
+                          <Queue wrapper={QueueNotFullScreen} />
                         </QueueWrapper>
 
                         <ModalBox />

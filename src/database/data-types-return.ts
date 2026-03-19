@@ -1,9 +1,9 @@
 import type { PostgrestError } from "@supabase/supabase-js";
 import type {
   AllMediaItems,
-  Database,
   listInfo,
   listSongsSection,
+  MediaItemSource,
   SearchDropdownResult,
   SearchItem,
   SearchSong,
@@ -30,7 +30,12 @@ export interface GetLikedIdReturn {
 }
 
 export type GetAllMediaItems = {
-  [K in keyof AllMediaItems]: NormalizedById<listInfo | SongInfo> | null;
+  [K in Exclude<
+    keyof AllMediaItems,
+    "trendingSongs"
+  >]: NormalizedById<listInfo> | null;
+} & {
+  trendingSongs: NormalizedById<SongInfo> | null;
 };
 
 export interface GetAllMediaItemsReturn {
@@ -44,7 +49,7 @@ export interface GetRecentReturn {
 }
 
 export interface listInfoUserLib extends listInfo {
-  source: Database["public"]["Enums"]["media_source_type"];
+  source: MediaItemSource;
 }
 
 export interface NavbarList extends listInfoUserLib {

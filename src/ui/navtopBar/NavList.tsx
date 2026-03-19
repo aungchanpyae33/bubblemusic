@@ -61,7 +61,7 @@ function NavList({
         setOpen={setOpen}
         childrenLogo={childrenLogo}
       >
-        <div className="overflow-auto flex-1  flex flex-col py-3  ">
+        <div className="overflow-auto will-change-scroll flex-1  flex flex-col py-3  ">
           {/*  will-change-scroll for hardware acceleration , without this , it feels junky in chrome and some webkit browser */}
 
           <NavSideLink
@@ -88,7 +88,7 @@ function NavList({
             </NavSideLink>
             <PlaylistAdd stackNum={1} />
           </div>
-          <PlaylistFolderContainer setOpen={setOpen} />
+          <PlaylistFolderContainer />
         </div>
       </NavListUlWrapper>
 

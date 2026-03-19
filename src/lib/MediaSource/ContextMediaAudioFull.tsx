@@ -1,9 +1,14 @@
-import React, { createContext, SetStateAction, useContext, useState } from "react";
+import React, {
+  createContext,
+  SetStateAction,
+  useContext,
+  useState,
+} from "react";
 interface contextProps {
   open: boolean;
   setOpen: React.Dispatch<SetStateAction<boolean>>;
 }
-export const Context = createContext<contextProps | undefined>(undefined);
+const Context = createContext<contextProps | undefined>(undefined);
 
 export const useMediaAudioFullContext = () => {
   const context = useContext(Context);

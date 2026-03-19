@@ -15,8 +15,7 @@ function ArtistWrapper({ artists, className }: ArtistWrapperProps) {
           <span key={item.id} className=" w-full">
             <UnderLineLinkHover
               href={`/artist/${item.id}`}
-              prefetch={false}
-              className="mr-1 leading-relaxed w-full  text-start"
+              className="mr-1 inline"
             >
               {item.name}
             </UnderLineLinkHover>

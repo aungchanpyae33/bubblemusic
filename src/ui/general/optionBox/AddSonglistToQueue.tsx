@@ -10,9 +10,7 @@ import {
   useRepeatAndCurrentPlayList,
   useSong,
 } from "@/lib/zustand";
-import {
-  useSongListContext,
-} from "@/ui/playlist/playlistOption/ContextSongListContainer";
+import { useSongListContext } from "@/ui/playlist/playlistOption/ContextSongListContainer";
 import { getSongListClient } from "@/database/client-data";
 import { useTranslations } from "next-intl";
 import OptionText from "./OptionText";
@@ -29,10 +27,9 @@ function AddSonglistToQueue() {
   if (!songId) return null;
   async function addSongListToQueue() {
     const { data, error } = await getSongListClient(id, type);
-
     if (data && !error) {
       const { songs } = data;
-      if (songs && songs.idArray.length > 1) {
+      if (songs && songs.idArray.length > 0) {
         currentAddToQueue(songs, songs.idArray);
       }
     }
@@ -43,7 +40,7 @@ function AddSonglistToQueue() {
         <OptionIconEl>
           <IconWrapper size="small" Icon={ListEnd} />
         </OptionIconEl>
-        <OptionText>{b("addToQueue")}</OptionText>
+        <OptionText>{b("addToQueue")}hi</OptionText>
       </OptionButton>
     </OptionItem>
   );

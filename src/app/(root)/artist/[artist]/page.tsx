@@ -1,13 +1,13 @@
 import { getArtistPage } from "@/database/data";
 import { outputRelative } from "@/lib/outputRelative";
-import AlbumUpperContainer from "@/ui/albumContainer/AlbumUpperContainer";
 import AudiosContainer from "@/ui/albumContainer/AudiosContainer";
-import Container from "@/ui/albumContainer/Container";
 import VerticalThreeDots from "@/ui/general/icon/VerticalThreeDots";
 import ListContainer from "@/ui/general/ListContainerOption/ListContainer";
 import ListContainerAddToLibrary from "@/ui/general/ListContainerOption/ListContainerAddToLibrary";
 import ListContainerPlayBack from "@/ui/general/ListContainerOption/ListContainerPlayBack";
 import SongListContainerOption from "@/ui/general/optionBox/SongListContainerOption";
+import ListUpperWrapper from "@/ui/ListContainer/ListUpperWrapper";
+import ListUpFaceGroup from "@/ui/ListUpFaceContainer/ListUpFaceGroup";
 import ContextSongListContainer from "@/ui/playlist/playlistOption/ContextSongListContainer";
 import MoreOption from "@/ui/trackComponent/MoreOption";
 import MoreOptionContext from "@/ui/trackComponent/MoreOptionContext";
@@ -21,7 +21,7 @@ async function page(props: { params: Promise<{ artist: string }> }) {
   if (!songs && !albums) return;
   return (
     <div className=" w-full">
-      <AlbumUpperContainer songs={songs} />
+      <ListUpperWrapper list={songs} />
       {songs && (
         <ContextSongListContainer id={songs.id} list={songs}>
           <ListContainer>
@@ -45,7 +45,7 @@ async function page(props: { params: Promise<{ artist: string }> }) {
         {songs && (
           <AudiosContainer description="topSongsArtist" listSong={songs} />
         )}
-        {albums && <Container songs={albums} description="album" />}
+        {albums && <ListUpFaceGroup list={albums} description="album" />}
       </div>
     </div>
   );

@@ -1,8 +1,6 @@
-import { Database } from "../../database.types";
+import type { MediaItemType } from "../../database.types-fest";
 
-export const outputRelatedType = (
-  type: Database["public"]["Enums"]["media_item_type"],
-) => {
+export const outputRelatedType = (type: MediaItemType) => {
   if (type === "playlist") return "profile";
   if (type === "album") return "artist";
   if (type === "track") return "artist";

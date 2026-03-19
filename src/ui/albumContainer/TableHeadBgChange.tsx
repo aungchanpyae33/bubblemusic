@@ -12,9 +12,7 @@ interface contextProps {
   isStuck: boolean;
   setIsStuck: React.Dispatch<SetStateAction<boolean>>;
 }
-export const ContextTableHead = createContext<contextProps | undefined>(
-  undefined,
-);
+const ContextTableHead = createContext<contextProps | undefined>(undefined);
 
 export const useTableHeadContext = () => {
   const context = useContext(ContextTableHead);

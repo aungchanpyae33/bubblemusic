@@ -1,10 +1,10 @@
 import { get } from "@/database/data";
-import Container from "@/ui/albumContainer/Container";
 import RecentlyListContainer from "@/ui/albumContainer/RecentlyListContainer";
 import ListItemContainer from "@/ui/general/ListItemContainer/ListItemContainer";
 import ListItemScrollHz from "@/ui/general/ListItemContainer/ListItemScrollHz";
 import TapNavi from "@/ui/Home/TapNavi";
 import type { GetRecent } from "@/database/data-types-return";
+import ListUpFaceGroup from "@/ui/ListUpFaceContainer/ListUpFaceGroup";
 
 async function page() {
   const { data, error } = await get();
@@ -33,9 +33,9 @@ async function page() {
           );
         }
         return (
-          <Container
+          <ListUpFaceGroup
             key={itemKey}
-            songs={data[itemKey]}
+            list={data[itemKey]}
             description={itemKey}
           />
         );

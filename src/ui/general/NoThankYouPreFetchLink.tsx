@@ -15,7 +15,7 @@ const NoThankYouPreFetchLink = forwardRef<
   HTMLAnchorElement,
   NoThankYouPreFetchLinkProps
 >(({ ...props }, ref) => {
-  return <Link ref={ref} prefetch={false} {...props} />;
+  return <Link ref={ref} prefetch={props.prefetch} {...props} />;
 });
 
 NoThankYouPreFetchLink.displayName = "NoThankYouPreFetchLink";

@@ -3,10 +3,7 @@ import AudioSeekBar from "./SliderUi/AudioSeekBar";
 // import AudioSeekBarWrapper from "./AudioSeekBarWrapper";
 import TimeIndicatorCur from "./Time/TimeIndicatorCur";
 import { useDataContext } from "@/lib/MediaSource/ContextMedia";
-export interface PropTime {
-  cur: number;
-  durationTime: number | undefined;
-}
+
 function AudioElement({
   children,
   url,

@@ -5,7 +5,7 @@ function Main({ children }: { children: ReactNode }) {
   return (
     <main
       className={clsx(
-        " h-full  flex-1 overflow-y-auto will-change-scroll md:ml-[70px]",
+        " h-full  flex-1 overflow-y-auto will-change-scroll md:ml-[70px] z-0",
         // will-change-scroll for hardware acceleration , without this , it feels junky in chrome and some webkit browser
       )}
     >

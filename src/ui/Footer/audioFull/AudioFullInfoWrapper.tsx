@@ -10,6 +10,7 @@ import { useDataContext } from "@/lib/MediaSource/ContextMedia";
 import ArtistWrapper from "@/ui/general/ArtistWrapper";
 import ToolTip from "@/ui/general/ToolTip";
 import LyricPaddingBlock from "./LyricPaddingBlock";
+import Queue from "@/ui/Queue/Queue";
 function AudioFullInfoWrapper({ children }: { children: React.ReactNode }) {
   const showBlock = useShowBlock((state: ShowBlock) => state.showBlock);
   const setShowBlock = useShowBlock(
@@ -107,7 +108,7 @@ function AudioFullInfoWrapper({ children }: { children: React.ReactNode }) {
               <LyricContainer type={showBlock.type} key={"lyric"} />
             )}
             {showBlock.type === "queue" && showBlock.open && (
-              <QueueFull key={"queue"} />
+              <Queue key="queue" wrapper={QueueFull} />
             )}
           </AnimatePresence>
 

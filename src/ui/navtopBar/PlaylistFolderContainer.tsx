@@ -1,77 +1,48 @@
-import React, { SetStateAction, useRef } from "react";
+import React, { useRef } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getUserLibClient } from "@/database/client-data";
-import NoThankYouPreFetchLink from "../general/NoThankYouPreFetchLink";
-import Image from "next/image";
-import IconWrapper from "../general/IconWrapper";
-import { Folder } from "lucide-react";
 import { Virtuoso } from "react-virtuoso";
-import PlaylistFolderContainerLoader from "./PlaylistFolderContainerLoader";
+import SingleItemList from "../general/SingleItemRow/SingleItemList";
+import VirtuosoLoaderSingleItemList from "../general/VirtuosoLoader/VirtuosoLoaderSingleItemList";
 
-function PlaylistFolderContainer({
-  setOpen,
-}: {
-  setOpen: React.Dispatch<SetStateAction<boolean>>;
-}) {
+function PlaylistFolderContainer() {
   const { data: queryData, error: queryError } = useQuery({
     queryKey: ["user-library"],
     queryFn: () => getUserLibClient(),
   });
-  const scrollRef = useRef<HTMLElement>(null);
+  const containerRef = useRef<HTMLElement>(null);
   const { data, error } = queryData || {};
   if (!data || error || queryError) return;
   const { userLib } = data;
   if (!userLib) return;
   return (
-    <div className=" relative  w-full h-full overflow-hidden">
-      <PlaylistFolderContainerLoader
-        scrollRef={scrollRef}
+    <div className=" relative  w-full h-full ">
+      <VirtuosoLoaderSingleItemList
+        containerRef={containerRef}
         length={userLib.idArray.length}
       />
-      <div className=" w-full h-full will-change-scroll overflow-auto  ">
+      <div className=" w-full h-full will-change-scroll  ">
         <Virtuoso
           scrollerRef={(el) => {
             if (el instanceof HTMLElement) {
-              scrollRef.current = el;
+              containerRef.current = el;
             }
           }}
           increaseViewportBy={{ top: 240, bottom: 240 }}
           style={{ height: "100%" }}
-          className=" will-change-scroll"
+          className=" will-change-scroll scroll-container"
+          fixedItemHeight={64}
+          defaultItemHeight={64}
           totalCount={userLib.idArray.length}
           itemContent={(index) => {
             const id = userLib.idArray[index];
             const item = userLib.byId[id];
             return (
-              <div
+              <SingleItemList
+                className="bg-section"
                 key={item.id}
-                className="p-2 bg-section hover:bg-surface-2  "
-              >
-                <NoThankYouPreFetchLink
-                  href={`/${item.type}/${item.id}`}
-                  className=" h-[50px] leading-relaxed  flex items-center gap-x-2"
-                  onClick={() => setOpen(false)}
-                >
-                  <div className="size-[50px] bg-placeholder relative  cursor-pointer">
-                    {item.cover_url ? (
-                      <Image
-                        src={item.cover_url}
-                        fill
-                        alt="image"
-                        sizes="50px"
-                      />
-                    ) : item.type === "playlist" ? (
-                      <div className=" absolute inset-0 flex items-center justify-center">
-                        <IconWrapper
-                          Icon={Folder}
-                          className="hover:scale-100   active:scale-100 size-[30px]"
-                        />
-                      </div>
-                    ) : null}
-                  </div>
-                  <div className=" flex-1  truncate pr-2">{item.name}</div>
-                </NoThankYouPreFetchLink>
-              </div>
+                list={item}
+              />
             );
           }}
         />

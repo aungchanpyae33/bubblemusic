@@ -11,8 +11,8 @@ import {
 } from "@/lib/zustand";
 import { useTransition } from "react";
 import useEditPlaylistMutate from "@/lib/CustomHooks/mutation/EditPlaylistMutate";
-import CheckType from "@/ui/navtopBar/createPlaylist/CheckType";
 import { useTranslations } from "next-intl";
+import CheckType from "@/ui/navtopBar/createPlaylist/CheckType/CheckType";
 
 function EditContentBox() {
   const b = useTranslations("block");

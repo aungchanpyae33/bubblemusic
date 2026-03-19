@@ -9,7 +9,7 @@ interface SongsDataContextType {
   songsData: ListSongPage | null;
 }
 
-export const SongsDataContext = createContext<SongsDataContextType | undefined>(
+const SongsDataContext = createContext<SongsDataContextType | undefined>(
   undefined,
 );
 

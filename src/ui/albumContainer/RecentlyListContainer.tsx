@@ -1,13 +1,15 @@
 "use client";
-import ContextContainer from "./ContextContainer";
-import ArrowNaviContainer from "./ArrowNaviContainer";
-import SonglistsContainer from "../playlist/SonglistsContainer";
-import SonglistWrapper from "./SonglistWrapper";
-import { useQuery } from "@tanstack/react-query";
+
 import { getRecentClient } from "@/database/client-data";
 import type { GetRecent } from "@/database/data-types-return";
+import { useQuery } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
+import ContextContainer from "./ContextContainer";
 import ListGeneralHeader from "./ListGeneralHeader";
+import ArrowNaviContainer from "../ListUpFaceContainer/ArrowNaviContainer";
+import ListUpFaceContainerWrapper from "../ListUpFaceContainer/ListUpFaceContainerWrapper";
+import ListUpFaceContainer from "../ListUpFaceContainer/ListUpFaceContainer";
+
 function RecentlyListContainer({
   songs,
   description,
@@ -25,19 +27,17 @@ function RecentlyListContainer({
   if (!data || error || data.idArray.length === 0) return;
   return (
     <ContextContainer>
-      <div aria-label="song name is" className=" justify-between px-4  flex ">
-        <ListGeneralHeader>{l(description)} </ListGeneralHeader>
+      <div className=" justify-between px-4  flex ">
+        <ListGeneralHeader>{l(description)}</ListGeneralHeader>
         <ArrowNaviContainer />
       </div>
       <div className="relative z-0 max-w-fit">
-        <SonglistWrapper>
-          {data.idArray.map((id, index) => {
-            const item = data.byId[`${id}`];
-            return (
-              <SonglistsContainer index={index} key={item.id} list={item} />
-            );
+        <ListUpFaceContainerWrapper>
+          {data.idArray.map((id) => {
+            const item = data.byId[id];
+            return <ListUpFaceContainer key={item.id} list={item} />;
           })}
-        </SonglistWrapper>
+        </ListUpFaceContainerWrapper>
       </div>
     </ContextContainer>
   );

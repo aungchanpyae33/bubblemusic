@@ -24,7 +24,7 @@ function InfoList({
       <UnderLineLinkHover
         href={`/${relatedType}/${related_id}`}
         prefetch={false}
-        className=" ml-1 text-lg font-black  leading-relaxed w-full truncate text-start  "
+        className=" ml-1 text-lg font-black"
       >
         {related_name}
       </UnderLineLinkHover>

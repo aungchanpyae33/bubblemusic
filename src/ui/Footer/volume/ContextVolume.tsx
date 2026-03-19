@@ -12,7 +12,7 @@ interface contextProps {
   open: boolean;
   setOpen: React.Dispatch<SetStateAction<boolean>>;
 }
-export const volumeContext = createContext<contextProps | undefined>(undefined);
+const volumeContext = createContext<contextProps | undefined>(undefined);
 
 export const useVolumeContext = () => {
   const context = useContext(volumeContext);

@@ -6,7 +6,7 @@ interface prop {
   arrowNaviRef: RefObject<HTMLDivElement | null>;
 }
 
-export const ContainerContext = createContext<prop | undefined>(undefined);
+const ContainerContext = createContext<prop | undefined>(undefined);
 
 export const useContainerContext = () => {
   const context = useContext(ContainerContext);

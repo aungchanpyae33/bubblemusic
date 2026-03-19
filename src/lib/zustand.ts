@@ -93,30 +93,6 @@ export interface previousSongPlaylistAction {
   ) => void;
 }
 
-export interface Playlist {
-  id: string;
-  name: string;
-}
-
-export interface playlistFolderProps {
-  playlistFolder: Playlist[] | null;
-}
-
-export interface setPlaylistFolderAction {
-  setPlaylistFolder: (data: Playlist[]) => void;
-}
-
-export interface addPlaylistFolderAction {
-  addPlaylistFolder: (value: Playlist) => void;
-}
-
-export interface addSongProps {
-  addSong: object;
-}
-export interface addSongAction {
-  addSongAction: (value: addSongProps["addSong"]) => void;
-}
-
 export interface toggleLikeProps {
   toggleLike: object;
 }
@@ -502,37 +478,6 @@ export const useNotInputFocus = create<focusState & focusStateAction>(
   (set) => ({
     isInputFocus: false,
     setIsInputFocus: (value: boolean) => set(() => ({ isInputFocus: value })),
-  }),
-);
-
-export const usePlaylistFolder = create<
-  playlistFolderProps & setPlaylistFolderAction & addPlaylistFolderAction
->((set) => ({
-  playlistFolder: null,
-  setPlaylistFolder: (value) =>
-    set((state) => {
-      // If there's no existing state yet, just set the new value
-      if (!state.playlistFolder) {
-        return { playlistFolder: value };
-      }
-      return { playlistFolder: state.playlistFolder };
-    }),
-  addPlaylistFolder: (value) =>
-    set((state) => ({
-      playlistFolder: [...(state.playlistFolder || []), value],
-    })),
-}));
-
-// only for trigger
-export const useSongsStoreData = create<addSongProps & addSongAction>(
-  (set) => ({
-    addSong: {},
-    addSongAction: (value) =>
-      set(() => {
-        return {
-          addSong: { ...value },
-        };
-      }),
   }),
 );
 

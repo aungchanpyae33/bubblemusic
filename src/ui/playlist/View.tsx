@@ -1,4 +1,3 @@
-import AlbumUpperContainer from "../albumContainer/AlbumUpperContainer";
 import ContextSongListContainer from "./playlistOption/ContextSongListContainer";
 import ListContainer from "../general/ListContainerOption/ListContainer";
 import ListContainerPlayBack from "../general/ListContainerOption/ListContainerPlayBack";
@@ -10,10 +9,11 @@ import AudiosContainer from "../albumContainer/AudiosContainer";
 import VerticalThreeDots from "../general/icon/VerticalThreeDots";
 import type { ListSongPage } from "@/database/data-types-return";
 import { outputRelative } from "@/lib/outputRelative";
+import ListUpperWrapper from "../ListContainer/ListUpperWrapper";
 function View({ songs }: { songs: ListSongPage }) {
   return (
     <div className=" w-full">
-      <AlbumUpperContainer songs={songs} />
+      <ListUpperWrapper list={songs} />
       <ContextSongListContainer id={songs.id} list={songs}>
         <ListContainer>
           <ListContainerPlayBack list={songs} />

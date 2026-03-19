@@ -1,5 +1,3 @@
-import Container from "@/ui/albumContainer/Container";
-import GenreContainer from "@/ui/genreContainer/GenreContainer";
 import Image from "next/image";
 
 async function page() {

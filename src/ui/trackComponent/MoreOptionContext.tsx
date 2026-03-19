@@ -19,7 +19,7 @@ interface MoreOptionContextProps {
   children: ReactNode;
   relative?: GoToRelativeContextValue["relative"];
 }
-export const ContextMoreOption = createContext<ContextMoreOptionValue | undefined>(
+const ContextMoreOption = createContext<ContextMoreOptionValue | undefined>(
   undefined,
 );
 

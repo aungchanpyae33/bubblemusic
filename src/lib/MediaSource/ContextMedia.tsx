@@ -1,5 +1,5 @@
 import { createContext, RefObject, useContext } from "react";
-export interface prop {
+export interface DataContextProps {
   duration: number;
   abortController: RefObject<AbortController | null>;
   fetching: RefObject<{ isFetch: boolean; fetchingseg: number }>;
@@ -9,6 +9,7 @@ export interface prop {
   song_time_stamp: Array<number>;
   bufferThreshold: number;
   song_id: string;
+  id: string;
   is_lyric: boolean;
   name: string;
   artists: Artist[];
@@ -18,16 +19,24 @@ export interface prop {
 import { ReactNode } from "react";
 import type { Artist } from "../../../database.types-fest";
 
-export const DataContext = createContext<prop | undefined>(undefined);
+const DataContext = createContext<DataContextProps | undefined>(undefined);
 
 export const useDataContext = () => {
   const context = useContext(DataContext);
   if (context === undefined) {
-    throw new Error("useDataContext must be used within a DataContext.Provider");
+    throw new Error(
+      "useDataContext must be used within a DataContext.Provider",
+    );
   }
   return context;
 };
-function ContextMedia({ children, data }: { children: ReactNode; data: prop }) {
+function ContextMedia({
+  children,
+  data,
+}: {
+  children: ReactNode;
+  data: DataContextProps;
+}) {
   const value = { ...data };
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;
 }

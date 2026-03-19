@@ -16,7 +16,7 @@ async function ListItemScrollHz({
         <ListGeneralHeader> {l(description)}</ListGeneralHeader>
       </div>
 
-      <div className="flex overflow-auto no-scrollbar  p-4 gap-5 will-change-scroll ">
+      <div className="flex overflow-auto scroll-container  p-4 gap-5 will-change-scroll ">
         {children}
       </div>
     </div>

@@ -14,12 +14,14 @@ interface LikeContextProps {
   setLikeAction: (value: Record<string, boolean>) => void;
 }
 
-export const LikeContext = createContext<LikeContextProps | undefined>(undefined);
+const LikeContext = createContext<LikeContextProps | undefined>(undefined);
 
 export const useLikeContext = () => {
   const context = useContext(LikeContext);
   if (context === undefined) {
-    throw new Error("useLikeContext must be used within a LikeContext.Provider");
+    throw new Error(
+      "useLikeContext must be used within a LikeContext.Provider",
+    );
   }
   return context;
 };

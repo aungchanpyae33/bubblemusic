@@ -8,11 +8,11 @@ import type {
   ListSongsReturn,
   UserLibReturn,
 } from "./data-types-return";
-import type { Database } from "../../database.types-fest";
+import type { MediaItemType } from "../../database.types-fest";
 
 export const getListDirectClient = async (
   id: string,
-  type: Database["public"]["Enums"]["media_item_type"],
+  type: MediaItemType,
 ): Promise<ListSongsReturn> => {
   const params = new URLSearchParams({
     id,
@@ -97,7 +97,7 @@ export const getSimilarSongQueueClient = async (
 
 export const getSongListClient = async (
   id: string,
-  type: Database["public"]["Enums"]["media_item_type"],
+  type: MediaItemType,
 ): Promise<FetchSongsReturn> => {
   const params = new URLSearchParams({
     id,

@@ -11,7 +11,7 @@ interface contextProps {
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
 }
-export const ContextToggle = createContext<contextProps | undefined>(undefined);
+const ContextToggle = createContext<contextProps | undefined>(undefined);
 
 export const useToggleContext = () => {
   const context = useContext(ContextToggle);

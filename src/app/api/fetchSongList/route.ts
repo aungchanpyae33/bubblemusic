@@ -1,12 +1,10 @@
 import { getSongList } from "@/database/data";
 import { NextRequest, NextResponse } from "next/server";
-import { Database } from "../../../../database.types";
+import type { MediaItemType } from "../../../../database.types-fest";
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
-  const type = searchParams.get("type") as
-    | Database["public"]["Enums"]["media_item_type"]
-    | null;
+  const type = searchParams.get("type") as MediaItemType | null;
   const id = searchParams.get("id");
   try {
     if (!type || !id) throw new Error("id  or type is required");
