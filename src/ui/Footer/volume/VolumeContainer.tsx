@@ -24,10 +24,10 @@ function VolumeContainer({
   return (
     <div
       className={clsx(
-        "absolute group-hover:lg:bg-inherit  h-full    lg:static lg:w-full lg:flex right-0  w-full",
+        "absolute group-hover:lg:bg-inherit   h-full    lg:static lg:w-full lg:flex right-0  w-full",
         {
           "flex bg-surface-2 lg:bg-inherit": isDragging,
-          "flex   bg-surface-2": open,
+          "flex   bg-surface-2 rounded-lg ": open,
           hidden: !open,
         },
       )}
