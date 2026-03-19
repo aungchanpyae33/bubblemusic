@@ -78,7 +78,7 @@ export default function RootLayout({
                     <AudioWrapper>
                       <BeforeLoad />
                       <NavBar />
-                      <div className="scr flex flex-1 overflow-hidden relative">
+                      <div className="flex flex-1 overflow-hidden relative">
                         <Main>
                           {children}
                           <Footer />
