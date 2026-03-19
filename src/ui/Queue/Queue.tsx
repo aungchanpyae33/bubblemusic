@@ -6,7 +6,7 @@ import {
   useSong,
 } from "@/lib/zustand";
 import clsx from "clsx";
-import React, { ReactNode, useRef } from "react";
+import React, { ReactNode } from "react";
 import { Virtuoso } from "react-virtuoso";
 import outputCurrentIndex from "@/lib/OutputCurrentIndex";
 import type { ListSongPage } from "@/database/data-types-return";
@@ -25,7 +25,7 @@ function Queue({
   const dataSongId = useSong(
     (state: SongState) => (state.songCu as Record<string, string>).id,
   );
-  const containerRef = useRef<HTMLElement>(null);
+
   if (!playListArray || !playListArray.songs) return;
 
   const currendIndex = outputCurrentIndex(
@@ -37,22 +37,15 @@ function Queue({
   if (!trimArray?.length) return null;
   return (
     <Wrapper>
-      <VirtuosoLoaderSingleItemList
-        containerRef={containerRef}
-        length={trimArray.length}
-      />
+      <VirtuosoLoaderSingleItemList length={trimArray.length} />
 
       <div className={clsx("relative h-full  flex-1 ")}>
         <Virtuoso
-          scrollerRef={(el) => {
-            if (el instanceof HTMLElement) {
-              containerRef.current = el;
-            }
-          }}
           increaseViewportBy={{ top: 240, bottom: 240 }}
           style={{ height: "100%" }}
           className=" will-change-scroll scroll-container"
           fixedItemHeight={64}
+          overscan={5}
           defaultItemHeight={64}
           totalCount={trimArray.length}
           itemContent={(index) => {

@@ -1,4 +1,3 @@
-import React, { useRef } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getUserLibClient } from "@/database/client-data";
 import { Virtuoso } from "react-virtuoso";
@@ -10,24 +9,15 @@ function PlaylistFolderContainer() {
     queryKey: ["user-library"],
     queryFn: () => getUserLibClient(),
   });
-  const containerRef = useRef<HTMLElement>(null);
   const { data, error } = queryData || {};
   if (!data || error || queryError) return;
   const { userLib } = data;
   if (!userLib) return;
   return (
     <div className=" relative  w-full h-full ">
-      <VirtuosoLoaderSingleItemList
-        containerRef={containerRef}
-        length={userLib.idArray.length}
-      />
+      <VirtuosoLoaderSingleItemList length={userLib.idArray.length} />
       <div className=" w-full h-full will-change-scroll  ">
         <Virtuoso
-          scrollerRef={(el) => {
-            if (el instanceof HTMLElement) {
-              containerRef.current = el;
-            }
-          }}
           increaseViewportBy={{ top: 240, bottom: 240 }}
           style={{ height: "100%" }}
           className=" will-change-scroll scroll-container"

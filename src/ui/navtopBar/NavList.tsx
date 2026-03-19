@@ -1,7 +1,7 @@
 "use client";
 import OverLay from "./OverLay";
 import NavSideLink from "./NavSideLink";
-import { ReactNode, useState } from "react";
+import { ReactNode, useRef, useState } from "react";
 import NavListUlWrapper from "./NavListUlWrapper";
 import { ListMusic, Menu } from "lucide-react";
 import IconWrapper from "../general/IconWrapper";
@@ -10,6 +10,7 @@ import NavSideLinkNotOpen from "./NavSideLinkNotOpen";
 import PlaylistAdd from "./PlaylistAdd";
 import PlaylistFolderContainer from "./PlaylistFolderContainer";
 import { useTranslations } from "next-intl";
+import ContextContainerHeight from "../Footer/audioFull/ContextContainerHeight";
 
 interface childrenProp {
   childrenExplore: ReactNode;
@@ -24,6 +25,7 @@ function NavList({
   childrenLogo,
 }: childrenProp) {
   const b = useTranslations("block");
+  const containerHeightRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
   return (
     <div className=" w-full  ">
@@ -88,7 +90,11 @@ function NavList({
             </NavSideLink>
             <PlaylistAdd stackNum={1} />
           </div>
-          <PlaylistFolderContainer />
+          <ContextContainerHeight containerHeightRef={containerHeightRef}>
+            <div className="w-full h-full" ref={containerHeightRef}>
+              {open && <PlaylistFolderContainer />}
+            </div>
+          </ContextContainerHeight>
         </div>
       </NavListUlWrapper>
 

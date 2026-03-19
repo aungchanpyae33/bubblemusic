@@ -1,16 +1,9 @@
-import { RefObject } from "react";
 import { EllipsisVertical } from "lucide-react";
 import { useVirtuosoLoader } from "@/lib/CustomHooks/useVirtuosoLoader";
 import IconWrapper from "../IconWrapper";
 
-function VirtuosoLoaderSingleItemList({
-  containerRef,
-  length,
-}: {
-  containerRef: RefObject<HTMLElement | null>;
-  length: number;
-}) {
-  const [count] = useVirtuosoLoader({ containerRef, length });
+function VirtuosoLoaderSingleItemList({ length }: { length: number }) {
+  const count = useVirtuosoLoader({ length });
   return (
     <div className="absolute inset-0 overflow-y-auto scroll-container">
       {[...Array(count)].map((_, i) => (
