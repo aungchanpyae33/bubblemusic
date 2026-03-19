@@ -127,9 +127,6 @@ importers:
       tailwindcss:
         specifier: ^3.4.4
         version: 3.4.14
-      tailwindcss-animate:
-        specifier: ^1.0.7
-        version: 1.0.7(tailwindcss@3.4.14)
       ts-prune:
         specifier: ^0.10.3
         version: 0.10.3
@@ -3295,11 +3292,6 @@ packages:
 
   tailwind-merge@3.1.0:
     resolution: {integrity: sha512-aV27Oj8B7U/tAOMhJsSGdWqelfmudnGMdXIlMnk1JfsjwSjts6o8HyfN7SFH3EztzH4YH8kk6GbLTHzITJO39Q==}
-
-  tailwindcss-animate@1.0.7:
-    resolution: {integrity: sha512-bl6mpH3T7I3UFxuvDEXLxy/VuFxBk5bbzplh7tXI68mwMokNYd1t9qPBHlnyTwfa4JGC4zP516I1hYYtQ/vspA==}
-    peerDependencies:
-      tailwindcss: '>=3.0.0 || insiders'
 
   tailwindcss@3.4.14:
     resolution: {integrity: sha512-IcSvOcTRcUtQQ7ILQL5quRDg7Xs93PdJEk1ZLbhhvJc7uj/OAhYOnruEiwnGgBvUtaUAJ8/mhSw1o8L2jCiENA==}
@@ -6765,10 +6757,6 @@ snapshots:
   tagged-tag@1.0.0: {}
 
   tailwind-merge@3.1.0: {}
-
-  tailwindcss-animate@1.0.7(tailwindcss@3.4.14):
-    dependencies:
-      tailwindcss: 3.4.14
 
   tailwindcss@3.4.14:
     dependencies:

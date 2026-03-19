@@ -1,6 +1,5 @@
 import type { Config } from "tailwindcss";
 import plugin from "tailwindcss/plugin";
-import animate from "tailwindcss-animate";
 const config: Config = {
   darkMode: "selector",
   // in version 4 there is no need to do that
@@ -87,7 +86,6 @@ const config: Config = {
     },
   },
   plugins: [
-    animate,
     plugin(function ({ addVariant }) {
       addVariant("has-hover", "@media(hover : hover)");
       addVariant("no-hover", "@media not all and (hover: hover)");
