@@ -27,7 +27,7 @@ function GoToArtist() {
             <OptionIconEl>
               <IconWrapper size="small" Icon={UserSearch} />
             </OptionIconEl>
-            <OptionText>{b("goToArtist")} </OptionText>
+            <OptionText>{b("goToArtist")}</OptionText>
             <OptionSubArrow>
               <IconWrapper Icon={ChevronRight} />
             </OptionSubArrow>
