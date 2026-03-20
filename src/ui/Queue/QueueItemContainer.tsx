@@ -1,6 +1,6 @@
 import AddToQueue from "../general/optionBox/AddToQueeue";
 import GoToAlbum from "../general/optionBox/GoToAlbum";
-import GoToArtist from "../general/optionBox/GoToArtist";
+import GoToRelative from "../general/optionBox/GoToRelative";
 import OptionContainer from "../general/optionBox/OptionContainer";
 import PlayNextQueue from "../general/optionBox/PlayNextQueue";
 import ShareSong from "../general/shareButton/ShareSong";
@@ -16,7 +16,7 @@ function QueueItemContainer() {
       <AddToQueue />
       <RemoveFromQueue />
       <ToggleHeartContent />
-      <GoToArtist />
+      <GoToRelative />
       <GoToAlbum />
       <ShareSong />
     </OptionContainer>

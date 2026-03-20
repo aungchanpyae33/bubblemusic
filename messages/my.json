@@ -36,7 +36,11 @@
     "addToPlayNext": "နောက်တပုဒ်အဖြစ်ထည့်မည်",
     "addToLibrary": "စုဆောင်းမှုသို့ ထည့်သွင်းမည်",
     "goToAlbum": "အယ်လ်ဘမ်သို့ သွားမည်",
-    "goToArtist": "အဆိုတော်သို့ သွားမည်",
+    "goToRelative": {
+      "album": "အဆိုတော်သို့ သွားမည်",
+      "track": "အဆိုတော်သို့ သွားမည်",
+      "playlist": "ဖန်တီးသူသို့ သွားမည်"
+    },
     "share": "မျှဝေမည်",
     "searchPage": {
       "searchResultFor": "{searchKeyword} အတွက် ရှာဖွေမှု ရလဒ်များ"

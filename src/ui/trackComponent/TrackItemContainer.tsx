@@ -2,13 +2,12 @@
 import AddSongButton from "./AddSongButton";
 import RemoveSongButton from "./RemoveSongButton";
 import ToggleHeartContent from "./ToggleHeartContent";
-import GoToArtist from "../general/optionBox/GoToArtist";
 import GoToAlbum from "../general/optionBox/GoToAlbum";
 import OptionContainer from "../general/optionBox/OptionContainer";
-
 import PlayNextQueue from "../general/optionBox/PlayNextQueue";
 import AddToQueue from "../general/optionBox/AddToQueeue";
 import ShareSong from "../general/shareButton/ShareSong";
+import GoToRelative from "../general/optionBox/GoToRelative";
 
 function TrackItemContainer() {
   return (
@@ -18,7 +17,7 @@ function TrackItemContainer() {
       <AddToQueue />
       <RemoveSongButton />
       <ToggleHeartContent />
-      <GoToArtist />
+      <GoToRelative />
       <GoToAlbum />
       <ShareSong />
     </OptionContainer>

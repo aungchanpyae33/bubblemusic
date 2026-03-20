@@ -5,6 +5,7 @@ import EditToPlaylist from "./EditToPlaylist";
 import PlayNextQueueSongList from "@/ui/general/optionBox/PlayNextQueueSongList";
 import AddSonglistToQueue from "@/ui/general/optionBox/AddSonglistToQueue";
 import ShareList from "@/ui/general/shareButton/ShareList";
+import GoToRelative from "@/ui/general/optionBox/GoToRelative";
 
 function PlaylistContainerOption() {
   return (
@@ -14,6 +15,7 @@ function PlaylistContainerOption() {
       <AddToLibrary />
       <RemoveFromLibrary />
       <EditToPlaylist />
+      <GoToRelative />
       <ShareList />
     </OptionContainer>
   );

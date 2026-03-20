@@ -12,7 +12,8 @@ function ListOption({ list }: ListOptionProps) {
   return (
     <div className=" flex items-center justify-center ">
       <MoreOptionContext
-        relative={outputRelative(list.related_id, list.related_name)}
+        relative={outputRelative(list.related_id, list.related_name, list.type)}
+        type={list.type}
       >
         <MoreOption
           triggerEl={<VerticalThreeDots className="fill-current" />}

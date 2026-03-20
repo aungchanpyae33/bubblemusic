@@ -9,6 +9,7 @@ import {
 import ContextGoToRelative, {
   GoToRelativeContextValue,
 } from "../general/optionBox/ContextGoToRelative";
+import type { MediaItemType } from "../../../database.types-fest";
 
 interface ContextMoreOptionValue {
   show: boolean;
@@ -18,6 +19,7 @@ interface ContextMoreOptionValue {
 interface MoreOptionContextProps {
   children: ReactNode;
   relative?: GoToRelativeContextValue["relative"];
+  type?: MediaItemType;
 }
 const ContextMoreOption = createContext<ContextMoreOptionValue | undefined>(
   undefined,
@@ -33,13 +35,19 @@ export const useMoreOptionContext = () => {
   return context;
 };
 
-function MoreOptionContext({ children, relative }: MoreOptionContextProps) {
+function MoreOptionContext({
+  children,
+  relative,
+  type,
+}: MoreOptionContextProps) {
   const [show, setShow] = useState(false);
   const value = { show, setShow };
 
   return (
     <ContextMoreOption.Provider value={value}>
-      <ContextGoToRelative relative={relative}>{children}</ContextGoToRelative>
+      <ContextGoToRelative relative={relative} type={type}>
+        {children}
+      </ContextGoToRelative>
     </ContextMoreOption.Provider>
   );
 }

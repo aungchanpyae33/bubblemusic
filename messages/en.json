@@ -36,8 +36,11 @@
     "addToPlayNext": "Add to play next",
     "addToLibrary": "Add to library",
     "goToAlbum": "Go to Album",
-    "goToArtist": "Go to Artist",
-
+    "goToRelative": {
+      "album": "Go to artist",
+      "track": "Go to artist",
+      "playlist": "Go to creator"
+    },
     "share": "Share",
     "searchPage": {
       "searchResultFor": "Search results for {searchKeyword}"

@@ -1,4 +1,5 @@
 import React, { createContext, useContext } from "react";
+import type { MediaItemType } from "../../../../database.types-fest";
 // this is used for go to artist case like context provider for both list container and track
 // it will use every more option three dots appear
 // this data will be consume by go to artist component
@@ -8,7 +9,8 @@ export interface RelativeData {
 }
 
 export interface GoToRelativeContextValue {
-  relative: RelativeData[] | RelativeData | undefined;
+  relative?: RelativeData[] | RelativeData | undefined;
+  type?: MediaItemType;
 }
 
 interface ContextGoToRelativeProps extends GoToRelativeContextValue {
@@ -29,8 +31,12 @@ export const useGoToRelativeContext = () => {
   return context;
 };
 
-function ContextGoToRelative({ relative, children }: ContextGoToRelativeProps) {
-  const value = { relative };
+function ContextGoToRelative({
+  relative,
+  type,
+  children,
+}: ContextGoToRelativeProps) {
+  const value = { relative, type };
   return (
     <GoToRelativeContext.Provider value={value}>
       {children}

@@ -40,7 +40,7 @@ function Track({ listSong, song }: TrackProps) {
           <ToggleHeartButton songId={song.song_id} />
         </div>
         <div className="flex items-center justify-center">
-          <MoreOptionContext relative={song.artists}>
+          <MoreOptionContext relative={song.artists} type={song.type}>
             <MoreOption
               targetElement={<TrackItemContainer />}
               triggerEl={<VerticalThreeDots />}

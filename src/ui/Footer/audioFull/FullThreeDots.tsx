@@ -19,7 +19,10 @@ function FullThreeDots() {
   return (
     <ListRowTrackOptionAndLike song={currentSong}>
       <div className="flex items-center  justify-center">
-        <MoreOptionContext relative={currentSong.artists}>
+        <MoreOptionContext
+          relative={currentSong.artists}
+          type={currentSong.type}
+        >
           <MoreOption
             targetElement={<QueueItemContainer />}
             triggerEl={

@@ -28,7 +28,7 @@ function QueueItemSong({ song, ...props }: QueueItemSongProps) {
       />
       <ListRowTrackOptionAndLike song={song}>
         <div className="flex items-center  justify-center">
-          <MoreOptionContext relative={song.artists}>
+          <MoreOptionContext relative={song.artists} type={song.type}>
             <MoreOption
               targetElement={<QueueItemContainer />}
               triggerEl={<VerticalThreeDots />}
