@@ -1,5 +1,5 @@
+import { useDataContext } from "@/Context/ContextMedia";
 import useMediaSessionSeek from "@/lib/CustomHooks/MediaSession/useMediaSessionSeek";
-import { useDataContext } from "@/lib/MediaSource/ContextMedia";
 import { ReactNode } from "react";
 
 function MediaSessionSeekWrapper({

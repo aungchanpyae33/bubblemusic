@@ -1,8 +1,8 @@
 "use client";
+import ContextContainerHeight from "@/Context/ContextContainerHeight";
 import useScreenSize from "@/lib/CustomHooks/useScreenSizeDetecter";
 import { queueState, queueStateAction, useOnlyOneSider } from "@/lib/zustand";
 import { useEffect, useRef } from "react";
-import ContextContainerHeight from "../Footer/audioFull/ContextContainerHeight";
 
 function QueueWrapper({ children }: { children: React.ReactNode }) {
   const isQueue = useOnlyOneSider((state: queueState) => state.isQueue);

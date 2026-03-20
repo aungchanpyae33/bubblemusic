@@ -4,11 +4,11 @@ import { RefObject, useState } from "react";
 import PlaceholderLyric from "./PlaceholderLyric";
 import { useQuery } from "@tanstack/react-query";
 import { getLyricClient } from "@/database/client-data";
-import { useDataContext } from "@/lib/MediaSource/ContextMedia";
 import LoadingLyric from "@/ui/loading/LoadingLyric";
 import ErrorLyric from "@/ui/Error/ErrorLyric";
 import NoExistLyric from "@/ui/NoExist/NoExistLyric";
 import PlaceHolderLyricScroll from "./PlaceHolderLyricScroll";
+import { useDataContext } from "@/Context/ContextMedia";
 
 function Lyric({
   lyricShow,

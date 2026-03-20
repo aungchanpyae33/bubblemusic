@@ -1,13 +1,13 @@
 "use client";
 import { addSongsToPlaylist, useAddSongsToPlaylist } from "@/lib/zustand";
 import OptionItem from "../general/optionBox/OptionItem";
-import { useInfoTrackContext } from "./ContextInfoTrack";
 import OptionButton from "../general/optionBox/OptionButton";
 import OptionIconEl from "../general/optionBox/OptionIconEl";
 import { ListPlus } from "lucide-react";
 import IconWrapper from "../general/IconWrapper";
 import { useTranslations } from "next-intl";
 import OptionText from "../general/optionBox/OptionText";
+import { useInfoTrackContext } from "@/Context/ContextInfoTrack";
 function AddSongButton() {
   const b = useTranslations("block");
   const { song } = useInfoTrackContext();

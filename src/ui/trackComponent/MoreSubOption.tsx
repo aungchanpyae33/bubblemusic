@@ -2,11 +2,11 @@
 import { useMemo, useRef } from "react";
 import { createPortal } from "react-dom";
 import clsx from "clsx";
-import MoreOptionUniqueContext from "./MoreOptionUniqueContext";
 import useTriggerButtonSub from "@/lib/CustomHooks/useTriggerButtonSub";
 import ToggleSubContent from "./ToggleSubContent";
 import { useDisableScroll } from "@/lib/CustomHooks/useDisableScroll";
 import { generateUUID } from "@/lib/GenerateUUID";
+import ContextMoreOptionUnique from "@/Context/ContextMoreOptionUnique";
 interface MoreOptionProps extends React.ComponentProps<"button"> {
   targetElement: React.ReactNode;
   triggerEl: React.ReactNode;
@@ -40,7 +40,7 @@ function MoreSubOption({
       {stayShow && (
         <>
           {createPortal(
-            <MoreOptionUniqueContext>
+            <ContextMoreOptionUnique>
               <ToggleSubContent
                 stayShow={stayShow}
                 parentRef={parentRef}
@@ -48,7 +48,7 @@ function MoreSubOption({
               >
                 {targetElement}
               </ToggleSubContent>
-            </MoreOptionUniqueContext>,
+            </ContextMoreOptionUnique>,
             document.body,
           )}
         </>

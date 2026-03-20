@@ -2,12 +2,12 @@
 
 import { Link2 } from "lucide-react";
 import IconWrapper from "../IconWrapper";
-import { useInfoTrackContext } from "@/ui/trackComponent/ContextInfoTrack";
 import OptionItem from "../optionBox/OptionItem";
 import OptionIconEl from "../optionBox/OptionIconEl";
 import OptionButton from "../optionBox/OptionButton";
 import { useTranslations } from "next-intl";
 import OptionText from "../optionBox/OptionText";
+import { useInfoTrackContext } from "@/Context/ContextInfoTrack";
 
 function ShareSong() {
   const b = useTranslations("block");

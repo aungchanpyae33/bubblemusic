@@ -10,10 +10,10 @@ import {
   useRepeatAndCurrentPlayList,
   useSong,
 } from "@/lib/zustand";
-import { useSongListContext } from "@/ui/playlist/playlistOption/ContextSongListContainer";
 import { getSongListClient } from "@/database/client-data";
 import { useTranslations } from "next-intl";
 import OptionText from "./OptionText";
+import { useSongListContext } from "@/Context/ContextSongListContainer";
 
 function AddSonglistToQueue() {
   const b = useTranslations("block");

@@ -8,37 +8,37 @@ import {
   useState,
 } from "react";
 
-interface ContextMoreOptionValue {
+interface MoreOptionUniqueContextProps {
   uuidState: string;
   setUuidState: React.Dispatch<SetStateAction<string>>;
 }
 
-interface MoreOptionUniqueContextProps {
+interface ContextMoreOptionUniqueProps {
   children: ReactNode;
 }
-const ContextMoreOptionUnique = createContext<
-  ContextMoreOptionValue | undefined
+const MoreOptionUniqueContext = createContext<
+  MoreOptionUniqueContextProps | undefined
 >(undefined);
 
 export const useMoreOptionUniqueContext = () => {
-  const context = useContext(ContextMoreOptionUnique);
+  const context = useContext(MoreOptionUniqueContext);
   if (context === undefined) {
     throw new Error(
-      "useMoreOptionUniqueContext must be used within a ContextMoreOptionUnique.Provider",
+      "useMoreOptionUniqueContext must be used within a MoreOptionUniqueContext.Provider",
     );
   }
   return context;
 };
 
-function MoreOptionUniqueContext({ children }: MoreOptionUniqueContextProps) {
+function ContextMoreOptionUnique({ children }: ContextMoreOptionUniqueProps) {
   const [uuidState, setUuidState] = useState("");
   const value = { uuidState, setUuidState };
 
   return (
-    <ContextMoreOptionUnique.Provider value={value}>
+    <MoreOptionUniqueContext.Provider value={value}>
       {children}
-    </ContextMoreOptionUnique.Provider>
+    </MoreOptionUniqueContext.Provider>
   );
 }
 
-export default MoreOptionUniqueContext;
+export default ContextMoreOptionUnique;

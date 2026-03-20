@@ -8,7 +8,7 @@ import {
   VolumeValueActions,
   VolumeValueState,
 } from "../zustand";
-import { useAudioElementContext } from "@/ui/Footer/audio/AudioWrapper";
+import { useAudioElementContext } from "@/Context/ContextAudioWrapper";
 
 interface audioSeekProp {
   sliderRef: RefObject<HTMLDivElement | null>;

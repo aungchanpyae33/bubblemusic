@@ -5,11 +5,11 @@ import VolumeSlider from "./VolumeSlider";
 import VolumeSliderActionWrapper from "./VolumeSliderActionWrapper";
 import clsx from "clsx";
 import VolumeMuteButton from "./VolumeMuteButton";
-import ContextVolume from "./ContextVolume";
 import VolumeContainer from "./VolumeContainer";
 import VolumeToggleButton from "./VolumeToggleButton";
-import { useMediaAudioFullContext } from "@/lib/MediaSource/ContextMediaAudioFull";
 import useVolumeSeek from "@/lib/CustomHooks/useVolumeSeek";
+import { useMediaAudioFullContext } from "@/Context/ContextMediaAudioFull";
+import ContextVolume from "@/Context/ContextVolume";
 
 function Volume({ isFull }: { isFull: boolean }) {
   const { open } = useMediaAudioFullContext();

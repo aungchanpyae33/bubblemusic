@@ -28,7 +28,7 @@ import type {
 import TogglePlayButton from "../general/TogglePlayButton/TogglePlayButton";
 import { MediaItemType } from "../../../database.types-fest";
 import { audioPlayTriggerIos } from "@/lib/audioPlayTriggerIOS";
-import { useAudioElementContext } from "../Footer/audio/AudioWrapper";
+import { useAudioElementContext } from "@/Context/ContextAudioWrapper";
 const hasData = async (
   dataFromFetch: RefObject<Promise<ListSongsReturn> | null>,
   listId: string,

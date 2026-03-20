@@ -2,12 +2,13 @@
 import { getUserLibClient } from "@/database/client-data";
 import { useQuery } from "@tanstack/react-query";
 import { createContext, ReactNode, useContext } from "react";
+
+import { generateByMergeWithLib } from "@/lib/generateByMergeWithLib";
 import type {
   listInfo,
   listSongsSection,
   MediaItemSource,
-} from "../../../../database.types-fest";
-import { generateByMergeWithLib } from "@/lib/generateByMergeWithLib";
+} from "../../database.types-fest";
 
 export type SongListValue = (listInfo | listSongsSection) & {
   source: MediaItemSource;

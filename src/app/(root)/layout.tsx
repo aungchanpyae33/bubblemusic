@@ -30,12 +30,11 @@ export const metadata: Metadata = {
   manifest: "/site.webmanifest",
 };
 import NextTopLoader from "nextjs-toploader";
-
-import AudioWrapper from "@/ui/Footer/audio/AudioWrapper";
 import LibandLikeHyration from "@/lib/HydrationData/LibandLikeHyration";
 import LoadingAudioPlayer from "@/ui/loading/LoadingAudioPlayer";
 import DeviceCheckFetcher from "@/lib/DeviceContext/DeviceCheckFetcher";
 import QueueNotFullScreen from "@/ui/Queue/QueueNotFullScreen";
+import ContextAudioWrapper from "@/Context/ContextAudioWrapper";
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -75,7 +74,7 @@ export default function RootLayout({
                       zIndex={1600}
                       showAtBottom={false}
                     />
-                    <AudioWrapper>
+                    <ContextAudioWrapper>
                       <BeforeLoad />
                       <NavBar />
                       <div className="flex flex-1 overflow-hidden relative">
@@ -92,7 +91,7 @@ export default function RootLayout({
                       <Suspense fallback={<LoadingAudioPlayer />}>
                         <AudioFooterBar />
                       </Suspense>
-                    </AudioWrapper>
+                    </ContextAudioWrapper>
                   </LibandLikeHyration>
                 </DeviceCheckFetcher>
               </NextIntlClientProvider>

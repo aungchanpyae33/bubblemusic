@@ -3,13 +3,13 @@ import VerticalThreeDots from "@/ui/general/ThreeDot/VerticalThreeDots";
 import ListContainer from "@/ui/general/ListContainerOption/ListContainer";
 import ListContainerPlayBack from "@/ui/general/ListContainerOption/ListContainerPlayBack";
 import ListUpperWrapper from "@/ui/ListContainer/ListUpperWrapper";
-import ContextInfoTrack from "@/ui/trackComponent/ContextInfoTrack";
-import ContextLike from "@/ui/trackComponent/ContextLike";
 import MoreOption from "@/ui/trackComponent/MoreOption";
-import MoreOptionContext from "@/ui/trackComponent/MoreOptionContext";
 import TrackItemContainer from "@/ui/trackComponent/TrackItemContainer";
 import TrackToggleLike from "@/ui/trackComponent/TrackToggleLike";
 import PageTrackItemContainer from "@/ui/albumContainer/PageTrackItemContainer";
+import ContextInfoTrack from "@/Context/ContextInfoTrack";
+import ContextLike from "@/Context/ContextLike";
+import ContextMoreOption from "@/Context/ContextMoreOption";
 
 // import PlaceHolderTrackInstantPlay from "@/ui/Footer/PlaceHolderTrackInstantPlay";
 
@@ -33,7 +33,7 @@ async function page(props: { params: Promise<{ track: string }> }) {
             <ListContainerPlayBack list={songs} />
             <TrackToggleLike songId={songsInfo.song_id} />
             <div>
-              <MoreOptionContext
+              <ContextMoreOption
                 relative={songsInfo.artists}
                 type={songsInfo.type}
               >
@@ -41,7 +41,7 @@ async function page(props: { params: Promise<{ track: string }> }) {
                   targetElement={<TrackItemContainer />}
                   triggerEl={<VerticalThreeDots />}
                 />
-              </MoreOptionContext>
+              </ContextMoreOption>
             </div>
           </ListContainer>
         </ContextLike>

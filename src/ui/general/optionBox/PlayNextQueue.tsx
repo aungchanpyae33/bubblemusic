@@ -10,10 +10,10 @@ import {
   useRepeatAndCurrentPlayList,
   useSong,
 } from "@/lib/zustand";
-import { useInfoTrackContext } from "@/ui/trackComponent/ContextInfoTrack";
 import { generateUUID } from "@/lib/GenerateUUID";
 import { useTranslations } from "next-intl";
 import OptionText from "./OptionText";
+import { useInfoTrackContext } from "@/Context/ContextInfoTrack";
 
 function PlayNextQueue() {
   const b = useTranslations("block");

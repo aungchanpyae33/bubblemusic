@@ -1,5 +1,5 @@
 "use client";
-import ContextMediaAudioFull from "@/lib/MediaSource/ContextMediaAudioFull";
+import ContextMediaAudioFull from "@/Context/ContextMediaAudioFull";
 import {
   isFallBackAudioState,
   useInstantFallBackAudioFull,

@@ -1,3 +1,4 @@
+import ContextSongListContainer from "@/Context/ContextSongListContainer";
 import { getArtistPage } from "@/database/data";
 import PageTrackItemContainer from "@/ui/albumContainer/PageTrackItemContainer";
 import ListContainer from "@/ui/general/ListContainerOption/ListContainer";
@@ -6,7 +7,6 @@ import ListContainerPlayBack from "@/ui/general/ListContainerOption/ListContaine
 import ListOption from "@/ui/ListContainer/ListOption";
 import ListUpperWrapper from "@/ui/ListContainer/ListUpperWrapper";
 import ListUpFaceGroup from "@/ui/ListUpFaceContainer/ListUpFaceGroup";
-import ContextSongListContainer from "@/ui/playlist/playlistOption/ContextSongListContainer";
 async function page(props: { params: Promise<{ artist: string }> }) {
   const params = await props.params;
 

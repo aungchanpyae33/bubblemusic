@@ -30,7 +30,7 @@ export const useAudioElementContext = () => {
   return context;
 };
 
-function AudioWrapper({ children }: { children: ReactNode }) {
+function ContextAudioWrapper({ children }: { children: ReactNode }) {
   const attchVol = useRef(false);
   const Isplay = useSongFunction(
     (state: SongFunctionState) =>
@@ -67,4 +67,4 @@ function AudioWrapper({ children }: { children: ReactNode }) {
   );
 }
 
-export default AudioWrapper;
+export default ContextAudioWrapper;

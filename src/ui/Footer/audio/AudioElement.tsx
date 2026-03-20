@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import AudioSeekBar from "./SliderUi/AudioSeekBar";
 // import AudioSeekBarWrapper from "./AudioSeekBarWrapper";
 import TimeIndicatorCur from "./Time/TimeIndicatorCur";
-import { useDataContext } from "@/lib/MediaSource/ContextMedia";
+import { useDataContext } from "@/Context/ContextMedia";
 
 function AudioElement({
   children,

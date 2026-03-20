@@ -8,37 +8,37 @@ import {
   useState,
 } from "react";
 
-interface ContextMoreOptionValue {
+interface MoreOptionStackContext {
   stack: number;
   setStack: React.Dispatch<SetStateAction<number>>;
 }
 
-interface MoreOptionStackContextProps {
+interface ContextMoreOptionStackProps {
   children: ReactNode;
 }
-const ContextMoreOptionStack = createContext<
-  ContextMoreOptionValue | undefined
+const MoreOptionStackContext = createContext<
+  MoreOptionStackContext | undefined
 >(undefined);
 
 export const useMoreOptionStackContext = () => {
-  const context = useContext(ContextMoreOptionStack);
+  const context = useContext(MoreOptionStackContext);
   if (context === undefined) {
     throw new Error(
-      "useMoreOptionStackContext must be used within a ContextMoreOptionStack.Provider",
+      "useMoreOptionStackContext must be used within a MoreOptionStackContext.Provider",
     );
   }
   return context;
 };
 
-function MoreOptionStackContext({ children }: MoreOptionStackContextProps) {
+function ContextMoreOptionStack({ children }: ContextMoreOptionStackProps) {
   const [stack, setStack] = useState(0);
   const value = { stack, setStack };
 
   return (
-    <ContextMoreOptionStack.Provider value={value}>
+    <MoreOptionStackContext.Provider value={value}>
       {children}
-    </ContextMoreOptionStack.Provider>
+    </MoreOptionStackContext.Provider>
   );
 }
 
-export default MoreOptionStackContext;
+export default ContextMoreOptionStack;

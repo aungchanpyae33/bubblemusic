@@ -1,12 +1,12 @@
 import SongContainer from "./SongContainer";
-import TableHeadBgChange from "./TableHeadBgChange";
-import ContextSongsData from "./ContextSongsData";
 import ConRenderSong from "./ConRenderSong";
 import { getTranslations } from "next-intl/server";
 import ListGeneralHeader from "./ListGeneralHeader";
 import TableHead from "../TableGrid/TableHead";
 import TableHeadItems from "../TableGrid/TableHeadItems";
 import ListItemNotExist from "../general/NoExist/ListItemNotExist";
+import ContextSongsData from "@/Context/ContextSongsData";
+import ContextTableHeadBgChange from "@/Context/ContextTableHeadBgChange";
 async function EditablePageTrackItemContainer({
   playlistId,
   description,
@@ -24,12 +24,12 @@ async function EditablePageTrackItemContainer({
         container={
           <div className=" w-full">
             <ListGeneralHeader>{l(description)}</ListGeneralHeader>
-            <TableHeadBgChange>
+            <ContextTableHeadBgChange>
               <TableHead>
                 <TableHeadItems b={b} />
               </TableHead>
               <SongContainer />
-            </TableHeadBgChange>
+            </ContextTableHeadBgChange>
           </div>
         }
         empty={<ListItemNotExist b={b} />}

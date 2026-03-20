@@ -3,7 +3,6 @@ import IconWrapper from "../general/IconWrapper";
 import OptionButton from "../general/optionBox/OptionButton";
 import OptionIconEl from "../general/optionBox/OptionIconEl";
 import OptionItem from "../general/optionBox/OptionItem";
-import { useInfoTrackContext } from "../trackComponent/ContextInfoTrack";
 import {
   removeFromQueueAction,
   SongDetail,
@@ -13,6 +12,7 @@ import {
 } from "@/lib/zustand";
 import { useTranslations } from "next-intl";
 import OptionText from "../general/optionBox/OptionText";
+import { useInfoTrackContext } from "@/Context/ContextInfoTrack";
 
 function RemoveFromQueue() {
   const b = useTranslations("block");

@@ -1,4 +1,4 @@
-import { useMediaAudioFullContext } from "@/lib/MediaSource/ContextMediaAudioFull";
+import { useMediaAudioFullContext } from "@/Context/ContextMediaAudioFull";
 import clsx from "clsx";
 import { useRef } from "react";
 

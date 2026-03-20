@@ -1,10 +1,10 @@
 import { outputRelatedType } from "@/lib/ouputRelatedType";
 import type { MediaItemType } from "../../../../../database.types-fest";
 import NoThankYouPreFetchLink from "../../NoThankYouPreFetchLink";
-import { RelativeData } from "../ContextGoToRelative";
 import OptionContainer from "../OptionContainer";
 import OptionItem from "../OptionItem";
 import OptionText from "../OptionText";
+import { RelativeData } from "@/Context/ContextGoToRelative";
 
 function RelativeSubItem({
   relative,

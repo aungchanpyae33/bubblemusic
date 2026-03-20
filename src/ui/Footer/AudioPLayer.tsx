@@ -20,7 +20,6 @@ import FullToggleButton from "./audioFull/FullToggleButton";
 import QueueButton from "./audio/QueueButton";
 import AudioFooterContainer from "./AudioFooterContainer";
 import clsx from "clsx";
-import ContextMedia from "@/lib/MediaSource/ContextMedia";
 import { AnimatePresence } from "motion/react";
 import { motion } from "motion/react";
 import PlaceHolderToggleState from "./PlaceHolderToggleState";
@@ -32,7 +31,8 @@ import PlaceHolderTrackUser from "./PlaceHolderTrackUser";
 import ToolTip from "../general/ToolTip";
 import useMediaSourceBuffer from "@/lib/CustomHooks/useMediaSourceBuffer";
 import LoadingAudioPlayer from "../loading/LoadingAudioPlayer";
-import MoreOptionStackContext from "../trackComponent/MoreOptionStackContext";
+import ContextMedia from "@/Context/ContextMedia";
+import ContextMoreOptionStack from "@/Context/ContextMoreOptionStack";
 function AudioPlayer({ start }: { start: boolean }) {
   const toggleRef = useRef<HTMLButtonElement | null>(null);
   const {
@@ -94,14 +94,14 @@ function AudioPlayer({ start }: { start: boolean }) {
               {/* this is for space key to toggle play and pause */}
             </PlaceHolderToggleState>
             <PlaceHolderTrackUser />
-            <MoreOptionStackContext>
+            <ContextMoreOptionStack>
               <AudioFull
                 url={url}
                 id={id}
                 duration={duration}
                 toggleRef={toggleRef}
               />
-            </MoreOptionStackContext>
+            </ContextMoreOptionStack>
 
             <AudioFooterContainer>
               <div className=" w-full sm:w-[25%]   md:w-[25%] max-w-[375px]  flex items-center">

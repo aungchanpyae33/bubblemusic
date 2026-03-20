@@ -8,48 +8,48 @@ import {
 } from "react";
 import ContextGoToRelative, {
   GoToRelativeContextValue,
-} from "../general/optionBox/ContextGoToRelative";
-import type { MediaItemType } from "../../../database.types-fest";
+} from "./ContextGoToRelative";
+import type { MediaItemType } from "../../database.types-fest";
 
-interface ContextMoreOptionValue {
+interface MoreOptionContextProps {
   show: boolean;
   setShow: React.Dispatch<SetStateAction<boolean>>;
 }
 
-interface MoreOptionContextProps {
+interface ContextMoreOptionProps {
   children: ReactNode;
   relative?: GoToRelativeContextValue["relative"];
   type?: MediaItemType;
 }
-const ContextMoreOption = createContext<ContextMoreOptionValue | undefined>(
+const MoreOptionContext = createContext<MoreOptionContextProps | undefined>(
   undefined,
 );
 
 export const useMoreOptionContext = () => {
-  const context = useContext(ContextMoreOption);
+  const context = useContext(MoreOptionContext);
   if (context === undefined) {
     throw new Error(
-      "useMoreOptionContext must be used within a ContextMoreOption.Provider",
+      "useMoreOptionContext must be used within a MoreOptionContext.Provider",
     );
   }
   return context;
 };
 
-function MoreOptionContext({
+function ContextMoreOption({
   children,
   relative,
   type,
-}: MoreOptionContextProps) {
+}: ContextMoreOptionProps) {
   const [show, setShow] = useState(false);
   const value = { show, setShow };
 
   return (
-    <ContextMoreOption.Provider value={value}>
+    <MoreOptionContext.Provider value={value}>
       <ContextGoToRelative relative={relative} type={type}>
         {children}
       </ContextGoToRelative>
-    </ContextMoreOption.Provider>
+    </MoreOptionContext.Provider>
   );
 }
 
-export default MoreOptionContext;
+export default ContextMoreOption;

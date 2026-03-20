@@ -23,9 +23,9 @@ import type {
 import { Pause, Play } from "lucide-react";
 import TogglePlayButton from "@/ui/general/TogglePlayButton/TogglePlayButton";
 import { SongInfo } from "../../../../database.types-fest";
-import { useAudioElementContext } from "@/ui/Footer/audio/AudioWrapper";
 import { PlayButtonOverlayOnImage } from "@/lib/StyleUtils/tailwindStyle";
 import { audioPlayTriggerIos } from "@/lib/audioPlayTriggerIOS";
+import { useAudioElementContext } from "@/Context/ContextAudioWrapper";
 
 interface ToggleWithoutListProp {
   song: SongInfo;

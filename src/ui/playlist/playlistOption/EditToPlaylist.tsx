@@ -5,9 +5,9 @@ import IconWrapper from "@/ui/general/IconWrapper";
 import { SquarePen } from "lucide-react";
 
 import { editToPlaylistAction, useEditToPlaylist } from "@/lib/zustand";
-import { useSongListContext } from "./ContextSongListContainer";
 import { useTranslations } from "next-intl";
 import OptionText from "@/ui/general/optionBox/OptionText";
+import { useSongListContext } from "@/Context/ContextSongListContainer";
 
 function EditToPlaylistChild() {
   const b = useTranslations("block");

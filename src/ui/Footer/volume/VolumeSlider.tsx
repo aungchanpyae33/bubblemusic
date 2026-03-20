@@ -1,6 +1,6 @@
+import { useAudioElementContext } from "@/Context/ContextAudioWrapper";
 import { VolumeDraggingActions, VolumeValueActions } from "@/lib/zustand";
 import React from "react";
-import { useAudioElementContext } from "../audio/AudioWrapper";
 
 interface Props extends React.ComponentProps<"div"> {
   setIsDragging: VolumeDraggingActions["setIsDragging"];

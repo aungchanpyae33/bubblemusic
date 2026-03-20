@@ -1,11 +1,6 @@
-import React, {
-  RefObject,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { RefObject, useEffect, useRef, useState } from "react";
 import debounce from "../debounce";
-import { useMediaAudioFullContext } from "../MediaSource/ContextMediaAudioFull";
+import { useMediaAudioFullContext } from "@/Context/ContextMediaAudioFull";
 interface isOverFlowProp {
   duration: number;
   clientWidth: number;

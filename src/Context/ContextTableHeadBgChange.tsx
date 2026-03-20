@@ -8,14 +8,16 @@ import {
   useState,
 } from "react";
 
-interface contextProps {
+interface TableHeadContextProps {
   isStuck: boolean;
   setIsStuck: React.Dispatch<SetStateAction<boolean>>;
 }
-const ContextTableHead = createContext<contextProps | undefined>(undefined);
+const TableHeadContext = createContext<TableHeadContextProps | undefined>(
+  undefined,
+);
 
 export const useTableHeadContext = () => {
-  const context = useContext(ContextTableHead);
+  const context = useContext(TableHeadContext);
   if (context === undefined) {
     throw new Error(
       "useTableHeadContext must be used within a ContextTableHead.Provider",
@@ -24,7 +26,7 @@ export const useTableHeadContext = () => {
   return context;
 };
 
-function TableHeadBgChange({ children }: { children: React.ReactNode }) {
+function ContextTableHeadBgChange({ children }: { children: React.ReactNode }) {
   const [isStuck, setIsStuck] = useState(false);
   const stickyRef = useRef<HTMLTableSectionElement | null>(null);
   const value = { isStuck, setIsStuck };
@@ -50,11 +52,11 @@ function TableHeadBgChange({ children }: { children: React.ReactNode }) {
   return (
     <>
       <div className=" w-full h-[1px]" ref={stickyRef}></div>
-      <ContextTableHead.Provider value={value}>
+      <TableHeadContext.Provider value={value}>
         <div>{children}</div>
-      </ContextTableHead.Provider>
+      </TableHeadContext.Provider>
     </>
   );
 }
 
-export default TableHeadBgChange;
+export default ContextTableHeadBgChange;

@@ -1,6 +1,5 @@
 "use client";
 import OptionItem from "./OptionItem";
-import { useInfoTrackContext } from "@/ui/trackComponent/ContextInfoTrack";
 import OptionIconEl from "./OptionIconEl";
 import { Disc } from "lucide-react";
 import IconWrapper from "../IconWrapper";
@@ -8,6 +7,7 @@ import OptionButton from "./OptionButton";
 import NoThankYouPreFetchLink from "../NoThankYouPreFetchLink";
 import { useTranslations } from "next-intl";
 import OptionText from "./OptionText";
+import { useInfoTrackContext } from "@/Context/ContextInfoTrack";
 
 function GoToAlbum() {
   const b = useTranslations("block");

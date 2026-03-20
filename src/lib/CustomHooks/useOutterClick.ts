@@ -1,5 +1,5 @@
-import { useMoreOptionStackContext } from "@/ui/trackComponent/MoreOptionStackContext";
-import { useMoreOptionUniqueContext } from "@/ui/trackComponent/MoreOptionUniqueContext";
+import { useMoreOptionStackContext } from "@/Context/ContextMoreOptionStack";
+import { useMoreOptionUniqueContext } from "@/Context/ContextMoreOptionUnique";
 import React, { RefObject, useEffect } from "react";
 
 // this function handles clicks outside the component to close it

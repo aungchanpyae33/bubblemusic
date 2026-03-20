@@ -1,4 +1,3 @@
-import { useMediaAudioFullContext } from "@/lib/MediaSource/ContextMediaAudioFull";
 import { useRef } from "react";
 import AudioFunctionButton from "../audio/AudioFunction/AudioFunctionButton";
 import AudioFunctionShuffle from "../audio/AudioFunction/AudioFunctionShuffle";
@@ -20,6 +19,7 @@ import FullCloseBtn from "./FullCloseBtn";
 import FullThreeDots from "./FullThreeDots";
 import AudioFullUpperWrapper from "./AudioFullUpperWrapper";
 import AudioFullImg from "./AudioFullImg";
+import { useMediaAudioFullContext } from "@/Context/ContextMediaAudioFull";
 
 function AudioFull({
   url,

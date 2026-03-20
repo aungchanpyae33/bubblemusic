@@ -1,5 +1,5 @@
 import React, { createContext, useContext } from "react";
-import type { MediaItemType } from "../../../../database.types-fest";
+import type { MediaItemType } from "../../database.types-fest";
 // this is used for go to artist case like context provider for both list container and track
 // it will use every more option three dots appear
 // this data will be consume by go to artist component

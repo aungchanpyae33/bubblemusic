@@ -6,11 +6,9 @@ import { BookmarkPlus } from "lucide-react";
 
 import { addToLibrary } from "@/actions/AddToLibrary";
 import { useQueryClient } from "@tanstack/react-query";
-import {
-  useSongListContext,
-} from "@/ui/playlist/playlistOption/ContextSongListContainer";
 import { useTranslations } from "next-intl";
 import OptionText from "./OptionText";
+import { useSongListContext } from "@/Context/ContextSongListContainer";
 
 function AddToLibraryChild() {
   const { id, type } = useSongListContext();

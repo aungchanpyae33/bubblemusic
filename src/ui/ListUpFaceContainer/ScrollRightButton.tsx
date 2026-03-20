@@ -2,7 +2,7 @@
 import { ChevronRight } from "lucide-react";
 import IconWrapper from "../general/IconWrapper";
 import ScrollHorizontal from "@/lib/ScrollHorizontal";
-import { useContainerContext } from "../albumContainer/ContextContainer";
+import { useContainerContext } from "@/Context/ContextContainer";
 
 function ScrollRightButton() {
   const { playlistWrapperRef } = useContainerContext();

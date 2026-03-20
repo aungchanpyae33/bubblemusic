@@ -2,8 +2,8 @@ import clsx from "clsx";
 import { ReactNode, SetStateAction, useRef } from "react";
 import NavSidebarToggle from "./NavSideBarToggle";
 import FocusTrap from "../Footer/audioFull/FocusTrap";
-import MoreOptionStackContext from "../trackComponent/MoreOptionStackContext";
 import useFocusOnOpen from "@/lib/CustomHooks/useFocusOnOpen";
+import ContextMoreOptionStack from "@/Context/ContextMoreOptionStack";
 
 interface NavSideListOpenWrapperProp {
   open: boolean;
@@ -21,7 +21,7 @@ function NavSideListOpenWrapper({
   useFocusOnOpen(open, ulRef);
   return (
     <FocusTrap refFocus={ulRef} open={open}>
-      <MoreOptionStackContext>
+      <ContextMoreOptionStack>
         <ul
           className={clsx(
             "fixed bg-section border-r border-seperate-soft  top-0 z-40 box-border w-[280px]  max-w-[280px]  left-0 h-full flex duration-200   transition-[transform,visibility] flex-col gap-1  rounded-b-sm",
@@ -47,7 +47,7 @@ function NavSideListOpenWrapper({
           </li>
           {children}
         </ul>
-      </MoreOptionStackContext>
+      </ContextMoreOptionStack>
     </FocusTrap>
   );
 }

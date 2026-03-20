@@ -6,12 +6,12 @@ import LyricContainer from "./LyricContainer";
 import QueueFull from "@/ui/Queue/QueueFull";
 import CloseShowBlockBtn from "./CloseShowBlockBtn";
 import Image from "next/image";
-import { useDataContext } from "@/lib/MediaSource/ContextMedia";
 import ArtistWrapper from "@/ui/general/ArtistWrapper";
 import ToolTip from "@/ui/general/ToolTip";
 import LyricPaddingBlock from "./LyricPaddingBlock";
 import Queue from "@/ui/Queue/Queue";
-import ContextContainerHeight from "./ContextContainerHeight";
+import { useDataContext } from "@/Context/ContextMedia";
+import ContextContainerHeight from "@/Context/ContextContainerHeight";
 function AudioFullUpperWrapper({ children }: { children: React.ReactNode }) {
   const showBlock = useShowBlock((state: ShowBlock) => state.showBlock);
   const setShowBlock = useShowBlock(

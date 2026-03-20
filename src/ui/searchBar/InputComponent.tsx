@@ -1,4 +1,4 @@
-import { useToggleContext } from "./ToggleContext";
+import { useToggleContext } from "@/Context/ContextToggle";
 import { focusStateAction, useNotInputFocus } from "@/lib/zustand";
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";

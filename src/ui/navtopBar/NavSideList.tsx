@@ -7,10 +7,10 @@ import IconWrapper from "../general/IconWrapper";
 
 import NavSideLinkNotOpen from "./NavSideLinkNotOpen";
 import { useTranslations } from "next-intl";
-import ContextContainerHeight from "../Footer/audioFull/ContextContainerHeight";
 import LibraryListItemContainer from "./LibraryListItemContainer";
 import NavSideListOpenWrapper from "./NavSideListOpenWrapper";
 import PlaylistCreate from "./PlaylistCreate";
+import ContextContainerHeight from "@/Context/ContextContainerHeight";
 
 interface NavSideListProps {
   childrenExplore: ReactNode;

@@ -1,7 +1,7 @@
 import IconWrapper from "@/ui/general/IconWrapper";
 import { Volume2, VolumeX } from "lucide-react";
-import { useVolumeContext } from "./ContextVolume";
 import clsx from "clsx";
+import { useVolumeContext } from "@/Context/ContextVolume";
 
 function VolumeToggleButton({ value }: { value: number }) {
   const { open, setOpen } = useVolumeContext();

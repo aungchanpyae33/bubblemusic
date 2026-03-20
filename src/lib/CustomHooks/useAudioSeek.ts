@@ -12,8 +12,8 @@ import {
   useAudioValue,
   useSongFunction,
 } from "../zustand";
-import { useDataContext } from "../MediaSource/ContextMedia";
-import { useAudioElementContext } from "@/ui/Footer/audio/AudioWrapper";
+import { useDataContext } from "@/Context/ContextMedia";
+import { useAudioElementContext } from "@/Context/ContextAudioWrapper";
 export interface valueProps {
   value: AudioValueState["value"] | undefined;
 }

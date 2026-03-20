@@ -2,8 +2,8 @@
 import { Heart } from "lucide-react";
 import IconWrapper from "../general/IconWrapper";
 import clsx from "clsx";
-import { useLikeContext } from "./ContextLike";
 import ToggleLikeWrapper from "../general/Like/ToggleLikeWrapper";
+import { useLikeContext } from "@/Context/ContextLike";
 
 function TrackToggleLike({ songId }: { songId: string }) {
   const { isLike } = useLikeContext();

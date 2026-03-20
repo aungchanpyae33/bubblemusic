@@ -8,10 +8,10 @@ import ToggleWithList from "../general/TogglePlayButton/ToggleWithList";
 import SingleItemRow from "../general/SingleItemRow/SingleItemRow";
 import ListRowTrackOptionAndLike from "../general/ListRow/ListRowTrackOptionAndLike";
 import ToggleHeartButton from "./ToggleHeartButton";
-import MoreOptionContext from "./MoreOptionContext";
 import MoreOption from "./MoreOption";
 import TrackItemContainer from "./TrackItemContainer";
 import VerticalThreeDots from "../general/ThreeDot/VerticalThreeDots";
+import ContextMoreOption from "@/Context/ContextMoreOption";
 interface TrackProps {
   listSong: ListSongPage;
   song: SongInfo;
@@ -40,12 +40,12 @@ function Track({ listSong, song }: TrackProps) {
           <ToggleHeartButton songId={song.song_id} />
         </div>
         <div className="flex items-center justify-center">
-          <MoreOptionContext relative={song.artists} type={song.type}>
+          <ContextMoreOption relative={song.artists} type={song.type}>
             <MoreOption
               targetElement={<TrackItemContainer />}
               triggerEl={<VerticalThreeDots />}
             />
-          </MoreOptionContext>
+          </ContextMoreOption>
         </div>
       </ListRowTrackOptionAndLike>
     </SingleItemRow>

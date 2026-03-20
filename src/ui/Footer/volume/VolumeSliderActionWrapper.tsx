@@ -1,7 +1,7 @@
+import { useAudioElementContext } from "@/Context/ContextAudioWrapper";
 import { sliderPositionCal } from "@/lib/MediaSource/SliderPositionCal";
 import { VolumeDraggingActions, VolumeValueActions } from "@/lib/zustand";
 import { RefObject } from "react";
-import { useAudioElementContext } from "../audio/AudioWrapper";
 
 function VolumeSliderActionWrapper({
   sliderRef,

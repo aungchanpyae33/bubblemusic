@@ -1,7 +1,7 @@
-import { useDataContext } from "@/lib/MediaSource/ContextMedia";
 import { AudioValueState, useAudioValue } from "@/lib/zustand";
 import { useEffect } from "react";
 import type { LyricData } from "../../../../database.types-fest";
+import { useDataContext } from "@/Context/ContextMedia";
 // currentIndex updater placeholder that run 1s everytime from value
 function PlaceholderLyric({
   lyric,

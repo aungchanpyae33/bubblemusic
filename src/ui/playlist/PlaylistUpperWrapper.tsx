@@ -1,9 +1,9 @@
 "use client";
 
-import { useDeviceContext } from "@/lib/DeviceContext/ContextDeviceCheck";
 import { useTranslations } from "next-intl";
-import { useSongListContext } from "./playlistOption/ContextSongListContainer";
 import ListUpperContainer from "../ListContainer/ListUpperContainer";
+import { useDeviceContext } from "@/Context/ContextDeviceCheck";
+import { useSongListContext } from "@/Context/ContextSongListContainer";
 
 function PlaylistUpperWrapper() {
   const l = useTranslations("ListTitle");

@@ -5,9 +5,9 @@ import AudioProgressbar from "./AudioProgressbar";
 import AudioSliderActionWrapper from "./AudioSliderActionWrapper";
 import AudioSlider from "./AudioSlider";
 import clsx from "clsx";
-import { useMediaAudioFullContext } from "@/lib/MediaSource/ContextMediaAudioFull";
 import type { valueProps } from "@/lib/CustomHooks/useAudioSeek";
 import useAudioSeek from "@/lib/CustomHooks/useAudioSeek";
+import { useMediaAudioFullContext } from "@/Context/ContextMediaAudioFull";
 interface PropAudioSeek extends React.ComponentProps<"div"> {
   duration: number;
   hideSliderInSmScreen: boolean;

@@ -1,9 +1,9 @@
+import { useAudioElementContext } from "@/Context/ContextAudioWrapper";
+import { useDataContext } from "@/Context/ContextMedia";
 import type { valueProps } from "@/lib/CustomHooks/useAudioSeek";
 import AudioSeeked from "@/lib/MediaSource/AudioSeeked";
-import { useDataContext } from "@/lib/MediaSource/ContextMedia";
 import { AudioDraggingActions, AudioValueActions } from "@/lib/zustand";
 import { ReactNode, RefObject } from "react";
-import { useAudioElementContext } from "../AudioWrapper";
 interface Props extends React.ComponentProps<"div"> {
   sliderRef: RefObject<HTMLDivElement | null>;
   setIsDragging: AudioDraggingActions["setIsDragging"];

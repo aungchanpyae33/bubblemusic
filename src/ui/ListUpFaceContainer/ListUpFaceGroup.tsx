@@ -2,9 +2,9 @@ import type { GetAllMediaItems } from "@/database/data-types-return";
 import { getTranslations } from "next-intl/server";
 import ListGeneralHeader from "../albumContainer/ListGeneralHeader";
 import ListUpFaceContainerWrapper from "./ListUpFaceContainerWrapper";
-import ContextContainer from "../albumContainer/ContextContainer";
 import ArrowNaviContainer from "./ArrowNaviContainer";
 import ListUpFaceContainer from "./ListUpFaceContainer";
+import ContextContainer from "@/Context/ContextContainer";
 async function ListUpFaceGroup({
   list,
   description,

@@ -1,4 +1,3 @@
-import { useDataContext } from "@/lib/MediaSource/ContextMedia";
 import {
   currentSongPlaylist,
   DirectPlayBackAction,
@@ -26,7 +25,8 @@ import { addRecentlySong } from "@/actions/addRecentSong";
 import { useQueryClient } from "@tanstack/react-query";
 import outputCurrentIndex from "@/lib/OutputCurrentIndex";
 import type { ListSongPage } from "@/database/data-types-return";
-import { useAudioElementContext } from "./audio/AudioWrapper";
+import { useDataContext } from "@/Context/ContextMedia";
+import { useAudioElementContext } from "@/Context/ContextAudioWrapper";
 
 function PlaceHolderToggleState({
   url,

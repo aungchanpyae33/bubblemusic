@@ -1,4 +1,6 @@
 import { createContext, RefObject, useContext } from "react";
+import { ReactNode } from "react";
+import type { Artist } from "../../database.types-fest";
 export interface DataContextProps {
   duration: number;
   abortController: RefObject<AbortController | null>;
@@ -15,9 +17,6 @@ export interface DataContextProps {
   artists: Artist[];
   cover_url: string;
 }
-
-import { ReactNode } from "react";
-import type { Artist } from "../../../database.types-fest";
 
 const DataContext = createContext<DataContextProps | undefined>(undefined);
 

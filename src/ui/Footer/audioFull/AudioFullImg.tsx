@@ -1,5 +1,5 @@
+import { useDataContext } from "@/Context/ContextMedia";
 import Image from "next/image";
-import { useDataContext } from "@/lib/MediaSource/ContextMedia";
 
 function AudioFullImg() {
   const { cover_url, name } = useDataContext();

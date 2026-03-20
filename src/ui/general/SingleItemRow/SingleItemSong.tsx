@@ -5,10 +5,10 @@ import ListRowItemInfo from "../ListRow/ListRowItemInfo";
 import ListRowTrackOptionAndLike from "../ListRow/ListRowTrackOptionAndLike";
 import ToggleWithoutList from "../TogglePlayButton/ToggleWithoutList";
 import SingleItemRow from "./SingleItemRow";
-import MoreOptionContext from "@/ui/trackComponent/MoreOptionContext";
 import MoreOption from "@/ui/trackComponent/MoreOption";
 import TrackItemContainer from "@/ui/trackComponent/TrackItemContainer";
 import VerticalThreeDots from "../ThreeDot/VerticalThreeDots";
+import ContextMoreOption from "@/Context/ContextMoreOption";
 
 function SingleItemSong({ song }: { song: SongInfo }) {
   return (
@@ -27,12 +27,12 @@ function SingleItemSong({ song }: { song: SongInfo }) {
           <ToggleHeartButton songId={song.song_id} />
         </div>
         <div className="flex items-center justify-center">
-          <MoreOptionContext relative={song.artists} type={song.type}>
+          <ContextMoreOption relative={song.artists} type={song.type}>
             <MoreOption
               targetElement={<TrackItemContainer />}
               triggerEl={<VerticalThreeDots />}
             />
-          </MoreOptionContext>
+          </ContextMoreOption>
         </div>
       </ListRowTrackOptionAndLike>
     </SingleItemRow>

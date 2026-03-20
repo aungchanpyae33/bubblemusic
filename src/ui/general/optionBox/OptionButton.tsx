@@ -1,5 +1,5 @@
-import { useDeviceContext } from "@/lib/DeviceContext/ContextDeviceCheck";
-import { useMoreOptionContext } from "@/ui/trackComponent/MoreOptionContext";
+import { useDeviceContext } from "@/Context/ContextDeviceCheck";
+import { useMoreOptionContext } from "@/Context/ContextMoreOption";
 import { twMerge } from "tailwind-merge";
 
 interface OptionButtonProps extends React.ComponentProps<"button"> {

@@ -1,7 +1,7 @@
 "use client";
-import { useTableHeadContext } from "../albumContainer/TableHeadBgChange";
 import { cn } from "@/lib/utils";
 import SingleItemRow from "../general/SingleItemRow/SingleItemRow";
+import { useTableHeadContext } from "@/Context/ContextTableHeadBgChange";
 
 function TableHead({ children }: { children: React.ReactNode }) {
   const { isStuck } = useTableHeadContext();

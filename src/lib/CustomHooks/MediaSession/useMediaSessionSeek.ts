@@ -1,7 +1,7 @@
 import { RefObject, useEffect } from "react";
 import { playBackRate } from "../../MediaSource/playBackRate";
 import AbortFetch from "../../MediaSource/AbortFetch";
-import { useAudioElementContext } from "@/ui/Footer/audio/AudioWrapper";
+import { useAudioElementContext } from "@/Context/ContextAudioWrapper";
 
 const useMediaSessionSeek = (
   fetching: RefObject<{ isFetch: boolean; fetchingseg: number }>,

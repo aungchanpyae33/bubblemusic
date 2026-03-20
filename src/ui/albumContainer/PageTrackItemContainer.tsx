@@ -1,11 +1,11 @@
 import Track from "../trackComponent/Track";
-import TableHeadBgChange from "./TableHeadBgChange";
 import type { ListSongPage } from "@/database/data-types-return";
 import { getTranslations } from "next-intl/server";
 import ListGeneralHeader from "./ListGeneralHeader";
 import TableHead from "../TableGrid/TableHead";
 import TableHeadItems from "../TableGrid/TableHeadItems";
 import ListItemNotExist from "../general/NoExist/ListItemNotExist";
+import ContextTableHeadBgChange from "@/Context/ContextTableHeadBgChange";
 async function PageTrackItemContainer({
   description,
   listSong,
@@ -21,7 +21,7 @@ async function PageTrackItemContainer({
   return songs && songs.idArray.length > 0 ? (
     <div className=" w-full  ">
       <ListGeneralHeader>{l(description)}</ListGeneralHeader>
-      <TableHeadBgChange>
+      <ContextTableHeadBgChange>
         <TableHead>
           <TableHeadItems b={b} />
         </TableHead>
@@ -29,7 +29,7 @@ async function PageTrackItemContainer({
           const item = songs.byId[id];
           return <Track key={item.id} listSong={listSong} song={item} />;
         })}
-      </TableHeadBgChange>
+      </ContextTableHeadBgChange>
     </div>
   ) : (
     <ListItemNotExist b={b} />

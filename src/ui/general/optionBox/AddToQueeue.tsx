@@ -3,7 +3,7 @@ import OptionItem from "./OptionItem";
 import { ListEnd } from "lucide-react";
 import IconWrapper from "../IconWrapper";
 import OptionIconEl from "./OptionIconEl";
-import { useInfoTrackContext } from "@/ui/trackComponent/ContextInfoTrack";
+
 import {
   currentAddToQueueAction,
   SongDetail,
@@ -14,6 +14,7 @@ import {
 import { generateUUID } from "@/lib/GenerateUUID";
 import { useTranslations } from "next-intl";
 import OptionText from "./OptionText";
+import { useInfoTrackContext } from "@/Context/ContextInfoTrack";
 
 function AddToQueue() {
   const b = useTranslations("block");

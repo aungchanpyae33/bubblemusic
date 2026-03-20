@@ -1,11 +1,11 @@
 "use client";
 import { useRef } from "react";
-import { useMoreOptionContext } from "./MoreOptionContext";
 import { createPortal } from "react-dom";
-import MoreOptionStackContext from "./MoreOptionStackContext";
-import MoreOptionUniqueContext from "./MoreOptionUniqueContext";
 import ToggleContent from "./ToggleContent";
 import { useDisableScroll } from "@/lib/CustomHooks/useDisableScroll";
+import { useMoreOptionContext } from "@/Context/ContextMoreOption";
+import ContextMoreOptionUnique from "@/Context/ContextMoreOptionUnique";
+import ContextMoreOptionStack from "@/Context/ContextMoreOptionStack";
 interface MoreOptionProps extends React.ComponentProps<"div"> {
   targetElement: React.ReactNode;
   triggerEl: React.ReactNode;
@@ -38,8 +38,8 @@ function MoreOption({
         <>
           {createPortal(
             // stack provider for all child from one parent lvl
-            <MoreOptionStackContext>
-              <MoreOptionUniqueContext>
+            <ContextMoreOptionStack>
+              <ContextMoreOptionUnique>
                 <ToggleContent
                   staticUp={staticUp}
                   staticDrop={staticDrop}
@@ -47,8 +47,8 @@ function MoreOption({
                 >
                   {targetElement}
                 </ToggleContent>
-              </MoreOptionUniqueContext>
-            </MoreOptionStackContext>,
+              </ContextMoreOptionUnique>
+            </ContextMoreOptionStack>,
             document.body,
           )}
         </>

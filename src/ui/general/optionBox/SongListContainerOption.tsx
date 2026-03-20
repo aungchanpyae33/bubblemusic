@@ -1,11 +1,9 @@
 "use client";
 import AlbumContainerOption from "@/ui/album/AlbumContainerOption";
 import ArtistContainerOption from "@/ui/artist/ArtistContainerOption";
-import {
-  useSongListContext,
-} from "@/ui/playlist/playlistOption/ContextSongListContainer";
 import PlaylistContainerOption from "@/ui/playlist/playlistOption/PlaylistContainerOption";
 import ProfileOption from "./ProfileOption";
+import { useSongListContext } from "@/Context/ContextSongListContainer";
 
 function SongListContainerOption() {
   const { type } = useSongListContext();

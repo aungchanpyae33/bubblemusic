@@ -1,6 +1,6 @@
 "use client";
+import { DeviceFromUserAgentReturn } from "@/lib/DeviceCheck";
 import { createContext, ReactNode, useContext } from "react";
-import { DeviceFromUserAgentReturn } from "../DeviceCheck";
 export interface DeviceContextProps {
   device: DeviceFromUserAgentReturn;
 }

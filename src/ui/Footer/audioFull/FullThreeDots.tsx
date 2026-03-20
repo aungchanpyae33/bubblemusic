@@ -1,4 +1,3 @@
-import { useDataContext } from "@/lib/MediaSource/ContextMedia";
 import {
   currentSongPlaylist,
   useRepeatAndCurrentPlayList,
@@ -7,7 +6,8 @@ import VerticalThreeDots from "@/ui/general/ThreeDot/VerticalThreeDots";
 import ListRowTrackOptionAndLike from "@/ui/general/ListRow/ListRowTrackOptionAndLike";
 import QueueItemContainer from "@/ui/Queue/QueueItemContainer";
 import MoreOption from "@/ui/trackComponent/MoreOption";
-import MoreOptionContext from "@/ui/trackComponent/MoreOptionContext";
+import { useDataContext } from "@/Context/ContextMedia";
+import ContextMoreOption from "@/Context/ContextMoreOption";
 
 function FullThreeDots() {
   const playListArray = useRepeatAndCurrentPlayList(
@@ -19,7 +19,7 @@ function FullThreeDots() {
   return (
     <ListRowTrackOptionAndLike song={currentSong}>
       <div className="flex items-center  justify-center">
-        <MoreOptionContext
+        <ContextMoreOption
           relative={currentSong.artists}
           type={currentSong.type}
         >
@@ -31,7 +31,7 @@ function FullThreeDots() {
               </div>
             }
           />
-        </MoreOptionContext>
+        </ContextMoreOption>
       </div>
     </ListRowTrackOptionAndLike>
   );

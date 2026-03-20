@@ -1,4 +1,4 @@
-import { useMediaAudioFullContext } from "@/lib/MediaSource/ContextMediaAudioFull";
+import { useMediaAudioFullContext } from "@/Context/ContextMediaAudioFull";
 import IconWrapper from "@/ui/general/IconWrapper";
 import { Maximize } from "lucide-react";
 import React from "react";

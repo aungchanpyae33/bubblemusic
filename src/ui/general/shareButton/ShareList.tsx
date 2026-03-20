@@ -3,12 +3,10 @@ import { Link2 } from "lucide-react";
 import IconWrapper from "../IconWrapper";
 import OptionItem from "../optionBox/OptionItem";
 import OptionIconEl from "../optionBox/OptionIconEl";
-import {
-  useSongListContext,
-} from "@/ui/playlist/playlistOption/ContextSongListContainer";
 import OptionButton from "../optionBox/OptionButton";
 import OptionText from "../optionBox/OptionText";
 import { useTranslations } from "next-intl";
+import { useSongListContext } from "@/Context/ContextSongListContainer";
 
 function ShareList() {
   const b = useTranslations("block");

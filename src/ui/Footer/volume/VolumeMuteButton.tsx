@@ -1,9 +1,9 @@
+import { useAudioElementContext } from "@/Context/ContextAudioWrapper";
+import { useVolumeContext } from "@/Context/ContextVolume";
 import { VolumeValueActions } from "@/lib/zustand";
 import IconWrapper from "@/ui/general/IconWrapper";
 import { Volume2, VolumeX } from "lucide-react";
 import React, { useState } from "react";
-import { useVolumeContext } from "./ContextVolume";
-import { useAudioElementContext } from "../audio/AudioWrapper";
 interface Props extends React.ComponentProps<"button"> {
   value: number;
   setValue: VolumeValueActions["setValue"];

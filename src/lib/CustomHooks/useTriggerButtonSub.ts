@@ -1,7 +1,7 @@
-import { useMoreOptionStackContext } from "@/ui/trackComponent/MoreOptionStackContext";
-import { useMoreOptionUniqueContext } from "@/ui/trackComponent/MoreOptionUniqueContext";
 import { useEffect } from "react";
 import { isTouchPointer } from "../isTouchPointer";
+import { useMoreOptionStackContext } from "@/Context/ContextMoreOptionStack";
+import { useMoreOptionUniqueContext } from "@/Context/ContextMoreOptionUnique";
 
 function useTriggerButtonSub(
   parentRef: React.RefObject<HTMLButtonElement | null>,
