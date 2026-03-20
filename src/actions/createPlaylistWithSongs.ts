@@ -12,7 +12,5 @@ export const insertDataActionWithSongs = async (queryData: FormData) => {
     playlist_name: playlistname,
     song_ids: [2, 5, 6],
   });
-  if (error) console.error(error);
-
   return { data, error };
 };

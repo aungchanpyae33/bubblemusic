@@ -38,7 +38,7 @@ export const fetchSegment = async (
     if (error.name === "AbortError") {
       console.log(`The song segment seg-${Num} fetching was aborted`);
     } else {
-      console.error(`Error fetching segment seg-${Num}:`, err);
+      console.log(`Error fetching segment seg-${Num}:`, err);
     }
   }
 };

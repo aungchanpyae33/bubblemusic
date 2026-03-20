@@ -26,7 +26,6 @@ export const editPlaylist = async ({
     };
     return { data: userLib, error };
   } catch (error) {
-    console.error("Unexpected error:", error);
     return { data: null, error };
   }
 };

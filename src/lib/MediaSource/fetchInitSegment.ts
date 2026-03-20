@@ -72,7 +72,7 @@ export const fetchInitSegment = async (
     if (error.name === "AbortError") {
       console.log(`The song init fetching was aborted`);
     } else {
-      console.error(`Error fetching init:`, err);
+      console.log(`Error fetching init:`, err);
     }
   }
 };
