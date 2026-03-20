@@ -40,7 +40,7 @@ function AddSonglistToQueue() {
         <OptionIconEl>
           <IconWrapper size="small" Icon={ListEnd} />
         </OptionIconEl>
-        <OptionText>{b("addToQueue")}hi</OptionText>
+        <OptionText>{b("addToQueue")}</OptionText>
       </OptionButton>
     </OptionItem>
   );
