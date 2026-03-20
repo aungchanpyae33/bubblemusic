@@ -87,7 +87,6 @@ function ListContainerPlayBack({ list }: ListContainerPlayBackProps) {
         return list.songs.byId[list.songs.idArray[0]];
       })();
       const uniUrl = id;
-      console.log("yes");
       setPlayListArray({
         [playListId || ""]: list,
       });
