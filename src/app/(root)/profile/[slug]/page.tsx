@@ -1,5 +1,5 @@
 import { getUserPage } from "@/database/data";
-import VerticalThreeDots from "@/ui/general/icon/VerticalThreeDots";
+import VerticalThreeDots from "@/ui/general/ThreeDot/VerticalThreeDots";
 import ListContainer from "@/ui/general/ListContainerOption/ListContainer";
 import ProfileOption from "@/ui/general/optionBox/ProfileOption";
 import ListUpperWrapper from "@/ui/ListContainer/ListUpperWrapper";

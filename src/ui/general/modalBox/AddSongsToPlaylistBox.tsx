@@ -4,7 +4,7 @@ import {
   songsToPlaylist,
   useAddSongsToPlaylist,
 } from "@/lib/zustand";
-import AddSongContent from "@/ui/trackComponent/AddSongContent";
+import AddSongModalBoxContainer from "@/ui/trackComponent/AddSongModalBoxContainer";
 import SubOpenContentWrapper from "@/ui/trackComponent/SubOpenContentWrapper";
 
 import SubOptionToggle from "@/ui/trackComponent/SubOptionToggle";
@@ -21,7 +21,7 @@ function AddSongsToPlaylistBox() {
         selector={(state: addSongsToPlaylist) => state.addSongsToPlaylist}
         useStore={useAddSongsToPlaylist}
       >
-        <AddSongContent />
+        <AddSongModalBoxContainer />
       </SubOptionToggle>
     </SubOpenContentWrapper>
   );

@@ -3,7 +3,7 @@ import AddSongItem from "./AddSongItem";
 import { useQuery } from "@tanstack/react-query";
 import { getUserLibClient } from "@/database/client-data";
 import { useTranslations } from "next-intl";
-function AddSongContent() {
+function AddSongModalBoxContainer() {
   const m = useTranslations("ModalBox");
   const { data: queryData, error: queryError } = useQuery({
     queryKey: ["user-library"],
@@ -30,4 +30,4 @@ function AddSongContent() {
   );
 }
 
-export default AddSongContent;
+export default AddSongModalBoxContainer;

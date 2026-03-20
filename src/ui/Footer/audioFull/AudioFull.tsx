@@ -9,9 +9,7 @@ import AudioFunctionRepeat from "../audio/AudioFunction/AudioFunctionRepeat";
 import TimeIndicatorDur from "../audio/Time/TimeIndicatorDur";
 import AudioSeekBar from "../audio/SliderUi/AudioSeekBar";
 import TimeIndicatorCur from "../audio/Time/TimeIndicatorCur";
-import AudioFullInfoWrapper from "./AudioFullInfoWrapper";
 import Volume from "../volume/Volume";
-import AudioCurImg from "./AudioCurImg";
 import FocusTrap from "./FocusTrap";
 import LyricToggleBtn from "./LyricToggleBtn";
 import QueueToggle from "./QueueToggle";
@@ -20,6 +18,8 @@ import { createPortal } from "react-dom";
 import useCloseFunctoionStack from "@/lib/CustomHooks/useCloseFunctionStack";
 import FullCloseBtn from "./FullCloseBtn";
 import FullThreeDots from "./FullThreeDots";
+import AudioFullUpperWrapper from "./AudioFullUpperWrapper";
+import AudioFullImg from "./AudioFullImg";
 
 function AudioFull({
   url,
@@ -65,9 +65,9 @@ function AudioFull({
                     <FullThreeDots />
                   </div>
 
-                  <AudioFullInfoWrapper>
-                    <AudioCurImg />
-                  </AudioFullInfoWrapper>
+                  <AudioFullUpperWrapper>
+                    <AudioFullImg />
+                  </AudioFullUpperWrapper>
                   <div className=" h-[20%]  p-2  shrink-0  w-[98%] md:w-[90%]  rounded-md  inset-x-0 mx-auto sticky bottom-0">
                     <div className="audioFunctionContainer  flex  flex-col flex-1 h-full gap-y-10 items-center justify-center">
                       <div className="BottomContainer w-full static top-0 left-0 items-center ">

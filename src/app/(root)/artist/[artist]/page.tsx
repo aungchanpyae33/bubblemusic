@@ -1,5 +1,5 @@
 import { getArtistPage } from "@/database/data";
-import AudiosContainer from "@/ui/albumContainer/AudiosContainer";
+import PageTrackItemContainer from "@/ui/albumContainer/PageTrackItemContainer";
 import ListContainer from "@/ui/general/ListContainerOption/ListContainer";
 import ListContainerAddToLibrary from "@/ui/general/ListContainerOption/ListContainerAddToLibrary";
 import ListContainerPlayBack from "@/ui/general/ListContainerOption/ListContainerPlayBack";
@@ -32,7 +32,10 @@ async function page(props: { params: Promise<{ artist: string }> }) {
       )}
       <div className=" space-y-3">
         {songs && (
-          <AudiosContainer description="topSongsArtist" listSong={songs} />
+          <PageTrackItemContainer
+            description="topSongsArtist"
+            listSong={songs}
+          />
         )}
         {albums && <ListUpFaceGroup list={albums} description="album" />}
       </div>

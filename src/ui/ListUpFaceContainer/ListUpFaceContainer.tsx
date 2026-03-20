@@ -1,13 +1,13 @@
 import clsx from "clsx";
 import UnderLineLinkHover from "../general/UnderLineLinkHover";
-import { outputRelatedType } from "@/lib/prototypeOuputRelatedType";
 import NoThankYouPreFetchLink from "../general/NoThankYouPreFetchLink";
 import type { listInfo } from "../../../database.types-fest";
-import ImageAttachedVertical from "../general/icon/ImageAttachedVertical";
+import ImageAttachedVertical from "../general/ThreeDot/ImageAttachedVertical";
 import ListOption from "../ListContainer/ListOption";
 import { DirectPlayButtonOverlayOnImage } from "@/lib/StyleUtils/tailwindStyle";
 import DirectPlayButton from "../playlist/DirectPlayButton";
 import ListImage from "../ListContainer/ListImage";
+import { outputRelatedType } from "@/lib/ouputRelatedType";
 
 interface ListUpFaceContainerProps {
   list: listInfo;

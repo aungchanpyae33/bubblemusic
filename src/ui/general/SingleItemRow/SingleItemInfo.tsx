@@ -1,6 +1,6 @@
+import { outputRelatedType } from "@/lib/ouputRelatedType";
 import type { listInfo } from "../../../../database.types-fest";
 import ToolTip from "../ToolTip";
-import { outputRelatedType } from "@/lib/prototypeOuputRelatedType";
 import UnderLineLinkHover from "../UnderLineLinkHover";
 
 interface SingleItemInfoProps {

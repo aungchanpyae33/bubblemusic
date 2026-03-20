@@ -6,7 +6,7 @@ import ListGeneralHeader from "./ListGeneralHeader";
 import TableHead from "../TableGrid/TableHead";
 import TableHeadItems from "../TableGrid/TableHeadItems";
 import ListItemNotExist from "../general/NoExist/ListItemNotExist";
-async function AudiosContainer({
+async function PageTrackItemContainer({
   description,
   listSong,
 }: {
@@ -36,4 +36,4 @@ async function AudiosContainer({
   );
 }
 
-export default AudiosContainer;
+export default PageTrackItemContainer;

@@ -1,10 +1,10 @@
 import { get } from "@/database/data";
 import RecentlyListContainer from "@/ui/albumContainer/RecentlyListContainer";
-import ListItemContainer from "@/ui/general/ListItemContainer/ListItemContainer";
-import ListItemScrollHz from "@/ui/general/ListItemContainer/ListItemScrollHz";
 import TapNavi from "@/ui/Home/TapNavi";
 import type { GetRecent } from "@/database/data-types-return";
 import ListUpFaceGroup from "@/ui/ListUpFaceContainer/ListUpFaceGroup";
+import ListItemUpFaceGroup from "@/ui/general/ListItemUpFaceGroup/ListItemUpFaceGroup";
+import ListItemUpFaceContainer from "@/ui/general/ListItemUpFaceGroup/ListItemUpFaceContainer";
 
 async function page() {
   const { data, error } = await get();
@@ -18,9 +18,9 @@ async function page() {
         if (data[itemKey] && data[itemKey].idArray.length === 0) return;
         if (itemKey === "trendingSongs") {
           return (
-            <ListItemScrollHz description={itemKey} key={itemKey}>
-              <ListItemContainer songs={data[itemKey]} />
-            </ListItemScrollHz>
+            <ListItemUpFaceGroup description={itemKey} key={itemKey}>
+              <ListItemUpFaceContainer songs={data[itemKey]} />
+            </ListItemUpFaceGroup>
           );
         }
         if (itemKey === "recentlyPlayed") {

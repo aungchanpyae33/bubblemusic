@@ -1,6 +1,5 @@
 "use client";
 import { getUserLibClient } from "@/database/client-data";
-import { generateValue } from "@/lib/generateValue";
 import { useQuery } from "@tanstack/react-query";
 import { createContext, ReactNode, useContext } from "react";
 import type {
@@ -8,6 +7,7 @@ import type {
   listSongsSection,
   MediaItemSource,
 } from "../../../../database.types-fest";
+import { generateByMergeWithLib } from "@/lib/generateByMergeWithLib";
 
 export type SongListValue = (listInfo | listSongsSection) & {
   source: MediaItemSource;
@@ -46,7 +46,7 @@ function ContextSongListContainer({
   const { userLib } = data;
   if (!userLib) return;
   const isDataExist = userLib.byId[id];
-  const value = generateValue(isDataExist, list);
+  const value = generateByMergeWithLib(isDataExist, list);
   return (
     <SongListContext.Provider value={value}>
       {children}

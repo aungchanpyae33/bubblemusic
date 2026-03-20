@@ -7,7 +7,7 @@ import SingleItemRow from "../general/SingleItemRow/SingleItemRow";
 import ListRowTrackOptionAndLike from "../general/ListRow/ListRowTrackOptionAndLike";
 import MoreOptionContext from "../trackComponent/MoreOptionContext";
 import QueueItemContainer from "./QueueItemContainer";
-import VerticalThreeDots from "../general/icon/VerticalThreeDots";
+import VerticalThreeDots from "../general/ThreeDot/VerticalThreeDots";
 import MoreOption from "../trackComponent/MoreOption";
 
 interface QueueItemSongProps extends ComponentProps<"div"> {

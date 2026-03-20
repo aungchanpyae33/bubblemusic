@@ -1,6 +1,5 @@
 import { getSongTrack } from "@/database/data";
-import AudiosContainer from "@/ui/albumContainer/AudiosContainer";
-import VerticalThreeDots from "@/ui/general/icon/VerticalThreeDots";
+import VerticalThreeDots from "@/ui/general/ThreeDot/VerticalThreeDots";
 import ListContainer from "@/ui/general/ListContainerOption/ListContainer";
 import ListContainerPlayBack from "@/ui/general/ListContainerOption/ListContainerPlayBack";
 import ListUpperWrapper from "@/ui/ListContainer/ListUpperWrapper";
@@ -10,6 +9,7 @@ import MoreOption from "@/ui/trackComponent/MoreOption";
 import MoreOptionContext from "@/ui/trackComponent/MoreOptionContext";
 import TrackItemContainer from "@/ui/trackComponent/TrackItemContainer";
 import TrackToggleLike from "@/ui/trackComponent/TrackToggleLike";
+import PageTrackItemContainer from "@/ui/albumContainer/PageTrackItemContainer";
 
 // import PlaceHolderTrackInstantPlay from "@/ui/Footer/PlaceHolderTrackInstantPlay";
 
@@ -47,7 +47,7 @@ async function page(props: { params: Promise<{ track: string }> }) {
         </ContextLike>
       </ContextInfoTrack>
 
-      <AudiosContainer description="track" listSong={songs} />
+      <PageTrackItemContainer description="track" listSong={songs} />
     </div>
   );
 }

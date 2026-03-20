@@ -7,7 +7,7 @@ import ListGeneralHeader from "./ListGeneralHeader";
 import TableHead from "../TableGrid/TableHead";
 import TableHeadItems from "../TableGrid/TableHeadItems";
 import ListItemNotExist from "../general/NoExist/ListItemNotExist";
-async function EditableAudiosContainer({
+async function EditablePageTrackItemContainer({
   playlistId,
   description,
 }: {
@@ -38,4 +38,4 @@ async function EditableAudiosContainer({
   );
 }
 
-export default EditableAudiosContainer;
+export default EditablePageTrackItemContainer;

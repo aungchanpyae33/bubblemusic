@@ -11,7 +11,7 @@ import ToggleHeartButton from "./ToggleHeartButton";
 import MoreOptionContext from "./MoreOptionContext";
 import MoreOption from "./MoreOption";
 import TrackItemContainer from "./TrackItemContainer";
-import VerticalThreeDots from "../general/icon/VerticalThreeDots";
+import VerticalThreeDots from "../general/ThreeDot/VerticalThreeDots";
 interface TrackProps {
   listSong: ListSongPage;
   song: SongInfo;

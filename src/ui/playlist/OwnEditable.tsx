@@ -7,16 +7,12 @@ import ContextSongListContainer from "./playlistOption/ContextSongListContainer"
 import ListContainer from "../general/ListContainerOption/ListContainer";
 import ListContainerPlayBack from "../general/ListContainerOption/ListContainerPlayBack";
 import ListContainerAddToLibrary from "../general/ListContainerOption/ListContainerAddToLibrary";
-import MoreOptionContext from "../trackComponent/MoreOptionContext";
-import MoreOption from "../trackComponent/MoreOption";
-import SongListContainerOption from "../general/optionBox/SongListContainerOption";
-import EditableAudiosContainer from "../albumContainer/EditableAudiosContainer";
-import VerticalThreeDots from "../general/icon/VerticalThreeDots";
 import type { ListSongPage } from "@/database/data-types-return";
-import { outputRelative } from "@/lib/outputRelative";
 import PlaylistUpperWrapper from "./PlaylistUpperWrapper";
+import ListOption from "../ListContainer/ListOption";
+import EditablePageTrackItemContainer from "../albumContainer/EditablePageTrackItemContainer";
 
-function OwnEdit({
+function OwnEditable({
   queryClient,
   songs,
   id,
@@ -37,22 +33,18 @@ function OwnEdit({
             <ListContainerAddToLibrary />
 
             <div>
-              <MoreOptionContext
-                relative={outputRelative(songs.related_id, songs.related_name)}
-              >
-                <MoreOption
-                  targetElement={<SongListContainerOption />}
-                  triggerEl={<VerticalThreeDots />}
-                />
-              </MoreOptionContext>
+              <ListOption list={songs} />
             </div>
           </ListContainer>
 
-          <EditableAudiosContainer playlistId={id} description={description} />
+          <EditablePageTrackItemContainer
+            playlistId={id}
+            description={description}
+          />
         </ContextSongListContainer>
       </div>
     </HydrationBoundary>
   );
 }
 
-export default OwnEdit;
+export default OwnEditable;

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { useDataContext } from "@/lib/MediaSource/ContextMedia";
 
-function AudioCurImg() {
+function AudioFullImg() {
   const { cover_url, name } = useDataContext();
 
   return (
@@ -16,4 +16,4 @@ function AudioCurImg() {
   );
 }
 
-export default AudioCurImg;
+export default AudioFullImg;

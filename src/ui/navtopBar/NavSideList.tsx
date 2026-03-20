@@ -2,28 +2,28 @@
 import OverLay from "./OverLay";
 import NavSideLink from "./NavSideLink";
 import { ReactNode, useRef, useState } from "react";
-import NavListUlWrapper from "./NavListUlWrapper";
 import { ListMusic, Menu } from "lucide-react";
 import IconWrapper from "../general/IconWrapper";
 
 import NavSideLinkNotOpen from "./NavSideLinkNotOpen";
-import PlaylistAdd from "./PlaylistAdd";
-import PlaylistFolderContainer from "./PlaylistFolderContainer";
 import { useTranslations } from "next-intl";
 import ContextContainerHeight from "../Footer/audioFull/ContextContainerHeight";
+import LibraryListItemContainer from "./LibraryListItemContainer";
+import NavSideListOpenWrapper from "./NavSideListOpenWrapper";
+import PlaylistCreate from "./PlaylistCreate";
 
-interface childrenProp {
+interface NavSideListProps {
   childrenExplore: ReactNode;
   childrenLive: ReactNode;
   childrenPlaylist: ReactNode;
   childrenLogo: ReactNode;
 }
-function NavList({
+function NavSideList({
   childrenExplore,
   childrenLive,
   childrenPlaylist,
   childrenLogo,
-}: childrenProp) {
+}: NavSideListProps) {
   const b = useTranslations("block");
   const containerHeightRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
@@ -58,7 +58,7 @@ function NavList({
         </div>
       </ul>
 
-      <NavListUlWrapper
+      <NavSideListOpenWrapper
         open={open}
         setOpen={setOpen}
         childrenLogo={childrenLogo}
@@ -88,19 +88,19 @@ function NavList({
                 <IconWrapper size="large" Icon={ListMusic} />
               </div>
             </NavSideLink>
-            <PlaylistAdd stackNum={1} />
+            <PlaylistCreate stackNum={1} />
           </div>
           <ContextContainerHeight containerHeightRef={containerHeightRef}>
             <div className="w-full h-full" ref={containerHeightRef}>
-              {open && <PlaylistFolderContainer />}
+              {open && <LibraryListItemContainer />}
             </div>
           </ContextContainerHeight>
         </div>
-      </NavListUlWrapper>
+      </NavSideListOpenWrapper>
 
       {open && <OverLay setOpen={setOpen} className="bg-overlay" />}
     </div>
   );
 }
 
-export default NavList;
+export default NavSideList;

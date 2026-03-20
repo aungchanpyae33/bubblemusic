@@ -4,7 +4,7 @@ import type { listInfo } from "../../../database.types-fest";
 import MoreOption from "../trackComponent/MoreOption";
 import SongListContainerOption from "../general/optionBox/SongListContainerOption";
 import ContextSongListContainer from "../playlist/playlistOption/ContextSongListContainer";
-import VerticalThreeDots from "../general/icon/VerticalThreeDots";
+import VerticalThreeDots from "../general/ThreeDot/VerticalThreeDots";
 interface ListOptionProps {
   list: listInfo;
 }

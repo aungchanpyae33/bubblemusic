@@ -2,7 +2,7 @@ import type { SongInfo } from "../../../../database.types-fest";
 import SingleItemSong from "../SingleItemRow/SingleItemSong";
 import type { GetAllMediaItems } from "@/database/data-types-return";
 
-function ListItemContainer({
+function ListItemUpFaceContainer({
   songs,
 }: {
   songs: GetAllMediaItems["trendingSongs"];
@@ -25,4 +25,4 @@ function ListItemContainer({
   );
 }
 
-export default ListItemContainer;
+export default ListItemUpFaceContainer;

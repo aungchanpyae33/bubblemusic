@@ -1,7 +1,7 @@
+import { outputRelatedType } from "@/lib/ouputRelatedType";
 import type { Artist, MediaItemType } from "../../../../database.types-fest";
 import ArtistWrapper from "../ArtistWrapper";
 import ToolTip from "../ToolTip";
-import { outputRelatedType } from "@/lib/prototypeOuputRelatedType";
 
 interface ListRowItemInfoProps {
   name: string;

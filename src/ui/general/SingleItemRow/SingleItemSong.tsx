@@ -8,7 +8,7 @@ import SingleItemRow from "./SingleItemRow";
 import MoreOptionContext from "@/ui/trackComponent/MoreOptionContext";
 import MoreOption from "@/ui/trackComponent/MoreOption";
 import TrackItemContainer from "@/ui/trackComponent/TrackItemContainer";
-import VerticalThreeDots from "../icon/VerticalThreeDots";
+import VerticalThreeDots from "../ThreeDot/VerticalThreeDots";
 
 function SingleItemSong({ song }: { song: SongInfo }) {
   return (

@@ -5,12 +5,12 @@ import { useQuery } from "@tanstack/react-query";
 
 function ConditonalRenderPlaylist({
   id,
-  OwnEdit,
-  View,
+  OwnEditable,
+  ViewAsOther,
 }: {
   id: string;
-  OwnEdit: React.JSX.Element;
-  View: React.JSX.Element;
+  OwnEditable: React.JSX.Element;
+  ViewAsOther: React.JSX.Element;
 }) {
   const { data: queryData, error: queryError } = useQuery({
     queryKey: ["user-library"],
@@ -22,7 +22,7 @@ function ConditonalRenderPlaylist({
   const { userLib } = data;
   if (!userLib) return;
   const { source } = userLib.byId[id] ?? { source: "none" };
-  return source === "create" ? OwnEdit : View;
+  return source === "create" ? OwnEditable : ViewAsOther;
 }
 
 export default ConditonalRenderPlaylist;

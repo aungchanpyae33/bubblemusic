@@ -12,7 +12,7 @@ import ToolTip from "@/ui/general/ToolTip";
 import LyricPaddingBlock from "./LyricPaddingBlock";
 import Queue from "@/ui/Queue/Queue";
 import ContextContainerHeight from "./ContextContainerHeight";
-function AudioFullInfoWrapper({ children }: { children: React.ReactNode }) {
+function AudioFullUpperWrapper({ children }: { children: React.ReactNode }) {
   const showBlock = useShowBlock((state: ShowBlock) => state.showBlock);
   const setShowBlock = useShowBlock(
     (state: ShowBlockAction) => state.setShowBlock,
@@ -127,4 +127,4 @@ function AudioFullInfoWrapper({ children }: { children: React.ReactNode }) {
   );
 }
 
-export default AudioFullInfoWrapper;
+export default AudioFullUpperWrapper;

@@ -2,7 +2,7 @@ import ListGeneralHeader from "@/ui/albumContainer/ListGeneralHeader";
 import { getTranslations } from "next-intl/server";
 import React from "react";
 
-async function ListItemScrollHz({
+async function ListItemUpFaceGroup({
   children,
   description,
 }: {
@@ -23,4 +23,4 @@ async function ListItemScrollHz({
   );
 }
 
-export default ListItemScrollHz;
+export default ListItemUpFaceGroup;

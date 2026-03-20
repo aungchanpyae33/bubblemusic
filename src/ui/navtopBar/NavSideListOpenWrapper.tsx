@@ -5,18 +5,18 @@ import FocusTrap from "../Footer/audioFull/FocusTrap";
 import MoreOptionStackContext from "../trackComponent/MoreOptionStackContext";
 import useFocusOnOpen from "@/lib/CustomHooks/useFocusOnOpen";
 
-interface NavListUlWrapperProp {
+interface NavSideListOpenWrapperProp {
   open: boolean;
   setOpen: React.Dispatch<SetStateAction<boolean>>;
   children: ReactNode;
   childrenLogo: ReactNode;
 }
-function NavListUlWrapper({
+function NavSideListOpenWrapper({
   open,
   setOpen,
   children,
   childrenLogo,
-}: NavListUlWrapperProp) {
+}: NavSideListOpenWrapperProp) {
   const ulRef = useRef<HTMLUListElement>(null);
   useFocusOnOpen(open, ulRef);
   return (
@@ -52,4 +52,4 @@ function NavListUlWrapper({
   );
 }
 
-export default NavListUlWrapper;
+export default NavSideListOpenWrapper;

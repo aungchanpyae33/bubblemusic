@@ -13,7 +13,7 @@ import useFocusOnOpen from "@/lib/CustomHooks/useFocusOnOpen";
 import { useTranslations } from "next-intl";
 import CheckTypeCreate from "./createPlaylist/CheckType/CheckTypeCreate";
 
-function PlaylistAdd({ stackNum }: { stackNum: number }) {
+function PlaylistCreate({ stackNum }: { stackNum: number }) {
   const b = useTranslations("block");
   const queryClient = useQueryClient();
   const { stack, setStack } = useMoreOptionStackContext();
@@ -93,4 +93,4 @@ function PlaylistAdd({ stackNum }: { stackNum: number }) {
   );
 }
 
-export default PlaylistAdd;
+export default PlaylistCreate;

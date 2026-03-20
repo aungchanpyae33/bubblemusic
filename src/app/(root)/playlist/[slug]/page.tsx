@@ -1,7 +1,7 @@
 import { getPlaylistSongs } from "@/database/data";
 import ConditonalRenderPlaylist from "@/ui/playlist/ConditonalRenderPlaylist";
-import OwnEdit from "@/ui/playlist/OwnEdit";
-import View from "@/ui/playlist/View";
+import OwnEditable from "@/ui/playlist/OwnEditable";
+import ViewAsOther from "@/ui/playlist/ViewAsOther";
 import { QueryClient } from "@tanstack/react-query";
 
 async function page(props: { params: Promise<{ slug: string }> }) {
@@ -18,15 +18,15 @@ async function page(props: { params: Promise<{ slug: string }> }) {
   return (
     <ConditonalRenderPlaylist
       id={params.slug}
-      OwnEdit={
-        <OwnEdit
+      OwnEditable={
+        <OwnEditable
           queryClient={queryClient}
           songs={songs}
           id={params.slug}
           description={"playlist"}
         />
       }
-      View={<View songs={songs} />}
+      ViewAsOther={<ViewAsOther songs={songs} />}
     />
   );
 }

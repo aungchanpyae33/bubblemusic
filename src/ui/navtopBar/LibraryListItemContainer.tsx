@@ -4,7 +4,7 @@ import { Virtuoso } from "react-virtuoso";
 import SingleItemList from "../general/SingleItemRow/SingleItemList";
 import VirtuosoLoaderSingleItemList from "../general/VirtuosoLoader/VirtuosoLoaderSingleItemList";
 
-function PlaylistFolderContainer() {
+function LibraryListItemContainer() {
   const { data: queryData, error: queryError } = useQuery({
     queryKey: ["user-library"],
     queryFn: () => getUserLibClient(),
@@ -14,7 +14,7 @@ function PlaylistFolderContainer() {
   const { userLib } = data;
   if (!userLib) return;
   return (
-    <div className=" relative  w-full h-full ">
+    <div className=" relative  w-full h-full">
       <VirtuosoLoaderSingleItemList length={userLib.idArray.length} />
       <div className=" w-full h-full will-change-scroll  ">
         <Virtuoso
@@ -41,4 +41,4 @@ function PlaylistFolderContainer() {
   );
 }
 
-export default PlaylistFolderContainer;
+export default LibraryListItemContainer;

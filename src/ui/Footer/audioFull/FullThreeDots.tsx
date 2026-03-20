@@ -3,7 +3,7 @@ import {
   currentSongPlaylist,
   useRepeatAndCurrentPlayList,
 } from "@/lib/zustand";
-import VerticalThreeDots from "@/ui/general/icon/VerticalThreeDots";
+import VerticalThreeDots from "@/ui/general/ThreeDot/VerticalThreeDots";
 import ListRowTrackOptionAndLike from "@/ui/general/ListRow/ListRowTrackOptionAndLike";
 import QueueItemContainer from "@/ui/Queue/QueueItemContainer";
 import MoreOption from "@/ui/trackComponent/MoreOption";

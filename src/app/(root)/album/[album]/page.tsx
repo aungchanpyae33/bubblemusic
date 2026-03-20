@@ -1,5 +1,5 @@
 import { getAlbumSongs } from "@/database/data";
-import AudiosContainer from "@/ui/albumContainer/AudiosContainer";
+import PageTrackItemContainer from "@/ui/albumContainer/PageTrackItemContainer";
 import ListContainer from "@/ui/general/ListContainerOption/ListContainer";
 import ListContainerAddToLibrary from "@/ui/general/ListContainerOption/ListContainerAddToLibrary";
 import ListContainerPlayBack from "@/ui/general/ListContainerOption/ListContainerPlayBack";
@@ -28,7 +28,7 @@ async function page(props: { params: Promise<{ album: string }> }) {
         </ListContainer>
       </ContextSongListContainer>
 
-      <AudiosContainer description="album" listSong={songs} />
+      <PageTrackItemContainer description="album" listSong={songs} />
     </div>
   );
 }
