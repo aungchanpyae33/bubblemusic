@@ -1,7 +1,9 @@
 import { EllipsisVertical } from "lucide-react";
 import { useVirtuosoLoader } from "@/lib/CustomHooks/useVirtuosoLoader";
 import IconWrapper from "../IconWrapper";
+const widths = ["w-[60%]", "w-[50%]", "w-[43%]", "w-[70%]"];
 
+const getWidth = (i: number) => widths[i % widths.length];
 function VirtuosoLoaderSingleItemList({ length }: { length: number }) {
   const count = useVirtuosoLoader({ length });
   return (
@@ -15,9 +17,11 @@ function VirtuosoLoaderSingleItemList({ length }: { length: number }) {
             <div className="size-12 bg-placeholder"> </div>
           </div>
 
-          <div className=" flex-col overflow-hidden flex justify-center gap-1">
-            <div className=" w-16 h-3 rounded-md bg-placeholder"></div>
-            <div className=" w-28 h-3 rounded-md bg-placeholder"></div>
+          <div className=" flex-col overflow-hidden flex justify-center gap-3">
+            <div className={`${getWidth(i)} h-3 rounded-md bg-placeholder`} />
+            <div
+              className={`${getWidth(i + 1)} h-3 rounded-md bg-placeholder opacity-85 `}
+            />
           </div>
 
           <div className=" flex items-center justify-center">
