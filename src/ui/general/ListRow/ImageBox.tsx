@@ -49,7 +49,7 @@ interface ImageBoxProps {
 function ImageBox({ type, name, cover_url, children }: ImageBoxProps) {
   return (
     <div className="flex items-center justify-center  ">
-      <div className=" relative  size-12">
+      <div className=" relative z-0  size-12">
         <ConditionalImageRender type={type} cover_url={cover_url} name={name} />
         {children}
       </div>
