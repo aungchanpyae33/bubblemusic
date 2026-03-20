@@ -1,14 +1,13 @@
-import { useAudioElementContext } from "@/ui/Footer/audio/AudioWrapper";
+import { RefObject } from "react";
 
-export const HlsDirectPlay = (url: string) => {
-  const { audioElRef } = useAudioElementContext();
-  if (!audioElRef!.current) return;
+export const hlsDirectPlay = (
+  url: string,
+  audioElRef: RefObject<HTMLAudioElement | null>,
+) => {
+  // play is already trigger by click with fun called audioPlayTriggerIOS as safari reject audio play if play does not come from click event
+  if (!audioElRef.current) return;
   const m3u8Url = url.replace("init.mp4", "media.m3u8");
-  audioElRef.current.load();
+
   audioElRef.current.src = m3u8Url;
-  audioElRef.current.onloadedmetadata = () => {
-    audioElRef
-      .current!.play()
-      .catch((err) => console.error("Playback failed:", err));
-  };
+  audioElRef.current.load();
 };

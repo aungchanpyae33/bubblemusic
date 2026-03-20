@@ -4,8 +4,8 @@ import { getRemainingBufferDuration } from "../MediaSource/getRemainBuffer";
 import { useRepeatAndCurrentPlayList } from "../zustand";
 import throttle from "../throttle";
 import { fetchInitSegment } from "../MediaSource/fetchInitSegment";
-import { HlsDirectPlay } from "../HlsDirectPlay";
 import { useAudioElementContext } from "@/ui/Footer/audio/AudioWrapper";
+import { hlsDirectPlay } from "../HlsDirectPlay";
 const bufferThreshold = 10;
 const mimeType_audio = "audio/mp4";
 const codecs_audio = "mp4a.40.2";
@@ -16,7 +16,7 @@ export interface FetchingState {
 }
 
 // this function check whether media source is supported or not first , then check whether native hls is supported or not
-export const shouldUseNativeHLS = () => {
+export function shouldUseNativeHLS() {
   if (typeof window === "undefined") return false;
 
   if (window.MediaSource) {
@@ -29,7 +29,7 @@ export const shouldUseNativeHLS = () => {
     audio.canPlayType("audio/mpegurl") !== "";
 
   return isNativeCapable;
-};
+}
 
 const useMediaSourceBuffer = (
   url: string,
@@ -63,7 +63,7 @@ const useMediaSourceBuffer = (
   useEffect(() => {
     if (!url) return;
     if (shouldUseNativeHLS()) {
-      HlsDirectPlay(url);
+      hlsDirectPlay(url, audioElRef);
       return;
     }
     if (!window.MediaSource) return;

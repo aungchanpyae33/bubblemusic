@@ -25,6 +25,7 @@ import TogglePlayButton from "@/ui/general/TogglePlayButton/TogglePlayButton";
 import { SongInfo } from "../../../../database.types-fest";
 import { useAudioElementContext } from "@/ui/Footer/audio/AudioWrapper";
 import { PlayButtonOverlayOnImage } from "@/lib/StyleUtils/tailwindStyle";
+import { audioPlayTriggerIos } from "@/lib/audioPlayTriggerIOS";
 
 interface ToggleWithoutListProp {
   song: SongInfo;
@@ -114,7 +115,7 @@ const ToggleWithoutList = ({ song }: ToggleWithoutListProp) => {
             artists: song.artists,
             cover_url: song.cover_url,
           };
-          audioElRef.current!.play().catch(() => {});
+          audioPlayTriggerIos(audioElRef);
           updateSongCu(data);
           setPlaylistId({
             [playlistId || ""]: [playlistId, song.id],

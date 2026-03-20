@@ -27,6 +27,8 @@ import type {
 } from "@/database/data-types-return";
 import TogglePlayButton from "../general/TogglePlayButton/TogglePlayButton";
 import { MediaItemType } from "../../../database.types-fest";
+import { audioPlayTriggerIos } from "@/lib/audioPlayTriggerIOS";
+import { useAudioElementContext } from "../Footer/audio/AudioWrapper";
 const hasData = async (
   dataFromFetch: RefObject<Promise<ListSongsReturn> | null>,
   listId: string,
@@ -82,6 +84,7 @@ function DirectPlayButton({ listId, type, className }: DirectPlayButtonProps) {
   const setIsFallBackAudio = useInstantFallBackAudioFull(
     (state: isFallBackAudioActions) => state.setIsFallBackAudio,
   );
+  const { audioElRef } = useAudioElementContext();
   async function getData() {
     const returnData = await hasData(dataFromFetch, listId, type);
     const { data, error } = returnData;
@@ -96,6 +99,10 @@ function DirectPlayButton({ listId, type, className }: DirectPlayButtonProps) {
     setIsFallBackAudio(); //fallback dynamic import
     //to reset auto fetch key after playing autogenerate playlist,
     FetchSongsListIdAction(undefined);
+
+    // need to add before async fetch call as sadari will reject the trigger after awit fetch call
+    audioPlayTriggerIos(audioElRef);
+
     const playlistData = !playlistId ? await getData() : playListArray;
     if (playlistData && playlistData.songs) {
       const {
