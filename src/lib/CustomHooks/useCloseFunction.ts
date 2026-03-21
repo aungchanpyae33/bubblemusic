@@ -1,7 +1,7 @@
+import { useDeviceContext } from "@/Context/ContextDeviceCheck";
+import { useMoreOptionStackContext } from "@/Context/ContextMoreOptionStack";
+import { useMoreOptionUniqueContext } from "@/Context/ContextMoreOptionUnique";
 import React, { RefObject, useEffect } from "react";
-import { useDeviceContext } from "../DeviceContext/ContextDeviceCheck";
-import { useMoreOptionStackContext } from "@/ui/trackComponent/MoreOptionStackContext";
-import { useMoreOptionUniqueContext } from "@/ui/trackComponent/MoreOptionUniqueContext";
 
 // this function do close the portal when escape is pressed , it also manage the stack for inner child components
 function useCloseFunctoion(

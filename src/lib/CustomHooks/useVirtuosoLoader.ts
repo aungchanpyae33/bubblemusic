@@ -1,4 +1,4 @@
-import { useContainerHeightContext } from "@/ui/Footer/audioFull/ContextContainerHeight";
+import { useContainerHeightContext } from "@/Context/ContextContainerHeight";
 
 const itemHeight = 64;
 export const useVirtuosoLoader = ({ length }: { length: number }) => {

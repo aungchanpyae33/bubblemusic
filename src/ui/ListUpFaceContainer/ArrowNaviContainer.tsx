@@ -1,6 +1,6 @@
 "use client";
 
-import { useContainerContext } from "../albumContainer/ContextContainer";
+import { useContainerContext } from "@/Context/ContextContainer";
 
 function ArrowNaviContainer() {
   const { arrowNaviRef } = useContainerContext();

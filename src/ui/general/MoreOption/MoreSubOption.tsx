@@ -1,0 +1,59 @@
+"use client";
+import { useMemo, useRef } from "react";
+import { createPortal } from "react-dom";
+import clsx from "clsx";
+import useTriggerButtonSub from "@/lib/CustomHooks/useTriggerButtonSub";
+import ToggleSubContent from "./ToggleSubContent";
+import { useDisableScroll } from "@/lib/CustomHooks/useDisableScroll";
+import { generateUUID } from "@/lib/GenerateUUID";
+import ContextMoreOptionUnique from "@/Context/ContextMoreOptionUnique";
+interface MoreOptionProps extends React.ComponentProps<"button"> {
+  targetElement: React.ReactNode;
+  triggerEl: React.ReactNode;
+  stackNum: number;
+}
+function MoreSubOption({
+  className,
+  targetElement,
+  triggerEl,
+  stackNum,
+}: MoreOptionProps) {
+  const parentRef = useRef<HTMLButtonElement>(null);
+  const uuid = useMemo(() => generateUUID(), []);
+  const [stayShow] = useTriggerButtonSub(parentRef, stackNum, uuid);
+  useDisableScroll(stayShow);
+
+  return (
+    <div>
+      <button
+        ref={parentRef}
+        className={clsx(
+          `w-full h-full bg-surface-2 rounded-md flex justify-center ${className}`,
+          {
+            "bg-transparent": !stayShow,
+          },
+        )}
+      >
+        {triggerEl}
+      </button>
+
+      {stayShow && (
+        <>
+          {createPortal(
+            <ContextMoreOptionUnique>
+              <ToggleSubContent
+                stayShow={stayShow}
+                parentRef={parentRef}
+                stackNum={stackNum}
+              >
+                {targetElement}
+              </ToggleSubContent>
+            </ContextMoreOptionUnique>,
+            document.body,
+          )}
+        </>
+      )}
+    </div>
+  );
+}
+export default MoreSubOption;

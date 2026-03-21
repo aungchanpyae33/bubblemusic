@@ -1,12 +1,12 @@
 import { getUserPage } from "@/database/data";
 import VerticalThreeDots from "@/ui/general/ThreeDot/VerticalThreeDots";
 import ListContainer from "@/ui/general/ListContainerOption/ListContainer";
-import ProfileOption from "@/ui/general/optionBox/ProfileOption";
 import ListUpperWrapper from "@/ui/ListContainer/ListUpperWrapper";
 import ListUpFaceGroup from "@/ui/ListUpFaceContainer/ListUpFaceGroup";
-import ContextSongListContainer from "@/ui/playlist/playlistOption/ContextSongListContainer";
-import MoreOption from "@/ui/trackComponent/MoreOption";
-import MoreOptionContext from "@/ui/trackComponent/MoreOptionContext";
+import ContextSongListContainer from "@/Context/ContextSongListContainer";
+import ContextMoreOption from "@/Context/ContextMoreOption";
+import ProfileOption from "@/ui/Option/ProfileOption/ProfileOption";
+import MoreOption from "@/ui/general/MoreOption/MoreOption";
 async function page(props: { params: Promise<{ slug: string }> }) {
   const params = await props.params;
 
@@ -19,15 +19,15 @@ async function page(props: { params: Promise<{ slug: string }> }) {
   return (
     <div className=" w-full">
       <ListUpperWrapper list={profile} />
-      <ListContainer className="h-[50px]">
+      <ListContainer>
         <div>
           <ContextSongListContainer id={profile.id} list={profile}>
-            <MoreOptionContext>
+            <ContextMoreOption>
               <MoreOption
                 targetElement={<ProfileOption />}
                 triggerEl={<VerticalThreeDots />}
               />
-            </MoreOptionContext>
+            </ContextMoreOption>
           </ContextSongListContainer>
         </div>
       </ListContainer>

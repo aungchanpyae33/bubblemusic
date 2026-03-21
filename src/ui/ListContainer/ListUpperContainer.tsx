@@ -1,12 +1,12 @@
 import type { ListSongPage } from "@/database/data-types-return";
 import type { listInfo } from "../../../database.types-fest";
-import type { SongListValue } from "../playlist/playlistOption/ContextSongListContainer";
 import clsx from "clsx";
 import { DeviceFromUserAgentReturn } from "@/lib/DeviceCheck";
 import { _Translator } from "next-intl";
-import InfoList from "../searchPage/topResult/InfoList";
 import ListImage from "./ListImage";
 import ListUpperName from "./ListUpperName";
+import type { SongListValue } from "@/Context/ContextSongListContainer";
+import InfoList from "../general/ListInfoGeneral/InfoList";
 
 interface ListUpperContainerProps {
   list: SongListValue | listInfo | ListSongPage;

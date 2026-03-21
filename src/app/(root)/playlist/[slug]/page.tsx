@@ -1,7 +1,8 @@
 import { getPlaylistSongs } from "@/database/data";
-import ConditonalRenderPlaylist from "@/ui/playlist/ConditonalRenderPlaylist";
-import OwnEditable from "@/ui/playlist/OwnEditable";
-import ViewAsOther from "@/ui/playlist/ViewAsOther";
+import ConditonalRenderPlaylist from "@/ui/EditablePlaylist/ConditonalRenderPlaylist";
+import OwnEditable from "@/ui/EditablePlaylist/OwnEditable";
+import ListPageView from "@/ui/general/SongPageView/ListPageView";
+import PageTrackItemContainer from "@/ui/general/SongPageView/PageTrackItemContainer";
 import { QueryClient } from "@tanstack/react-query";
 
 async function page(props: { params: Promise<{ slug: string }> }) {
@@ -26,7 +27,11 @@ async function page(props: { params: Promise<{ slug: string }> }) {
           description={"playlist"}
         />
       }
-      ViewAsOther={<ViewAsOther songs={songs} />}
+      ViewAsOther={
+        <ListPageView songs={songs}>
+          <PageTrackItemContainer description="playlist" listSong={songs} />
+        </ListPageView>
+      }
     />
   );
 }

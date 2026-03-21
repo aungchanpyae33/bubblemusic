@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { useScrollArrows } from "@/lib/CustomHooks/useScrollArrow";
 import { isTouchPointer } from "@/lib/isTouchPointer";
-import { useContainerContext } from "../albumContainer/ContextContainer";
 import ScrollRightButton from "./ScrollRightButton";
 import ScrollLeftButton from "./ScrollLeftButton";
+import { useContainerContext } from "@/Context/ContextContainer";
 
 function ListUpFaceContainerWrapper({
   children,

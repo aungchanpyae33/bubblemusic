@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "../../globals.css";
-import NavBar from "@/ui/navtopBar/NavBar";
+import NavBar from "@/ui/NavtopBar/NavBar";
 import { NextIntlClientProvider } from "next-intl";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -9,12 +9,11 @@ const inter = Inter({ subsets: ["latin"] });
 import { Suspense } from "react";
 import Main from "@/ui/Main/Main";
 import Queue from "@/ui/Queue/Queue";
-import AudioFooterBar from "@/ui/Footer/AudioFooterBar";
 import Footer from "@/ui/Footer/Footer";
 import QueueWrapper from "@/ui/Queue/QueueWrapper";
 import QueryClientPrv from "@/lib/tanstack/QueryClient";
 import BeforeLoad from "@/ui/warning/BeforeLoad";
-import ModalBox from "@/ui/general/modalBox/ModalBox";
+import ModalBox from "@/ui/general/ModalAction/ModalBox";
 import { ThemeProvider } from "next-themes";
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -30,12 +29,12 @@ export const metadata: Metadata = {
   manifest: "/site.webmanifest",
 };
 import NextTopLoader from "nextjs-toploader";
-
-import AudioWrapper from "@/ui/Footer/audio/AudioWrapper";
 import LibandLikeHyration from "@/lib/HydrationData/LibandLikeHyration";
 import LoadingAudioPlayer from "@/ui/loading/LoadingAudioPlayer";
-import DeviceCheckFetcher from "@/lib/DeviceContext/DeviceCheckFetcher";
+import DeviceCheckFetcher from "@/lib/DeviceCheck/DeviceCheckFetcher";
 import QueueNotFullScreen from "@/ui/Queue/QueueNotFullScreen";
+import ContextAudioWrapper from "@/Context/ContextAudioWrapper";
+import AudioFooterBar from "@/ui/AudioFooterBar/AudioFooterBar";
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -75,7 +74,7 @@ export default function RootLayout({
                       zIndex={1600}
                       showAtBottom={false}
                     />
-                    <AudioWrapper>
+                    <ContextAudioWrapper>
                       <BeforeLoad />
                       <NavBar />
                       <div className="flex flex-1 overflow-hidden relative">
@@ -92,7 +91,7 @@ export default function RootLayout({
                       <Suspense fallback={<LoadingAudioPlayer />}>
                         <AudioFooterBar />
                       </Suspense>
-                    </AudioWrapper>
+                    </ContextAudioWrapper>
                   </LibandLikeHyration>
                 </DeviceCheckFetcher>
               </NextIntlClientProvider>

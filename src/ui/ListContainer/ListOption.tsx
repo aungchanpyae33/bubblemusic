@@ -1,17 +1,17 @@
 import { outputRelative } from "@/lib/outputRelative";
-import MoreOptionContext from "../trackComponent/MoreOptionContext";
 import type { listInfo } from "../../../database.types-fest";
-import MoreOption from "../trackComponent/MoreOption";
-import SongListContainerOption from "../general/optionBox/SongListContainerOption";
-import ContextSongListContainer from "../playlist/playlistOption/ContextSongListContainer";
 import VerticalThreeDots from "../general/ThreeDot/VerticalThreeDots";
+import ContextMoreOption from "@/Context/ContextMoreOption";
+import ContextSongListContainer from "@/Context/ContextSongListContainer";
+import SongListContainerOption from "../Option/OptionUI/SongListContainerOption";
+import MoreOption from "../general/MoreOption/MoreOption";
 interface ListOptionProps {
   list: listInfo;
 }
 function ListOption({ list }: ListOptionProps) {
   return (
     <div className=" flex items-center justify-center ">
-      <MoreOptionContext
+      <ContextMoreOption
         relative={outputRelative(list.related_id, list.related_name, list.type)}
         type={list.type}
       >
@@ -23,7 +23,7 @@ function ListOption({ list }: ListOptionProps) {
             </ContextSongListContainer>
           }
         />
-      </MoreOptionContext>
+      </ContextMoreOption>
     </div>
   );
 }

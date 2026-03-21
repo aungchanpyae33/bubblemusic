@@ -1,14 +1,14 @@
-import ToggleHeartButton from "@/ui/trackComponent/ToggleHeartButton";
+import ToggleHeartButton from "@/ui/Track/ToggleHeartButton";
 import type { SongInfo } from "../../../../database.types-fest";
 import ImageBox from "../ListRow/ImageBox";
 import ListRowItemInfo from "../ListRow/ListRowItemInfo";
 import ListRowTrackOptionAndLike from "../ListRow/ListRowTrackOptionAndLike";
 import ToggleWithoutList from "../TogglePlayButton/ToggleWithoutList";
 import SingleItemRow from "./SingleItemRow";
-import MoreOptionContext from "@/ui/trackComponent/MoreOptionContext";
-import MoreOption from "@/ui/trackComponent/MoreOption";
-import TrackItemContainer from "@/ui/trackComponent/TrackItemContainer";
 import VerticalThreeDots from "../ThreeDot/VerticalThreeDots";
+import ContextMoreOption from "@/Context/ContextMoreOption";
+import TrackItemContainer from "@/ui/Option/TrackOption/TrackItemContainer";
+import MoreOption from "../MoreOption/MoreOption";
 
 function SingleItemSong({ song }: { song: SongInfo }) {
   return (
@@ -27,12 +27,12 @@ function SingleItemSong({ song }: { song: SongInfo }) {
           <ToggleHeartButton songId={song.song_id} />
         </div>
         <div className="flex items-center justify-center">
-          <MoreOptionContext relative={song.artists} type={song.type}>
+          <ContextMoreOption relative={song.artists} type={song.type}>
             <MoreOption
               targetElement={<TrackItemContainer />}
               triggerEl={<VerticalThreeDots />}
             />
-          </MoreOptionContext>
+          </ContextMoreOption>
         </div>
       </ListRowTrackOptionAndLike>
     </SingleItemRow>

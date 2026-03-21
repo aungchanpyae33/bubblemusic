@@ -1,7 +1,7 @@
-import ContextInfoTrack from "@/ui/trackComponent/ContextInfoTrack";
+import ContextInfoTrack from "@/Context/ContextInfoTrack";
 import type { SongInfo } from "../../../../database.types-fest";
-import ContextLike from "@/ui/trackComponent/ContextLike";
 import { ReactNode } from "react";
+import ContextLike from "@/Context/ContextLike";
 
 interface ListRowTrackOptionAndLikeProps {
   song: SongInfo;

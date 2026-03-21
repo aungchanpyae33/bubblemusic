@@ -2,7 +2,7 @@
 
 import { addLike } from "@/actions/addLike";
 import { removeLike } from "@/actions/removeLike";
-import { useLikeContext } from "@/ui/trackComponent/ContextLike";
+import { useLikeContext } from "@/Context/ContextLike";
 import { ReactNode } from "react";
 interface ToggleLikeWrapperProps {
   songId: string;

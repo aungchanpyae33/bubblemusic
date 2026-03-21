@@ -1,14 +1,14 @@
 "use client";
-import MoreOptionContext from "../trackComponent/MoreOptionContext";
-import MoreOption from "../trackComponent/MoreOption";
 import type { JwtPayload } from "@supabase/supabase-js";
-import UserProfileContainer from "./UserProfileContainer";
+import ContextMoreOption from "@/Context/ContextMoreOption";
+import UserProfileContainer from "../Option/UserOwnProfileOption/UserProfileContainer";
+import MoreOption from "../general/MoreOption/MoreOption";
 
 function UserProfile({ user }: { user: JwtPayload }) {
   const userName = user.user_metadata.first_name.slice(0, 1);
   return (
     <div className=" relative  z-10">
-      <MoreOptionContext>
+      <ContextMoreOption>
         <MoreOption
           staticDrop={true}
           triggerEl={
@@ -18,7 +18,7 @@ function UserProfile({ user }: { user: JwtPayload }) {
           }
           targetElement={<UserProfileContainer user={user} />}
         />
-      </MoreOptionContext>
+      </ContextMoreOption>
     </div>
   );
 }

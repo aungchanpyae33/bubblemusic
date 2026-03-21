@@ -1,6 +1,6 @@
-import ListGeneralHeader from "@/ui/albumContainer/ListGeneralHeader";
 import { getTranslations } from "next-intl/server";
 import React from "react";
+import ListGeneralHeader from "../ListInfoGeneral/ListGeneralHeader";
 
 async function ListItemUpFaceGroup({
   children,
