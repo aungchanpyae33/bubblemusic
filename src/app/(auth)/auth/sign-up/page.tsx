@@ -1,11 +1,16 @@
-import { SignUpForm } from "@/components/sign-up-form";
+import AuthContainer from "@/ui/auth/AuthContainer";
+import BrandTitle from "@/ui/auth/BrandTitle";
+import SignInText from "@/ui/auth/signupForm/SignInText";
+import SignUpFormContainer from "@/ui/auth/signupForm/SignUpFormContainer";
+import TitleSignUp from "@/ui/auth/signupForm/TitleSignUp";
 
 export default function Page() {
   return (
-    <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
-      <div className="w-full max-w-sm">
-        <SignUpForm />
-      </div>
-    </div>
+    <AuthContainer>
+      <BrandTitle />
+      <TitleSignUp />
+      <SignUpFormContainer />
+      <SignInText />
+    </AuthContainer>
   );
 }

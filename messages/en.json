@@ -74,8 +74,27 @@
   "Loading": {
     "loadingLyric": "Loading the lyric..."
   },
-  "Error": {
-    "errorLyric": "There was an error retrieving the lyrics"
+
+  "ErrorMsg": {
+    "errorLyric": "There was an error retrieving the lyrics",
+    "required": "{label} field needs to be filled in order to sumbit",
+    "noMBTI": "no MBTI fount",
+    "maxLength": "Max length is {max} characters",
+    "minLength": "Max length is {min} characters",
+    "minLengthPassword": "Password must be at least {min} characters",
+    "passwordComplexity": "Password must include uppercase, lowercase, number, symbol and at least {min} characters",
+    "onlyNumbers": "Only  English numbers are allowed",
+    "invalidYear": "Please enter the correct year of birth",
+    "outOfRangeYear": "Please enter a year between 1900 and {currentYear}",
+    "wrongEmail": "Please provide valid email address",
+    "wentWrong": "Something went wrong",
+    "alreadyEmail": "This email is alreay exist",
+    "notConfirmEmail": "Please comfirm the email first",
+    "wrongCredentials": "The credentials you typed are incorrect",
+    "alreadyUser": "User is already exist. Please sign in",
+    "notFoundUser": "User does not exist. Please Sign up",
+    "notFieldChange": "Input field datas are not changed",
+    "wentWrongUploadImage": "There is something wrong with uploading the image"
   },
   "Warning": {
     "notice": "Notice",

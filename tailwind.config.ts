@@ -69,6 +69,7 @@ const config: Config = {
         borderFull: "var(--bordersecondary)",
         placeholder: "var(--placeholder)",
         pop: "var(--pop)",
+        error: "var(--error)",
         brand: "var(--brand)",
         surface: {
           1: "var(--surface-1)",

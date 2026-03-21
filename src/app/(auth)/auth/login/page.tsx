@@ -1,11 +1,16 @@
-import { LoginForm } from "@/components/login-form";
+import AuthContainer from "@/ui/auth/AuthContainer";
+import BrandTitle from "@/ui/auth/BrandTitle";
+import LoginFormContainer from "@/ui/auth/loginForm/LoginFormContainer";
+import SignUpText from "@/ui/auth/loginForm/SignUpText";
+import TitleLogin from "@/ui/auth/loginForm/TitleLogin";
 
 export default function Page() {
   return (
-    <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
-      <div className="w-full max-w-sm">
-        <LoginForm />
-      </div>
-    </div>
+    <AuthContainer>
+      <BrandTitle />
+      <TitleLogin />
+      <LoginFormContainer />
+      <SignUpText />
+    </AuthContainer>
   );
 }
