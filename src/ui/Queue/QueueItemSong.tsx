@@ -5,10 +5,10 @@ import ListRowItemInfo from "../general/ListRow/ListRowItemInfo";
 import ToggleWithoutList from "../general/TogglePlayButton/ToggleWithoutList";
 import SingleItemRow from "../general/SingleItemRow/SingleItemRow";
 import ListRowTrackOptionAndLike from "../general/ListRow/ListRowTrackOptionAndLike";
-import QueueItemContainer from "./QueueItemContainer";
 import VerticalThreeDots from "../general/ThreeDot/VerticalThreeDots";
-import MoreOption from "../trackComponent/MoreOption";
 import ContextMoreOption from "@/Context/ContextMoreOption";
+import QueueItemContainer from "../Option/QueuOption/QueueItemContainer";
+import MoreOption from "../general/MoreOption/MoreOption";
 
 interface QueueItemSongProps extends ComponentProps<"div"> {
   song: SongInfo;

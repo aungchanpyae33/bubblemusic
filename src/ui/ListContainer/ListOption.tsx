@@ -1,10 +1,10 @@
 import { outputRelative } from "@/lib/outputRelative";
 import type { listInfo } from "../../../database.types-fest";
-import MoreOption from "../trackComponent/MoreOption";
-import SongListContainerOption from "../general/optionBox/SongListContainerOption";
 import VerticalThreeDots from "../general/ThreeDot/VerticalThreeDots";
 import ContextMoreOption from "@/Context/ContextMoreOption";
 import ContextSongListContainer from "@/Context/ContextSongListContainer";
+import SongListContainerOption from "../Option/OptionUI/SongListContainerOption";
+import MoreOption from "../general/MoreOption/MoreOption";
 interface ListOptionProps {
   list: listInfo;
 }

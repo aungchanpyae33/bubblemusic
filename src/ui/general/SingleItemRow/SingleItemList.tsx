@@ -1,4 +1,3 @@
-import DirectPlayButton from "@/ui/playlist/DirectPlayButton";
 import type { listInfo } from "../../../../database.types-fest";
 import ImageBox from "../ListRow/ImageBox";
 import SingleItemRow from "./SingleItemRow";
@@ -6,6 +5,7 @@ import SingleItemInfo from "./SingleItemInfo";
 import ListOption from "@/ui/ListContainer/ListOption";
 import { PlayButtonOverlayOnImage } from "@/lib/StyleUtils/tailwindStyle";
 import { ComponentProps } from "react";
+import DirectPlayButton from "../TogglePlayButton/DirectPlayButton";
 interface SingleItemListProps extends ComponentProps<"div"> {
   list: listInfo;
 }

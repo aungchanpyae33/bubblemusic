@@ -1,10 +1,10 @@
 import { get } from "@/database/data";
-import RecentlyListContainer from "@/ui/albumContainer/RecentlyListContainer";
-import TapNavi from "@/ui/Home/TapNavi";
+import TapNavi from "@/ui/TapNavi/TapNavi";
 import type { GetRecent } from "@/database/data-types-return";
 import ListUpFaceGroup from "@/ui/ListUpFaceContainer/ListUpFaceGroup";
 import ListItemUpFaceGroup from "@/ui/general/ListItemUpFaceGroup/ListItemUpFaceGroup";
 import ListItemUpFaceContainer from "@/ui/general/ListItemUpFaceGroup/ListItemUpFaceContainer";
+import RecentlyListContainer from "@/ui/ListUpFaceContainer/RecentlyListContainer";
 
 async function page() {
   const { data, error } = await get();

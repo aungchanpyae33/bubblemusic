@@ -1,11 +1,11 @@
-import InfoSong from "./InfoSong";
-import InfoList from "./InfoList";
 import SearchContainer from "../SearchContainer";
 import UnderLineLinkHover from "@/ui/general/UnderLineLinkHover";
 import type { GetSearchPage } from "@/database/data-types-return";
 import { getTranslations } from "next-intl/server";
 import ListImage from "@/ui/ListContainer/ListImage";
 import ListUpperName from "@/ui/ListContainer/ListUpperName";
+import InfoSong from "@/ui/general/ListInfoGeneral/InfoSong";
+import InfoList from "@/ui/general/ListInfoGeneral/InfoList";
 
 async function TopResult({
   topResult,

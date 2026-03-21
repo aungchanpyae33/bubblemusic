@@ -1,9 +1,9 @@
 import SearchBar from "../searchBar/SearchBar";
 import UserInfo from "../user/UserInfo";
-import NavSideBar from "./NavSideBar";
 import { Suspense } from "react";
 import NoThankYouPreFetchLink from "../general/NoThankYouPreFetchLink";
 import Logo from "./Logo";
+import NavSideBar from "../NavSideBarUI/NavSideBar";
 function NavBar() {
   return (
     <nav className="navBarContainer bg-section flex w-full   h-[70px] z-10   items-center justify-between border-opacity-15  border-b border-seperate-soft ">

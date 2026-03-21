@@ -5,9 +5,9 @@ import type { listInfo } from "../../../database.types-fest";
 import ImageAttachedVertical from "../general/ThreeDot/ImageAttachedVertical";
 import ListOption from "../ListContainer/ListOption";
 import { DirectPlayButtonOverlayOnImage } from "@/lib/StyleUtils/tailwindStyle";
-import DirectPlayButton from "../playlist/DirectPlayButton";
 import ListImage from "../ListContainer/ListImage";
 import { outputRelatedType } from "@/lib/ouputRelatedType";
+import DirectPlayButton from "../general/TogglePlayButton/DirectPlayButton";
 
 interface ListUpFaceContainerProps {
   list: listInfo;

@@ -22,7 +22,7 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 import NextTopLoader from "nextjs-toploader";
-import DeviceCheckFetcher from "@/lib/DeviceContext/DeviceCheckFetcher";
+import DeviceCheckFetcher from "@/lib/DeviceCheck/DeviceCheckFetcher";
 import { NextIntlClientProvider } from "next-intl";
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
