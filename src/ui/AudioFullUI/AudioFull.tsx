@@ -14,7 +14,7 @@ import FullThreeDots from "./FullThreeDots";
 import AudioFullUpperWrapper from "./AudioFullUpperWrapper";
 import AudioFullImg from "./AudioFullImg";
 import { useMediaAudioFullContext } from "@/Context/ContextMediaAudioFull";
-import FocusTrap from "../general/FocusTrap";
+import { FocusTrap } from "focus-trap-react";
 import TimeIndicatorCur from "../AudioActionRelatedUI/Time/TimeIndicatorCur";
 import TimeIndicatorDur from "../AudioActionRelatedUI/Time/TimeIndicatorDur";
 import LyricToggleBtn from "../Lyric/LyricToggleBtn";
@@ -57,7 +57,7 @@ function AudioFull({
               }}
               className="fixed will-change-transform inset-0 z-50"
             >
-              <FocusTrap refFocus={refFocus}>
+              <FocusTrap>
                 <div
                   className="w-full h-full  flex flex-col items-center justify-center bg-background relative"
                   ref={refFocus}

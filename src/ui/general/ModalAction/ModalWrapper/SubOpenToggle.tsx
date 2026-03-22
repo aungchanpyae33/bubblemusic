@@ -2,7 +2,7 @@
 import React, { RefObject, useRef } from "react";
 import { twMerge } from "tailwind-merge";
 import useSetFocusMounted from "@/lib/CustomHooks/useSetFocusMounted";
-import FocusTrap from "../../FocusTrap";
+import { FocusTrap } from "focus-trap-react";
 import useCloseFunctoion from "@/lib/CustomHooks/useCloseFunction";
 import { closeModalBox } from "@/lib/closeModalBox";
 
@@ -38,7 +38,7 @@ function SubOpenToggle<T>({
         closeModalBox(zustandModalBoxFn, originParentTriggerRef);
       }}
     >
-      <FocusTrap refFocus={refFocus}>
+      <FocusTrap>
         <div
           tabIndex={0}
           ref={refFocus}

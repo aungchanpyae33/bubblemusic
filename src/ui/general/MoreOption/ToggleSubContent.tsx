@@ -17,8 +17,8 @@ import { useMoreOptionUniqueContext } from "@/Context/ContextMoreOptionUnique";
 import { useMoreOptionStackContext } from "@/Context/ContextMoreOptionStack";
 import { useMoreOptionContext } from "@/Context/ContextMoreOption";
 import TipUi from "../TipUi";
-import FocusTrap from "../FocusTrap";
 import useCloseFunctoionStack from "@/lib/CustomHooks/useCloseFunctionStack";
+import { FocusTrap } from "focus-trap-react";
 
 interface ToggleSubContentMobileProps extends React.ComponentProps<"div"> {
   children: React.ReactNode;
@@ -71,7 +71,7 @@ function ToggleSubContentMobile({
   useFocusOnOpen(stayShow, containerRef);
   return (
     <div ref={scope} className="z-50">
-      <FocusTrap refFocus={containerRef}>
+      <FocusTrap>
         <motion.div
           onClick={(e) => {
             if (e.target === e.currentTarget) return;
@@ -146,7 +146,7 @@ function ToggleSubContentFloat({
   useCloseFunctoionStack(stayShow, containerRef);
   useFocusOnOpen(stayShow, containerRef);
   return (
-    <FocusTrap refFocus={containerRef}>
+    <FocusTrap>
       <div
         className={clsx(
           " fixed  z-50 max-w-full bg-pop   overflow-auto max-h-full   border-opacity-25 border border-borderFull left-0 top-0 p-1 rounded-md",

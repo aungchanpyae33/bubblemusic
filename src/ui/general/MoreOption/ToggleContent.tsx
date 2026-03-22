@@ -16,7 +16,7 @@ import { useMoreOptionStackContext } from "@/Context/ContextMoreOptionStack";
 import { useMoreOptionUniqueContext } from "@/Context/ContextMoreOptionUnique";
 import { useDeviceContext } from "@/Context/ContextDeviceCheck";
 import TipUi from "../TipUi";
-import FocusTrap from "../FocusTrap";
+import { FocusTrap } from "focus-trap-react";
 
 interface ToggleContentProps extends React.ComponentProps<"div"> {
   parentRef: RefObject<HTMLButtonElement | null>;
@@ -47,7 +47,7 @@ function ToggleContentFloat({
   useCloseFunctoion(show, () => setShow(false), containerRef);
   useFocusOnOpen(stack === 0, containerRef);
   return (
-    <FocusTrap refFocus={containerRef}>
+    <FocusTrap>
       <div
         className={clsx(
           " fixed z-50 overflow-auto max-w-full  bg-pop max-h-full border border-borderFull left-0 top-0 p-1 rounded-md",
@@ -109,7 +109,7 @@ function ToggleContentMobile({
   useFocusOnOpen(stack === 0, containerRef);
   return (
     <div ref={scope} className="z-50">
-      <FocusTrap refFocus={containerRef}>
+      <FocusTrap>
         <motion.div
           onClick={(e) => {
             if (e.target === e.currentTarget) return;
