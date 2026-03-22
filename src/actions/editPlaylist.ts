@@ -2,18 +2,20 @@
 
 import { createClient } from "@/database/server";
 import { normalizeById } from "@/lib/returnById";
+import { FormDataTypeEdit } from "@/ui/general/ModalAction/EditPlaylist/PlaylistEditForm";
 
 export const editPlaylist = async ({
   playlistId,
   playlistName,
-  p_is_public,
+  checkType,
 }: {
   playlistId: string;
   playlistName: string;
-  p_is_public: boolean;
+  checkType: FormDataTypeEdit["checkType"];
 }) => {
   try {
     const supabase = await createClient();
+    const p_is_public = checkType === "public" ? true : false;
     const { data, error } = await supabase.rpc("edit_playlist", {
       p_playlist_id: playlistId,
       p_new_name: playlistName,
