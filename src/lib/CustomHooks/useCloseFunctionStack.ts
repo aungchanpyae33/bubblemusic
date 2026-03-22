@@ -1,3 +1,5 @@
+import { useDeviceContext } from "@/Context/ContextDeviceCheck";
+import { useMoreOptionContext } from "@/Context/ContextMoreOption";
 import { useMoreOptionStackContext } from "@/Context/ContextMoreOptionStack";
 import { RefObject, useEffect, useRef } from "react";
 
@@ -8,7 +10,8 @@ function useCloseFunctoionStack(
 ) {
   const lastFocusElRef = useRef<HTMLElement | null>(null);
   const { stack, setStack } = useMoreOptionStackContext();
-
+  const { setShow } = useMoreOptionContext();
+  const { device } = useDeviceContext();
   useEffect(() => {
     if (value) {
       // only save the element once
@@ -26,7 +29,14 @@ function useCloseFunctoionStack(
       if (e.key === "Escape" && value === true) {
         e.preventDefault();
         e.stopPropagation();
-
+        if (device === "mobile") {
+          setStack(0);
+          setShow(false);
+          if (lastFocusElRef.current) {
+            lastFocusElRef.current.focus();
+          }
+          return;
+        }
         const newStack = Math.max(0, stack - 1);
         setStack(newStack);
         // Restore focus to lastOpen element
@@ -43,7 +53,7 @@ function useCloseFunctoionStack(
     return () => {
       containerEl.removeEventListener("keydown", closeSearch);
     };
-  }, [value, stack, setStack, containerRef]);
+  }, [value, stack, setStack, containerRef, device, setShow]);
 }
 
 export default useCloseFunctoionStack;
