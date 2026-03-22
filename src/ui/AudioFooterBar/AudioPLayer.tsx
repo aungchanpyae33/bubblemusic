@@ -23,7 +23,6 @@ import ToolTip from "../general/ToolTip";
 import useMediaSourceBuffer from "@/lib/CustomHooks/useMediaSourceBuffer";
 import LoadingAudioPlayer from "../loading/LoadingAudioPlayer";
 import ContextMedia from "@/Context/ContextMedia";
-import ContextMoreOptionStack from "@/Context/ContextMoreOptionStack";
 import PlaceHolderToggleState from "@/Placeholder/PlaceHolderToggleState";
 import PlaceHolderFetchQueue from "@/Placeholder/PlaceHolderFetchQueue";
 import PlaceHolderTrackUser from "@/Placeholder/PlaceHolderTrackUser";
@@ -94,14 +93,13 @@ function AudioPlayer({ start }: { start: boolean }) {
               {/* this is for space key to toggle play and pause */}
             </PlaceHolderToggleState>
             <PlaceHolderTrackUser />
-            <ContextMoreOptionStack>
-              <AudioFull
-                url={url}
-                id={id}
-                duration={duration}
-                toggleRef={toggleRef}
-              />
-            </ContextMoreOptionStack>
+
+            <AudioFull
+              url={url}
+              id={id}
+              duration={duration}
+              toggleRef={toggleRef}
+            />
 
             <AudioFooterContainer>
               <div className=" w-full sm:w-[25%]   md:w-[25%] max-w-[375px]  flex items-center">

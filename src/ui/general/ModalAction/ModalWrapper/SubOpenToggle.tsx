@@ -1,13 +1,15 @@
 "use client";
-import React, { useRef } from "react";
+import React, { RefObject, useRef } from "react";
 import { twMerge } from "tailwind-merge";
 import useSetFocusMounted from "@/lib/CustomHooks/useSetFocusMounted";
 import FocusTrap from "../../FocusTrap";
+import useCloseFunctoion from "@/lib/CustomHooks/useCloseFunction";
 
 interface SubOpenToggleProps<T> extends React.ComponentProps<"div"> {
   /** Zustand selector type */
   selector: (state: never) => T;
   useStore: (selector: (state: never) => T) => T;
+  originParentTriggerRef: RefObject<HTMLElement>;
   children: React.ReactNode;
 }
 const baseStyle =
@@ -16,15 +18,25 @@ function SubOpenToggle<T>({
   children,
   selector,
   useStore,
+  originParentTriggerRef,
   className,
 }: SubOpenToggleProps<T>) {
-  const addSongsToPlaylist = useStore(selector) as (value: unknown) => void;
+  const zustandModalBoxFn = useStore(selector) as (value: unknown) => void;
   const refFocus = useRef<HTMLDivElement>(null);
+  useCloseFunctoion(
+    true,
+    () => zustandModalBoxFn({}),
+    refFocus,
+    originParentTriggerRef,
+  );
   useSetFocusMounted({ refFocus: refFocus });
   return (
     <div
       className=" fixed  inset-0 z-50 bg-overlay"
-      onClick={() => addSongsToPlaylist({})}
+      onClick={() => {
+        zustandModalBoxFn({});
+        originParentTriggerRef.current.focus();
+      }}
     >
       <FocusTrap refFocus={refFocus}>
         <div

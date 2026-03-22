@@ -89,7 +89,7 @@ function NavSideList({
                 <IconWrapper size="large" Icon={ListMusic} />
               </div>
             </NavSideLink>
-            <PlaylistCreate stackNum={1} />
+            <PlaylistCreate />
           </div>
           <ContextContainerHeight containerHeightRef={containerHeightRef}>
             <div className="w-full h-full" ref={containerHeightRef}>

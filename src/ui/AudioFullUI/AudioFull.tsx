@@ -9,7 +9,6 @@ import AudioSeekBar from "../general/SliderUi/AudioSeekBar";
 import Volume from "../general/volume/Volume";
 import { AnimatePresence, motion } from "motion/react";
 import { createPortal } from "react-dom";
-import useCloseFunctoionStack from "@/lib/CustomHooks/useCloseFunctionStack";
 import FullCloseBtn from "./FullCloseBtn";
 import FullThreeDots from "./FullThreeDots";
 import AudioFullUpperWrapper from "./AudioFullUpperWrapper";
@@ -20,6 +19,8 @@ import TimeIndicatorCur from "../AudioActionRelatedUI/Time/TimeIndicatorCur";
 import TimeIndicatorDur from "../AudioActionRelatedUI/Time/TimeIndicatorDur";
 import LyricToggleBtn from "../Lyric/LyricToggleBtn";
 import QueueToggle from "../Queue/QueueToggle";
+import useCloseFunctoion from "@/lib/CustomHooks/useCloseFunction";
+import useFocusOnOpen from "@/lib/CustomHooks/useFocusOnOpen";
 
 function AudioFull({
   url,
@@ -35,7 +36,8 @@ function AudioFull({
   const { open, setOpen } = useMediaAudioFullContext();
   const refFocus = useRef<HTMLDivElement | null>(null);
 
-  useCloseFunctoionStack(open, setOpen, toggleRef);
+  useCloseFunctoion(open, () => setOpen(false), refFocus);
+  useFocusOnOpen(open, refFocus);
   return (
     <AnimatePresence>
       {open && (
@@ -59,6 +61,7 @@ function AudioFull({
                 <div
                   className="w-full h-full  flex flex-col items-center justify-center bg-background relative"
                   ref={refFocus}
+                  tabIndex={0}
                 >
                   <div className="mx-auto  w-[90%] h-[55px] min-h-[55px] max-h-[55px]  flex items-center justify-between sticky top-0">
                     <FullCloseBtn setOpen={setOpen} toggleRef={toggleRef} />

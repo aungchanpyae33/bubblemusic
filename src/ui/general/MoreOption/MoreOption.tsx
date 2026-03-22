@@ -6,6 +6,7 @@ import { useDisableScroll } from "@/lib/CustomHooks/useDisableScroll";
 import { useMoreOptionContext } from "@/Context/ContextMoreOption";
 import ContextMoreOptionUnique from "@/Context/ContextMoreOptionUnique";
 import ContextMoreOptionStack from "@/Context/ContextMoreOptionStack";
+import ContextOriginParentTrigger from "@/Context/ContextOriginParentTrigger";
 interface MoreOptionProps extends React.ComponentProps<"div"> {
   targetElement: React.ReactNode;
   triggerEl: React.ReactNode;
@@ -37,18 +38,20 @@ function MoreOption({
       {show && (
         <>
           {createPortal(
-            // stack provider for all child from one parent lvl
-            <ContextMoreOptionStack>
-              <ContextMoreOptionUnique>
-                <ToggleContent
-                  staticUp={staticUp}
-                  staticDrop={staticDrop}
-                  parentRef={parentRef}
-                >
-                  {targetElement}
-                </ToggleContent>
-              </ContextMoreOptionUnique>
-            </ContextMoreOptionStack>,
+            <ContextOriginParentTrigger originParentTriggerRef={parentRef}>
+              {/* stack provider for all child from one parent lvl */}
+              <ContextMoreOptionStack>
+                <ContextMoreOptionUnique>
+                  <ToggleContent
+                    staticUp={staticUp}
+                    staticDrop={staticDrop}
+                    parentRef={parentRef}
+                  >
+                    {targetElement}
+                  </ToggleContent>
+                </ContextMoreOptionUnique>
+              </ContextMoreOptionStack>
+            </ContextOriginParentTrigger>,
             document.body,
           )}
         </>
