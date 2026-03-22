@@ -7,7 +7,7 @@ import {
 } from "@/lib/zustand";
 import SubOpenContentWrapper from "../ModalWrapper/SubOpenContentWrapper";
 import SubOpenToggle from "../ModalWrapper/SubOpenToggle";
-import EditContentBox from "./EditContentBox";
+import PlaylistEditForm from "./PlaylistEditForm";
 function EditPlaylistBox() {
   return (
     <SubOpenContentWrapper
@@ -21,7 +21,7 @@ function EditPlaylistBox() {
         useStore={useEditToPlaylist}
         className="max-w-[480px] w-[94%]"
       >
-        <EditContentBox />
+        <PlaylistEditForm />
       </SubOpenToggle>
     </SubOpenContentWrapper>
   );

@@ -2,13 +2,18 @@
 import type { UserLibReturn } from "@/database/data-types-return";
 import { createClient } from "@/database/server";
 import { normalizeById } from "@/lib/returnById";
+import type { FormDataTypeCreate } from "@/ui/PlaylistForm/PlaylistCreateForm";
 
-export const insertDataAction = async (
-  playlist_name: string,
-  p_is_public: boolean,
-): Promise<UserLibReturn> => {
+export const insertDataAction = async ({
+  playlist_name,
+  checkType,
+}: {
+  playlist_name: string;
+  checkType: FormDataTypeCreate["checkType"];
+}): Promise<UserLibReturn> => {
   try {
     const supabase = await createClient();
+    const p_is_public = checkType === "public" ? true : false;
     const { data, error } = await supabase.rpc("insert_playlist", {
       playlist_name,
       p_is_public,

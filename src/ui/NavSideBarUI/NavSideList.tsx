@@ -10,7 +10,7 @@ import { useTranslations } from "next-intl";
 import LibraryListItemContainer from "./LibraryListItemContainer";
 import NavSideListOpenWrapper from "./NavSideListOpenWrapper";
 import ContextContainerHeight from "@/Context/ContextContainerHeight";
-import PlaylistCreate from "../CreatePlaylist/PlaylistCreate";
+import PlaylistCreate from "../PlaylistForm/PlaylistCreate";
 import OverLay from "../general/overlay/OverLay";
 
 interface NavSideListProps {
