@@ -71,7 +71,11 @@ function ToggleSubContentMobile({
   useFocusOnOpen(stayShow, containerRef);
   return (
     <div ref={scope} className="z-50">
-      <FocusTrap>
+      <FocusTrap
+        focusTrapOptions={{
+          allowOutsideClick: true,
+        }}
+      >
         <motion.div
           onClick={(e) => {
             if (e.target === e.currentTarget) return;
@@ -146,7 +150,11 @@ function ToggleSubContentFloat({
   useCloseFunctoionStack(stayShow, containerRef);
   useFocusOnOpen(stayShow, containerRef);
   return (
-    <FocusTrap>
+    <FocusTrap
+      focusTrapOptions={{
+        allowOutsideClick: true,
+      }}
+    >
       <div
         className={clsx(
           " fixed  z-50 max-w-full bg-pop   overflow-auto max-h-full   border-opacity-25 border border-borderFull left-0 top-0 p-1 rounded-md",

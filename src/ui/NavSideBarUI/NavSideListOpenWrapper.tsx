@@ -22,7 +22,12 @@ function NavSideListOpenWrapper({
   useCloseFunctoion(open, () => setOpen(false), ulRef);
   useFocusOnOpen(open, ulRef);
   return (
-    <FocusTrap>
+    <FocusTrap
+      active={open}
+      focusTrapOptions={{
+        allowOutsideClick: true,
+      }}
+    >
       <ul
         className={clsx(
           "fixed bg-section border-r border-seperate-soft  top-0 z-40 box-border w-[280px]  max-w-[280px]  left-0 h-full flex duration-200   transition-transform flex-col gap-1  rounded-b-sm",

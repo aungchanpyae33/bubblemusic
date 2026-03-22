@@ -38,7 +38,11 @@ function SubOpenToggle<T>({
         closeModalBox(zustandModalBoxFn, originParentTriggerRef);
       }}
     >
-      <FocusTrap>
+      <FocusTrap
+        focusTrapOptions={{
+          allowOutsideClick: true,
+        }}
+      >
         <div
           tabIndex={0}
           ref={refFocus}
