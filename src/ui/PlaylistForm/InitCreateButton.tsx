@@ -1,14 +1,17 @@
-import { useMoreOptionStackContext } from "@/Context/ContextMoreOptionStack";
 import IconWrapper from "@/ui/general/IconWrapper";
 import { Plus } from "lucide-react";
+import { Dispatch, SetStateAction } from "react";
 
-function InitCreateButton({ stackNum }: { stackNum: number }) {
-  const { setStack } = useMoreOptionStackContext();
+function InitCreateButton({
+  setOpen,
+}: {
+  setOpen: Dispatch<SetStateAction<boolean>>;
+}) {
   return (
     <button
       className="mr-2"
       onClick={() => {
-        setStack(stackNum);
+        setOpen(true);
       }}
     >
       <IconWrapper size="large" Icon={Plus} />

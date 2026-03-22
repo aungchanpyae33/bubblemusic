@@ -18,6 +18,7 @@ import { useMoreOptionStackContext } from "@/Context/ContextMoreOptionStack";
 import { useMoreOptionContext } from "@/Context/ContextMoreOption";
 import TipUi from "../TipUi";
 import FocusTrap from "../FocusTrap";
+import useCloseFunctoionStack from "@/lib/CustomHooks/useCloseFunctionStack";
 
 interface ToggleSubContentMobileProps extends React.ComponentProps<"div"> {
   children: React.ReactNode;
@@ -66,6 +67,7 @@ function ToggleSubContentMobile({
     });
   }
 
+  useCloseFunctoionStack(stayShow, containerRef);
   useFocusOnOpen(stayShow, containerRef);
   return (
     <div ref={scope} className="z-50">
@@ -141,6 +143,7 @@ function ToggleSubContentFloat({
   useEnableScroll(containerRef);
   // outterclickSub is to detect only click is inside portal and targert parent trigger
   useOutterClickSub(containerRef, stackNum);
+  useCloseFunctoionStack(stayShow, containerRef);
   useFocusOnOpen(stayShow, containerRef);
   return (
     <FocusTrap refFocus={containerRef}>

@@ -1,54 +1,55 @@
-import { useDeviceContext } from "@/Context/ContextDeviceCheck";
-import { useMoreOptionStackContext } from "@/Context/ContextMoreOptionStack";
-import { useMoreOptionUniqueContext } from "@/Context/ContextMoreOptionUnique";
-import React, { RefObject, useEffect } from "react";
+import { RefObject, useEffect, useRef } from "react";
 
-// this function do close the portal when escape is pressed , it also manage the stack for inner child components
 function useCloseFunctoion(
   value: boolean,
-  fun:
-    | React.Dispatch<React.SetStateAction<boolean>>
-    | ((value: boolean) => void),
-  closeElement?: RefObject<HTMLButtonElement | null>,
+  onClose: () => void,
+  containerRef: RefObject<HTMLElement | null>,
+  originParentTriggerRef?: RefObject<HTMLElement | null>,
 ) {
-  const { device } = useDeviceContext();
-  const { stack, setStack } = useMoreOptionStackContext();
-  const { setUuidState } = useMoreOptionUniqueContext();
-  // stack are 0 === parent , 1 === child , 2 === grand child etc..
+  const lastFocusElRef = useRef<HTMLElement | null>(null);
+
+  //  Save the element that had focus RIGHT when  open
+  //    (this runs BEFORE useFocusOnOpen || useSetFocusOnMount as swap the order of hooks)
   useEffect(() => {
-    function closeSearch(e: KeyboardEvent) {
-      if (e.key === "Escape" && value === true) {
-        e.preventDefault();
-
-        if (device === "mobile") {
-          // on mobile just close all stack
-          setStack(0);
-          fun(false);
-          return;
-        }
-
-        // stack === 0 means it is the parent component
-        // i use open (boolean) only  for parent , inner child state are paired with stack number
-        if (stack === 0) {
-          fun(false);
-          if (!closeElement) return;
-          closeElement.current!.focus();
-          return;
-        }
-
-        // decrease the stack count because of clicking triiger
-        const newStack = Math.max(0, stack - 1);
-        setStack(newStack);
-      }
+    const originParentTriggerEl = originParentTriggerRef?.current;
+    if (originParentTriggerEl) {
+      lastFocusElRef.current = originParentTriggerEl;
+      return;
     }
     if (value) {
-      window.addEventListener("keydown", closeSearch);
+      // only save the element once
+      if (lastFocusElRef.current) return;
+      lastFocusElRef.current = document.activeElement as HTMLElement | null;
     }
 
     return () => {
-      window.removeEventListener("keydown", closeSearch);
+      lastFocusElRef.current = null;
     };
-  }, [value, fun, closeElement, stack, setStack, setUuidState, device]);
+  }, [value, originParentTriggerRef]);
+
+  useEffect(() => {
+    const containerEl = containerRef.current;
+    if (!containerEl || !value) return;
+
+    function closeSearch(e: KeyboardEvent) {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        e.stopPropagation();
+        onClose();
+
+        // Restore focus to lastOpen element
+        if (lastFocusElRef.current) {
+          lastFocusElRef.current.focus();
+        }
+      }
+    }
+
+    containerEl.addEventListener("keydown", closeSearch);
+
+    return () => {
+      containerEl.removeEventListener("keydown", closeSearch);
+    };
+  }, [value, onClose, containerRef]);
 }
 
 export default useCloseFunctoion;

@@ -44,9 +44,8 @@ function ToggleContentFloat({
   // outterclick is to detect click is inside portal and targert parent trigger or not inside when portal is open
   useEnableScroll(containerRef);
   useOutterClick(show, setShow, containerRef, parentRef);
+  useCloseFunctoion(show, () => setShow(false), containerRef);
   useFocusOnOpen(stack === 0, containerRef);
-  useCloseFunctoion(show, setShow, parentRef);
-
   return (
     <FocusTrap refFocus={containerRef}>
       <div
@@ -68,10 +67,8 @@ const bottom = 20;
 // to sastify the bottom-5 in close
 
 function ToggleContentMobile({
-  parentRef,
   children,
 }: {
-  parentRef: ToggleContentProps["parentRef"];
   children: ToggleContentProps["children"];
 }) {
   const [scope, animate] = useAnimate();
@@ -108,9 +105,8 @@ function ToggleContentMobile({
     });
   }
 
+  useCloseFunctoion(show, () => setShow(false), containerRef);
   useFocusOnOpen(stack === 0, containerRef);
-  useCloseFunctoion(show, setShow, parentRef);
-
   return (
     <div ref={scope} className="z-50">
       <FocusTrap refFocus={containerRef}>
@@ -187,7 +183,7 @@ function ToggleContent({
       {children}
     </ToggleContentFloat>
   ) : (
-    <ToggleContentMobile parentRef={parentRef}>{children}</ToggleContentMobile>
+    <ToggleContentMobile>{children}</ToggleContentMobile>
   );
 }
 
