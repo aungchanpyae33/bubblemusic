@@ -27,6 +27,7 @@
     --foreground: #2c2a2a;
     --seperate: #363636c3;
     --seperate-hard: #272727fe;
+    --error: #ee3d2df9;
     --section-card: #ffffff;
     --bordersecondary: #2a2a2a;
     --placeholder: #363333;
@@ -64,6 +65,7 @@
     --foreground: #fafafa;
     --seperate: #525252c3;
     --seperate-hard: #8a8787fe;
+    --error: #ee3d2df9;
     --section-card: #212121;
     --bordersecondary: #a0a0a0;
     --placeholder: #2b2828;
@@ -182,4 +184,39 @@
 
 .scroll-container::-webkit-scrollbar-thumb:hover {
   background-color: var(--ink-400); /* zinc-400 */
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* prevent browser default autofill color */
+/* Firefox */
+input[type="number"] {
+  appearance: textfield;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  border: none;
+  -webkit-text-fill-color: var(--foreground);
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+  /* Paint over chrome color */
+  -webkit-box-shadow: 0 0 0 1000px var(--section-card) inset;
+  box-shadow: 0 0 0 1000px var(--section-card) inset;
+
+  border-radius: inherit;
+
+  /* prevent flash after navigation */
+  transition: background-color 9999s ease-out;
+  font-size: medium;
 }
