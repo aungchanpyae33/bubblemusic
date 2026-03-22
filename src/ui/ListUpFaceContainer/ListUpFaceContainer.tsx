@@ -8,6 +8,8 @@ import { DirectPlayButtonOverlayOnImage } from "@/lib/StyleUtils/tailwindStyle";
 import ListImage from "../ListContainer/ListImage";
 import { outputRelatedType } from "@/lib/ouputRelatedType";
 import DirectPlayButton from "../general/TogglePlayButton/DirectPlayButton";
+import ContextSongListContainer from "@/Context/ContextSongListContainer";
+import ListUpFaceNameText from "./ListUpFaceNameText";
 
 interface ListUpFaceContainerProps {
   list: listInfo;
@@ -47,7 +49,9 @@ function ListUpFaceContainer({ list }: ListUpFaceContainerProps) {
       </div>
 
       <div className="">
-        <UnderLineLinkHover href={`/${type}/${id}`}>{name}</UnderLineLinkHover>
+        <ContextSongListContainer list={list} id={list.id}>
+          <ListUpFaceNameText />
+        </ContextSongListContainer>
         {relatedType && (
           <UnderLineLinkHover
             href={`/${relatedType}/${related_id}`}
