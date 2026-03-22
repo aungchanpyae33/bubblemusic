@@ -2,7 +2,7 @@
 import type { UserLibReturn } from "@/database/data-types-return";
 import { createClient } from "@/database/server";
 import { normalizeById } from "@/lib/returnById";
-import type { FormDataTypeCreate } from "@/ui/PlaylistForm/PlaylistCreateForm";
+import { FormDataTypeCreate } from "@/ui/general/ModalAction/CreatePlaylist/PlaylistCreateForm";
 
 export const insertDataAction = async ({
   playlist_name,

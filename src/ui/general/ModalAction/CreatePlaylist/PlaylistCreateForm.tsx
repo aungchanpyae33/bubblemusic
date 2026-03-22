@@ -2,11 +2,19 @@ import { FormProvider, useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { insertDataAction } from "@/actions/createPlaylist";
 import { useTranslations } from "next-intl";
-import IconWrapper from "../general/IconWrapper";
 import { X } from "lucide-react";
-import TitleInput from "./TitleInput";
-import SubmitButton from "./SubmitButton";
-import CheckTypeBase from "./CheckType/CheckTypeBase";
+import IconWrapper from "../../IconWrapper";
+import TitleInput from "@/ui/PlaylistForm/TitleInput";
+import CheckTypeBase from "@/ui/PlaylistForm/CheckType/CheckTypeBase";
+import SubmitButton from "@/ui/PlaylistForm/SubmitButton";
+import { closeModalBox } from "@/lib/closeModalBox";
+import {
+  createToPlaylistModalBox,
+  createToPlaylistModalBoxAction,
+  createToPlaylistModalBoxProps,
+  useCreateToPlaylist,
+} from "@/lib/zustand";
+
 export interface FormDataTypeCreate {
   name: string;
   checkType: "public" | "private";
@@ -19,6 +27,13 @@ const defaultValue: FormDataTypeCreate = {
 function PlaylistCreateForm() {
   const b = useTranslations("block");
   const e = useTranslations("ErrorMsg");
+  const { originParentTriggerRef } = useCreateToPlaylist(
+    (state: createToPlaylistModalBox) => state.createToPlaylistModalBox,
+  ) as createToPlaylistModalBoxProps;
+  const createToPlaylistModalBoxAction = useCreateToPlaylist(
+    (state: createToPlaylistModalBoxAction) =>
+      state.createToPlaylistModalBoxAction,
+  );
   const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: async (data: FormDataTypeCreate) => {
@@ -58,7 +73,12 @@ function PlaylistCreateForm() {
             <button
               type="button"
               className=" bg-transparent transition-colors  duration-200 hover:bg-surface-2 p-1 rounded-full flex items-center justify-center"
-              onClick={() => {}}
+              onClick={() =>
+                closeModalBox(
+                  createToPlaylistModalBoxAction,
+                  originParentTriggerRef,
+                )
+              }
             >
               <IconWrapper size="large" Icon={X} />
             </button>

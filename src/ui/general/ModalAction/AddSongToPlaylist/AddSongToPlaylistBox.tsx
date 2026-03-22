@@ -1,24 +1,32 @@
 "use client";
 import {
-  addSongsToPlaylist,
-  songsToPlaylist,
-  useAddSongsToPlaylist,
+  addSongsToPlaylistModalBox,
+  songsToPlaylistModalBox,
+  useAddSongsToPlaylistModalBox,
 } from "@/lib/zustand";
 import SubOpenContentWrapper from "../ModalWrapper/SubOpenContentWrapper";
 import SubOpenToggle from "../ModalWrapper/SubOpenToggle";
 import AddSongModalBoxContainer from "./AddSongModalBoxContainer";
 
 function AddSongToPlaylistBox() {
+  const data = useAddSongsToPlaylistModalBox(
+    (state: songsToPlaylistModalBox) => state.songsToPlaylistModalBox,
+  );
+  if (!data) return null;
+  const { originParentTriggerRef } = data;
   return (
     <SubOpenContentWrapper
-      selector={(state: songsToPlaylist) =>
-        Object.values(state.songsToPlaylist)[0]
+      selector={(state: songsToPlaylistModalBox) =>
+        state.songsToPlaylistModalBox
       }
-      useStore={useAddSongsToPlaylist}
+      useStore={useAddSongsToPlaylistModalBox}
     >
       <SubOpenToggle
-        selector={(state: addSongsToPlaylist) => state.addSongsToPlaylist}
-        useStore={useAddSongsToPlaylist}
+        originParentTriggerRef={originParentTriggerRef}
+        selector={(state: addSongsToPlaylistModalBox) =>
+          state.addSongsToPlaylistModalBox
+        }
+        useStore={useAddSongsToPlaylistModalBox}
       >
         <AddSongModalBoxContainer />
       </SubOpenToggle>

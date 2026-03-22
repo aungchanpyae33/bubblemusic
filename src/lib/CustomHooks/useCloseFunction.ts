@@ -21,10 +21,6 @@ function useCloseFunctoion(
       if (lastFocusElRef.current) return;
       lastFocusElRef.current = document.activeElement as HTMLElement | null;
     }
-
-    return () => {
-      lastFocusElRef.current = null;
-    };
   }, [value, originParentTriggerRef]);
 
   useEffect(() => {

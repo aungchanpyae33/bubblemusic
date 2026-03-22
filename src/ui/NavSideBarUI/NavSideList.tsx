@@ -10,8 +10,8 @@ import { useTranslations } from "next-intl";
 import LibraryListItemContainer from "./LibraryListItemContainer";
 import NavSideListOpenWrapper from "./NavSideListOpenWrapper";
 import ContextContainerHeight from "@/Context/ContextContainerHeight";
-import PlaylistCreate from "../PlaylistForm/PlaylistCreate";
 import OverLay from "../general/overlay/OverLay";
+import InitCreateButton from "../PlaylistForm/InitCreateButton";
 
 interface NavSideListProps {
   childrenExplore: ReactNode;
@@ -89,7 +89,7 @@ function NavSideList({
                 <IconWrapper size="large" Icon={ListMusic} />
               </div>
             </NavSideLink>
-            <PlaylistCreate />
+            <InitCreateButton />
           </div>
           <ContextContainerHeight containerHeightRef={containerHeightRef}>
             <div className="w-full h-full" ref={containerHeightRef}>

@@ -1,7 +1,8 @@
 import { useOutputDefaultCheckType } from "@/lib/CustomHooks/useOutputDefaultCheckType";
 import {
-  editToPlaylist,
-  editToPlaylistProps,
+  editToPlaylistModalBox,
+  editToPlaylistModalBoxAction,
+  editToPlaylistModalBoxProps,
   useEditToPlaylist,
 } from "@/lib/zustand";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -13,6 +14,7 @@ import IconWrapper from "../../IconWrapper";
 import TitleInput from "@/ui/PlaylistForm/TitleInput";
 import CheckTypeBase from "@/ui/PlaylistForm/CheckType/CheckTypeBase";
 import SubmitButton from "@/ui/PlaylistForm/SubmitButton";
+import { closeModalBox } from "@/lib/closeModalBox";
 export interface FormDataTypeEdit {
   id: string;
   name: string;
@@ -22,9 +24,12 @@ export interface FormDataTypeEdit {
 function PlaylistEditForm() {
   const e = useTranslations("ErrorMsg");
   const b = useTranslations("block");
-  const { id, name } = useEditToPlaylist(
-    (state: editToPlaylist) => state.editToPlaylist,
-  ) as editToPlaylistProps;
+  const { id, name, originParentTriggerRef } = useEditToPlaylist(
+    (state: editToPlaylistModalBox) => state.editToPlaylistModalBox,
+  ) as editToPlaylistModalBoxProps;
+  const editToPlaylistModalBoxAction = useEditToPlaylist(
+    (state: editToPlaylistModalBoxAction) => state.editToPlaylistModalBoxAction,
+  );
   const checkType = useOutputDefaultCheckType(id);
   const queryClient = useQueryClient();
   const defaultValue: FormDataTypeEdit = {
@@ -54,6 +59,9 @@ function PlaylistEditForm() {
     onError: (error) => {
       // todo
     },
+    onSettled: () => {
+      closeModalBox(editToPlaylistModalBoxAction, originParentTriggerRef);
+    },
   });
   const handleAction = (data: FormDataTypeEdit) => {
     mutation.mutate(data);
@@ -72,7 +80,12 @@ function PlaylistEditForm() {
             <button
               type="button"
               className=" bg-transparent transition-colors  duration-200 hover:bg-surface-2 p-1 rounded-full flex items-center justify-center"
-              onClick={() => {}}
+              onClick={() =>
+                closeModalBox(
+                  editToPlaylistModalBoxAction,
+                  originParentTriggerRef,
+                )
+              }
             >
               <IconWrapper size="large" Icon={X} />
             </button>

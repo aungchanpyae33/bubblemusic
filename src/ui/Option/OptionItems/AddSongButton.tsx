@@ -1,5 +1,4 @@
 "use client";
-import { addSongsToPlaylist, useAddSongsToPlaylist } from "@/lib/zustand";
 import { useTranslations } from "next-intl";
 import { useInfoTrackContext } from "@/Context/ContextInfoTrack";
 import OptionItem from "../OptionUI/OptionItem";
@@ -8,17 +7,24 @@ import OptionIconEl from "../OptionUI/OptionIconEl";
 import IconWrapper from "@/ui/general/IconWrapper";
 import OptionText from "../OptionUI/OptionText";
 import { ListPlus } from "lucide-react";
+import {
+  addSongsToPlaylistModalBox,
+  useAddSongsToPlaylistModalBox,
+} from "@/lib/zustand";
+import { useOriginParentTriggerContext } from "@/Context/ContextOriginParentTrigger";
 function AddSongButton() {
   const b = useTranslations("block");
   const { song } = useInfoTrackContext();
-  const songId = song?.song_id;
-  const cover_url = song?.cover_url;
-  const addSongsToPlaylist = useAddSongsToPlaylist(
-    (state: addSongsToPlaylist) => state.addSongsToPlaylist,
+  const addSongsToPlaylistModalBox = useAddSongsToPlaylistModalBox(
+    (state: addSongsToPlaylistModalBox) => state.addSongsToPlaylistModalBox,
   );
-  if (!songId) return null;
+  const { originParentTriggerRef } = useOriginParentTriggerContext();
+  if (!song) return null;
+  const songId = song.song_id;
+  const cover_url = song.cover_url;
+
   function addSongs() {
-    addSongsToPlaylist({ songId, cover_url });
+    addSongsToPlaylistModalBox({ songId, cover_url, originParentTriggerRef });
   }
   return (
     <OptionItem>

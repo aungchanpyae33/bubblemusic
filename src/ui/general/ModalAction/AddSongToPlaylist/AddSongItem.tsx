@@ -1,10 +1,10 @@
 import {
-  addSongsToPlaylist,
-  addSongsToPlaylistProps,
-  songExistAction,
-  songsToPlaylist,
-  useAddSongsToPlaylist,
-  useIsExistSongs,
+  addSongsToPlaylistModalBox,
+  songExistActionModalBox,
+  songsToPlaylistModalBox,
+  songsToPlaylistModalBoxProps,
+  useAddSongsToPlaylistModalBox,
+  useIsExistSongsModalBox,
 } from "@/lib/zustand";
 import useAddSongMutate from "@/lib/CustomHooks/mutation/AddSongMutate";
 import {
@@ -12,6 +12,7 @@ import {
   getUserLibClient,
 } from "@/database/client-data";
 import { useQuery } from "@tanstack/react-query";
+import { closeModalBox } from "@/lib/closeModalBox";
 
 function AddSongItem({
   playlistSongs,
@@ -22,14 +23,15 @@ function AddSongItem({
   };
 }) {
   const playlistId = playlistSongs.id;
-  const setIsSongExist = useIsExistSongs(
-    (state: songExistAction) => state.setIsSongExist,
+  const setIsSongExistModalBox = useIsExistSongsModalBox(
+    (state: songExistActionModalBox) => state.setIsSongExistModalBox,
   );
-  const { songId, cover_url } = useAddSongsToPlaylist(
-    (state: songsToPlaylist) => state.songsToPlaylist,
-  ) as addSongsToPlaylistProps;
-  const addSongsToPlaylist = useAddSongsToPlaylist(
-    (state: addSongsToPlaylist) => state.addSongsToPlaylist,
+  const { songId, cover_url, originParentTriggerRef } =
+    useAddSongsToPlaylistModalBox(
+      (state: songsToPlaylistModalBox) => state.songsToPlaylistModalBox,
+    ) as songsToPlaylistModalBoxProps;
+  const addSongsToPlaylistModalBox = useAddSongsToPlaylistModalBox(
+    (state: addSongsToPlaylistModalBox) => state.addSongsToPlaylistModalBox,
   );
   const { data: queryData, error: queryError } = useQuery({
     queryKey: ["user-library"],
@@ -42,10 +44,14 @@ function AddSongItem({
   const isListCover = playlist?.cover_url;
   const noExistCover = isListCover ? null : cover_url;
 
-  const mutation = useAddSongMutate(playlistId, noExistCover);
+  const mutation = useAddSongMutate(
+    playlistId,
+    noExistCover,
+    originParentTriggerRef,
+  );
 
   async function handleAdd() {
-    addSongsToPlaylist({});
+    closeModalBox(addSongsToPlaylistModalBox, originParentTriggerRef);
     const { exists, error } = await checkSongsBeforeAddClient({
       playlistId: playlistId,
       songId: songId,
@@ -57,12 +63,14 @@ function AddSongItem({
         songId: songId,
       });
     } else {
-      setIsSongExist({ playlistId: playlistId, songId: songId });
+      setIsSongExistModalBox({ playlistId, songId, originParentTriggerRef });
     }
   }
   return (
-    <div className=" p-1 ">
-      <button onClick={handleAdd}>{playlistSongs.name}</button>
+    <div className=" p-1">
+      <button className=" block max-w-full truncate" onClick={handleAdd}>
+        {playlistSongs.name}
+      </button>
     </div>
   );
 }

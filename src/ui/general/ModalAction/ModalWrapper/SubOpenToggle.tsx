@@ -4,16 +4,17 @@ import { twMerge } from "tailwind-merge";
 import useSetFocusMounted from "@/lib/CustomHooks/useSetFocusMounted";
 import FocusTrap from "../../FocusTrap";
 import useCloseFunctoion from "@/lib/CustomHooks/useCloseFunction";
+import { closeModalBox } from "@/lib/closeModalBox";
 
 interface SubOpenToggleProps<T> extends React.ComponentProps<"div"> {
   /** Zustand selector type */
   selector: (state: never) => T;
   useStore: (selector: (state: never) => T) => T;
-  originParentTriggerRef: RefObject<HTMLElement>;
+  originParentTriggerRef: RefObject<HTMLElement | null>;
   children: React.ReactNode;
 }
 const baseStyle =
-  "z-50 bg-pop p-3 rounded-md border border-borderFull w-[400px] absolute max-h-[95vh] overflow-y-auto  top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]";
+  "z-50 bg-pop p-3 rounded-md border border-borderFull w-[480px] absolute max-h-[95vh] overflow-y-auto  top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]";
 function SubOpenToggle<T>({
   children,
   selector,
@@ -25,7 +26,7 @@ function SubOpenToggle<T>({
   const refFocus = useRef<HTMLDivElement>(null);
   useCloseFunctoion(
     true,
-    () => zustandModalBoxFn({}),
+    () => zustandModalBoxFn(undefined),
     refFocus,
     originParentTriggerRef,
   );
@@ -34,8 +35,7 @@ function SubOpenToggle<T>({
     <div
       className=" fixed  inset-0 z-50 bg-overlay"
       onClick={() => {
-        zustandModalBoxFn({});
-        originParentTriggerRef.current.focus();
+        closeModalBox(zustandModalBoxFn, originParentTriggerRef);
       }}
     >
       <FocusTrap refFocus={refFocus}>

@@ -1,20 +1,31 @@
 "use client";
 
-import { isSongExist, songExistAction, useIsExistSongs } from "@/lib/zustand";
+import {
+  isSongExistModalBox,
+  songExistActionModalBox,
+  useIsExistSongsModalBox,
+} from "@/lib/zustand";
 import SubOpenContentWrapper from "../ModalWrapper/SubOpenContentWrapper";
 import SubOpenToggle from "../ModalWrapper/SubOpenToggle";
 import ConfirmAddSong from "./ConfirmAddSong";
 
 function ConfirmAddSongBox() {
+  const data = useIsExistSongsModalBox(
+    (state: isSongExistModalBox) => state.isSongExistModalBox,
+  );
+  if (!data) return null;
+  const { originParentTriggerRef } = data;
   return (
     <SubOpenContentWrapper
-      selector={(state: isSongExist) => Object.values(state.isSongExist)[0]}
-      useStore={useIsExistSongs}
+      selector={(state: isSongExistModalBox) => state.isSongExistModalBox}
+      useStore={useIsExistSongsModalBox}
     >
       <SubOpenToggle
-        selector={(state: songExistAction) => state.setIsSongExist}
-        useStore={useIsExistSongs}
-        className=""
+        selector={(state: songExistActionModalBox) =>
+          state.setIsSongExistModalBox
+        }
+        originParentTriggerRef={originParentTriggerRef}
+        useStore={useIsExistSongsModalBox}
       >
         <ConfirmAddSong />
       </SubOpenToggle>

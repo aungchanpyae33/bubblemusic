@@ -1,29 +1,33 @@
 "use client";
 import useAddSongMutate from "@/lib/CustomHooks/mutation/AddSongMutate";
 import {
-  addSongsToPlaylistProps,
-  isSongExist,
-  songExist,
-  songExistAction,
-  songsToPlaylist,
-  useAddSongsToPlaylist,
-  useIsExistSongs,
+  isSongExistModalBox,
+  isSongExistModalBoxProps,
+  songExistActionModalBox,
+  songsToPlaylistModalBox,
+  songsToPlaylistModalBoxProps,
+  useAddSongsToPlaylistModalBox,
+  useIsExistSongsModalBox,
 } from "@/lib/zustand";
 import { useTranslations } from "next-intl";
 import NotiBox from "../../NotiBox/NotiBox";
 
 function ConfirmAddSong() {
   const w = useTranslations("Warning");
-  const { playlistId, songId } = useIsExistSongs(
-    (state: isSongExist) => state.isSongExist,
-  ) as songExist;
-  const { cover_url } = useAddSongsToPlaylist(
-    (state: songsToPlaylist) => state.songsToPlaylist,
-  ) as addSongsToPlaylistProps;
-  const setIsSongExist = useIsExistSongs(
-    (state: songExistAction) => state.setIsSongExist,
+  const { playlistId, songId } = useIsExistSongsModalBox(
+    (state: isSongExistModalBox) => state.isSongExistModalBox,
+  ) as isSongExistModalBoxProps;
+  const { cover_url, originParentTriggerRef } = useAddSongsToPlaylistModalBox(
+    (state: songsToPlaylistModalBox) => state.songsToPlaylistModalBox,
+  ) as songsToPlaylistModalBoxProps;
+  const setIsSongExist = useIsExistSongsModalBox(
+    (state: songExistActionModalBox) => state.setIsSongExistModalBox,
   );
-  const mutation = useAddSongMutate(playlistId, cover_url);
+  const mutation = useAddSongMutate(
+    playlistId,
+    cover_url,
+    originParentTriggerRef,
+  );
   function handleAdd() {
     mutation.mutate({
       playlistId,
@@ -37,7 +41,9 @@ function ConfirmAddSong() {
       <div className=" w-full flex justify-end gap-3">
         <button
           className="bg-surface-1 p-2 rounded-lg"
-          onClick={() => setIsSongExist({})}
+          onClick={() => {
+            setIsSongExist(undefined);
+          }}
         >
           {" "}
           {w("cancel")}

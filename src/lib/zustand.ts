@@ -485,63 +485,99 @@ import outputCurrentIndex from "./OutputCurrentIndex";
 import { excludeCurrentSongsList } from "./excludeCurrentSongs";
 import { NormalizedById } from "./returnById";
 
-export interface songExist {
+export interface isSongExistModalBoxProps {
   playlistId: string;
   songId: string;
+  originParentTriggerRef: RefObject<HTMLElement | null>;
 }
-export interface isSongExist {
-  isSongExist: songExist | object;
+export interface isSongExistModalBox {
+  isSongExistModalBox: isSongExistModalBoxProps | undefined;
 }
-export interface songExistAction {
-  setIsSongExist: (songExist: isSongExist["isSongExist"]) => void;
+export interface songExistActionModalBox {
+  setIsSongExistModalBox: (
+    songExist: isSongExistModalBox["isSongExistModalBox"],
+  ) => void;
 }
-export const useIsExistSongs = create<isSongExist & songExistAction>((set) => ({
-  isSongExist: {},
-  setIsSongExist: (value) =>
+export const useIsExistSongsModalBox = create<
+  isSongExistModalBox & songExistActionModalBox
+>((set) => ({
+  isSongExistModalBox: undefined,
+  setIsSongExistModalBox: (value) =>
     set(() => ({
-      isSongExist: value,
+      isSongExistModalBox: value,
     })),
 }));
 
-export interface addSongsToPlaylistProps {
+export interface songsToPlaylistModalBoxProps {
   songId: string;
   cover_url: string;
+  originParentTriggerRef: RefObject<HTMLElement | null>;
 }
-export interface songsToPlaylist {
-  songsToPlaylist: addSongsToPlaylistProps | object;
+export interface songsToPlaylistModalBox {
+  songsToPlaylistModalBox: songsToPlaylistModalBoxProps | undefined;
 }
-export interface addSongsToPlaylist {
-  addSongsToPlaylist: (value: addSongsToPlaylistProps | object) => void;
+export interface addSongsToPlaylistModalBox {
+  addSongsToPlaylistModalBox: (
+    value: songsToPlaylistModalBox["songsToPlaylistModalBox"],
+  ) => void;
 }
-export const useAddSongsToPlaylist = create<
-  songsToPlaylist & addSongsToPlaylist
+export const useAddSongsToPlaylistModalBox = create<
+  songsToPlaylistModalBox & addSongsToPlaylistModalBox
 >((set) => ({
-  songsToPlaylist: {},
-  addSongsToPlaylist: (value) =>
+  songsToPlaylistModalBox: undefined,
+  addSongsToPlaylistModalBox: (value) =>
     set(() => ({
-      songsToPlaylist: value,
+      songsToPlaylistModalBox: value,
     })),
 }));
 
-export interface editToPlaylistProps {
+export interface editToPlaylistModalBoxProps {
   id: string;
   name: string;
+  originParentTriggerRef: RefObject<HTMLElement | null>;
 }
-export interface editToPlaylist {
-  editToPlaylist: editToPlaylistProps | object;
+export interface editToPlaylistModalBox {
+  editToPlaylistModalBox: editToPlaylistModalBoxProps | undefined;
 }
-export interface editToPlaylistAction {
-  editToPlaylistAction: (value: editToPlaylist["editToPlaylist"]) => void;
+export interface editToPlaylistModalBoxAction {
+  editToPlaylistModalBoxAction: (
+    value: editToPlaylistModalBox["editToPlaylistModalBox"],
+  ) => void;
 }
-export const useEditToPlaylist = create<editToPlaylist & editToPlaylistAction>(
-  (set) => ({
-    editToPlaylist: {},
-    editToPlaylistAction: (value) =>
-      set(() => ({
-        editToPlaylist: value,
-      })),
-  }),
-);
+export const useEditToPlaylist = create<
+  editToPlaylistModalBox & editToPlaylistModalBoxAction
+>((set) => ({
+  editToPlaylistModalBox: undefined,
+  editToPlaylistModalBoxAction: (value) =>
+    set(() => ({
+      editToPlaylistModalBox: value,
+    })),
+}));
+
+export interface createToPlaylistModalBoxProps {
+  originParentTriggerRef: RefObject<HTMLElement | null>;
+}
+
+export interface createToPlaylistModalBox {
+  createToPlaylistModalBox: createToPlaylistModalBoxProps | undefined;
+}
+
+export interface createToPlaylistModalBoxAction {
+  createToPlaylistModalBoxAction: (
+    value: createToPlaylistModalBox["createToPlaylistModalBox"],
+  ) => void;
+}
+
+export const useCreateToPlaylist = create<
+  createToPlaylistModalBox & createToPlaylistModalBoxAction
+>((set) => ({
+  createToPlaylistModalBox: undefined,
+  createToPlaylistModalBoxAction: (value) =>
+    set(() => ({
+      createToPlaylistModalBox: value,
+    })),
+}));
+
 export interface ShowBlock {
   showBlock: { type: "lyric" | "queue" | undefined; open: boolean };
 }
