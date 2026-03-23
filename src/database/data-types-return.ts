@@ -4,6 +4,7 @@ import type {
   listInfo,
   listSongsSection,
   MediaItemSource,
+  NewlyItems,
   SearchDropdownResult,
   SearchItem,
   SearchSong,
@@ -45,6 +46,20 @@ export interface GetAllMediaItemsReturn {
 export type GetRecent = NormalizedById<listInfo>;
 export interface GetRecentReturn {
   data: GetRecent | null;
+  error: ErrorResponse["error"];
+}
+
+export type GetNewlyItems = {
+  [k in Exclude<
+    keyof NewlyItems,
+    "newlyAddedSongs"
+  >]: NormalizedById<listInfo> | null;
+} & {
+  newlyAddedSongs: NormalizedById<SongInfo> | null;
+};
+
+export interface GetNewlyItemsReturn {
+  data: GetNewlyItems | null;
   error: ErrorResponse["error"];
 }
 

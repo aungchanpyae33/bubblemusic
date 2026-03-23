@@ -1,305 +1,57 @@
-import Image from "next/image";
+import { getGenre, getMood, getNewly } from "@/database/data";
+import ListItemUpFaceContainer from "@/ui/general/ListItemUpFaceGroup/ListItemUpFaceContainer";
+import ListItemUpFaceGroup from "@/ui/general/ListItemUpFaceGroup/ListItemUpFaceGroup";
+import GenreContainer from "@/ui/CategoryContainer/GenreContainer";
+import ListUpFaceGroup from "@/ui/ListUpFaceContainer/ListUpFaceGroup";
+import MoodContainer from "@/ui/CategoryContainer/MoodContainer";
 
 async function page() {
+  const [getNewlyData, getGenreData, getMoodData] = await Promise.all([
+    getNewly(),
+    getGenre(),
+    getMood(),
+  ]);
+  const { data: newlyData, error: newlyError } = getNewlyData;
+  const { data: genreData, error: genreError } = getGenreData;
+  const { data: moodData, error: moodError } = getMoodData;
+  if (
+    !newlyData ||
+    newlyError ||
+    !genreData ||
+    genreError ||
+    !moodData ||
+    moodError
+  )
+    return null;
   return (
-    <div className=" space-y-3 py-4">
-      <div className=" w-full   ">
-        <h1 className="px-4">ခေတ်စားနေသော သီချင်းများ</h1>
-        <div className="h-[300px] flex overflow-auto no-scrollbar  p-4 gap-5 ">
-          <div className=" w-[90%] max-w-[400px] min-w-[350px]   h-full flex flex-col gap-2 justify-between">
-            <div className="h-[60px] outline outline-slate-200  w-full flex gap-3">
-              <div className="  w-[60px] h-full relative">
-                <Image
-                  src="https://s3.tebi.io/test1345/timo-volz-ZlFKIG6dApg-unsplash%20%281%29.jpg"
-                  fill
-                  alt="this is image element"
-                  priority={true}
-                />
-              </div>
-              <div className=" flex-1 flex flex-col justify-center">
-                <span>hello</span>
-                <span>hello hi</span>
-              </div>
-              <div className=" w-[60px] h-full bg-placeholder flex items-center justify-center">
-                dot
-              </div>
-            </div>
-            <div className="h-[60px] outline outline-slate-200  w-full flex gap-3">
-              <div className="  w-[60px] h-full relative">
-                <Image
-                  src="https://s3.tebi.io/test1345/timo-volz-ZlFKIG6dApg-unsplash%20%281%29.jpg"
-                  fill
-                  alt="this is image element"
-                  priority={true}
-                />
-              </div>
-              <div className=" flex-1 flex flex-col justify-center">
-                <span>hello</span>
-                <span>hello hi</span>
-              </div>
-              <div className=" w-[60px] h-full bg-placeholder flex items-center justify-center">
-                dot
-              </div>
-            </div>
-            <div className="h-[60px] outline outline-slate-200  w-full flex gap-3">
-              <div className="  w-[60px] h-full relative">
-                <Image
-                  src="https://s3.tebi.io/test1345/timo-volz-ZlFKIG6dApg-unsplash%20%281%29.jpg"
-                  fill
-                  alt="this is image element"
-                  priority={true}
-                />
-              </div>
-              <div className=" flex-1 flex flex-col justify-center">
-                <span>hello</span>
-                <span>hello hi</span>
-              </div>
-              <div className=" w-[60px] h-full bg-placeholder flex items-center justify-center">
-                dot
-              </div>
-            </div>
-            <div className="h-[60px] outline outline-slate-200  w-full flex gap-3">
-              <div className="  w-[60px] h-full relative">
-                <Image
-                  src="https://s3.tebi.io/test1345/timo-volz-ZlFKIG6dApg-unsplash%20%281%29.jpg"
-                  fill
-                  alt="this is image element"
-                  priority={true}
-                />
-              </div>
-              <div className=" flex-1 flex flex-col justify-center">
-                <span>hello</span>
-                <span>hello hi</span>
-              </div>
-              <div className=" w-[60px] h-full bg-placeholder flex items-center justify-center">
-                dot
-              </div>
-            </div>
-          </div>
-          <div className=" w-[90%] max-w-[400px] min-w-[350px]   h-full flex flex-col gap-2 justify-between">
-            <div className="h-[60px] outline outline-slate-200  w-full flex gap-3">
-              <div className="  w-[60px] h-full relative">
-                <Image
-                  src="https://s3.tebi.io/test1345/timo-volz-ZlFKIG6dApg-unsplash%20%281%29.jpg"
-                  fill
-                  alt="this is image element"
-                  priority={true}
-                />
-              </div>
-              <div className=" flex-1 flex flex-col justify-center">
-                <span>hello</span>
-                <span>hello hi</span>
-              </div>
-              <div className=" w-[60px] h-full bg-placeholder flex items-center justify-center">
-                dot
-              </div>
-            </div>
-            <div className="h-[60px] outline outline-slate-200  w-full flex gap-3">
-              <div className="  w-[60px] h-full relative">
-                <Image
-                  src="https://s3.tebi.io/test1345/timo-volz-ZlFKIG6dApg-unsplash%20%281%29.jpg"
-                  fill
-                  alt="this is image element"
-                  priority={true}
-                />
-              </div>
-              <div className=" flex-1 flex flex-col justify-center">
-                <span>hello</span>
-                <span>hello hi</span>
-              </div>
-              <div className=" w-[60px] h-full bg-placeholder flex items-center justify-center">
-                dot
-              </div>
-            </div>
-            <div className="h-[60px] outline outline-slate-200  w-full flex gap-3">
-              <div className="  w-[60px] h-full relative">
-                <Image
-                  src="https://s3.tebi.io/test1345/timo-volz-ZlFKIG6dApg-unsplash%20%281%29.jpg"
-                  fill
-                  alt="this is image element"
-                  priority={true}
-                />
-              </div>
-              <div className=" flex-1 flex flex-col justify-center">
-                <span>hello</span>
-                <span>hello hi</span>
-              </div>
-              <div className=" w-[60px] h-full bg-placeholder flex items-center justify-center">
-                dot
-              </div>
-            </div>
-            <div className="h-[60px] outline outline-slate-200  w-full flex gap-3">
-              <div className="  w-[60px] h-full relative">
-                <Image
-                  src="https://s3.tebi.io/test1345/timo-volz-ZlFKIG6dApg-unsplash%20%281%29.jpg"
-                  fill
-                  alt="this is image element"
-                  priority={true}
-                />
-              </div>
-              <div className=" flex-1 flex flex-col justify-center">
-                <span>hello</span>
-                <span>hello hi</span>
-              </div>
-              <div className=" w-[60px] h-full bg-placeholder flex items-center justify-center">
-                dot
-              </div>
-            </div>
-          </div>
-          <div className=" w-[90%] max-w-[400px] min-w-[350px]   h-full flex flex-col gap-2 justify-between">
-            <div className="h-[60px] outline outline-slate-200  w-full flex gap-3">
-              <div className="  w-[60px] h-full relative">
-                <Image
-                  src="https://s3.tebi.io/test1345/timo-volz-ZlFKIG6dApg-unsplash%20%281%29.jpg"
-                  fill
-                  alt="this is image element"
-                  priority={true}
-                />
-              </div>
-              <div className=" flex-1 flex flex-col justify-center">
-                <span>hello</span>
-                <span>hello hi</span>
-              </div>
-              <div className=" w-[60px] h-full bg-placeholder flex items-center justify-center">
-                dot
-              </div>
-            </div>
-            <div className="h-[60px] outline outline-slate-200  w-full flex gap-3">
-              <div className="  w-[60px] h-full relative">
-                <Image
-                  src="https://s3.tebi.io/test1345/timo-volz-ZlFKIG6dApg-unsplash%20%281%29.jpg"
-                  fill
-                  alt="this is image element"
-                  priority={true}
-                />
-              </div>
-              <div className=" flex-1 flex flex-col justify-center">
-                <span>hello</span>
-                <span>hello hi</span>
-              </div>
-              <div className=" w-[60px] h-full bg-placeholder flex items-center justify-center">
-                dot
-              </div>
-            </div>
-            <div className="h-[60px] outline outline-slate-200  w-full flex gap-3">
-              <div className="  w-[60px] h-full relative">
-                <Image
-                  src="https://s3.tebi.io/test1345/timo-volz-ZlFKIG6dApg-unsplash%20%281%29.jpg"
-                  fill
-                  alt="this is image element"
-                  priority={true}
-                />
-              </div>
-              <div className=" flex-1 flex flex-col justify-center">
-                <span>hello</span>
-                <span>hello hi</span>
-              </div>
-              <div className=" w-[60px] h-full bg-placeholder flex items-center justify-center">
-                dot
-              </div>
-            </div>
-            <div className="h-[60px] outline outline-slate-200  w-full flex gap-3">
-              <div className="  w-[60px] h-full relative">
-                <Image
-                  src="https://s3.tebi.io/test1345/timo-volz-ZlFKIG6dApg-unsplash%20%281%29.jpg"
-                  fill
-                  alt="this is image element"
-                  priority={true}
-                />
-              </div>
-              <div className=" flex-1 flex flex-col justify-center">
-                <span>hello</span>
-                <span>hello hi</span>
-              </div>
-              <div className=" w-[60px] h-full bg-placeholder flex items-center justify-center">
-                dot
-              </div>
-            </div>
-          </div>
-          <div className=" w-[90%] max-w-[400px] min-w-[350px]   h-full flex flex-col gap-2 justify-between">
-            <div className="h-[60px] outline outline-slate-200  w-full flex gap-3">
-              <div className="  w-[60px] h-full relative">
-                <Image
-                  src="https://s3.tebi.io/test1345/timo-volz-ZlFKIG6dApg-unsplash%20%281%29.jpg"
-                  fill
-                  alt="this is image element"
-                  priority={true}
-                />
-              </div>
-              <div className=" flex-1 flex flex-col justify-center">
-                <span>hello</span>
-                <span>hello hi</span>
-              </div>
-              <div className=" w-[60px] h-full bg-placeholder flex items-center justify-center">
-                dot
-              </div>
-            </div>
-            <div className="h-[60px] outline outline-slate-200  w-full flex gap-3">
-              <div className="  w-[60px] h-full relative">
-                <Image
-                  src="https://s3.tebi.io/test1345/timo-volz-ZlFKIG6dApg-unsplash%20%281%29.jpg"
-                  fill
-                  alt="this is image element"
-                  priority={true}
-                />
-              </div>
-              <div className=" flex-1 flex flex-col justify-center">
-                <span>hello</span>
-                <span>hello hi</span>
-              </div>
-              <div className=" w-[60px] h-full bg-placeholder flex items-center justify-center">
-                dot
-              </div>
-            </div>
-            <div className="h-[60px] outline outline-slate-200  w-full flex gap-3">
-              <div className="  w-[60px] h-full relative">
-                <Image
-                  src="https://s3.tebi.io/test1345/timo-volz-ZlFKIG6dApg-unsplash%20%281%29.jpg"
-                  fill
-                  alt="this is image element"
-                  priority={true}
-                />
-              </div>
-              <div className=" flex-1 flex flex-col justify-center">
-                <span>hello</span>
-                <span>hello hi</span>
-              </div>
-              <div className=" w-[60px] h-full bg-placeholder flex items-center justify-center">
-                dot
-              </div>
-            </div>
-            <div className="h-[60px] outline outline-slate-200  w-full flex gap-3">
-              <div className="  w-[60px] h-full relative">
-                <Image
-                  src="https://s3.tebi.io/test1345/timo-volz-ZlFKIG6dApg-unsplash%20%281%29.jpg"
-                  fill
-                  alt="this is image element"
-                  priority={true}
-                />
-              </div>
-              <div className=" flex-1 flex flex-col justify-center">
-                <span>hello</span>
-                <span>hello hi</span>
-              </div>
-              <div className=" w-[60px] h-full bg-placeholder flex items-center justify-center">
-                dot
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      {/* <Container songs={["one"]} description="freshest song of the week" />
-      <Container songs={["one"]} description="freshest song of the week" />
-      <Container songs={["one"]} description="freshest song of the week" /> */}
+    <div className=" space-y-3">
+      <ListItemUpFaceGroup description="genre">
+        <GenreContainer genreList={genreData} />
+      </ListItemUpFaceGroup>
+      <ListItemUpFaceGroup description="mood">
+        <MoodContainer moodList={moodData} />
+      </ListItemUpFaceGroup>
+      {(Object.keys(newlyData) as (keyof typeof newlyData)[]).map((itemKey) => {
+        if (!newlyData[itemKey]) return null;
+        if (newlyData[itemKey] && newlyData[itemKey].idArray.length === 0)
+          return null;
+
+        if (itemKey === "newlyAddedSongs") {
+          return (
+            <ListItemUpFaceGroup description={itemKey} key={itemKey}>
+              <ListItemUpFaceContainer songs={newlyData[itemKey]} />
+            </ListItemUpFaceGroup>
+          );
+        }
+        return (
+          <ListUpFaceGroup
+            key={itemKey}
+            list={newlyData[itemKey]}
+            description={itemKey}
+          />
+        );
+      })}
     </div>
-    // <div className="grid grid-cols-12 gap-5 p-4">
-    //   <GenreContainer description={"supanova"} />
-    //   <GenreContainer description={"supanova"} />
-    //   <GenreContainer description={"supanova"} />
-    //   <GenreContainer description={"supanova"} />
-    //   <GenreContainer description={"supanova"} />
-    //   <GenreContainer description={"supanova"} />
-    // </div>
   );
 }
 

@@ -64,6 +64,13 @@ export type AllMediaItems = {
   playlistForYou: listInfo[];
 };
 
+export type NewlyItems = {
+  newlyAddedSongs: SongInfo[];
+  newlyAddedArtists: listInfo[];
+  newlyAddedAlbums: listInfo[];
+  newlyAddedPlaylists: listInfo[];
+};
+
 export type RecentList = {
   recentlyPlayed: listInfo[];
 };
@@ -117,6 +124,10 @@ export type Database = MergeDeep<
         get_all_media_items: {
           Args: Record<string, never>; // Means 'never' or empty args
           Returns: AllMediaItems; // Overwrite 'Json' with our strict type
+        };
+        get_newly: {
+          Args: Record<string, never>;
+          Returns: NewlyItems;
         };
         // ADD THIS SECTION 👇
         get_recent_list: {

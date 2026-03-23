@@ -7,6 +7,7 @@ import {
   FetchSongsReturn,
   GetAllMediaItemsReturn,
   GetLikedIdReturn,
+  GetNewlyItemsReturn,
   GetRecentReturn,
   GetSearchPageReturn,
   ListSongsReturn,
@@ -33,6 +34,48 @@ export const getLikedId = async (): Promise<GetLikedIdReturn> => {
     };
 
     return { data: userLike, error };
+  } catch (error) {
+    return { data: null, error };
+  }
+};
+
+export const getGenre = async () => {
+  try {
+    const supabase = await createClient();
+    const { data, error } = await supabase.from("genres").select("*");
+    if (error) throw error;
+    if (!data) throw new Error("not found");
+    return { data, error };
+  } catch (error) {
+    return { data: null, error };
+  }
+};
+
+export const getMood = async () => {
+  try {
+    const supabase = await createClient();
+    const { data, error } = await supabase.from("moods").select("*");
+    if (error) throw error;
+    if (!data) throw new Error("not found");
+    return { data, error };
+  } catch (error) {
+    return { data: null, error };
+  }
+};
+
+export const getNewly = async (): Promise<GetNewlyItemsReturn> => {
+  try {
+    const supabase = await createClient();
+    const { data, error } = await supabase.rpc("get_newly");
+    if (error) throw error;
+    if (!data) throw new Error("not found");
+    const mapItem = {
+      newlyAddedSongs: normalizeById(data.newlyAddedSongs),
+      newlyAddedAlbums: normalizeById(data.newlyAddedAlbums),
+      newlyAddedPlaylists: normalizeById(data.newlyAddedPlaylists),
+      newlyAddedArtists: normalizeById(data.newlyAddedArtists),
+    };
+    return { data: mapItem, error };
   } catch (error) {
     return { data: null, error };
   }

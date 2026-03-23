@@ -1,6 +1,6 @@
 export default async function Page(props: {
-  params: Promise<{ genre: string }>;
+  params: Promise<{ mood: string }>;
 }) {
   const params = await props.params;
-  return <div>My Post:{params.genre}</div>;
+  return <div>My Post{params.mood}</div>;
 }
