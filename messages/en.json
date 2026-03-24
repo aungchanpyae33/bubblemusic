@@ -129,7 +129,31 @@
     "track": "Song",
     "profile": "Profile",
     "topResult": "Top Result",
-    "topSongsArtist": "Popular Songs"
+    "topSongsArtist": "Popular Songs",
+    "newlyAddedSongs": "Recently Added Songs",
+    "newlyAddedPlaylists": "Recently Added Playlists",
+    "newlyAddedAlbums": "Recently Added Albums",
+    "newlyAddedArtists": "Recently Added Artists",
+    "genre": "Genre",
+    "mood": "Mood"
+  },
+  "Genre": {
+    "mix": "Mix",
+    "electronic": "Electronic",
+    "k-pop": "K-pop",
+    "rap": "Rap",
+    "pop": "Pop",
+    "hip-hop": "Hip-hop",
+    "rock": "Rock",
+    "soul": "Soul"
+  },
+  "Mood": {
+    "energy": "Energy",
+    "love": "Love",
+    "sad": "Sad",
+    "happy": "Happy",
+    "chill": "Chill",
+    "sleep": "Sleep"
   },
   "Auth": {
     "createAccount": "Create a new Account",
