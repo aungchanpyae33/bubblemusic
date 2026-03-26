@@ -9,7 +9,6 @@ import {
 import { useToggleContentPosition } from "@/lib/CustomHooks/useToggleContentPosition";
 import useOutterClick from "@/lib/CustomHooks/useOutterClick";
 import useCloseFunctoion from "@/lib/CustomHooks/useCloseFunction";
-import useFocusOnOpen from "@/lib/CustomHooks/useFocusOnOpen";
 import { useEnableScroll } from "@/lib/CustomHooks/useEnableScroll";
 import { useMoreOptionContext } from "@/Context/ContextMoreOption";
 import { useMoreOptionStackContext } from "@/Context/ContextMoreOptionStack";
@@ -32,7 +31,6 @@ function ToggleContentFloat({
   children,
 }: ToggleContentProps) {
   const { show, setShow } = useMoreOptionContext();
-  const { stack } = useMoreOptionStackContext();
 
   const containerRef = useRef<HTMLDivElement>(null);
   const [position] = useToggleContentPosition({
@@ -45,7 +43,6 @@ function ToggleContentFloat({
   useEnableScroll(containerRef);
   useOutterClick(show, setShow, containerRef, parentRef);
   useCloseFunctoion(show, () => setShow(false), containerRef);
-  useFocusOnOpen(stack === 0, containerRef);
   return (
     <FocusTrap
       focusTrapOptions={{
@@ -79,7 +76,7 @@ function ToggleContentMobile({
   const { show, setShow } = useMoreOptionContext();
   const controls = useDragControls();
   const y = useMotionValue(0);
-  const { stack, setStack } = useMoreOptionStackContext();
+  const { setStack } = useMoreOptionStackContext();
   const { uuidState } = useMoreOptionUniqueContext();
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -110,66 +107,67 @@ function ToggleContentMobile({
   }
 
   useCloseFunctoion(show, () => setShow(false), containerRef);
-  useFocusOnOpen(stack === 0, containerRef);
   return (
     <div ref={scope} className="z-50">
-      <FocusTrap
-        focusTrapOptions={{
-          allowOutsideClick: true,
+      <motion.div
+        onClick={(e) => {
+          if (e.target === e.currentTarget) return;
+          onCloseAnimation();
+        }}
+        id="drawer"
+        initial={{ y: "100%" }}
+        animate={{ y: "0%" }}
+        transition={{
+          ease: "easeInOut",
+        }}
+        className={clsx(
+          " fixed z-50 p-2   bottom-5 left-2 right-2 overflow-hidden rounded-md bg-pop",
+          {
+            hidden: uuidState !== "",
+          },
+        )}
+        style={{ y }}
+        drag="y"
+        dragControls={controls}
+        onDragEnd={(_, info) => {
+          if (info.offset.y > 60) {
+            onCloseAnimation();
+          }
+        }}
+        dragListener={false}
+        dragConstraints={{
+          top: 0,
+          bottom: 0,
+        }}
+        ref={containerRef}
+        dragElastic={{
+          top: 0,
+          bottom: 0.5,
         }}
       >
-        <motion.div
-          onClick={(e) => {
-            if (e.target === e.currentTarget) return;
-            onCloseAnimation();
-          }}
-          id="drawer"
-          initial={{ y: "100%" }}
-          animate={{ y: "0%" }}
-          transition={{
-            ease: "easeInOut",
-          }}
-          className={clsx(
-            " fixed z-50 p-2   bottom-5 left-2 right-2 overflow-hidden rounded-md bg-pop",
-            {
-              hidden: uuidState !== "",
-            },
-          )}
-          style={{ y }}
-          drag="y"
-          dragControls={controls}
-          onDragEnd={(_, info) => {
-            if (info.offset.y > 60) {
-              onCloseAnimation();
-            }
-          }}
-          dragListener={false}
-          dragConstraints={{
-            top: 0,
-            bottom: 0,
-          }}
-          ref={containerRef}
-          tabIndex={-1}
-          dragElastic={{
-            top: 0,
-            bottom: 0.5,
+        <FocusTrap
+          active={uuidState === ""}
+          focusTrapOptions={{
+            allowOutsideClick: true,
           }}
         >
-          <TipUi controls={controls} />
-          <div className="  w-full">{children}</div>
-        </motion.div>
-        <motion.div
-          id="backDrop"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ ease: "easeInOut" }}
-          onClick={onCloseAnimation}
-          aria-hidden
-          className={clsx("fixed  top-0 left-0 bottom-0 right-0 bg-overlay", {
-            hidden: uuidState !== "",
-          })}
-        ></motion.div>
-      </FocusTrap>
+          <div className="w-full h-full" tabIndex={-1}>
+            <TipUi controls={controls} />
+            <div className="  w-full">{children}</div>
+          </div>
+        </FocusTrap>
+      </motion.div>
+      <motion.div
+        id="backDrop"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ ease: "easeInOut" }}
+        onClick={onCloseAnimation}
+        aria-hidden
+        className={clsx("fixed  top-0 left-0 bottom-0 right-0 bg-overlay", {
+          hidden: uuidState !== "",
+        })}
+      ></motion.div>
     </div>
   );
 }

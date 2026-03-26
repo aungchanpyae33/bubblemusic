@@ -5,7 +5,7 @@ import { twMerge } from "tailwind-merge";
 interface OptionButtonProps extends React.ComponentProps<"button"> {
   children: React.ReactNode;
   isSub?: boolean;
-  action?: () => void | Promise<void>;
+  action?: () => void | Promise<void | null> | null;
 }
 const baseStyle = "flex w-full h-full items-center";
 function OptionButton({

@@ -13,12 +13,7 @@ function InitCreateButton() {
       state.createToPlaylistModalBoxAction,
   );
   return (
-    <button
-      className="mr-2"
-      onClick={() =>
-        createToPlaylistModalBoxAction({ originParentTriggerRef: buttonRef })
-      }
-    >
+    <button className="mr-2" onClick={() => createToPlaylistModalBoxAction({})}>
       <IconWrapper size="large" Icon={Plus} />
     </button>
   );

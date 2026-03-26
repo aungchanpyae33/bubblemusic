@@ -2,16 +2,16 @@ import { insertSongtoPlaylist } from "@/actions/addSongsToPlaylist";
 import type { UserLibReturn } from "@/database/data-types-return";
 import { closeModalBox } from "@/lib/closeModalBox";
 import {
+  originParentTriggerRef,
   songExistActionModalBox,
   useIsExistSongsModalBox,
 } from "@/lib/zustand";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { RefObject } from "react";
 
 const useAddSongMutate = (
   playlistId: string,
   cover_url: string | null,
-  originParentTriggerRef: RefObject<HTMLElement | null>,
+  originParentTriggerRef: originParentTriggerRef,
 ) => {
   const setIsSongExistModalBox = useIsExistSongsModalBox(
     (state: songExistActionModalBox) => state.setIsSongExistModalBox,

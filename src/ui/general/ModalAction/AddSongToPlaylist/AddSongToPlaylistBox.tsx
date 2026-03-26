@@ -7,8 +7,10 @@ import {
 import SubOpenContentWrapper from "../ModalWrapper/SubOpenContentWrapper";
 import SubOpenToggle from "../ModalWrapper/SubOpenToggle";
 import AddSongModalBoxContainer from "./AddSongModalBoxContainer";
+import { useTranslations } from "next-intl";
 
 function AddSongToPlaylistBox() {
+  const m = useTranslations("ModalBox");
   const data = useAddSongsToPlaylistModalBox(
     (state: songsToPlaylistModalBox) => state.songsToPlaylistModalBox,
   );
@@ -26,6 +28,7 @@ function AddSongToPlaylistBox() {
         selector={(state: addSongsToPlaylistModalBox) =>
           state.addSongsToPlaylistModalBox
         }
+        headerText={m("addSongToPlaylist.title")}
         useStore={useAddSongsToPlaylistModalBox}
       >
         <AddSongModalBoxContainer />

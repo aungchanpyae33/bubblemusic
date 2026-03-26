@@ -7,12 +7,15 @@ import { useMoreOptionContext } from "@/Context/ContextMoreOption";
 import ContextMoreOptionUnique from "@/Context/ContextMoreOptionUnique";
 import ContextMoreOptionStack from "@/Context/ContextMoreOptionStack";
 import ContextOriginParentTrigger from "@/Context/ContextOriginParentTrigger";
-interface MoreOptionProps extends React.ComponentProps<"div"> {
+import { cn } from "@/lib/utils";
+interface MoreOptionProps {
+  className?: string;
   targetElement: React.ReactNode;
   triggerEl: React.ReactNode;
   staticDrop?: boolean;
   staticUp?: boolean;
 }
+const baseStyle = "w-full h-full flex justify-center";
 function MoreOption({
   className,
   triggerEl,
@@ -30,7 +33,7 @@ function MoreOption({
         onClick={() => {
           setShow(!show);
         }}
-        className={`w-full h-full  flex justify-center ${className}`}
+        className={cn(baseStyle, className)}
       >
         {triggerEl}
       </button>

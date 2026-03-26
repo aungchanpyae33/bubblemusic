@@ -8,8 +8,10 @@ import {
 import SubOpenContentWrapper from "../ModalWrapper/SubOpenContentWrapper";
 import SubOpenToggle from "../ModalWrapper/SubOpenToggle";
 import ConfirmAddSong from "./ConfirmAddSong";
+import { useTranslations } from "next-intl";
 
 function ConfirmAddSongBox() {
+  const w = useTranslations("Warning");
   const data = useIsExistSongsModalBox(
     (state: isSongExistModalBox) => state.isSongExistModalBox,
   );
@@ -24,6 +26,7 @@ function ConfirmAddSongBox() {
         selector={(state: songExistActionModalBox) =>
           state.setIsSongExistModalBox
         }
+        headerText={w("notice")}
         originParentTriggerRef={originParentTriggerRef}
         useStore={useIsExistSongsModalBox}
       >
