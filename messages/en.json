@@ -52,7 +52,8 @@
     "newPlaylist": "New Playlist",
     "navLink": {
       "exploreDescription": "Explore",
-      "liveDescription": "Live"
+      "likeDescription": "Like Songs",
+      "libraryDescription": "Library"
     },
     "emptySongList": "There is no track in the playlist",
     "playlistForm": {
@@ -138,7 +139,17 @@
     "newlyAddedAlbums": "Recently Added Albums",
     "newlyAddedArtists": "Recently Added Artists",
     "genre": "Genre",
-    "mood": "Mood"
+    "mood": "Mood",
+    "shoreMore": "Show all",
+    "lastLikedSongs": "Liked Songs",
+    "lastSavedAlbums": "Your saved Albums",
+    "lastSavedPlaylists": "Your saved Playlists",
+    "lastCreatedPlaylists": "Your created Playlists",
+    "lastSavedArtists": "Your favourite Artists",
+    "overview": "Overview",
+    "create-playlist": "Own Playlist",
+    "liked-songs": "Liked Songs",
+    "recently": "Recently Played"
   },
   "Genre": {
     "mix": "Mix",

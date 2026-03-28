@@ -26,6 +26,8 @@ async function page() {
         if (itemKey === "recentlyPlayed") {
           return (
             <RecentlyListContainer
+              showMore={true}
+              href="/library/recently"
               key={itemKey}
               songs={data[itemKey] as GetRecent}
               description={itemKey}

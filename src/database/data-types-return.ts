@@ -1,6 +1,7 @@
 import type { PostgrestError } from "@supabase/supabase-js";
 import type {
   AllMediaItems,
+  LibraryOverview,
   listInfo,
   listSongsSection,
   MediaItemSource,
@@ -11,7 +12,7 @@ import type {
   SongInfo,
   Tables,
 } from "../../database.types-fest";
-import type { NormalizedById } from "@/lib/returnById";
+import type { NormalizedById, NormalizedByIdOnly } from "@/lib/returnById";
 
 export interface ErrorResponse {
   error: PostgrestError | null | unknown;
@@ -22,7 +23,7 @@ export interface GetLyricReturn {
   error: ErrorResponse["error"];
 }
 export type UserLike = {
-  userLike: NormalizedById<{ id: string }> | null;
+  userLike: NormalizedByIdOnly<{ id: string }> | null;
 };
 
 export interface GetLikedIdReturn {
@@ -60,6 +61,29 @@ export type GetNewlyItems = {
 
 export interface GetNewlyItemsReturn {
   data: GetNewlyItems | null;
+  error: ErrorResponse["error"];
+}
+
+export type GetLibraryOverview = {
+  [k in Exclude<
+    keyof LibraryOverview,
+    "lastLikedSongs"
+  >]: NormalizedById<listInfo> | null;
+} & {
+  lastLikedSongs: NormalizedById<SongInfo> | null;
+};
+
+export interface GetLibraryOverviewReturn {
+  data: GetLibraryOverview | null;
+  error: ErrorResponse["error"];
+}
+
+export type GetLikeSong = {
+  result: NormalizedById<SongInfo> | null;
+};
+
+export interface GetLikeSongReturn {
+  data: GetLikeSong | null;
   error: ErrorResponse["error"];
 }
 
@@ -103,6 +127,14 @@ export interface ListSongsReturn {
   error: ErrorResponse["error"];
 }
 
+export type LibrarySongListSectionPage = {
+  result: NormalizedById<listInfo> | null;
+};
+
+export interface LibrarySongListSectionPageReturn {
+  data: LibrarySongListSectionPage | null;
+  error: ErrorResponse["error"];
+}
 export interface ArtistPage {
   songs: ListSongPage;
   albums: NormalizedById<listInfo> | null;

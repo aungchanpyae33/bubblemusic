@@ -33,7 +33,12 @@ async function page(props: { params: Promise<{ slug: string }> }) {
       </ListContainer>
 
       {playlists && (
-        <ListUpFaceGroup list={playlists} description="publicPlaylist" />
+        <ListUpFaceGroup
+          showMore={true}
+          href={`/profile/${params.slug}/playlists`}
+          list={playlists}
+          description="publicPlaylist"
+        />
       )}
     </div>
   );

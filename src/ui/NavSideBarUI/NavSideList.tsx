@@ -2,7 +2,7 @@
 
 import NavSideLink from "./NavSideLink";
 import { ReactNode, useRef, useState } from "react";
-import { ListMusic, Menu } from "lucide-react";
+import { Menu } from "lucide-react";
 import IconWrapper from "../general/IconWrapper";
 
 import NavSideLinkNotOpen from "./NavSideLinkNotOpen";
@@ -17,19 +17,20 @@ import NeedToSignInSideBar from "./NeedToSignInSideBar";
 
 interface NavSideListProps {
   childrenExplore: ReactNode;
-  childrenLive: ReactNode;
+  childrenLike: ReactNode;
   childrenPlaylist: ReactNode;
   childrenLogo: ReactNode;
 }
 function NavSideList({
   childrenExplore,
-  childrenLive,
+  childrenLike,
   childrenPlaylist,
   childrenLogo,
 }: NavSideListProps) {
   const b = useTranslations("block");
   const containerHeightRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
+  const { userInfo } = useUserInfoContext();
   return (
     <div className=" w-full  ">
       <ul className="fixed w-[70px] top-0  box-border left-0 h-[70px] md:h-full flex  flex-col gap-x-1   rounded-b-sm">
@@ -51,11 +52,11 @@ function NavSideList({
           <NavSideLinkNotOpen hrefString="/explore">
             {childrenExplore}
           </NavSideLinkNotOpen>
-          <NavSideLinkNotOpen hrefString="/live">
-            {childrenLive}
+          <NavSideLinkNotOpen hrefString="/playlist/like">
+            {childrenLike}
           </NavSideLinkNotOpen>
 
-          <NavSideLinkNotOpen hrefString="/library">
+          <NavSideLinkNotOpen hrefString="/library/overview">
             {childrenPlaylist}
           </NavSideLinkNotOpen>
         </div>
@@ -66,7 +67,7 @@ function NavSideList({
         setOpen={setOpen}
         childrenLogo={childrenLogo}
       >
-        <div className="overflow-auto will-change-scroll flex-1  flex flex-col py-3  ">
+        <div className="overflow-auto will-change-scroll flex-1  flex flex-col">
           {/*  will-change-scroll for hardware acceleration , without this , it feels junky in chrome and some webkit browser */}
 
           <NavSideLink
@@ -78,21 +79,25 @@ function NavSideList({
             {childrenExplore}
           </NavSideLink>
           <NavSideLink
-            url="/live"
-            desp={b("navLink.liveDescription")}
+            url="/playlist/like"
+            desp={b("navLink.likeDescription")}
             open={open}
             setOpen={setOpen}
           >
-            {childrenLive}
+            {childrenLike}
           </NavSideLink>
-          <div className="h-[50px] flex items-center justify-between  ">
-            <NavSideLink url="/library" desp="" open={open} setOpen={setOpen}>
-              <div className=" w-[70px] flex items-center  justify-center">
-                <IconWrapper size="large" Icon={ListMusic} />
-              </div>
+          <div className="flex items-center relative justify-between w-full  ">
+            <NavSideLink
+              url="/library/overview"
+              desp={b("navLink.libraryDescription")}
+              open={open}
+              setOpen={setOpen}
+            >
+              {childrenPlaylist}
             </NavSideLink>
             <InitCreateButton />
           </div>
+
           <ContextContainerHeight containerHeightRef={containerHeightRef}>
             <div className="w-full h-full" ref={containerHeightRef}>
               {open && userInfo ? (

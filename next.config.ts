@@ -13,6 +13,12 @@ const nextConfig: NextConfig = {
         port: "",
         pathname: "/storage/v1/object/public/bubblemusic/source/**",
       },
+      {
+        protocol: "https",
+        hostname: "njjvikpbvsfomrpyxnta.supabase.co",
+        port: "",
+        pathname: "/storage/v1/object/public/bubblemusic/bubble-assets/**",
+      },
     ],
   },
 };

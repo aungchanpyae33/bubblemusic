@@ -1,7 +1,5 @@
 import type { MergeDeep } from "type-fest";
-import type { Database as DBGenerated } from "./database.types"; // Import your raw supabase file
-
-// 1. Define your Custom Types here
+import type { Database as DBGenerated } from "./database.types";
 export type LyricData = {
   time: number;
   line: string;
@@ -14,7 +12,8 @@ export type listInfo = {
   cover_url: string | null;
   related_id: string;
   related_name: string;
-  type: Database["public"]["Enums"]["media_item_type"];
+  type: MediaItemType;
+  flag?: MediaItemFlag;
   play_count?: number;
   played_at?: string;
   is_official?: boolean;
@@ -51,7 +50,6 @@ export interface SongInfo {
   cover_url: string;
 }
 
-// The final object returned by get_all_media_items()
 export type AllMediaItems = {
   recentlyPlayed: listInfo[];
   trendingSongs: SongInfo[];
@@ -71,8 +69,25 @@ export type NewlyItems = {
   newlyAddedPlaylists: listInfo[];
 };
 
+export type LibraryOverview = {
+  lastLikedSongs: SongInfo[];
+  lastSavedAlbums: listInfo[];
+  lastSavedPlaylists: listInfo[];
+  lastCreatedPlaylists: listInfo[];
+  lastSavedArtists: listInfo[];
+  recentlyPlayed: listInfo[];
+};
+
+export type LikeSongsList = {
+  songs: SongInfo[];
+};
+
 export type RecentList = {
   recentlyPlayed: listInfo[];
+};
+
+export type LibrarySonglistSectinon = {
+  result: listInfo[];
 };
 
 export type ListSongs = {
@@ -85,6 +100,7 @@ export interface ArtistInfo extends ListSongs {
 
 export type MediaItemType = Enums<"media_item_type">;
 export type MediaItemSource = Enums<"media_source_type">;
+export type MediaItemFlag = Enums<"media_item_flag">;
 export interface UserInfo {
   profile: listInfo;
   playlists: listInfo[];
@@ -105,9 +121,6 @@ export type SearchDropdownResult = {
   profiles: SearchItem[];
 };
 
-// 2. Override the Database Type
-// We use MergeDeep to "patch" the specific fields we want to change
-// while keeping everything else exactly as Supabase generated it.
 export type Database = MergeDeep<
   DBGenerated,
   {
@@ -119,7 +132,7 @@ export type Database = MergeDeep<
           Update: { lyric_data?: LyricData };
         };
       };
-      // ADD THIS SECTION 👇
+
       Functions: {
         get_all_media_items: {
           Args: Record<string, never>; // Means 'never' or empty args
@@ -129,10 +142,42 @@ export type Database = MergeDeep<
           Args: Record<string, never>;
           Returns: NewlyItems;
         };
-        // ADD THIS SECTION 👇
+        get_library_overview: {
+          Args: Record<string, never>;
+          Returns: LibraryOverview;
+        };
+
         get_recent_list: {
           Args: Record<string, never>;
-          Returns: RecentList; // Overwrites 'Json' with our strict type
+          Returns: RecentList;
+        };
+        get_last_liked_songs: {
+          Args: { like_title: string };
+          Returns: ListSongs;
+        };
+        get_last_saved_albums: {
+          Args: Record<string, never>;
+          Returns: LibrarySonglistSectinon;
+        };
+        get_last_saved_playlists: {
+          Args: Record<string, never>;
+          Returns: LibrarySonglistSectinon;
+        };
+        get_last_created_playlists: {
+          Args: Record<string, never>;
+          Returns: LibrarySonglistSectinon;
+        };
+        get_last_saved_artists: {
+          Args: Record<string, never>;
+          Returns: LibrarySonglistSectinon;
+        };
+        get_recently_played: {
+          Args: Record<string, never>;
+          Returns: LibrarySonglistSectinon;
+        };
+        get_user_playlist_profile: {
+          Args: { p_user_id: string };
+          Returns: LibrarySonglistSectinon;
         };
         search_dropdown: {
           Args: { query: string };
@@ -209,8 +254,8 @@ export type Database = MergeDeep<
   }
 >;
 
-// 3. Re-export Helper Types (Typed with YOUR new Database)
-// This ensures that when you use Tables<'lyric'> it uses the fixed version.
+// Re-export Helper Types
+// This ensures that when  use Tables<'lyric'> it uses the fixed version.
 
 export type Tables<TableName extends keyof Database["public"]["Tables"]> =
   Database["public"]["Tables"][TableName]["Row"];

@@ -6,14 +6,17 @@ import {
   ArtistPageReturn,
   FetchSongsReturn,
   GetAllMediaItemsReturn,
+  GetLibraryOverviewReturn,
   GetLikedIdReturn,
   GetNewlyItemsReturn,
   GetRecentReturn,
   GetSearchPageReturn,
+  LibrarySongListSectionPageReturn,
   ListSongsReturn,
   UserLibReturn,
   UserPageReturn,
 } from "./data-types-return";
+import { LibSonglistRoute } from "@/app/(root)/library/[params]/page";
 export interface Movie {
   id: number;
   name: string;
@@ -75,6 +78,47 @@ export const getNewly = async (): Promise<GetNewlyItemsReturn> => {
       newlyAddedArtists: normalizeById(data.newlyAddedArtists),
     };
     return { data: mapItem, error };
+  } catch (error) {
+    return { data: null, error };
+  }
+};
+
+export const getLibraryOverview =
+  async (): Promise<GetLibraryOverviewReturn> => {
+    try {
+      const supabase = await createClient();
+      const { data, error } = await supabase.rpc("get_library_overview");
+      if (error) throw error;
+      if (!data) throw new Error("not found");
+      const mapItem = {
+        lastLikedSongs: normalizeById(data.lastLikedSongs),
+        lastSavedAlbums: normalizeById(data.lastSavedAlbums),
+        lastSavedPlaylists: normalizeById(data.lastSavedPlaylists),
+        lastCreatedPlaylists: normalizeById(data.lastCreatedPlaylists),
+        lastSavedArtists: normalizeById(data.lastSavedArtists),
+        recentlyPlayed: normalizeById(data.recentlyPlayed),
+      };
+
+      return { data: mapItem, error };
+    } catch (error) {
+      return { data: null, error };
+    }
+  };
+
+export const getLikeSongs = async (
+  like_title: string,
+): Promise<ListSongsReturn> => {
+  try {
+    const supabase = await createClient();
+    const { data, error } = await supabase.rpc("get_last_liked_songs", {
+      like_title,
+    });
+    if (error) throw error;
+    if (!data) throw new Error("not found");
+    const mappedData = {
+      songs: { ...data.songs, songs: normalizeById(data.songs.songs) },
+    };
+    return { data: mappedData, error };
   } catch (error) {
     return { data: null, error };
   }
@@ -284,6 +328,66 @@ const fetchSongListByType = async (id: string, type: MediaItemType) => {
     } else {
       return { data: null, error: null };
     }
+  } catch (error) {
+    return { data: null, error };
+  }
+};
+
+const fetchLibrarySectionByRoute = async (route: LibSonglistRoute) => {
+  try {
+    const supabase = await createClient();
+    if (route === "album") {
+      return await supabase.rpc("get_last_saved_albums");
+    }
+    if (route === "playlist") {
+      return await supabase.rpc("get_last_saved_playlists");
+    }
+    if (route === "create-playlist") {
+      return await supabase.rpc("get_last_created_playlists");
+    }
+    if (route === "artist") {
+      return await supabase.rpc("get_last_saved_artists");
+    }
+    if (route === "recently") {
+      return await supabase.rpc("get_recently_played");
+    }
+    return { data: null, error: null };
+  } catch (error) {
+    return { data: null, error };
+  }
+};
+
+export const getUserFullPlaylist = async (
+  p_user_id: string,
+): Promise<LibrarySongListSectionPageReturn> => {
+  try {
+    const supabase = await createClient();
+    const { data, error } = await supabase.rpc("get_user_playlist_profile", {
+      p_user_id,
+    });
+    if (error) throw error;
+    if (!data) throw new Error("not found");
+
+    const mappedData = {
+      result: normalizeById(data.result),
+    };
+    return { data: mappedData, error };
+  } catch (error) {
+    return { data: null, error };
+  }
+};
+
+export const getLibSectionList = async (
+  route: LibSonglistRoute,
+): Promise<LibrarySongListSectionPageReturn> => {
+  try {
+    const { data, error } = await fetchLibrarySectionByRoute(route);
+    if (error) throw error;
+    if (!data) throw new Error("not found");
+    const mappedData = {
+      result: normalizeById(data.result),
+    };
+    return { data: mappedData, error };
   } catch (error) {
     return { data: null, error };
   }

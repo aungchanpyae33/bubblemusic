@@ -55,7 +55,7 @@ function PlaceHolderToggleState({
   const playlistId = useStorePlayListId(
     (state: StorePlayListIdState) => Object.values(state.playlistId)[0] || [],
   ) as string[];
-  const { id: list_id, type } = playListArray;
+  const { id: list_id, type, flag } = playListArray;
   const setPlay = useSongFunction(
     (state: SongFunctionActions) => state.setPlay,
   );
@@ -188,6 +188,7 @@ function PlaceHolderToggleState({
     async function addRecentList() {
       if (list_id.startsWith("create-on-fly")) return;
       if (type === "track") return;
+      if (flag && flag === "user-specific") return;
       const { data: recentList, error } = await addRecentlyPlayedList(
         list_id,
         type,
@@ -208,7 +209,7 @@ function PlaceHolderToggleState({
       }, 60000);
     }
     addRecentList();
-  }, [list_id, type, setListTrack, queryClient]);
+  }, [list_id, type, setListTrack, queryClient, flag]);
   //to prevent fast skipping song to add many times and user fast skip songs should not store in user perference
   useEffect(() => {
     function addRecentSong() {
