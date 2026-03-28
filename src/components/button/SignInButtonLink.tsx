@@ -7,7 +7,7 @@ function SignInButtonLink() {
   const b = useTranslations("block");
   return (
     <Link href="/auth/login">
-      <Button className="">{b("login")}</Button>
+      <Button>{b("login")}</Button>
     </Link>
   );
 }

@@ -9,12 +9,25 @@ import OptionItem from "../OptionUI/OptionItem";
 import OptionButton from "../OptionUI/OptionButton";
 import OptionIconEl from "../OptionUI/OptionIconEl";
 import OptionText from "../OptionUI/OptionText";
+import { useOriginParentTriggerContext } from "@/Context/ContextOriginParentTrigger";
+import { useUserInfoContext } from "@/Context/ContextUserInfo";
+import { SignInModalBoxAction, useSignInModalBox } from "@/lib/zustand";
+import { guardToSignIn } from "@/lib/guardToSignIn";
 
 function AddToLibraryChild() {
   const { id, type } = useSongListContext();
   const b = useTranslations("block");
+  const { originParentTriggerRef } = useOriginParentTriggerContext();
+  const { userInfo } = useUserInfoContext();
+  const signInModalBoxAction = useSignInModalBox(
+    (state: SignInModalBoxAction) => state.signInModalBoxAction,
+  );
   const queryClient = useQueryClient();
   async function addToLibraryFn() {
+    if (!userInfo) {
+      return guardToSignIn({ originParentTriggerRef }, signInModalBoxAction);
+    }
+
     const { data, error } = await addToLibrary(id, type);
     if (error) {
       console.log(error);
@@ -40,8 +53,8 @@ function AddToLibraryChild() {
 }
 
 function AddToLibrary() {
-  const { source } = useSongListContext();
-
+  const { source, flag } = useSongListContext();
+  if (flag && flag === "user-specific") return null;
   if (source !== "none") return null;
   return <AddToLibraryChild />;
 }

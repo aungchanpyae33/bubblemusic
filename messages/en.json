@@ -96,8 +96,11 @@
     "notice": "Notice",
     "songAlreadyExist": "Songs is already exist. Do you want to add?",
     "add": "Add",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "needToLogin": "You must be logged in to perform that feature",
+    "needToLoginSidebar": "Log in to save your favorites."
   },
+
   "Footer": {
     "aboutTitle": "About This Project",
     "aboutDescription": "This music streaming bubble web app is a personal web application project created to demonstrate TypeScript, React, and Next.js. It is designed with a simple and user-friendly interface that allows users to listen to music, save songs, and even listen together with others.",

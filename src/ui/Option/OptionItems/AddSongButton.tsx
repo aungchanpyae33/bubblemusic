@@ -9,21 +9,33 @@ import OptionText from "../OptionUI/OptionText";
 import { ListPlus } from "lucide-react";
 import {
   addSongsToPlaylistModalBox,
+  SignInModalBoxAction,
   useAddSongsToPlaylistModalBox,
+  useSignInModalBox,
 } from "@/lib/zustand";
 import { useOriginParentTriggerContext } from "@/Context/ContextOriginParentTrigger";
+import { useUserInfoContext } from "@/Context/ContextUserInfo";
+import { guardToSignIn } from "@/lib/guardToSignIn";
 function AddSongButton() {
   const b = useTranslations("block");
   const { song } = useInfoTrackContext();
   const addSongsToPlaylistModalBox = useAddSongsToPlaylistModalBox(
     (state: addSongsToPlaylistModalBox) => state.addSongsToPlaylistModalBox,
   );
+  const { userInfo } = useUserInfoContext();
+
   const { originParentTriggerRef } = useOriginParentTriggerContext();
+  const signInModalBoxAction = useSignInModalBox(
+    (state: SignInModalBoxAction) => state.signInModalBoxAction,
+  );
   if (!song) return null;
   const songId = song.song_id;
   const cover_url = song.cover_url;
-
   function addSongs() {
+    if (!userInfo) {
+      return guardToSignIn({ originParentTriggerRef }, signInModalBoxAction);
+    }
+
     addSongsToPlaylistModalBox({ songId, cover_url, originParentTriggerRef });
   }
   return (

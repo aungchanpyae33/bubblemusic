@@ -1,9 +1,9 @@
 import SearchBar from "../searchBar/SearchBar";
-import UserInfo from "../user/UserInfo";
 import { Suspense } from "react";
 import NoThankYouPreFetchLink from "../general/NoThankYouPreFetchLink";
 import Logo from "./Logo";
 import NavSideBar from "../NavSideBarUI/NavSideBar";
+import AuthCheckRender from "./AuthCheckRender";
 function NavBar() {
   return (
     <nav className="navBarContainer bg-section flex w-full   h-[70px] z-10   items-center justify-between border-opacity-15  border-b border-seperate-soft ">
@@ -21,12 +21,12 @@ function NavBar() {
         </div>
       </Suspense>
 
-      <div className=" flex-1  z-20  text-end">
+      <div className=" flex-1 z-20  text-end">
         <SearchBar />
       </div>
 
-      <div className="max-w-[200px]  w-[20%] flex justify-end pr-4">
-        <UserInfo />
+      <div className="max-w-[200px] w-[20%] min-w-fit flex justify-end pr-4">
+        <AuthCheckRender />
       </div>
     </nav>
   );

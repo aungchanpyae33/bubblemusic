@@ -13,6 +13,9 @@ import type {
   MediaItemType,
 } from "../../../../database.types-fest";
 import { useSongListContext } from "@/Context/ContextSongListContainer";
+import { useUserInfoContext } from "@/Context/ContextUserInfo";
+import { SignInModalBoxAction, useSignInModalBox } from "@/lib/zustand";
+import { guardToSignIn } from "@/lib/guardToSignIn";
 
 interface ListContainerAddToLibraryProps {
   id: string;
@@ -42,10 +45,17 @@ function ListContainerAddToLibrary() {
   const loader = useTopLoader();
   const queryClient = useQueryClient();
   const [itemSource, setItemSource] = useState(isAdd(source));
+  const { userInfo } = useUserInfoContext();
+  const signInModalBoxAction = useSignInModalBox(
+    (state: SignInModalBoxAction) => state.signInModalBoxAction,
+  );
   useEffect(() => {
     setItemSource(isAdd(source));
   }, [source]);
   async function ActionToLibraryFn() {
+    if (!userInfo) {
+      return guardToSignIn({}, signInModalBoxAction);
+    }
     loader.start();
     setItemSource(itemSource);
     const { data, error } = await modifyLib({ id, type, source });

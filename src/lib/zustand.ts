@@ -127,6 +127,16 @@ export interface AudioDraggingActions {
   setIsDragging: (newState: boolean) => void;
 }
 
+interface SignInModalBoxProps {
+  originParentTriggerRef?: originParentTriggerRef;
+}
+export interface SignInModalBox {
+  signInModalBox: SignInModalBoxProps | undefined;
+}
+export interface SignInModalBoxAction {
+  signInModalBoxAction: (value: SignInModalBox["signInModalBox"]) => void;
+}
+
 export interface VolumeValueState {
   value: number;
 }
@@ -157,30 +167,22 @@ export interface focusStateAction {
 }
 
 // need to select them with object key as there will be used for many component
-export const useSong = create<SongState & SongActions & resetAction>()(
-  (set) => ({
-    songCu: {},
-    updateSongCu: (newSong) =>
-      set(() => ({
-        songCu: { ...newSong },
-      })),
-    reset: () => {
-      set({ songCu: {} });
-    },
-  }),
-);
+export const useSong = create<SongState & SongActions>()((set) => ({
+  songCu: {},
+  updateSongCu: (newSong) =>
+    set(() => ({
+      songCu: { ...newSong },
+    })),
+}));
 
 export const usePreviousPlayList = create<
-  previousSongPlaylist & previousSongPlaylistAction & resetAction
+  previousSongPlaylist & previousSongPlaylistAction
 >()((set) => ({
   previousPlayListArray: {},
   setPreviousPlayListArray: (newList) =>
     set(() => {
       return { previousPlayListArray: { ...newList } };
     }),
-  reset: () => {
-    set({ previousPlayListArray: {} });
-  },
 }));
 
 export const useSongFunction = create<SongFunctionState & SongFunctionActions>(
@@ -200,16 +202,13 @@ export const useSongFunction = create<SongFunctionState & SongFunctionActions>(
 );
 
 export const useStorePlayListId = create<
-  StorePlayListIdState & StorePlayListIdStateAction & resetAction
+  StorePlayListIdState & StorePlayListIdStateAction
 >()((set) => ({
   playlistId: {},
   setPlaylistId: (id) =>
     set(() => ({
       playlistId: { ...id },
     })),
-  reset: () => {
-    set({ playlistId: {} });
-  },
 }));
 
 export const useShouldFetchSongsList = create<
@@ -247,8 +246,7 @@ export const useRepeatAndCurrentPlayList = create<
     removeFromQueueAction &
     IsRepeatState &
     RepeatAction &
-    PrefetchAction &
-    resetAction
+    PrefetchAction
 >()((set, get) => ({
   playListArray: {},
 
@@ -395,12 +393,6 @@ export const useRepeatAndCurrentPlayList = create<
       }
     }
   },
-  reset: () => {
-    set(() => ({
-      playListArray: {},
-      isRepeat: false,
-    }));
-  },
 }));
 
 export const useAudioValue = create<AudioValueState & AudioValueActions>(
@@ -424,7 +416,19 @@ export const useAudioDragging = create<
     })),
 }));
 
-export const useVolumeValue = create<VolumeValueState & VolumeValueActions>()(
+export const useSignInModalBox = create<SignInModalBox & SignInModalBoxAction>(
+  (set) => ({
+    signInModalBox: undefined,
+    signInModalBoxAction: (newState) =>
+      set(() => ({
+        signInModalBox: newState,
+      })),
+  }),
+);
+
+export const useVolumeValue = create<
+  VolumeValueState & VolumeValueActions & resetAction
+>()(
   persist(
     (set) => ({
       value: 0,
@@ -432,6 +436,11 @@ export const useVolumeValue = create<VolumeValueState & VolumeValueActions>()(
         set(() => ({
           value: newValue,
         })),
+      reset: () => {
+        set(() => ({
+          value: 0,
+        }));
+      },
     }),
     {
       name: "volume-storage", // key in localStorage
@@ -488,7 +497,8 @@ import { NormalizedById } from "./returnById";
 export interface isSongExistModalBoxProps {
   playlistId: string;
   songId: string;
-  originParentTriggerRef: RefObject<HTMLElement | null>;
+  cover_url: string;
+  originParentTriggerRef?: originParentTriggerRef;
 }
 export interface isSongExistModalBox {
   isSongExistModalBox: isSongExistModalBoxProps | undefined;
@@ -511,7 +521,7 @@ export const useIsExistSongsModalBox = create<
 export interface songsToPlaylistModalBoxProps {
   songId: string;
   cover_url: string;
-  originParentTriggerRef: RefObject<HTMLElement | null>;
+  originParentTriggerRef?: originParentTriggerRef;
 }
 export interface songsToPlaylistModalBox {
   songsToPlaylistModalBox: songsToPlaylistModalBoxProps | undefined;
@@ -531,10 +541,11 @@ export const useAddSongsToPlaylistModalBox = create<
     })),
 }));
 
+export type originParentTriggerRef = RefObject<HTMLElement | null> | undefined;
 export interface editToPlaylistModalBoxProps {
   id: string;
   name: string;
-  originParentTriggerRef: RefObject<HTMLElement | null>;
+  originParentTriggerRef?: originParentTriggerRef;
 }
 export interface editToPlaylistModalBox {
   editToPlaylistModalBox: editToPlaylistModalBoxProps | undefined;
@@ -555,7 +566,7 @@ export const useEditToPlaylist = create<
 }));
 
 export interface createToPlaylistModalBoxProps {
-  originParentTriggerRef: RefObject<HTMLElement | null>;
+  originParentTriggerRef?: originParentTriggerRef;
 }
 
 export interface createToPlaylistModalBox {
@@ -624,7 +635,9 @@ export interface SongTrackState {
 export interface SetSongTrackAction {
   setSongTrack: (songId: string) => void;
 }
-export const useSongTrack = create<SongTrackState & SetSongTrackAction>()(
+export const useSongTrack = create<
+  SongTrackState & SetSongTrackAction & resetAction
+>()(
   persist(
     (set) => ({
       songTrack: undefined,
@@ -664,6 +677,12 @@ export const useSongTrack = create<SongTrackState & SetSongTrackAction>()(
             },
           };
         }),
+
+      reset: () => {
+        set(() => ({
+          songTrack: undefined,
+        }));
+      },
     }),
     {
       name: "track-song-storage",
