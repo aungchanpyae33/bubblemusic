@@ -19,7 +19,7 @@ async function PageTrackItemContainer({
   ]);
   const songs = listSong.songs;
   return songs && songs.idArray.length > 0 ? (
-    <div className=" w-full  ">
+    <div className=" w-full my-4">
       <ListGeneralHeader>{l(description)}</ListGeneralHeader>
       <ContextTableHeadBgChange>
         <TableHead>

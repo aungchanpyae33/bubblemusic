@@ -1,9 +1,9 @@
 import type { LucideIcon } from "lucide-react";
-import IconWrapper from "../IconWrapper";
+import IconWrapper, { IconWrapperProps } from "../IconWrapper";
 
 interface TogglePlayButtonProps {
   isPlay: boolean | undefined;
-  size?: "exLarge" | "large" | "medium" | "small";
+  size?: IconWrapperProps["size"];
   notClickable?: boolean;
   playIcon: LucideIcon;
   pauseIcon: LucideIcon;
@@ -16,7 +16,7 @@ function TogglePlayButton({
   notClickable,
 }: TogglePlayButtonProps) {
   return (
-    <div className="  p-1 rounded-full bg-surface-1">
+    <div className="p-1 rounded-full bg-surface-1">
       {isPlay ? (
         <IconWrapper
           className="fill-foreground"

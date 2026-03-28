@@ -13,8 +13,8 @@ function ScrollRightButton() {
       className=" absolute z-20 right-0 top-[40%]"
     >
       <IconWrapper
-        size="medium"
-        className="text-foreground/70 bg-surface-1 hover:bg-surface-2 hover:translate-x-1 transition-transform duration-200 rounded-full size-14 hover:text-foreground"
+        size="exLarge"
+        className="text-foreground/70 bg-surface-1 hover:bg-surface-2 hover:translate-x-1 transition-transform duration-200 rounded-full hover:text-foreground"
         Icon={ChevronRight}
       />
     </button>

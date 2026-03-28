@@ -166,7 +166,7 @@ function DirectPlayButton({ listId, type, className }: DirectPlayButtonProps) {
         isPlay={IsPlayList}
         pauseIcon={Pause}
         playIcon={Play}
-        size="medium"
+        size={size}
       />
     </button>
   );

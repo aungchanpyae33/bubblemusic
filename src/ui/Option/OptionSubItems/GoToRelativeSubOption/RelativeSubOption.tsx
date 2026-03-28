@@ -5,7 +5,9 @@ import OptionItem from "../../OptionUI/OptionItem";
 import NoThankYouPreFetchLink from "@/ui/general/NoThankYouPreFetchLink";
 import OptionText from "../../OptionUI/OptionText";
 import OptionContainer from "../../OptionUI/OptionContainer";
-
+import OptionIconEl from "../../OptionUI/OptionIconEl";
+import IconWrapper from "@/ui/general/IconWrapper";
+import { User } from "lucide-react";
 function RelativeSubItem({
   relative,
   type,
@@ -18,8 +20,13 @@ function RelativeSubItem({
     <OptionItem>
       <NoThankYouPreFetchLink
         href={`/${relatedType}/${relative.id}`}
-      ></NoThankYouPreFetchLink>
-      <OptionText>{relative.name}</OptionText>
+        className="flex items-center"
+      >
+        <OptionIconEl>
+          <IconWrapper Icon={User} size="small" />
+        </OptionIconEl>
+        <OptionText>{relative.name}</OptionText>
+      </NoThankYouPreFetchLink>
     </OptionItem>
   );
 }

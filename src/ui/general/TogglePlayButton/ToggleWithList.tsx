@@ -116,6 +116,7 @@ const ToggleWithList = ({ listSong, song }: ToggleWithListProp) => {
     >
       <span className=" flex justify-center">
         <TogglePlayButton
+          size="exSmall"
           isPlay={song.url === songCuUrl && Isplay}
           playIcon={Play}
           pauseIcon={Pause}

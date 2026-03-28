@@ -15,6 +15,7 @@ function SingleItemList({ list, ...props }: SingleItemListProps) {
       <ImageBox name={list.name} cover_url={list.cover_url} type={list.type}>
         {list.type !== "profile" && (
           <DirectPlayButton
+            size="exSmall"
             className={PlayButtonOverlayOnImage}
             listId={list.id}
             type={list.type}

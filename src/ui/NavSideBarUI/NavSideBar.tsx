@@ -1,4 +1,4 @@
-import { Compass, ListMusic, Radio } from "lucide-react";
+import { Compass, Heart, ListMusic } from "lucide-react";
 import IconWrapper from "../general/IconWrapper";
 import NavSideList from "./NavSideList";
 import Logo from "../NavtopBar/Logo";
@@ -9,17 +9,17 @@ async function NavSideBar() {
       <NavSideList
         childrenLogo={<Logo />}
         childrenExplore={
-          <div className=" w-[70px] max-w-[70px] h-[70px]   flex items-center justify-center     ">
+          <div className=" size-16 flex items-center justify-center     ">
             <IconWrapper size="large" Icon={Compass} />
           </div>
         }
-        childrenLive={
-          <div className=" w-[70px]  h-[70px]  flex items-center justify-center  ">
-            <IconWrapper size="large" Icon={Radio} />
+        childrenLike={
+          <div className=" size-16 flex items-center justify-center  ">
+            <IconWrapper size="large" Icon={Heart} />
           </div>
         }
         childrenPlaylist={
-          <div className=" w-[70px] h-[70px]  flex items-center justify-center  ">
+          <div className=" size-16 flex items-center justify-center  ">
             <IconWrapper size="large" Icon={ListMusic} />
           </div>
         }

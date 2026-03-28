@@ -21,10 +21,10 @@ function FormContainer({
     }
   }, [show, inputRef]);
   return (
-    <div className="w-[80%]  sm:max-w-[500px] lg:max-w-[600px] mx-auto">
+    <div className="w-[80%] h-full  sm:max-w-[500px] lg:max-w-[600px] mx-auto">
       <SearchToggleButton
         show={show}
-        className="sm:hidden bg-surface-1    p-2 rounded-full"
+        className="sm:hidden h-full  ml-auto flex items-center p-1 rounded-full"
         onClick={() => {
           setShow(true);
         }}
