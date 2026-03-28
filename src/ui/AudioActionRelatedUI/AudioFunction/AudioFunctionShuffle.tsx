@@ -1,7 +1,5 @@
 import type { ListSongPage } from "@/database/data-types-return";
-import excludeCurrentSongs, {
-  excludeCurrentSongsList,
-} from "@/lib/excludeCurrentSongs";
+import excludeCurrentSongs from "@/lib/excludeCurrentSongs";
 import outputCurrentIndex from "@/lib/OutputCurrentIndex";
 import shufflePlaylist from "@/lib/shufflePlaylist";
 import {
@@ -46,9 +44,10 @@ function AudioFunctionShuffle({ className, listSong, id }: Props) {
     const currentSong = listSong.songs.idArray[currentIndex];
 
     const excludeCurrentSongsArray = excludeCurrentSongs(
-      listSong as excludeCurrentSongsList,
+      listSong as ListSongPage,
       currentIndex,
     );
+    if (!excludeCurrentSongsArray) return null;
     const shufflePlaylistOutput = shufflePlaylist(
       excludeCurrentSongsArray,
       isShuffle,

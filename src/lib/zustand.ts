@@ -344,10 +344,8 @@ export const useRepeatAndCurrentPlayList = create<
       signal: abortController!.current!.signal,
     };
 
-    const playlistArray = Object.values(
-      get().playListArray,
-    )[0] as excludeCurrentSongsList;
-
+    const playlistArray = Object.values(get().playListArray)[0] as ListSongPage;
+    if (!playlistArray.songs) return null;
     const currentIndex = outputCurrentIndex(playlistArray.songs.idArray, id);
 
     const extract = Math.min(
@@ -491,7 +489,6 @@ export const useNotInputFocus = create<focusState & focusStateAction>(
 );
 
 import outputCurrentIndex from "./OutputCurrentIndex";
-import { excludeCurrentSongsList } from "./excludeCurrentSongs";
 import { NormalizedById } from "./returnById";
 
 export interface isSongExistModalBoxProps {

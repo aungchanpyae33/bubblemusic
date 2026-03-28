@@ -1,16 +1,7 @@
-import type { listSongsSection, SongInfo } from "../../database.types-fest";
-import type { NormalizedById } from "./returnById";
+import { ListSongPage } from "@/database/data-types-return";
 
-export interface excludeCurrentSongsList extends Omit<
-  listSongsSection,
-  "songs"
-> {
-  songs: NormalizedById<SongInfo>;
-}
-const excludeCurrentSongs = (
-  ListSong: excludeCurrentSongsList,
-  currentIndex: number,
-) => {
+const excludeCurrentSongs = (ListSong: ListSongPage, currentIndex: number) => {
+  if (!ListSong.songs) return;
   return [
     ...ListSong.songs.idArray.slice(0, currentIndex),
     ...ListSong.songs.idArray.slice(currentIndex + 1),
