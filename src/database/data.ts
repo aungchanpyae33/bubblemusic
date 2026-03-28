@@ -1,6 +1,6 @@
 import { createClient } from "./server";
 
-import { normalizeById } from "@/lib/returnById";
+import { normalizeById, normalizeByIdOnly } from "@/lib/returnById";
 import type { MediaItemType } from "../../database.types-fest";
 import {
   ArtistPageReturn,
@@ -28,9 +28,8 @@ export const getLikedId = async (): Promise<GetLikedIdReturn> => {
     const { data, error } = await supabase.rpc("getlikedid");
     if (error) throw error;
     if (!data) throw new Error("not found");
-
     const userLike = {
-      userLike: normalizeById(data),
+      userLike: normalizeByIdOnly(data),
     };
 
     return { data: userLike, error };

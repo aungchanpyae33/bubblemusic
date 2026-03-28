@@ -19,3 +19,21 @@ export function normalizeById<T extends { id: string }>(
 
   return result;
 }
+
+export type NormalizedByIdOnly<T> = {
+  byId: Record<string, T>;
+};
+
+export function normalizeByIdOnly<T extends { id: string }>(
+  items: T[] | null,
+): NormalizedByIdOnly<T> | null {
+  if (!items) return null;
+
+  const byId: Record<string, T> = {};
+
+  for (const item of items) {
+    byId[item.id] = item;
+  }
+
+  return { byId };
+}
