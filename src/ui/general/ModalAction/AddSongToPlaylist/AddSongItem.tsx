@@ -63,7 +63,12 @@ function AddSongItem({
         songId: songId,
       });
     } else {
-      setIsSongExistModalBox({ playlistId, songId, originParentTriggerRef });
+      setIsSongExistModalBox({
+        playlistId,
+        songId,
+        cover_url,
+        originParentTriggerRef,
+      });
     }
   }
   return (

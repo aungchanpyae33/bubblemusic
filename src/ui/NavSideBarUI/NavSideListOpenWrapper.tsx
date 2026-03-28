@@ -1,10 +1,9 @@
 import clsx from "clsx";
 import { ReactNode, SetStateAction, useRef } from "react";
 import NavSidebarToggle from "./NavSideBarToggle";
-import useFocusOnOpen from "@/lib/CustomHooks/useFocusOnOpen";
 import NoThankYouPreFetchLink from "../general/NoThankYouPreFetchLink";
-import useCloseFunctoion from "@/lib/CustomHooks/useCloseFunction";
 import { FocusTrap } from "focus-trap-react";
+import useCloseFunctoion from "@/lib/CustomHooks/useCloseFunction";
 
 interface NavSideListOpenWrapperProp {
   open: boolean;
@@ -20,7 +19,7 @@ function NavSideListOpenWrapper({
 }: NavSideListOpenWrapperProp) {
   const ulRef = useRef<HTMLUListElement>(null);
   useCloseFunctoion(open, () => setOpen(false), ulRef);
-  useFocusOnOpen(open, ulRef);
+
   return (
     <FocusTrap
       active={open}
@@ -39,6 +38,7 @@ function NavSideListOpenWrapper({
         )}
         ref={ulRef}
         tabIndex={0}
+        inert={!open ? true : false}
       >
         <li className="h-[70px] relative   flex border-b border-seperate-soft">
           <NavSidebarToggle setOpen={setOpen} open={open} />

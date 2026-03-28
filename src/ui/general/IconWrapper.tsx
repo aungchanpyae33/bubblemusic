@@ -6,19 +6,19 @@ interface IconWrapperProps extends React.ComponentProps<"svg"> {
   notClickable?: boolean;
 }
 const baseSize = {
-  exLarge: "w-10 h-10",
-  large: "w-8 h-8",
-  medium: "w-7 h-7",
-  small: "w-6 h-6",
+  exLarge: "size-10 md:size-11",
+  large: "size-8 md:size-9",
+  medium: "size-7 md:size-8",
+  small: "size-6 md:size-7",
 };
 function IconWrapper({
   Icon,
-  size,
+  size = "small",
   notClickable,
   className,
   ...props
 }: IconWrapperProps) {
-  const baseStyle = `text-icon-foreground stroke-[0.8]  hover:scale-105   active:scale-90 transition-transform duration-200 ${
+  const baseStyle = `text-icon-foreground stroke-[0.8]  hover:scale-105 active:scale-90 transition-transform duration-200 ${
     baseSize[size!]
   }`;
 
