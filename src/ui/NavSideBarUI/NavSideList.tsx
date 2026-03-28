@@ -12,6 +12,8 @@ import NavSideListOpenWrapper from "./NavSideListOpenWrapper";
 import ContextContainerHeight from "@/Context/ContextContainerHeight";
 import OverLay from "../general/overlay/OverLay";
 import InitCreateButton from "../PlaylistForm/InitCreateButton";
+import { useUserInfoContext } from "@/Context/ContextUserInfo";
+import NeedToSignInSideBar from "./NeedToSignInSideBar";
 
 interface NavSideListProps {
   childrenExplore: ReactNode;
@@ -93,7 +95,11 @@ function NavSideList({
           </div>
           <ContextContainerHeight containerHeightRef={containerHeightRef}>
             <div className="w-full h-full" ref={containerHeightRef}>
-              {open && <LibraryListItemContainer />}
+              {open && userInfo ? (
+                <LibraryListItemContainer />
+              ) : (
+                <NeedToSignInSideBar />
+              )}
             </div>
           </ContextContainerHeight>
         </div>
