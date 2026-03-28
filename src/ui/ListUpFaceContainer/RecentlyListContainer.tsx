@@ -9,13 +9,18 @@ import ListUpFaceContainerWrapper from "../ListUpFaceContainer/ListUpFaceContain
 import ListUpFaceContainer from "../ListUpFaceContainer/ListUpFaceContainer";
 import ContextContainer from "@/Context/ContextContainer";
 import ListGeneralHeader from "../general/ListInfoGeneral/ListGeneralHeader";
+import UnderLineLinkHover from "../general/UnderLineLinkHover";
 
 function RecentlyListContainer({
   songs,
   description,
+  showMore,
+  href,
 }: {
   songs: GetRecent;
   description: string;
+  showMore?: boolean;
+  href?: string;
 }) {
   const l = useTranslations("ListTitle");
   const { data, error } = useQuery({
@@ -29,11 +34,17 @@ function RecentlyListContainer({
     <ContextContainer>
       <div className=" justify-between px-4  flex ">
         <ListGeneralHeader>{l(description)}</ListGeneralHeader>
-        <ArrowNaviContainer />
+
+        <ArrowNaviContainer>
+          {showMore && href && data.idArray.length > 7 && (
+            <UnderLineLinkHover href={href}>{l("showMore")}</UnderLineLinkHover>
+          )}
+        </ArrowNaviContainer>
       </div>
       <div className="relative z-0 max-w-fit">
         <ListUpFaceContainerWrapper>
-          {data.idArray.map((id) => {
+          {data.idArray.map((id, index) => {
+            if (showMore && index === 7) return;
             const item = data.byId[id];
             return <ListUpFaceContainer key={item.id} list={item} />;
           })}
