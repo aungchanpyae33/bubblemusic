@@ -5,6 +5,7 @@ import {
   useInstantFallBackAudioFull,
   useRepeatAndCurrentPlayList,
   useShouldFetchSongsList,
+  useSignInModalBox,
   useSong,
   useSongFunction,
   useStorePlayListId,
@@ -19,6 +20,7 @@ import type {
   StorePlayListIdStateAction,
   ShouldFetchSongsListIdAction,
   isFallBackAudioActions,
+  SignInModalBoxAction,
 } from "@/lib/zustand";
 import { Pause, Play } from "lucide-react";
 import TogglePlayButton from "@/ui/general/TogglePlayButton/TogglePlayButton";
@@ -26,6 +28,8 @@ import type { SongInfo } from "../../../../database.types-fest";
 import { PlayButtonOverlayOnImage } from "@/lib/StyleUtils/tailwindStyle";
 import { audioPlayTriggerIos } from "@/lib/audioPlayTriggerIOS";
 import { useAudioElementContext } from "@/Context/ContextAudioWrapper";
+import { useUserInfoContext } from "@/Context/ContextUserInfo";
+import { guardToSignIn } from "@/lib/guardToSignIn";
 
 interface ToggleWithListProp {
   listSong: ListSongPage;
@@ -55,6 +59,11 @@ const ToggleWithList = ({ listSong, song }: ToggleWithListProp) => {
   const setPlay = useSongFunction(
     (state: SongFunctionActions) => state.setPlay,
   );
+  const { userInfo } = useUserInfoContext();
+  const signInModalBoxAction = useSignInModalBox(
+    (state: SignInModalBoxAction) => state.signInModalBoxAction,
+  );
+
   const setPlayListArray = useRepeatAndCurrentPlayList(
     (state: currentSongPlaylistAction) => state.setPlayListArray,
   );
@@ -76,6 +85,7 @@ const ToggleWithList = ({ listSong, song }: ToggleWithListProp) => {
         }
       }}
       onClick={() => {
+        if (!userInfo) return guardToSignIn({}, signInModalBoxAction);
         setIsFallBackAudio(); //fallback dynamic import
 
         setPlayListArray({

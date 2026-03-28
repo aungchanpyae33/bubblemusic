@@ -5,6 +5,7 @@ import {
   useInstantFallBackAudioFull,
   useRepeatAndCurrentPlayList,
   useShouldFetchSongsList,
+  useSignInModalBox,
   useSong,
   useSongFunction,
   useStorePlayListId,
@@ -19,6 +20,7 @@ import type {
   StorePlayListIdStateAction,
   ShouldFetchSongsListIdAction,
   isFallBackAudioActions,
+  SignInModalBoxAction,
 } from "@/lib/zustand";
 import { Pause, Play } from "lucide-react";
 import TogglePlayButton from "@/ui/general/TogglePlayButton/TogglePlayButton";
@@ -26,6 +28,8 @@ import { SongInfo } from "../../../../database.types-fest";
 import { PlayButtonOverlayOnImage } from "@/lib/StyleUtils/tailwindStyle";
 import { audioPlayTriggerIos } from "@/lib/audioPlayTriggerIOS";
 import { useAudioElementContext } from "@/Context/ContextAudioWrapper";
+import { useUserInfoContext } from "@/Context/ContextUserInfo";
+import { guardToSignIn } from "@/lib/guardToSignIn";
 
 interface ToggleWithoutListProp {
   song: SongInfo;
@@ -64,6 +68,11 @@ const ToggleWithoutList = ({ song }: ToggleWithoutListProp) => {
   const setPlayList = useDirectPlayBack(
     (state: DirectPlayBackAction) => state.setPlayList,
   );
+  const { userInfo } = useUserInfoContext();
+  const signInModalBoxAction = useSignInModalBox(
+    (state: SignInModalBoxAction) => state.signInModalBoxAction,
+  );
+
   const { audioElRef } = useAudioElementContext();
   return (
     <button
@@ -75,6 +84,8 @@ const ToggleWithoutList = ({ song }: ToggleWithoutListProp) => {
         }
       }}
       onClick={() => {
+        if (!userInfo) return guardToSignIn({}, signInModalBoxAction);
+
         setIsFallBackAudio(); //fallback dynamic import
 
         const data: ListSongPage = {
