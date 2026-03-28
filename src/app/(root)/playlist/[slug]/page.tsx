@@ -1,12 +1,16 @@
-import { getPlaylistSongs } from "@/database/data";
+import { checkExist, getPlaylistSongs } from "@/database/data";
 import ConditonalRenderPlaylist from "@/ui/EditablePlaylist/ConditonalRenderPlaylist";
 import OwnEditable from "@/ui/EditablePlaylist/OwnEditable";
 import ListPageView from "@/ui/general/SongPageView/ListPageView";
 import PageTrackItemContainer from "@/ui/general/SongPageView/PageTrackItemContainer";
 import { QueryClient } from "@tanstack/react-query";
+import { notFound } from "next/navigation";
 
 async function page(props: { params: Promise<{ slug: string }> }) {
   const params = await props.params;
+  const { exists } = await checkExist("playlist", params.slug);
+  if (!exists) notFound();
+
   const queryClient = new QueryClient();
   const { data, error } = await queryClient.fetchQuery({
     queryKey: ["playlist", params.slug],
@@ -15,7 +19,7 @@ async function page(props: { params: Promise<{ slug: string }> }) {
 
   if (!data || error) return null;
   const { songs } = data;
-  if (!songs) return;
+  if (!songs) return null;
   return (
     <ConditonalRenderPlaylist
       id={params.slug}

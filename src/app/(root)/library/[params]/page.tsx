@@ -1,6 +1,7 @@
 import LikeSongSection from "@/ui/LibraryPage/LibPagesUI/LikeSongSection";
 import ListSongsUpFaceSection from "@/ui/LibraryPage/LibPagesUI/ListSongsUpFaceSection";
 import OverViewSection from "@/ui/LibraryPage/LibPagesUI/OverViewSection";
+import { notFound } from "next/navigation";
 
 const routeMap: Record<LibRoute, React.ReactNode> = {
   overview: <OverViewSection />,
@@ -31,8 +32,7 @@ async function page(props: { params: Promise<{ params: string }> }) {
   // todo protectde page route
   const params = (await props.params).params;
   if (!SUPPORTED_ROUTE.includes(params as LibRoute)) {
-    // todo not found page
-    return null;
+    notFound();
   }
   const route = params as LibRoute;
   return <div className="space-y-3">{routeMap[route]}</div>;

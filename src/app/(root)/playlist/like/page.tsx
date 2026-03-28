@@ -1,6 +1,6 @@
 import LikeSongSection from "@/ui/LibraryPage/LibPagesUI/LikeSongSection";
 
-function page() {
+async function page() {
   // to do proteced page route
   return <LikeSongSection />;
 }

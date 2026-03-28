@@ -1,5 +1,6 @@
 {
   "block": {
+    "home": "Home",
     "tapNavi": {
       "like": "Like",
       "energetic": "Energetic",
@@ -99,7 +100,9 @@
     "add": "Add",
     "cancel": "Cancel",
     "needToLogin": "You must be logged in to perform that feature",
-    "needToLoginSidebar": "Log in to save your favorites."
+    "needToLoginSidebar": "Log in to save your favorites.",
+    "NotFound": "Not Found",
+    "globalNotFound": "We can't find the page you're looking for. Please try searching for something else"
   },
 
   "Footer": {

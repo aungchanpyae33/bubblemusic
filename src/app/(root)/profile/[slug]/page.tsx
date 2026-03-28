@@ -1,4 +1,4 @@
-import { getUserPage } from "@/database/data";
+import { checkExist, getUserPage } from "@/database/data";
 import VerticalThreeDots from "@/ui/general/ThreeDot/VerticalThreeDots";
 import ListContainer from "@/ui/general/ListContainerOption/ListContainer";
 import ListUpperWrapper from "@/ui/ListContainer/ListUpperWrapper";
@@ -7,9 +7,11 @@ import ContextSongListContainer from "@/Context/ContextSongListContainer";
 import ContextMoreOption from "@/Context/ContextMoreOption";
 import ProfileOption from "@/ui/Option/ProfileOption/ProfileOption";
 import MoreOption from "@/ui/general/MoreOption/MoreOption";
+import { notFound } from "next/navigation";
 async function page(props: { params: Promise<{ slug: string }> }) {
   const params = await props.params;
-
+  const { exists } = await checkExist("profile", params.slug);
+  if (!exists) notFound();
   const { data, error } = await getUserPage(params.slug);
   if (!data || error) return;
 

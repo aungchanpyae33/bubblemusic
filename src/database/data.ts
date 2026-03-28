@@ -509,3 +509,54 @@ export const getLyric = async (songId: string) => {
     return { data: null, error };
   }
 };
+
+//  check exist first
+type fetchCheckType = MediaItemType | "moods" | "genres";
+export const fetchCheckExistByType = async (
+  type: fetchCheckType,
+  id: string,
+) => {
+  try {
+    const supabase = await createClient();
+
+    if (type === "playlist") {
+      return supabase.from("playlists").select("id").eq("id", id).maybeSingle();
+    }
+    if (type === "album") {
+      return supabase.from("album").select("id").eq("id", id).maybeSingle();
+    }
+    if (type === "artist") {
+      return supabase.from("artist").select("id").eq("id", id).maybeSingle();
+    }
+    if (type === "profile") {
+      return supabase
+        .from("users")
+        .select("id")
+        .eq("user_id", id)
+        .maybeSingle();
+    }
+    if (type === "track") {
+      return supabase.from("song").select("id").eq("id", id).maybeSingle();
+    }
+    if (type === "genres") {
+      return supabase.from("genres").select("id").eq("id", id).maybeSingle();
+    }
+    if (type === "moods") {
+      return supabase.from("moods").select("id").eq("id", id).maybeSingle();
+    }
+
+    return { data: null, error: "error" };
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const checkExist = async (type: fetchCheckType, id: string) => {
+  try {
+    const { data, error } = await fetchCheckExistByType(type, id);
+    if (error) throw error;
+    return { exists: !!data, error };
+  } catch (error) {
+    return { exists: false, error };
+  }
+};
