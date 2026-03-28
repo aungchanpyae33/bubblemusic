@@ -4,21 +4,26 @@ import { useQuery } from "@tanstack/react-query";
 import { createContext, ReactNode, useContext } from "react";
 
 import { generateByMergeWithLib } from "@/lib/generateByMergeWithLib";
-import type {
-  listInfo,
-  listSongsSection,
-  MediaItemSource,
-} from "../../database.types-fest";
+import type { listInfo, MediaItemSource } from "../../database.types-fest";
+import { ListSongPage } from "@/database/data-types-return";
 
-export type SongListValue = (listInfo | listSongsSection) & {
+export type SongListValue = listInfo & {
   source: MediaItemSource;
+  inPage?: boolean;
 };
 
+export type SongListPageValue = ListSongPage & {
+  source: MediaItemSource;
+  inPage?: boolean;
+};
 // Default context value
-const SongListContext = createContext<SongListValue | undefined>(undefined);
+const SongListContext = createContext<
+  SongListValue | SongListPageValue | undefined
+>(undefined);
 interface ContextSongListContainerProps {
   id: string;
-  list: listInfo | listSongsSection;
+  list: listInfo | ListSongPage;
+  inPage?: boolean;
   children: ReactNode;
 }
 
@@ -34,6 +39,7 @@ export const useSongListContext = () => {
 
 function ContextSongListContainer({
   id,
+  inPage,
   children,
   list,
 }: ContextSongListContainerProps) {
@@ -47,7 +53,7 @@ function ContextSongListContainer({
   const { userLib } = data;
   if (!userLib) return;
   const isDataExist = userLib.byId[id];
-  const value = generateByMergeWithLib(isDataExist, list);
+  const value = generateByMergeWithLib(isDataExist, list, inPage);
   return (
     <SongListContext.Provider value={value}>
       {children}

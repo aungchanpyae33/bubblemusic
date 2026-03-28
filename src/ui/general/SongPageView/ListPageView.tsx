@@ -6,6 +6,8 @@ import ListContainerPlayBack from "../ListContainerOption/ListContainerPlayBack"
 import ListContainerAddToLibrary from "../ListContainerOption/ListContainerAddToLibrary";
 import ListOption from "@/ui/ListContainer/ListOption";
 import { ReactNode } from "react";
+
+const inPage = true;
 function ListPageView({
   songs,
   children,
@@ -16,13 +18,14 @@ function ListPageView({
   return (
     <div className=" w-full">
       <ListUpperWrapper list={songs} />
-      <ContextSongListContainer id={songs.id} list={songs}>
+      <ContextSongListContainer inPage={inPage} id={songs.id} list={songs}>
         <ListContainer>
           <ListContainerPlayBack list={songs} />
-          <ListContainerAddToLibrary />
-
+          {!songs.flag && songs.flag !== "user-specific" && (
+            <ListContainerAddToLibrary />
+          )}
           <div>
-            <ListOption list={songs} />
+            <ListOption inPage={inPage} list={songs} />
           </div>
         </ListContainer>
       </ContextSongListContainer>

@@ -5,10 +5,12 @@ import ContextMoreOption from "@/Context/ContextMoreOption";
 import ContextSongListContainer from "@/Context/ContextSongListContainer";
 import SongListContainerOption from "../Option/OptionUI/SongListContainerOption";
 import MoreOption from "../general/MoreOption/MoreOption";
+import { ListSongPage } from "@/database/data-types-return";
 interface ListOptionProps {
-  list: listInfo;
+  list: listInfo | ListSongPage;
+  inPage?: boolean;
 }
-function ListOption({ list }: ListOptionProps) {
+function ListOption({ list, inPage }: ListOptionProps) {
   return (
     <div className=" flex items-center justify-center ">
       <ContextMoreOption
@@ -18,7 +20,7 @@ function ListOption({ list }: ListOptionProps) {
         <MoreOption
           triggerEl={<VerticalThreeDots className="fill-current" />}
           targetElement={
-            <ContextSongListContainer id={list.id} list={list}>
+            <ContextSongListContainer inPage={inPage} id={list.id} list={list}>
               <SongListContainerOption />
             </ContextSongListContainer>
           }

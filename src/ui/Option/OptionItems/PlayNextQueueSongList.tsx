@@ -8,7 +8,11 @@ import {
 } from "@/lib/zustand";
 import { getSongListClient } from "@/database/client-data";
 import { useTranslations } from "next-intl";
-import { useSongListContext } from "@/Context/ContextSongListContainer";
+import {
+  SongListPageValue,
+  SongListValue,
+  useSongListContext,
+} from "@/Context/ContextSongListContainer";
 import OptionItem from "../OptionUI/OptionItem";
 import OptionButton from "../OptionUI/OptionButton";
 import OptionIconEl from "../OptionUI/OptionIconEl";
@@ -17,7 +21,8 @@ import OptionText from "../OptionUI/OptionText";
 
 function PlayNextQueueSongList() {
   const b = useTranslations("block");
-  const { id, type } = useSongListContext();
+  const list = useSongListContext();
+  const { inPage } = list;
   const currentAddToNext = useRepeatAndCurrentPlayList(
     (state: currentAddToNextAction) => state.currentAddToNext,
   );
@@ -26,11 +31,19 @@ function PlayNextQueueSongList() {
   ) as SongDetail;
   if (!id_scoope) return null;
   async function addToNextSonglist() {
-    const { data, error } = await getSongListClient(id, type);
-    if (!data || error) return;
-    const { songs } = data;
-    if (!songs || songs.idArray.length < 1) return;
-    currentAddToNext(songs, songs.idArray, id_scoope);
+    if (inPage) {
+      const { songs } = list as SongListPageValue;
+      if (!songs || songs.idArray.length === 0) return;
+      currentAddToNext(songs, songs.idArray, id_scoope);
+    } else {
+      const { id, type } = list as SongListValue;
+      const { data, error } = await getSongListClient(id, type);
+
+      if (!data || error) return;
+      const { songs } = data;
+      if (!songs || songs.idArray.length === 0) return;
+      currentAddToNext(songs, songs.idArray, id_scoope);
+    }
   }
   return (
     <OptionItem>
