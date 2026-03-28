@@ -1,12 +1,12 @@
 "use server";
 import type { UserLibReturn } from "@/database/data-types-return";
 import { createClient } from "@/database/server";
-import type { listSongsSection } from "../../database.types-fest";
+import type { MediaItemType } from "../../database.types-fest";
 import { normalizeById } from "@/lib/returnById";
 
 export const addToLibrary = async (
   id: string,
-  type: listSongsSection["type"],
+  type: MediaItemType,
 ): Promise<UserLibReturn> => {
   try {
     const supabase = await createClient();
