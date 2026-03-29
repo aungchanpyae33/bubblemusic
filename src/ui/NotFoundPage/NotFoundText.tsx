@@ -4,7 +4,12 @@ type Props = {
   w: _Translator<Record<string, any>, "Warning">;
 };
 async function NotFoundText({ w }: { w: Props["w"] }) {
-  return <div className=" text-center max-w-80">{w("globalNotFound")}</div>;
+  return (
+    <div className=" text-center max-w-80">
+      <h1 className="text-xl font-extrabold">{w("globalNotFoundTitle")}</h1>
+      <p>{w("globalNotFoundText")}</p>
+    </div>
+  );
 }
 
 export default NotFoundText;
