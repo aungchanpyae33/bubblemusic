@@ -8,7 +8,11 @@ import { notFound } from "next/navigation";
 
 async function page(props: { params: Promise<{ slug: string }> }) {
   const params = await props.params;
-  const { exists } = await checkExist("playlist", params.slug);
+  const { exists, error: checkExistError } = await checkExist(
+    "playlist",
+    params.slug,
+  );
+  if (checkExistError) throw new Error("page-load-error");
   if (!exists) notFound();
 
   const queryClient = new QueryClient();

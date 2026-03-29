@@ -21,8 +21,10 @@ async function page() {
     genreError ||
     !moodData ||
     moodError
-  )
-    return null;
+  ) {
+    throw new Error("page-load-error");
+  }
+
   return (
     <div className=" space-y-3">
       <ListItemUpFaceGroup description="genre">

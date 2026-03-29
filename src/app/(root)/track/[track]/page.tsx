@@ -6,15 +6,16 @@ import { notFound } from "next/navigation";
 async function page(props: { params: Promise<{ track: string }> }) {
   const { track } = await props.params;
 
-  const { exists } = await checkExist("track", track);
+  const { exists, error: checkExistError } = await checkExist("track", track);
+  if (checkExistError) throw new Error("page-load-error");
   if (!exists) notFound();
 
   const { data, error } = await getSongTrack(track);
 
-  if (!data || error) return;
+  if (!data || error) throw new Error("page-load-error");
   const { songs } = data;
-  if (!songs) return;
-  if (!songs.songs) return;
+  if (!songs) throw new Error("page-load-error");
+  if (!songs.songs) throw new Error("page-load-error");
 
   const songsInfo = songs.songs.byId[track];
 

@@ -1,6 +1,8 @@
 {
   "block": {
     "home": "Home",
+    "back": "Back",
+    "reload": "Reload",
     "tapNavi": {
       "like": "Like",
       "energetic": "Energetic",
@@ -92,7 +94,9 @@
     "wrongCredentials": "The credentials you typed are incorrect",
     "alreadyUser": "User is already exist. Please sign in",
     "notFoundUser": "User does not exist. Please Sign up",
-    "notFieldChange": "Input field datas are not changed"
+    "notFieldChange": "Input field datas are not changed",
+    "globalErrorTitle": "This page couldn't load.",
+    "globalErrorText": " Please reload to try again or go back."
   },
   "Warning": {
     "notice": "Notice",
@@ -102,7 +106,10 @@
     "needToLogin": "You must be logged in to perform that feature",
     "needToLoginSidebar": "Log in to save your favorites.",
     "NotFound": "Not Found",
-    "globalNotFound": "We can't find the page you're looking for. Please try searching for something else"
+
+    "globalNotFoundTitle": "We can't find the page",
+    "globalNotFoundText": "Please try searching for something else",
+    "currentlyEmpty": "Nothing yet.Currently, it is empty."
   },
 
   "Footer": {

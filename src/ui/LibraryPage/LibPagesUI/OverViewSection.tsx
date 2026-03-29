@@ -1,6 +1,7 @@
 import { getLibraryOverview } from "@/database/data";
 import ListItemUpFaceContainer from "@/ui/general/ListItemUpFaceGroup/ListItemUpFaceContainer";
 import ListItemUpFaceGroup from "@/ui/general/ListItemUpFaceGroup/ListItemUpFaceGroup";
+import EmptyGeneral from "@/ui/general/NoExist/EmptyGeneral";
 import ListUpFaceGroup from "@/ui/ListUpFaceContainer/ListUpFaceGroup";
 
 const routeHrefGrop = {
@@ -13,7 +14,8 @@ const routeHrefGrop = {
 
 async function OverViewSection() {
   const { data, error } = await getLibraryOverview();
-  if (!data || error) return null;
+  if (!data || error) throw new Error("page-load-error");
+  if (Object.keys(data).length === 0) return <EmptyGeneral />;
   return (
     <>
       {(Object.keys(data) as (keyof typeof data)[]).map((itemKey) => {

@@ -8,8 +8,7 @@ import RecentlyListContainer from "@/ui/ListUpFaceContainer/RecentlyListContaine
 
 async function page() {
   const { data, error } = await get();
-
-  if (!data || error) return null;
+  if (!data || error) throw new Error("page-load-error");
   return (
     <div className="space-y-3">
       <TapNavi />

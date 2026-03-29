@@ -1,12 +1,12 @@
 import { getTranslations } from "next-intl/server";
 import TableHead from "../TableHeadGrid/TableHead";
 import TableHeadItems from "../TableHeadGrid/TableHeadItems";
-import ListItemNotExist from "../general/NoExist/ListItemNotExist";
 import ContextSongsData from "@/Context/ContextSongsData";
 import ContextTableHeadBgChange from "@/Context/ContextTableHeadBgChange";
 import ConRenderSong from "./ConRenderSong";
 import ListGeneralHeader from "../general/ListInfoGeneral/ListGeneralHeader";
 import SongContainer from "./SongContainer";
+import EmptyGeneral from "../general/NoExist/EmptyGeneral";
 async function EditablePageTrackItemContainer({
   playlistId,
   description,
@@ -32,7 +32,7 @@ async function EditablePageTrackItemContainer({
             </ContextTableHeadBgChange>
           </div>
         }
-        empty={<ListItemNotExist b={b} />}
+        empty={<EmptyGeneral />}
       />
     </ContextSongsData>
   );

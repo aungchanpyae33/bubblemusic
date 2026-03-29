@@ -10,14 +10,19 @@ import MoreOption from "@/ui/general/MoreOption/MoreOption";
 import { notFound } from "next/navigation";
 async function page(props: { params: Promise<{ slug: string }> }) {
   const params = await props.params;
-  const { exists } = await checkExist("profile", params.slug);
+  const { exists, error: checkExistError } = await checkExist(
+    "profile",
+    params.slug,
+  );
+  if (checkExistError) throw new Error("page-load-error");
   if (!exists) notFound();
+
   const { data, error } = await getUserPage(params.slug);
-  if (!data || error) return;
+  if (!data || error) throw new Error("page-load-error");
 
   const { playlists, profile } = data;
 
-  if (!playlists || !profile) return;
+  if (!profile) throw new Error("page-load-error");
   return (
     <div className=" w-full">
       <ListUpperWrapper list={profile} />

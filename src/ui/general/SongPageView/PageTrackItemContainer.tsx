@@ -4,8 +4,8 @@ import ContextTableHeadBgChange from "@/Context/ContextTableHeadBgChange";
 import TableHead from "@/ui/TableHeadGrid/TableHead";
 import TableHeadItems from "@/ui/TableHeadGrid/TableHeadItems";
 import Track from "@/ui/Track/Track";
-import ListItemNotExist from "../NoExist/ListItemNotExist";
 import ListGeneralHeader from "../ListInfoGeneral/ListGeneralHeader";
+import EmptyGeneral from "../NoExist/EmptyGeneral";
 async function PageTrackItemContainer({
   description,
   listSong,
@@ -18,7 +18,8 @@ async function PageTrackItemContainer({
     getTranslations("ListTitle"),
   ]);
   const songs = listSong.songs;
-  return songs && songs.idArray.length > 0 ? (
+  if (!songs || songs.idArray.length === 0) return <EmptyGeneral />;
+  return (
     <div className=" w-full my-4">
       <ListGeneralHeader>{l(description)}</ListGeneralHeader>
       <ContextTableHeadBgChange>
@@ -31,8 +32,6 @@ async function PageTrackItemContainer({
         })}
       </ContextTableHeadBgChange>
     </div>
-  ) : (
-    <ListItemNotExist b={b} />
   );
 }
 
