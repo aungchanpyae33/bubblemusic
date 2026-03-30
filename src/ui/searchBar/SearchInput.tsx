@@ -5,6 +5,7 @@ import SearchResult from "./SearchResult";
 import FormContainer from "./FormContainer";
 import SearchResultWrapper from "./SearchResultWrapper";
 import SearchLoading from "../loading/SearchLoading";
+import { searchGuard } from "@/lib/searchGuard";
 
 function SearchInput() {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -16,7 +17,7 @@ function SearchInput() {
     }
     searchAbortController.current = new AbortController();
     const signal = searchAbortController.current.signal;
-
+    if (searchGuard(params)) return [];
     if (params && params.length > 0) {
       const fetchData = await fetch(`/api/search?with=${params}`, {
         signal,

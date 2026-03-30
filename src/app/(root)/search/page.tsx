@@ -1,4 +1,5 @@
 import { getSearchPage } from "@/database/data";
+import { searchGuard } from "@/lib/searchGuard";
 import EmptyGeneral from "@/ui/general/NoExist/EmptyGeneral";
 import SearchKeywordInfo from "@/ui/searchPage/SearchKeywordInfo";
 import SearchSection from "@/ui/searchPage/SearchSection";
@@ -11,7 +12,12 @@ async function page(props: {
   }>;
 }) {
   const searchParams = await props.searchParams;
-  const query = searchParams?.query || "";
+  const query = searchParams?.query;
+  if (!query) return <EmptyGeneral />;
+  if (searchGuard(query)) {
+    return <EmptyGeneral />;
+  }
+
   const { data, error } = await getSearchPage(query);
 
   if (!data || error) throw new Error("page-load-error");

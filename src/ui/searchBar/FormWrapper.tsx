@@ -8,14 +8,17 @@ interface FormWrapperProps {
 }
 import { useRouter } from "nextjs-toploader/app";
 import { useToggleContext } from "@/Context/ContextToggle";
+import { searchGuard } from "@/lib/searchGuard";
 function FormWrapper({ children, inputRef, show }: FormWrapperProps) {
   const { setOpen } = useToggleContext();
   const router = useRouter();
   function goSearch(FormData: FormData) {
     setOpen(false);
     inputRef.current?.blur();
-    const input = FormData.get("query") as string;
-    router.push(`/search?query=${encodeURIComponent(input)}`);
+    const query = FormData.get("query") as string;
+
+    if (searchGuard(query)) return;
+    router.push(`/search?query=${encodeURIComponent(query)}`);
   }
   return (
     <Form

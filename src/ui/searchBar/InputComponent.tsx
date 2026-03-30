@@ -25,7 +25,6 @@ function InputComponent({ inputRef, setValue }: InputComponentProps) {
         type="search"
         id="search"
         name="query"
-        required
         autoComplete="off"
         spellCheck="false"
         defaultValue={defaultValue}
