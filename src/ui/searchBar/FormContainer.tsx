@@ -21,7 +21,7 @@ function FormContainer({
     }
   }, [show, inputRef]);
   return (
-    <div className="w-[80%] h-full  sm:max-w-[500px] lg:max-w-[600px] mx-auto">
+    <div className="w-[93%]  h-full  sm:max-w-[500px] lg:max-w-[600px] mx-auto">
       <SearchToggleButton
         show={show}
         className="sm:hidden h-full  ml-auto flex items-center p-1 rounded-full"
