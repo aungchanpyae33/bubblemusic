@@ -1,13 +1,15 @@
 "use client";
 import Link from "next/link";
 import Button from "./Button";
-import { useTranslations } from "next-intl";
+import IconWrapper from "@/ui/general/IconWrapper";
+import { LogIn } from "lucide-react";
 
 function SignInButtonLink() {
-  const b = useTranslations("block");
   return (
     <Link href="/auth/login">
-      <Button>{b("login")}</Button>
+      <Button>
+        <IconWrapper Icon={LogIn} />
+      </Button>
     </Link>
   );
 }
