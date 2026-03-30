@@ -6,6 +6,8 @@ import FormContainer from "./FormContainer";
 import SearchResultWrapper from "./SearchResultWrapper";
 import SearchLoading from "../loading/SearchLoading";
 import { searchGuard } from "@/lib/searchGuard";
+import NoExistSearchResult from "../NoExist/NoExistSearchResult";
+import ErrorSearch from "../Error/ErrorSearch";
 
 function SearchInput() {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -18,37 +20,40 @@ function SearchInput() {
     searchAbortController.current = new AbortController();
     const signal = searchAbortController.current.signal;
     if (searchGuard(params)) return [];
-    if (params && params.length > 0) {
+    try {
       const fetchData = await fetch(`/api/search?with=${params}`, {
         signal,
       });
+
       const { data, error } = await fetchData.json();
       if (error) throw new Error(error);
       return data;
+    } catch (error) {
+      throw error;
     }
-    return [];
   }
 
-  const {
-    data = [],
-    error,
-    isLoading,
-    isFetching,
-  } = useQuery({
+  const { data = [], status } = useQuery({
     queryKey: ["search", value],
     queryFn: () => fetchInput(value),
     staleTime: 10 * 60 * 1000,
   });
-  const showLoading = isLoading || isFetching;
+  const showLoading = status === "pending";
 
-  // [todo] need to return error component
-  if (error) return;
+  let content = null;
+
+  if (status === "error") {
+    content = <ErrorSearch />;
+  } else if (showLoading) {
+    content = <SearchLoading />;
+  } else if (data.length > 0) {
+    content = <SearchResult data={data} inputRef={inputRef} />;
+  } else if (!searchGuard(value) && value.length > 0) {
+    content = <NoExistSearchResult />;
+  }
   return (
     <FormContainer inputRef={inputRef} setValue={setValue}>
-      <SearchResultWrapper>
-        {showLoading && <SearchLoading />}
-        {data.length > 0 && <SearchResult data={data} inputRef={inputRef} />}
-      </SearchResultWrapper>
+      <SearchResultWrapper>{content}</SearchResultWrapper>
     </FormContainer>
   );
 }

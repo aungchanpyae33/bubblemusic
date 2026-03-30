@@ -96,7 +96,8 @@
     "notFoundUser": "User does not exist. Please Sign up",
     "notFieldChange": "Input field datas are not changed",
     "globalErrorTitle": "This page couldn't load.",
-    "globalErrorText": " Please reload to try again or go back."
+    "globalErrorText": " Please reload to try again or go back.",
+    "searchError": "An error occurred while searching."
   },
   "Warning": {
     "notice": "Notice",
@@ -109,7 +110,8 @@
 
     "globalNotFoundTitle": "We can't find the page",
     "globalNotFoundText": "Please try searching for something else",
-    "currentlyEmpty": "Nothing yet.Currently, it is empty."
+    "currentlyEmpty": "Nothing yet.Currently, it is empty.",
+    "noSearchResult": "Search result not found"
   },
 
   "Footer": {
