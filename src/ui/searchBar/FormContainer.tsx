@@ -31,20 +31,17 @@ function FormContainer({
       />
       <FormWrapper show={show} inputRef={inputRef}>
         <div className=" relative  w-full  ">
-          <div
-            className="flex items-stretch border border-borderFull border-opacity-25 focus-within:outline
-            focus-within:outline-2 focus-within:outline-borderFull rounded-md overflow-hidden"
-          >
+          <div className="flex items-stretch rounded-lg focus-within:ring-2 focus-within:ring-blue-800   overflow-hidden">
             <SearchToggleButton
               show={show}
-              className="sm:hidden flex justify-center items-center bg-surface-1 border-r border-seperate-hard border-opacity-15  text-ink-400 hover:text-foreground w-[70px] "
+              className="sm:hidden  flex justify-center items-center bg-surface-1 border-r border-seperate-hard border-opacity-15  text-ink-400 rounded-none hover:text-foreground w-[50px] "
               onClick={() => {
                 setShow(false);
               }}
             />
             <InputComponent inputRef={inputRef} setValue={setValue} />
             <button
-              className="bg-surface-1   px-2"
+              className="bg-surface-1 px-2 border-l border-seperate-hard flex items-center justify-center border-opacity-15  text-ink-400 rounded-none hover:text-foreground"
               type="button"
               onPointerDown={(e) => {
                 e.preventDefault(); // Prevent focus loss
@@ -55,11 +52,7 @@ function FormContainer({
                 setValue("");
               }}
             >
-              <IconWrapper
-                size="large"
-                Icon={X}
-                className="rounded-full text-ink-400 hover:text-foreground"
-              />
+              <IconWrapper size="large" Icon={X} className="rounded-full" />
             </button>
           </div>
           {children}

@@ -20,7 +20,7 @@ function InputComponent({ inputRef, setValue }: InputComponentProps) {
         <span className="sr-only">Search</span>
       </label>
       <input
-        className="placeholder:text-ink-400 block bg-surface-1 w-full h-[40px]  pl-4 shadow-sm focus:outline-none text-base"
+        className="placeholder:text-ink-400 block bg-surface-1 flex-1 appearance-none rounded-none h-[45px]  pl-4 shadow-sm focus:outline-none text-base"
         placeholder={b("searchInputPlaceholder")}
         type="search"
         id="search"
