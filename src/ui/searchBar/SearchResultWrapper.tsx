@@ -5,7 +5,7 @@ function SearchResultWrapper({ children }: { children: ReactNode }) {
   const { open } = useToggleContext();
   return (
     open && (
-      <div className="w-full absolute bg-pop  -bottom-1 translate-y-full">
+      <div className="w-full absolute bg-pop rounded-md -bottom-1 translate-y-full">
         {children}
       </div>
     )
