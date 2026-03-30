@@ -3,7 +3,7 @@ import IconWrapper from "../general/IconWrapper";
 import NavSideList from "./NavSideList";
 import Logo from "../NavtopBar/Logo";
 
-async function NavSideBar() {
+function NavSideBar() {
   return (
     <div className="w-[70px] bg-section ">
       <NavSideList
