@@ -2,12 +2,12 @@ import ErrorPageText from "./ErrorPageText";
 import ReloadPageButton from "./ReloadPageButton";
 import GoBackButton from "./GoBackButton";
 
-function ErrorWrapper({ unstable_retry }: { unstable_retry: () => void }) {
+function ErrorWrapper({ reset }: { reset: () => void }) {
   return (
     <>
       <ErrorPageText />
       <div className=" flex items-center gap-3">
-        <ReloadPageButton unstable_retry={unstable_retry} />
+        <ReloadPageButton reset={reset} />
         <GoBackButton />
       </div>
     </>

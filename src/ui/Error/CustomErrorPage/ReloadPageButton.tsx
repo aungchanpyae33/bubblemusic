@@ -1,14 +1,22 @@
 import Button from "@/components/button/Button";
 import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
+import { useTopLoader } from "nextjs-toploader";
+import { startTransition } from "react";
 
-function ReloadPageButton({ unstable_retry }: { unstable_retry: () => void }) {
+function ReloadPageButton({ reset }: { reset: () => void }) {
   const b = useTranslations("block");
+  const router = useRouter();
+  const loader = useTopLoader();
   return (
     <Button
-      onClick={
-        // Attempt to recover by re-fetching and re-rendering the segment
-        () => unstable_retry()
-      }
+      onClick={() => {
+        startTransition(() => {
+          loader.start();
+          router.refresh(); // ← re-fetches server data
+          reset(); // ← clears error state
+        });
+      }}
     >
       <span>{b("reload")}</span>
     </Button>
