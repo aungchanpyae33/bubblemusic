@@ -4,6 +4,7 @@ import { Movie } from "@/database/data";
 
 import SearchResultItem from "./SearchResultItem";
 import useNaviSearch from "@/lib/CustomHooks/useNaviSearch";
+import SearchResultContainer from "./SearchResultContainer";
 
 interface prop {
   data: Movie[];
@@ -14,7 +15,7 @@ function SearchResult({ data, inputRef }: prop) {
   const [arrow] = useNaviSearch({ run: false, number: -1 }, inputRef, data);
 
   return (
-    <div className="SearchResult w-full absolute bg-surface-1 rounded-md -bottom-1 translate-y-full  border border-borderFull border-opacity-25  p-1   shadow-md shadow-overlay text-start">
+    <SearchResultContainer>
       {data.map((item: Movie, index: number) => (
         <SearchResultItem
           inputRef={inputRef}
@@ -23,7 +24,7 @@ function SearchResult({ data, inputRef }: prop) {
           show={index === arrow.number && !arrow.run}
         />
       ))}
-    </div>
+    </SearchResultContainer>
   );
 }
 

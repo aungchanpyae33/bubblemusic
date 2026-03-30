@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import SearchResult from "./SearchResult";
 import FormContainer from "./FormContainer";
 import SearchResultWrapper from "./SearchResultWrapper";
+import SearchLoading from "../loading/SearchLoading";
 
 function SearchInput() {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -27,20 +28,26 @@ function SearchInput() {
     return [];
   }
 
-  const { data = [], error } = useQuery({
+  const {
+    data = [],
+    error,
+    isLoading,
+    isFetching,
+  } = useQuery({
     queryKey: ["search", value],
     queryFn: () => fetchInput(value),
     staleTime: 10 * 60 * 1000,
   });
+  const showLoading = isLoading || isFetching;
+
   // [todo] need to return error component
   if (error) return;
   return (
     <FormContainer inputRef={inputRef} setValue={setValue}>
-      {data.length > 0 && (
-        <SearchResultWrapper>
-          <SearchResult data={data} inputRef={inputRef} />
-        </SearchResultWrapper>
-      )}
+      <SearchResultWrapper>
+        {showLoading && <SearchLoading />}
+        {data.length > 0 && <SearchResult data={data} inputRef={inputRef} />}
+      </SearchResultWrapper>
     </FormContainer>
   );
 }
