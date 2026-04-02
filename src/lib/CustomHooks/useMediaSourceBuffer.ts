@@ -11,7 +11,7 @@ const useMediaSourceBuffer = (url: string) => {
     const src = url;
     if (!src) return;
 
-    if (!Hls.isSupported()) {
+    if (Hls.isSupported()) {
       mainHlsInstance.current = new Hls({
         maxBufferLength: 10,
         backBufferLength: 90,
