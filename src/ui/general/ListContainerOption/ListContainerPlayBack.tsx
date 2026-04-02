@@ -82,23 +82,13 @@ function ListContainerPlayBack({ list }: ListContainerPlayBackProps) {
     FetchSongsListIdAction(undefined);
 
     if (list) {
-      const {
-        url,
-        sege,
-        duration,
-        name,
-        song_time_stamp,
-        id,
-        song_id,
-        artists,
-        is_lyric,
-        cover_url,
-      } = (() => {
-        if (playlistId) {
-          return list.songs.byId[id_scope];
-        }
-        return list.songs.byId[list.songs.idArray[0]];
-      })();
+      const { url, duration, name, id, song_id, artists, is_lyric, cover_url } =
+        (() => {
+          if (playlistId) {
+            return list.songs.byId[id_scope];
+          }
+          return list.songs.byId[list.songs.idArray[0]];
+        })();
       const uniUrl = id;
       setPlayListArray({
         [playListId || ""]: list,
@@ -109,10 +99,8 @@ function ListContainerPlayBack({ list }: ListContainerPlayBackProps) {
       } else {
         updateSongCu({
           [uniUrl || ""]: url,
-          sege,
           duration,
           name,
-          song_time_stamp,
           id,
           song_id,
           artists,

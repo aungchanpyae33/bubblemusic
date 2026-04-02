@@ -118,13 +118,10 @@ function PlaceHolderToggleState({
         const songList = playListArray.songs;
         const {
           url,
-          sege,
           duration,
           name,
-          song_time_stamp,
           id,
           song_id,
-
           artists,
           is_lyric,
           cover_url,
@@ -140,13 +137,10 @@ function PlaceHolderToggleState({
         }
         updateSongCu({
           [uniUrl || ""]: url,
-          sege,
           duration,
           name,
-          song_time_stamp,
           id,
           song_id,
-
           artists,
           is_lyric,
           cover_url,

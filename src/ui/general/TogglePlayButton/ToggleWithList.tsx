@@ -102,10 +102,8 @@ const ToggleWithList = ({ listSong, song }: ToggleWithListProp) => {
         } else {
           const data = {
             [uniUrl || ""]: song.url,
-            sege: song.sege,
             duration: song.duration,
             name: song.name,
-            song_time_stamp: song.song_time_stamp,
             id: song.id,
             is_lyric: song.is_lyric,
             song_id: song.song_id,
