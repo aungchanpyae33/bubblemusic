@@ -1,17 +1,6 @@
 "use client";
-import {
-  SongFunctionState,
-  useSongFunction,
-  useVolumeValue,
-  VolumeValueState,
-} from "@/lib/zustand";
-import React, {
-  createContext,
-  ReactNode,
-  useContext,
-  useEffect,
-  useRef,
-} from "react";
+import PlaceholderAudioHandler from "@/Placeholder/PlaceholderAudioHandler";
+import React, { createContext, ReactNode, useContext, useRef } from "react";
 
 interface AudioElementContextProps {
   audioElRef: React.RefObject<HTMLAudioElement | null>;
@@ -31,35 +20,11 @@ export const useAudioElementContext = () => {
 };
 
 function ContextAudioWrapper({ children }: { children: ReactNode }) {
-  const attchVol = useRef(false);
-  const Isplay = useSongFunction(
-    (state: SongFunctionState) =>
-      Object.values(state.Isplay as Record<string, boolean>)[0],
-  );
-  const value = useVolumeValue((state: VolumeValueState) =>
-    !attchVol.current ? state.value : undefined,
-  );
-  useEffect(() => {
-    if (!attchVol.current) {
-      attchVol.current = true;
-    }
-  }, []);
-
   const audioElRef = useRef<HTMLAudioElement>(null);
   return (
     <>
-      <audio
-        ref={audioElRef}
-        onLoadedMetadata={(e) => {
-          if (value !== undefined) {
-            const defaultVol = 1 - value / 100;
-            e.currentTarget.volume = defaultVol;
-          }
-          if (Isplay) {
-            e.currentTarget.play();
-          }
-        }}
-      />
+      <audio ref={audioElRef} />
+      <PlaceholderAudioHandler audioElRef={audioElRef} />
       <AudioElementContext.Provider value={{ audioElRef }}>
         {children}
       </AudioElementContext.Provider>
