@@ -39,11 +39,9 @@ export interface SongInfo {
   song_id: string;
   name: string;
   url: string;
-  sege: number;
   duration: number;
   is_lyric: boolean;
   type: "track";
-  song_time_stamp: number[];
   play_count?: number;
   artists: Artist[];
   album: Album;

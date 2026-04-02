@@ -6,9 +6,7 @@ import { persist } from "zustand/middleware";
 
 export interface SongDetail {
   url: string;
-  sege: number;
   duration: number;
-  song_time_stamp: Array<number>;
   name: string;
   id: string;
   song_id: string;
