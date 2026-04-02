@@ -44,10 +44,8 @@ const useMediaSessionButton = (id_scope: string) => {
   useEffect(() => {
     function MediaSessionButtonTaks({
       url,
-      sege,
       duration,
       name,
-      song_time_stamp,
       id,
       song_id,
       artists,
@@ -55,10 +53,8 @@ const useMediaSessionButton = (id_scope: string) => {
       cover_url,
     }: {
       url: string;
-      sege: number;
       duration: number;
       name: string;
-      song_time_stamp: number[];
       id: string;
       song_id: string;
       artists: Artist[];
@@ -69,10 +65,8 @@ const useMediaSessionButton = (id_scope: string) => {
       const uniUrl = id;
       updateSongCu({
         [uniUrl || ""]: url,
-        sege,
         duration,
         name,
-        song_time_stamp,
         id,
         song_id,
         artists,
@@ -100,10 +94,8 @@ const useMediaSessionButton = (id_scope: string) => {
 
         const {
           url,
-          sege,
           name,
           duration,
-          song_time_stamp,
           id,
           song_id,
           artists,
@@ -115,10 +107,8 @@ const useMediaSessionButton = (id_scope: string) => {
           ];
         MediaSessionButtonTaks({
           url,
-          sege,
           duration,
           name,
-          song_time_stamp,
           id,
           song_id,
           artists,
@@ -140,10 +130,8 @@ const useMediaSessionButton = (id_scope: string) => {
         if (currentIndex >= playListArray.songs.idArray.length - 1) return;
         const {
           url,
-          sege,
           name,
           duration,
-          song_time_stamp,
           id,
           song_id,
           artists,
@@ -155,10 +143,8 @@ const useMediaSessionButton = (id_scope: string) => {
           ];
         MediaSessionButtonTaks({
           url,
-          sege,
           duration,
           name,
-          song_time_stamp,
           id,
           song_id,
           artists,

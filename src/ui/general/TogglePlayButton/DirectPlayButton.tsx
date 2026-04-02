@@ -34,6 +34,7 @@ import TogglePlayButton from "./TogglePlayButton";
 import { useUserInfoContext } from "@/Context/ContextUserInfo";
 import { guardToSignIn } from "@/lib/guardToSignIn";
 import { IconWrapperProps } from "../IconWrapper";
+import { cn } from "@/lib/utils";
 const hasData = async (
   dataFromFetch: RefObject<Promise<ListSongsReturn> | null>,
   listId: string,
@@ -121,23 +122,13 @@ function DirectPlayButton({
 
     const playlistData = !playlistId ? await getData() : playListArray;
     if (playlistData && playlistData.songs) {
-      const {
-        url,
-        sege,
-        duration,
-        name,
-        song_time_stamp,
-        id,
-        song_id,
-        artists,
-        is_lyric,
-        cover_url,
-      } = (() => {
-        if (playlistId && playlist_songId) {
-          return playlistData.songs.byId[playlist_songId];
-        }
-        return playlistData.songs.byId[playlistData.songs.idArray[0]];
-      })();
+      const { url, duration, name, id, song_id, artists, is_lyric, cover_url } =
+        (() => {
+          if (playlistId && playlist_songId) {
+            return playlistData.songs.byId[playlist_songId];
+          }
+          return playlistData.songs.byId[playlistData.songs.idArray[0]];
+        })();
       const uniUrl = id;
       setPlayListArray({
         [listId || ""]: playlistData,
@@ -149,10 +140,8 @@ function DirectPlayButton({
       } else {
         updateSongCu({
           [uniUrl || ""]: url,
-          sege,
           duration,
           name,
-          song_time_stamp,
           id,
           song_id,
           artists,

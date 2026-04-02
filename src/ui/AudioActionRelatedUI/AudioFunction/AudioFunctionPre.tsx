@@ -42,26 +42,14 @@ function AudioFunctionPre({ listSong, className, id }: Props) {
     const currentIndex = outputCurrentIndex(listSong.songs.idArray, id_scope);
     const songList = listSong.songs;
     if (currentIndex <= 0) return;
-    const {
-      url,
-      sege,
-      duration,
-      name,
-      song_time_stamp,
-      id,
-      song_id,
-      artists,
-      is_lyric,
-      cover_url,
-    } = songList.byId[listSong.songs.idArray[currentIndex - 1]];
+    const { url, duration, name, id, song_id, artists, is_lyric, cover_url } =
+      songList.byId[listSong.songs.idArray[currentIndex - 1]];
 
     const uniUrl = id;
     updateSongCu({
       [uniUrl || ""]: url,
-      sege,
       duration,
       name,
-      song_time_stamp,
       id,
       song_id,
       artists,
