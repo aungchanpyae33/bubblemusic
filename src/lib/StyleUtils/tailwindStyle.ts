@@ -6,5 +6,3 @@ export const DirectPlayButtonOverlayOnImage =
 
 export const UpStepButtonStyle =
   "shadow-[_2px_2px_var(--foreground)] transition-all duration-150 active:shadow-[_1px_1px_var(--foreground)]  active:translate-y-[1px] active:translate-x-[1px]";
-
-export const iconResponsive = "size-6 md:size-7";
