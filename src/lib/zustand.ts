@@ -23,17 +23,6 @@ export interface IsRepeatState {
 export interface RepeatAction {
   setRepeat: () => void;
 }
-export interface PrefetchAction {
-  prefetchSegment: (params: PrefetchParams) => Promise<ArrayBuffer[] | null>;
-}
-export interface PrefetchParams {
-  id: string;
-  abortController: RefObject<AbortController | null>;
-  prefetchedUrl: RefObject<string>;
-  prefetchPromiseRef: RefObject<Promise<
-    [ArrayBuffer, ArrayBuffer] | null
-  > | null>;
-}
 export interface SongState {
   songCu: SongDetail | object;
 }
@@ -245,9 +234,8 @@ export const useRepeatAndCurrentPlayList = create<
     currentAddToNextAction &
     removeFromQueueAction &
     IsRepeatState &
-    RepeatAction &
-    PrefetchAction
->()((set, get) => ({
+    RepeatAction
+>()((set) => ({
   playListArray: {},
 
   setPlayListArray: (newList) =>
@@ -332,65 +320,6 @@ export const useRepeatAndCurrentPlayList = create<
   isRepeat: false,
   setRepeat: () => set((state) => ({ isRepeat: !state.isRepeat })),
   // if it check as isRepeat in function component, it will re-render entrire component
-  prefetchSegment: async ({
-    id,
-    abortController,
-    prefetchedUrl,
-    prefetchPromiseRef,
-  }: PrefetchParams) => {
-    if (get().isRepeat) return null;
-
-    const fetchOptions: RequestInit = {
-      signal: abortController!.current!.signal,
-    };
-
-    const playlistArray = Object.values(get().playListArray)[0] as ListSongPage;
-    if (!playlistArray.songs) return null;
-    const currentIndex = outputCurrentIndex(playlistArray.songs.idArray, id);
-
-    const extract = Math.min(
-      currentIndex + 1,
-      playlistArray.songs.idArray.length - 1,
-    );
-    const { id: id_scope, url } =
-      playlistArray.songs.byId[playlistArray.songs.idArray[extract]];
-
-    if (
-      currentIndex >= playlistArray.songs.idArray.length - 1 &&
-      id === id_scope
-    ) {
-      return prefetchPromiseRef.current;
-    }
-
-    const initUrl = url;
-    const seg1Url = url.replace("init.mp4", "seg-1.m4s");
-
-    try {
-      // if prefetch promise is not null , means they are waiting some promise, if then return this promise to receive the data
-      if (!prefetchPromiseRef.current) {
-        // immediate update url to inform there is a prefetch call
-        prefetchedUrl.current = url;
-        prefetchPromiseRef.current = Promise.all([
-          fetch(initUrl, fetchOptions).then((res) => res.arrayBuffer()),
-          fetch(seg1Url, fetchOptions).then((res) => res.arrayBuffer()),
-        ]).catch((err): [ArrayBuffer, ArrayBuffer] | null => {
-          //if there is error, reset the prefetchUrl to false the condition check in mediaSourceBuffer.ts
-          prefetchedUrl.current = "";
-          if (err instanceof DOMException && err.name === "AbortError") {
-            return null;
-          }
-          throw err;
-        });
-      }
-      return prefetchPromiseRef.current;
-    } catch (err: unknown) {
-      if (err instanceof DOMException && err.name === "AbortError") {
-        return null;
-      } else {
-        throw err;
-      }
-    }
-  },
 }));
 
 export const useAudioValue = create<AudioValueState & AudioValueActions>(

@@ -25,7 +25,6 @@ import { addRecentlySong } from "@/actions/addRecentSong";
 import { useQueryClient } from "@tanstack/react-query";
 import outputCurrentIndex from "@/lib/OutputCurrentIndex";
 import type { ListSongPage } from "@/database/data-types-return";
-import { useDataContext } from "@/Context/ContextMedia";
 import { useAudioElementContext } from "@/Context/ContextAudioWrapper";
 
 function PlaceHolderToggleState({
@@ -41,7 +40,6 @@ function PlaceHolderToggleState({
   const setTimeoutRefForList = useRef<ReturnType<typeof setTimeout> | null>(
     null,
   );
-  const { segNum } = useDataContext();
   const { audioElRef } = useAudioElementContext();
   const playListArray = useRepeatAndCurrentPlayList(
     (state: currentSongPlaylist) =>
@@ -98,7 +96,6 @@ function PlaceHolderToggleState({
       if (!copyAudioRef) return;
       if (isRepeat) {
         copyAudioRef.currentTime = 0;
-        segNum.current = 1;
         copyAudioRef.play();
         return;
       }
@@ -174,7 +171,6 @@ function PlaceHolderToggleState({
     setPlay,
     updateSongCu,
     isRepeat,
-    segNum,
     setPlayList,
     playListArray,
     playlistId,

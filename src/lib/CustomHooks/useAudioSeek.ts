@@ -12,7 +12,6 @@ import {
   useAudioValue,
   useSongFunction,
 } from "../zustand";
-import { useDataContext } from "@/Context/ContextMedia";
 import { useAudioElementContext } from "@/Context/ContextAudioWrapper";
 export interface valueProps {
   value: AudioValueState["value"] | undefined;
@@ -49,15 +48,6 @@ const useAudioSeek = ({
   const setIsDragging = useAudioDragging(
     (state: AudioDraggingActions) => state.setIsDragging,
   );
-  const {
-    loadNextSegment,
-    segNum,
-    sege,
-    abortController,
-    fetching,
-    bufferThreshold,
-    song_time_stamp,
-  } = useDataContext();
   const throttledSetValue = useMemo(
     () => throttle((val: number) => setValue(val), 1000),
     [setValue],
@@ -89,13 +79,6 @@ const useAudioSeek = ({
         per,
         duration,
         audioElRef,
-        sege,
-        segNum,
-        loadNextSegment,
-        bufferThreshold,
-        fetching,
-        abortController,
-        song_time_stamp,
       });
     }
     function update() {
@@ -124,17 +107,10 @@ const useAudioSeek = ({
   }, [
     duration,
     isDragging,
-    loadNextSegment,
-    segNum,
-    sege,
     sliderRef,
-    abortController,
-    fetching,
     setIsDragging,
     setValue,
-    bufferThreshold,
     shouldRun,
-    song_time_stamp,
     throttledSetValue,
     Isplay,
     audioElRef,

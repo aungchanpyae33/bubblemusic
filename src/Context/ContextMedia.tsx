@@ -1,15 +1,8 @@
-import { createContext, RefObject, useContext } from "react";
+import { createContext, useContext } from "react";
 import { ReactNode } from "react";
 import type { Artist } from "../../database.types-fest";
 export interface DataContextProps {
   duration: number;
-  abortController: RefObject<AbortController | null>;
-  fetching: RefObject<{ isFetch: boolean; fetchingseg: number }>;
-  loadNextSegment: React.RefObject<(() => Promise<void>) | null>;
-  segNum: RefObject<number>;
-  sege: number | undefined;
-  song_time_stamp: Array<number>;
-  bufferThreshold: number;
   song_id: string;
   id: string;
   is_lyric: boolean;

@@ -34,40 +34,19 @@ import AudioElement from "../AudioActionRelatedUI/AudioElement";
 import TimeIndicatorDur from "../AudioActionRelatedUI/Time/TimeIndicatorDur";
 function AudioPlayer({ start }: { start: boolean }) {
   const toggleRef = useRef<HTMLButtonElement | null>(null);
-  const {
-    sege,
-    name,
-    duration,
-    song_time_stamp,
-    id,
-    song_id,
-    is_lyric,
-    artists,
-    cover_url,
-  } = useSong((state: SongState) => state.songCu) as SongDetail;
+  const { name, duration, id, song_id, is_lyric, artists, cover_url } = useSong(
+    (state: SongState) => state.songCu,
+  ) as SongDetail;
   const url = useSong(
     (state: SongState) =>
       Object.values(state.songCu as Record<string, string>)[0],
   );
 
-  const {
-    loadNextSegment,
-    segNum,
-    abortController,
-    fetching,
-    bufferThreshold,
-  } = useMediaSourceBuffer(url, sege, song_time_stamp, id!);
+  useMediaSourceBuffer(url);
   return (
     <ContextMedia
       data={{
         duration,
-        abortController,
-        fetching,
-        segNum,
-        song_time_stamp,
-        loadNextSegment: loadNextSegment,
-        sege,
-        bufferThreshold,
         song_id,
         id,
         is_lyric,

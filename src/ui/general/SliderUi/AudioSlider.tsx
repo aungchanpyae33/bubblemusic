@@ -1,5 +1,4 @@
 import { useAudioElementContext } from "@/Context/ContextAudioWrapper";
-import { useDataContext } from "@/Context/ContextMedia";
 import type { valueProps } from "@/lib/CustomHooks/useAudioSeek";
 import AudioSeeked from "@/lib/MediaSource/AudioSeeked";
 import { AudioDraggingActions, AudioValueActions } from "@/lib/zustand";
@@ -23,15 +22,6 @@ function AudioSlider({
   children,
   className,
 }: Props) {
-  const {
-    loadNextSegment,
-    segNum,
-    sege,
-    abortController,
-    fetching,
-    bufferThreshold,
-    song_time_stamp,
-  } = useDataContext();
   const { audioElRef } = useAudioElementContext();
   return (
     <div
@@ -69,13 +59,6 @@ function AudioSlider({
             per,
             duration,
             audioElRef,
-            sege,
-            segNum,
-            loadNextSegment,
-            bufferThreshold,
-            fetching,
-            abortController,
-            song_time_stamp,
           });
         } else if (e.key !== "Tab") {
           e.preventDefault();
