@@ -26,6 +26,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import outputCurrentIndex from "@/lib/OutputCurrentIndex";
 import type { ListSongPage } from "@/database/data-types-return";
 import { useAudioElementContext } from "@/Context/ContextAudioWrapper";
+import { safeAudioPlay } from "@/lib/safeAudioPlay";
 
 function PlaceHolderToggleState({
   url,
@@ -82,7 +83,7 @@ function PlaceHolderToggleState({
       if (copyAudioRef.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA) {
         if (Isplay) {
           if (copyAudioRef.paused) {
-            copyAudioRef.play();
+            safeAudioPlay(copyAudioRef);
           }
         } else {
           if (!copyAudioRef.paused) {
@@ -96,7 +97,7 @@ function PlaceHolderToggleState({
       if (!copyAudioRef) return;
       if (isRepeat) {
         copyAudioRef.currentTime = 0;
-        copyAudioRef.play();
+        safeAudioPlay(copyAudioRef);
         return;
       }
       if (

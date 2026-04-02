@@ -9,6 +9,7 @@ const useMediaSourceBuffer = (url: string) => {
     const audio = audioElRef.current;
     if (!audio) return;
     const src = url;
+    if (!src) return;
 
     if (!Hls.isSupported()) {
       mainHlsInstance.current = new Hls({
@@ -30,6 +31,7 @@ const useMediaSourceBuffer = (url: string) => {
 
     return () => {
       mainHlsInstance.current?.destroy();
+      mainHlsInstance.current = null;
     };
   }, [audioElRef, url]);
 };

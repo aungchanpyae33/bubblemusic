@@ -5,6 +5,7 @@ import {
   VolumeValueState,
 } from "@/lib/zustand";
 import { useEffect } from "react";
+import { safeAudioPlay } from "@/lib/safeAudioPlay";
 
 function PlaceholderAudioHandler({
   audioElRef,
@@ -27,7 +28,7 @@ function PlaceholderAudioHandler({
       const defaultVol = 1 - value / 100;
       audioEl.volume = defaultVol;
       if (Isplay) {
-        audioEl.play();
+        safeAudioPlay(audioEl);
       }
     }
 
