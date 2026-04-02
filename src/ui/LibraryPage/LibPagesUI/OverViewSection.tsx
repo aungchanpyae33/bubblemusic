@@ -15,7 +15,10 @@ const routeHrefGrop = {
 async function OverViewSection() {
   const { data, error } = await getLibraryOverview();
   if (!data || error) throw new Error("page-load-error");
-  if (Object.keys(data).length === 0) return <EmptyGeneral />;
+  const allEmpty = Object.values(data).every(
+    (v) => v && v.idArray.length === 0,
+  );
+  if (allEmpty) return <EmptyGeneral />;
   return (
     <>
       {(Object.keys(data) as (keyof typeof data)[]).map((itemKey) => {
