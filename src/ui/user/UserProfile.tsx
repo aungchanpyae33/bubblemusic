@@ -5,7 +5,9 @@ import UserProfileContainer from "../Option/UserOwnProfileOption/UserProfileCont
 import MoreOption from "../general/MoreOption/MoreOption";
 
 function UserProfile({ user }: { user: JwtPayload }) {
-  const userName = user.user_metadata.first_name.slice(0, 1);
+  const userfistName = user.user_metadata.first_name ?? "";
+  const sliceName = userfistName.slice(0, 1);
+
   return (
     <div className=" relative  z-10">
       <ContextMoreOption>
@@ -13,7 +15,7 @@ function UserProfile({ user }: { user: JwtPayload }) {
           staticDrop={true}
           triggerEl={
             <div className=" size-[45px] flex bg-surface-1  hover:scale-105   active:scale-90 items-center justify-center rounded-full">
-              {userName}
+              {sliceName}
             </div>
           }
           targetElement={<UserProfileContainer user={user} />}
