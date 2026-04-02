@@ -26,13 +26,9 @@ async function page(props: {
   return (
     <div className="  space-y-5">
       <SearchKeywordInfo query={query} />
+
       {/* show empty ui when no results are found */}
-      {!top_result &&
-        (!songs || songs.idArray.length === 0) &&
-        (!albums || albums.idArray.length === 0) &&
-        (!artists || artists.idArray.length === 0) &&
-        (!playlists || playlists.idArray.length === 0) &&
-        (!profiles || profiles.idArray.length === 0) && <EmptyGeneral />}
+      {!top_result && <EmptyGeneral />}
 
       {top_result && <TopResult topResult={top_result} />}
       {songs && songs.idArray.length > 0 && (
