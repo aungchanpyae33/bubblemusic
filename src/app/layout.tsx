@@ -18,6 +18,10 @@ export const metadata: Metadata = {
   manifest: "/site.webmanifest",
 };
 import NextTopLoader from "nextjs-toploader";
+import { NextIntlClientProvider } from "next-intl";
+import { Suspense } from "react";
+import AppLoading from "@/ui/loading/AppLoading";
+import DeviceCheckFetcher from "@/lib/DeviceCheck/DeviceCheckFetcher";
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -52,7 +56,11 @@ export default function RootLayout({
             zIndex={1600}
             showAtBottom={false}
           />
-          {children}
+          <Suspense fallback={<AppLoading />}>
+            <NextIntlClientProvider>
+              <DeviceCheckFetcher>{children}</DeviceCheckFetcher>
+            </NextIntlClientProvider>
+          </Suspense>
         </ThemeProvider>
       </body>
     </html>

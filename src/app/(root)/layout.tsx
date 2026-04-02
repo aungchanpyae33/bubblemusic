@@ -1,5 +1,4 @@
 import NavBar from "@/ui/NavtopBar/NavBar";
-import { NextIntlClientProvider } from "next-intl";
 import { Suspense } from "react";
 import Main from "@/ui/Main/Main";
 import Queue from "@/ui/Queue/Queue";
@@ -9,7 +8,6 @@ import QueryClientPrv from "@/lib/tanstack/QueryClient";
 import ModalBox from "@/ui/general/ModalAction/ModalBox";
 import LibandLikeHyration from "@/lib/HydrationData/LibandLikeHyration";
 import LoadingAudioPlayer from "@/ui/loading/LoadingAudioPlayer";
-import DeviceCheckFetcher from "@/lib/DeviceCheck/DeviceCheckFetcher";
 import QueueNotFullScreen from "@/ui/Queue/QueueNotFullScreen";
 import ContextAudioWrapper from "@/Context/ContextAudioWrapper";
 import AudioFooterBar from "@/ui/AudioFooterBar/AudioFooterBar";
@@ -23,33 +21,29 @@ export default function RootLayout({
 }>) {
   return (
     <QueryClientPrv>
-      <NextIntlClientProvider>
-        <UserInfoFetcher>
-          <DeviceCheckFetcher>
-            <LibandLikeHyration>
-              <ContextAudioWrapper>
-                <PlaceHolderScrollToTop />
-                <BeforeLoad />
-                <NavBar />
-                <div className="flex flex-1 overflow-hidden relative">
-                  <Main>
-                    {children}
-                    <Footer />
-                  </Main>
-                  <QueueWrapper>
-                    <Queue wrapper={QueueNotFullScreen} />
-                  </QueueWrapper>
+      <UserInfoFetcher>
+        <LibandLikeHyration>
+          <ContextAudioWrapper>
+            <PlaceHolderScrollToTop />
+            <BeforeLoad />
+            <NavBar />
+            <div className="flex flex-1 overflow-hidden relative">
+              <Main>
+                {children}
+                <Footer />
+              </Main>
+              <QueueWrapper>
+                <Queue wrapper={QueueNotFullScreen} />
+              </QueueWrapper>
 
-                  <ModalBox />
-                </div>
-                <Suspense fallback={<LoadingAudioPlayer />}>
-                  <AudioFooterBar />
-                </Suspense>
-              </ContextAudioWrapper>
-            </LibandLikeHyration>
-          </DeviceCheckFetcher>
-        </UserInfoFetcher>
-      </NextIntlClientProvider>
+              <ModalBox />
+            </div>
+            <Suspense fallback={<LoadingAudioPlayer />}>
+              <AudioFooterBar />
+            </Suspense>
+          </ContextAudioWrapper>
+        </LibandLikeHyration>
+      </UserInfoFetcher>
     </QueryClientPrv>
   );
 }
