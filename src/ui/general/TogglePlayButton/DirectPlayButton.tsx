@@ -159,7 +159,11 @@ function DirectPlayButton({
 
   return (
     <button
-      className={className}
+      className={cn(
+        className,
+        IsPlayList !== undefined &&
+          "has-hover:opacity-100 ring-2 rounded-full ring-blue-800",
+      )}
       onClick={(e) => {
         e.preventDefault();
         e.stopPropagation();

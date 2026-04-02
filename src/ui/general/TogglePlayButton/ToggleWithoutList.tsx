@@ -30,6 +30,7 @@ import { audioPlayTriggerIos } from "@/lib/audioPlayTriggerIOS";
 import { useAudioElementContext } from "@/Context/ContextAudioWrapper";
 import { useUserInfoContext } from "@/Context/ContextUserInfo";
 import { guardToSignIn } from "@/lib/guardToSignIn";
+import { cn } from "@/lib/utils";
 
 interface ToggleWithoutListProp {
   song: SongInfo;
@@ -133,7 +134,11 @@ const ToggleWithoutList = ({ song }: ToggleWithoutListProp) => {
           setPlay(uniUrl || "", true);
         }
       }}
-      className={PlayButtonOverlayOnImage}
+      className={cn(
+        PlayButtonOverlayOnImage,
+        Isplay !== undefined &&
+          "has-hover:opacity-100 ring-2 rounded-full ring-blue-800",
+      )}
       id="play-icon"
     >
       <span className=" flex justify-center">
