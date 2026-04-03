@@ -66,7 +66,7 @@ function Footer() {
           <h3 className="text-foreground font-bold text-lg">
             {f("contactTitle")}
           </h3>
-          <p className="text-ink-400 text-sm">{f("contactDescription")} hi</p>
+          <p className="text-ink-400 text-sm">{f("contactDescription")}</p>
           <div className="flex flex-col space-y-3">
             <Link
               target="_"
