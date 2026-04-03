@@ -8,7 +8,7 @@ import LanguageSwitchItem from "../OptionSubItems/LanguageSwitch/LanguagaeSwtich
 import LogoutItem from "../OptionItems/LogoutItem";
 
 function UserProfileContainer({ user }: { user: JwtPayload }) {
-  const name = user.user_metadata.first_name + user.user_metadata.last_name;
+  const name = user.user_metadata.display_name;
   const email = user.user_metadata.email;
   const id = user.sub;
   return (

@@ -185,6 +185,7 @@
     "createAccount": "Create a new Account",
     "loginAccount": "Login to an Account",
     "email": "email",
+    "display_name": "Your Name",
     "emailPlaceholder": "email@example.com",
     "password": "Password",
     "passwordPlaceholder": "password",

@@ -5,7 +5,7 @@ import UserProfileContainer from "../Option/UserOwnProfileOption/UserProfileCont
 import MoreOption from "../general/MoreOption/MoreOption";
 
 function UserProfile({ user }: { user: JwtPayload }) {
-  const userfistName = user.user_metadata.first_name ?? "";
+  const userfistName = user.user_metadata.display_name ?? "";
   const sliceName = userfistName.slice(0, 1);
 
   return (

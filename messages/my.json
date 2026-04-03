@@ -181,6 +181,7 @@
     "createAccount": "အကောင့်အသစ်ပြုလုပ်ရန်",
     "loginAccount": "အကောင့်သို့ဝင်ရန်",
     "email": "အီးမေးလ်",
+    "display_name": "သင်၏ နံမည်",
     "emailPlaceholder": "email@example.com",
     "password": "စကားဝှက်",
     "passwordPlaceholder": "စကားဝှက်",

@@ -11,9 +11,11 @@ import EmailInput from "../AuthItemGeneral/EmailInput";
 import PasswordInput from "../AuthItemGeneral/PasswordInput";
 import RootErrorText from "../AuthItemGeneral/RootErrorText";
 import SubmitButton from "../AuthItemGeneral/SubmitButton";
+import NameInput from "../AuthItemGeneral/UserName/NameInput";
 type SignUpValues = {
   email: string;
   password: string;
+  display_name: string;
 };
 function SignUpFormContainer() {
   const router = useRouter();
@@ -29,6 +31,9 @@ function SignUpFormContainer() {
         email: data.email,
         password: data.password,
         options: {
+          data: {
+            display_name: data.display_name,
+          },
           emailRedirectTo: `${window.location.origin}/auth/login`,
         },
       });
@@ -58,6 +63,7 @@ function SignUpFormContainer() {
       <form onSubmit={methods.handleSubmit(loginAction)} className=" space-y-5">
         <EmailInput />
         <PasswordInput />
+        <NameInput />
         <RootErrorText />
         <SubmitButton
           actionText="signup"
