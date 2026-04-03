@@ -194,6 +194,8 @@
     "passwordPlaceholder": "password",
     "login": "Login",
     "signUp": "Sign Up",
+    "unAuthTitle": "Authentication Required",
+    "unAuthText": "You need to log in to view this page.",
     "noAcc": "Don't have an account? <link>Register here</link>",
     "alreadyAcc": "Already have an account? <link>Log in here</link>",
     "signUpSuccess": "Verify your email",

@@ -17,7 +17,7 @@ import {
   UserLibReturn,
   UserPageReturn,
 } from "./data-types-return";
-import { LibSonglistRoute } from "@/app/(root)/library/[params]/page";
+import { LibSonglistRoute } from "@/app/(root)/library/(library)/[params]/page";
 export interface Movie {
   id: number;
   name: string;

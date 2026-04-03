@@ -2,6 +2,9 @@ import createNextIntlPlugin from "next-intl/plugin";
 import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   cacheComponents: true,
+  experimental: {
+    authInterrupts: true,
+  },
 
   // reactStrictMode: false,
   images: {

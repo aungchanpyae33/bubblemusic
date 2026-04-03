@@ -1,7 +1,8 @@
+import { userFetch } from "@/lib/UserInfoFetch";
 import LikeSongSection from "@/ui/LibraryPage/LibPagesUI/LikeSongSection";
 import ListSongsUpFaceSection from "@/ui/LibraryPage/LibPagesUI/ListSongsUpFaceSection";
 import OverViewSection from "@/ui/LibraryPage/LibPagesUI/OverViewSection";
-import { notFound } from "next/navigation";
+import { notFound, unauthorized } from "next/navigation";
 
 const routeMap: Record<LibRoute, React.ReactNode> = {
   overview: <OverViewSection />,
@@ -29,7 +30,11 @@ export const SUPPORTED_ROUTE = [
 export type LibRoute = (typeof SUPPORTED_ROUTE)[number];
 export type LibSonglistRoute = (typeof LIB_SONGLIST_ROUTE)[number];
 async function page(props: { params: Promise<{ params: string }> }) {
-  // todo protectde page route
+  const user = await userFetch();
+  if (!user) {
+    unauthorized();
+  }
+
   const params = (await props.params).params;
   if (!SUPPORTED_ROUTE.includes(params as LibRoute)) {
     notFound();
