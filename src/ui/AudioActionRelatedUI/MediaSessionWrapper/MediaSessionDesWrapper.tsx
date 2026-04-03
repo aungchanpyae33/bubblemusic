@@ -4,11 +4,13 @@ import type { Artist } from "../../../../database.types-fest";
 function MediaSessionDesWrapper({
   name,
   artists,
+  cover_url,
 }: {
+  cover_url: string;
   name: string;
   artists: Artist[];
 }) {
-  useMediaSessionDes(name, artists);
+  useMediaSessionDes(name, artists, cover_url);
   return null;
 }
 

@@ -1,6 +1,10 @@
 import { useEffect } from "react";
 import type { Artist } from "../../../../database.types-fest";
-const useMediaSessionDes = (name: string, artists: Artist[]) => {
+const useMediaSessionDes = (
+  name: string,
+  artists: Artist[],
+  cover_url: string,
+) => {
   useEffect(() => {
     if ("mediaSession" in navigator) {
       navigator.mediaSession.metadata = new MediaMetadata({
@@ -8,7 +12,7 @@ const useMediaSessionDes = (name: string, artists: Artist[]) => {
         artist: artists.map((artist) => artist.name).join(", "),
         artwork: [
           {
-            src: "https://tebi.bubblemusic.dpdns.org/lee-hi/4-only/cover/photo_2025-05-23_14-51-24.jpg",
+            src: cover_url,
             sizes: "300x300",
             type: "image/jpg",
           },
@@ -18,6 +22,6 @@ const useMediaSessionDes = (name: string, artists: Artist[]) => {
     return () => {
       navigator.mediaSession.metadata = null;
     };
-  }, [name, artists]);
+  }, [name, artists, cover_url]);
 };
 export default useMediaSessionDes;

@@ -65,7 +65,11 @@ function AudioPlayer({ start }: { start: boolean }) {
               "w-full will-change-transform bg-section    relative flex   h-[70px]",
             )}
           >
-            <MediaSessionDesWrapper name={name} artists={artists} />
+            <MediaSessionDesWrapper
+              name={name}
+              artists={artists}
+              cover_url={cover_url}
+            />
             <PlaceHolderToggleState url={url} id={id}>
               <PlaceHolderFetchQueue />
               <PlaceholderToggleButtonSpaceKey />
