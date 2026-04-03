@@ -53,7 +53,12 @@ function Queue({
             const id = trimArray[index];
             const item = playListArray.songs.byId[id];
             return (
-              <QueueItemSong className="bg-section" song={item} key={item.id} />
+              <QueueItemSong
+                className="bg-section"
+                listSong={playListArray}
+                song={item}
+                key={item.id}
+              />
             );
           }}
         />
