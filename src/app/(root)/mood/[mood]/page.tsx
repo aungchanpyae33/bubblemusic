@@ -31,7 +31,6 @@ export default async function Page(props: {
     (v) => v && v.idArray.length === 0,
   );
   if (allEmpty) return <EmptyGeneral />;
-  //  to do
   return (
     <div className="space-y-3">
       {(Object.keys(data) as (keyof typeof data)[]).map((itemKey) => {

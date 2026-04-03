@@ -19,13 +19,6 @@ import type { ListSongPage } from "@/database/data-types-return";
 import type { Artist } from "../../../../database.types-fest";
 
 const useMediaSessionButton = (id_scope: string) => {
-  //[todo] need to add more code to align with audiofunction pre and next but can safe remove some code as there will be no ui when page refresh
-  // const [playListArrayKey, playListArray] = useRepeatAndCurrentPlayList(
-  //   (state: currentSongPlaylist) =>
-  //     Object.entries(
-  //       state.playListArray as Record<string, getSongsReturn | undefined>
-  //     )[0] || []
-  // );
   const playListArray = useRepeatAndCurrentPlayList(
     (state: currentSongPlaylist) => Object.values(state.playListArray)[0] || [],
   ) as ListSongPage;

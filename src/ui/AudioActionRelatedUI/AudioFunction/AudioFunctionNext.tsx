@@ -57,7 +57,6 @@ function AudioFunctionNext({ listSong, className, id }: Props) {
       is_lyric,
       cover_url,
     });
-    // [todo] need to check if there is a new playlist or not
     setPlaylistId({ [playlistId[0] || ""]: [playlistId[0], id] });
     setPlayList(playlistId[0], true);
     setPlay(uniUrl || "", true);

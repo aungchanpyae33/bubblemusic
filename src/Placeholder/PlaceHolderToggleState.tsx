@@ -146,12 +146,10 @@ function PlaceHolderToggleState({
           is_lyric,
           cover_url,
         });
-        // [todo] need to check if there is a new playlist or not
         setPlaylistId({
           [playlistId[0] || ""]: [playlistId[0], id],
         });
         setPlay(uniUrl, true);
-        // [todo] need to check if there is a new playlist or not
         setPlayList(playlistId[0], true);
       }
     }
