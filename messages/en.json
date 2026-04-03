@@ -161,7 +161,10 @@
     "overview": "Overview",
     "create-playlist": "Own Playlist",
     "liked-songs": "Liked Songs",
-    "recently": "Recently Played"
+    "recently": "Recently Played",
+    "recommended": "{name} Playlists For You",
+    "popular": "Top {name} Playlists This Week",
+    "recent": "Recently Added {name} Playlists"
   },
   "Genre": {
     "mix": "Mix",

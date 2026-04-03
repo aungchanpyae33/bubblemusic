@@ -11,6 +11,7 @@ import {
   GetNewlyItemsReturn,
   GetRecentReturn,
   GetSearchPageReturn,
+  GetSpecificCategoryPageReturn,
   LibrarySongListSectionPageReturn,
   ListSongsReturn,
   UserLibReturn,
@@ -119,6 +120,48 @@ export const getLikeSongs = async (
       songs: { ...data.songs, songs: normalizeById(data.songs.songs) },
     };
     return { data: mappedData, error };
+  } catch (error) {
+    return { data: null, error };
+  }
+};
+
+export const getGenresPage = async (
+  genre_id: string,
+): Promise<GetSpecificCategoryPageReturn> => {
+  try {
+    const supabase = await createClient();
+    const { data, error } = await supabase.rpc("get_genre_page", {
+      genre_id: genre_id,
+    });
+    if (error) throw error;
+    if (!data) throw new Error("not found");
+    const mappedItem = {
+      recommended: normalizeById(data.recommended),
+      popular: normalizeById(data.popular),
+      recent: normalizeById(data.recent),
+    };
+    return { data: mappedItem, error };
+  } catch (error) {
+    return { data: null, error };
+  }
+};
+
+export const getMoodPage = async (
+  mood_id: string,
+): Promise<GetSpecificCategoryPageReturn> => {
+  try {
+    const supabase = await createClient();
+    const { data, error } = await supabase.rpc("get_mood_page", {
+      mood_id: mood_id,
+    });
+    if (error) throw error;
+    if (!data) throw new Error("not found");
+    const mappedItem = {
+      recommended: normalizeById(data.recommended),
+      popular: normalizeById(data.popular),
+      recent: normalizeById(data.recent),
+    };
+    return { data: mappedItem, error };
   } catch (error) {
     return { data: null, error };
   }
@@ -511,7 +554,7 @@ export const getLyric = async (songId: string) => {
 };
 
 //  check exist first
-type fetchCheckType = MediaItemType | "moods" | "genres";
+type fetchCheckType = MediaItemType;
 export const fetchCheckExistByType = async (
   type: fetchCheckType,
   id: string,
@@ -558,5 +601,38 @@ export const checkExist = async (type: fetchCheckType, id: string) => {
     return { exists: !!data, error };
   } catch (error) {
     return { exists: false, error };
+  }
+};
+
+type GenresAndMoodsType = "genres" | "moods";
+export const fetchCheckExistGenresAndMoodsById = async (
+  type: GenresAndMoodsType,
+  id: string,
+) => {
+  try {
+    const supabase = await createClient();
+    if (type === "genres") {
+      return supabase.from("genres").select("*").eq("id", id).maybeSingle();
+    }
+    if (type === "moods") {
+      return supabase.from("moods").select("*").eq("id", id).maybeSingle();
+    }
+
+    return { data: null, error: "error" };
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const checkExistGenresAndMoods = async (
+  type: GenresAndMoodsType,
+  id: string,
+) => {
+  try {
+    const { data, error } = await fetchCheckExistGenresAndMoodsById(type, id);
+    if (error) throw error;
+    return { exists: !!data, data, error };
+  } catch (error) {
+    return { exists: false, data: null, error };
   }
 };

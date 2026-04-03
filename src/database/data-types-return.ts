@@ -1,6 +1,7 @@
 import type { PostgrestError } from "@supabase/supabase-js";
 import type {
   AllMediaItems,
+  CategorySection,
   LibraryOverview,
   listInfo,
   listSongsSection,
@@ -61,6 +62,15 @@ export type GetNewlyItems = {
 
 export interface GetNewlyItemsReturn {
   data: GetNewlyItems | null;
+  error: ErrorResponse["error"];
+}
+
+export type GetSpecificCategoryPage = {
+  [k in keyof CategorySection]: NormalizedById<listInfo> | null;
+};
+
+export interface GetSpecificCategoryPageReturn {
+  data: GetSpecificCategoryPage | null;
   error: ErrorResponse["error"];
 }
 

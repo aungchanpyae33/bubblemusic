@@ -76,6 +76,12 @@ export type LibraryOverview = {
   recentlyPlayed: listInfo[];
 };
 
+export type CategorySection = {
+  recommended: listInfo[];
+  popular: listInfo[];
+  recent: listInfo[];
+};
+
 export type LikeSongsList = {
   songs: SongInfo[];
 };
@@ -144,7 +150,14 @@ export type Database = MergeDeep<
           Args: Record<string, never>;
           Returns: LibraryOverview;
         };
-
+        get_genre_page: {
+          Args: { genre_id: string };
+          Returns: CategorySection;
+        };
+        get_mood_page: {
+          Args: { mood_id: string };
+          Returns: CategorySection;
+        };
         get_recent_list: {
           Args: Record<string, never>;
           Returns: RecentList;

@@ -9,11 +9,13 @@ import UnderLineLinkHover from "../general/UnderLineLinkHover";
 async function ListUpFaceGroup({
   list,
   description,
+  insertDescription,
   showMore,
   href,
 }: {
   list: GetAllMediaItems[Exclude<keyof GetAllMediaItems, "trendingSongs">];
   description: string;
+  insertDescription?: Record<string, string>;
   showMore?: boolean;
   href?: string;
 }) {
@@ -22,7 +24,9 @@ async function ListUpFaceGroup({
   return (
     <ContextContainer>
       <div className=" justify-between px-4  flex ">
-        <ListGeneralHeader>{l(description)}</ListGeneralHeader>
+        <ListGeneralHeader>
+          {l(description, insertDescription)}
+        </ListGeneralHeader>
         <ArrowNaviContainer>
           {showMore && href && list.idArray.length > 7 && (
             <UnderLineLinkHover href={href}>{l("showMore")}</UnderLineLinkHover>
