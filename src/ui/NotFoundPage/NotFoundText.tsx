@@ -6,7 +6,9 @@ type Props = {
 async function NotFoundText({ w }: { w: Props["w"] }) {
   return (
     <div className=" text-center max-w-80">
-      <h1 className="text-xl font-extrabold">{w("globalNotFoundTitle")}</h1>
+      <h1 className="text-lg mb-2 font-extrabold">
+        {w("globalNotFoundTitle")}
+      </h1>
       <p>{w("globalNotFoundText")}</p>
     </div>
   );
