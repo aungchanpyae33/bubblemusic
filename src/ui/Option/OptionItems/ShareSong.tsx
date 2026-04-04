@@ -8,9 +8,10 @@ import OptionButton from "../OptionUI/OptionButton";
 import OptionIconEl from "../OptionUI/OptionIconEl";
 import IconWrapper from "@/ui/general/IconWrapper";
 import OptionText from "../OptionUI/OptionText";
-
+import { toast } from "sonner";
 function ShareSong() {
   const b = useTranslations("block");
+  const toa = useTranslations("Toast");
   const { song } = useInfoTrackContext();
   const songId = song?.song_id;
   const handleCopy = async () => {
@@ -18,8 +19,9 @@ function ShareSong() {
 
     try {
       await navigator.clipboard.writeText(`${origin}/track/${songId}`);
-    } catch (err) {
-      console.error("Failed to copy: ", err);
+      toast.info(toa("share.shareCopy"));
+    } catch {
+      toast.error(toa("error"));
     }
   };
 

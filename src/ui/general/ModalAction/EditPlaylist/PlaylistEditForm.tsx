@@ -13,6 +13,7 @@ import TitleInput from "@/ui/PlaylistForm/TitleInput";
 import CheckTypeBase from "@/ui/PlaylistForm/CheckType/CheckTypeBase";
 import SubmitButton from "@/ui/PlaylistForm/SubmitButton";
 import { closeModalBox } from "@/lib/closeModalBox";
+import { toast } from "sonner";
 export interface FormDataTypeEdit {
   id: string;
   name: string;
@@ -20,8 +21,8 @@ export interface FormDataTypeEdit {
 }
 
 function PlaylistEditForm() {
-  const e = useTranslations("ErrorMsg");
   const b = useTranslations("block");
+  const toa = useTranslations("Toast");
   const { id, name, originParentTriggerRef } = useEditToPlaylist(
     (state: editToPlaylistModalBox) => state.editToPlaylistModalBox,
   ) as editToPlaylistModalBoxProps;
@@ -44,18 +45,26 @@ function PlaylistEditForm() {
         checkType: data.checkType,
       });
       if (!data || playlistError) {
-        const err = new Error(e("wentWrong"));
+        const err = new Error("action-failed");
         err.name = "custom_error";
         throw err;
       }
 
       return { data: playlistData, error: playlistError };
     },
-    onSuccess: (data) => {
-      queryClient.setQueryData(["user-library"], data);
+    onMutate: () => {
+      // This runs BEFORE mutationFn
+      const toastId = toast.loading(toa("loading")); // trigger loading toast
+      return { toastId }; // pass to onSuccess / onError
     },
-    onError: (error) => {
-      // todo
+    onSuccess: (data, _, context) => {
+      queryClient.setQueryData(["user-library"], data);
+      if (!context.toastId) return;
+      toast.info(toa("playlistAction.playlistEdit"), { id: context.toastId });
+    },
+    onError: (_, __, context) => {
+      if (!context?.toastId) return;
+      toast.error(toa("error"), { id: context.toastId });
     },
     onSettled: () => {
       closeModalBox(editToPlaylistModalBoxAction, originParentTriggerRef);

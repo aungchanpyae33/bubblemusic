@@ -14,9 +14,11 @@ import OptionIconEl from "../OptionUI/OptionIconEl";
 import IconWrapper from "@/ui/general/IconWrapper";
 import { ListStart } from "lucide-react";
 import OptionText from "../OptionUI/OptionText";
+import { toast } from "sonner";
 
 function PlayNextQueue() {
   const b = useTranslations("block");
+  const toa = useTranslations("Toast");
   const { song } = useInfoTrackContext();
   const currentAddToNext = useRepeatAndCurrentPlayList(
     (state: currentAddToNextAction) => state.currentAddToNext,
@@ -34,6 +36,7 @@ function PlayNextQueue() {
   const queueSong = addUniIdSong && addUniIdSong;
   function addToNext() {
     currentAddToNext(queueSong, [uuid], id);
+    toast.success(toa("addToPlayNextAction"));
   }
   return (
     <OptionItem>

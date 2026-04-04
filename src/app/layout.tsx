@@ -21,6 +21,7 @@ import NextTopLoader from "nextjs-toploader";
 import { NextIntlClientProvider } from "next-intl";
 import { Suspense } from "react";
 import AppLoading from "@/ui/loading/AppLoading";
+import { Toaster } from "sonner";
 import DeviceCheckFetcher from "@/lib/DeviceCheck/DeviceCheckFetcher";
 export default function RootLayout({
   children,
@@ -36,6 +37,12 @@ export default function RootLayout({
       <body
         className={`${inter.className} overflow-hidden relative h-full flex flex-col`}
       >
+        <Toaster
+          position="bottom-center"
+          toastOptions={{
+            duration: 2000,
+          }}
+        />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

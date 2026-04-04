@@ -13,6 +13,8 @@ import {
 } from "@/database/client-data";
 import { useQuery } from "@tanstack/react-query";
 import { closeModalBox } from "@/lib/closeModalBox";
+import { useTranslations } from "next-intl";
+import { toast } from "sonner";
 
 function AddSongItem({
   playlistSongs,
@@ -22,6 +24,7 @@ function AddSongItem({
     name: string;
   };
 }) {
+  const toa = useTranslations("Toast");
   const playlistId = playlistSongs.id;
   const setIsSongExistModalBox = useIsExistSongsModalBox(
     (state: songExistActionModalBox) => state.setIsSongExistModalBox,
@@ -44,25 +47,27 @@ function AddSongItem({
   const isListCover = playlist?.cover_url;
   const noExistCover = isListCover ? null : cover_url;
 
-  const mutation = useAddSongMutate(
-    playlistId,
-    noExistCover,
-    originParentTriggerRef,
-  );
+  const mutation = useAddSongMutate(playlistId, noExistCover);
 
   async function handleAdd() {
     closeModalBox(addSongsToPlaylistModalBox, originParentTriggerRef);
+    const toastId = toast.loading(toa("loading")); //
     const { exists, error } = await checkSongsBeforeAddClient({
       playlistId: playlistId,
       songId: songId,
     });
-    if (error) return;
+    if (error) {
+      toast.error(toa("error"), { id: toastId });
+      return;
+    }
     if (!exists && !error) {
       mutation.mutate({
         playlistId: playlistId,
         songId: songId,
+        toastId: toastId,
       });
     } else {
+      toast.dismiss(toastId);
       setIsSongExistModalBox({
         playlistId,
         songId,

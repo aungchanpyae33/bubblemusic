@@ -12,6 +12,7 @@ import OptionText from "../OptionUI/OptionText";
 function RemoveSongButtonChild() {
   const b = useTranslations("block");
   const { id, song } = useInfoTrackContext();
+
   const id_scope = song?.id;
 
   const mutation = useRemoveSongMutate(id!);

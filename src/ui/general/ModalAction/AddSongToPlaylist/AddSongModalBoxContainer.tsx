@@ -13,7 +13,7 @@ function AddSongModalBoxContainer() {
   const { userLib } = data;
   if (!userLib) return;
   return (
-    <div className=" space-y-3">
+    <div className=" space-y-3 max-h-96 overflow-auto scroll-container">
       {userLib.idArray.length > 0 &&
         userLib.idArray.map((id) => {
           const item = userLib.byId[id];

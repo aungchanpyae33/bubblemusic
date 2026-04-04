@@ -13,9 +13,11 @@ import OptionButton from "../OptionUI/OptionButton";
 import OptionIconEl from "../OptionUI/OptionIconEl";
 import IconWrapper from "@/ui/general/IconWrapper";
 import OptionText from "../OptionUI/OptionText";
+import { toast } from "sonner";
 
 function RemoveFromQueue() {
   const b = useTranslations("block");
+  const toa = useTranslations("Toast");
   const { song } = useInfoTrackContext();
   const removeFromQueue = useRepeatAndCurrentPlayList(
     (state: removeFromQueueAction) => state.removeFromQueue,
@@ -31,6 +33,7 @@ function RemoveFromQueue() {
 
   function removeFromQueueFn() {
     removeFromQueue(id);
+    toast.success(toa("removeFromQueueAction"));
   }
   return (
     <OptionItem>

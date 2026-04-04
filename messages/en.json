@@ -71,7 +71,37 @@
       "album": "Album"
     }
   },
-
+  "Toast": {
+    "loading": "Processing… Please wait.",
+    "like": {
+      "addLikeSuccess": "Song added to your likes.",
+      "addLikeError": "Couldn't like the song. Please try again.",
+      "removeLikeSuccess": "Song removed from your likes.",
+      "removeLikeError": "Couldn't remove like. Please try again."
+    },
+    "share": {
+      "shareCopy": "The share link is successfully copied"
+    },
+    "playlistAction": {
+      "playlistCreate": "The playlist is successfully created",
+      "playlistEdit": "The playlist is successfully edited"
+    },
+    "removeFromLib": {
+      "removeFromLibSuccess": "Removed from your library successfully"
+    },
+    "addToLib": {
+      "addToLibSuccess": "Added to your library successfully"
+    },
+    "addSongToPlaylist": {
+      "addSongToPlaylistSuccess": "The song is added to the playlist successfully"
+    },
+    "removeSongFromPlaylist": {
+      "removeSongFromPlaylistSuccess": "The song is removed from the playlist successfully"
+    },
+    "removeFromQueueAction": "Removed from the queue successfully",
+    "addToQueueAction": "Added to the queue successfully",
+    "addToPlayNextAction": "‌Added as play next to the queue successfully"
+  },
   "ModalBox": {
     "addSongToPlaylist": {
       "title": " Add Songs to the Playlist"

@@ -2,7 +2,7 @@ import IconWrapper from "@/ui/general/IconWrapper";
 import { BookmarkPlus } from "lucide-react";
 
 import { addToLibrary } from "@/actions/AddToLibrary";
-import { useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { useSongListContext } from "@/Context/ContextSongListContainer";
 import OptionItem from "../OptionUI/OptionItem";
@@ -13,10 +13,12 @@ import { useOriginParentTriggerContext } from "@/Context/ContextOriginParentTrig
 import { useUserInfoContext } from "@/Context/ContextUserInfo";
 import { SignInModalBoxAction, useSignInModalBox } from "@/lib/zustand";
 import { guardToSignIn } from "@/lib/guardToSignIn";
+import { toast } from "sonner";
 
 function AddToLibraryChild() {
   const { id, type } = useSongListContext();
   const b = useTranslations("block");
+  const toa = useTranslations("Toast");
   const { originParentTriggerRef } = useOriginParentTriggerContext();
   const { userInfo } = useUserInfoContext();
   const signInModalBoxAction = useSignInModalBox(
@@ -24,25 +26,47 @@ function AddToLibraryChild() {
   );
   const queryClient = useQueryClient();
   async function addToLibraryFn() {
+    const { data, error } = await addToLibrary(id, type);
+    if (!data || error) {
+      const err = new Error("action-failed");
+      err.name = "custom_error";
+      throw err;
+    }
+    return data;
+  }
+  const mutation = useMutation({
+    mutationFn: addToLibraryFn,
+    onMutate: () => {
+      // This runs BEFORE mutationFn
+      const toastId = toast.loading(toa("loading")); // trigger loading toast
+      return { toastId }; // pass to onSuccess / onError
+    },
+    onSuccess: (data, _, context) => {
+      queryClient.setQueryData(["user-library"], {
+        data,
+        error: null,
+      });
+
+      if (!context.toastId) return;
+      toast.success(toa("addToLib.addToLibSuccess"), {
+        id: context.toastId,
+      });
+    },
+    onError: (_, __, context) => {
+      if (!context?.toastId) return;
+      toast.error(toa("error"), { id: context.toastId });
+    },
+  });
+  function handleAdd() {
     if (!userInfo) {
       return guardToSignIn({ originParentTriggerRef }, signInModalBoxAction);
     }
-
-    const { data, error } = await addToLibrary(id, type);
-    if (error) {
-      console.log(error);
-    } else {
-      if (data) {
-        queryClient.setQueryData(["user-library"], {
-          data,
-          error: null,
-        });
-      }
-    }
+    mutation.mutate();
   }
+
   return (
     <OptionItem>
-      <OptionButton action={addToLibraryFn}>
+      <OptionButton action={handleAdd}>
         <OptionIconEl>
           <IconWrapper size="small" Icon={BookmarkPlus} />
         </OptionIconEl>

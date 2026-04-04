@@ -18,8 +18,10 @@ import OptionIconEl from "../OptionUI/OptionIconEl";
 import IconWrapper from "@/ui/general/IconWrapper";
 import { ListEnd } from "lucide-react";
 import OptionText from "../OptionUI/OptionText";
+import { toast } from "sonner";
 function AddSonglistToQueue() {
   const b = useTranslations("block");
+  const toa = useTranslations("Toast");
   const list = useSongListContext();
   const { inPage } = list;
 
@@ -32,18 +34,30 @@ function AddSonglistToQueue() {
   ) as SongDetail;
   if (!songId) return null;
   async function addSongListToQueue() {
+    const toastId = toast.loading(toa("loading"));
     if (inPage) {
       const { songs } = list as SongListPageValue;
-      if (!songs || songs.idArray.length === 0) return;
+      if (!songs || songs.idArray.length === 0) {
+        toast.dismiss(toastId);
+        return;
+      }
       currentAddToQueue(songs, songs.idArray);
+      toast.success(toa("addToQueueAction"), { id: toastId });
     } else {
       const { id, type } = list as SongListValue;
       const { data, error } = await getSongListClient(id, type);
-      if (data && !error) {
-        const { songs } = data;
-        if (!songs || songs.idArray.length === 0) return;
-        currentAddToQueue(songs, songs.idArray);
+      if (!data || error) {
+        toast.error(toa("error"), { id: toastId });
+        return;
       }
+
+      const { songs } = data;
+      if (!songs || songs.idArray.length === 0) {
+        toast.dismiss(toastId);
+        return;
+      }
+      currentAddToQueue(songs, songs.idArray);
+      toast.success(toa("addToQueueAction"), { id: toastId });
     }
   }
   return (

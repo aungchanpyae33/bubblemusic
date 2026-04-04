@@ -5,7 +5,14 @@ import { useTranslations } from "next-intl";
 import TitleInput from "@/ui/PlaylistForm/TitleInput";
 import CheckTypeBase from "@/ui/PlaylistForm/CheckType/CheckTypeBase";
 import SubmitButton from "@/ui/PlaylistForm/SubmitButton";
-
+import { toast } from "sonner";
+import { closeModalBox } from "@/lib/closeModalBox";
+import {
+  createToPlaylistModalBox,
+  createToPlaylistModalBoxAction,
+  createToPlaylistModalBoxProps,
+  useCreateToPlaylist,
+} from "@/lib/zustand";
 export interface FormDataTypeCreate {
   name: string;
   checkType: "public" | "private";
@@ -17,7 +24,14 @@ const defaultValue: FormDataTypeCreate = {
 };
 function PlaylistCreateForm() {
   const b = useTranslations("block");
-  const e = useTranslations("ErrorMsg");
+  const toa = useTranslations("Toast");
+  const { originParentTriggerRef } = useCreateToPlaylist(
+    (state: createToPlaylistModalBox) => state.createToPlaylistModalBox,
+  ) as createToPlaylistModalBoxProps;
+  const createToPlaylistModalBoxAction = useCreateToPlaylist(
+    (state: createToPlaylistModalBoxAction) =>
+      state.createToPlaylistModalBoxAction,
+  );
   const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: async (data: FormDataTypeCreate) => {
@@ -27,18 +41,31 @@ function PlaylistCreateForm() {
           checkType: data.checkType,
         });
       if (!data || playlistError) {
-        const err = new Error(e("wentWrong"));
+        const err = new Error("action-failed");
         err.name = "custom_error";
         throw err;
       }
 
       return { data: playlistData, error: playlistError };
     },
-    onSuccess: (data) => {
-      queryClient.setQueryData(["user-library"], data);
+    onMutate: () => {
+      // This runs BEFORE mutationFn
+      const toastId = toast.loading(toa("loading")); // trigger loading toast
+      return { toastId }; // pass to onSuccess / onError
     },
-    onError: (error) => {
-      // todo
+    onSuccess: (data, _, context) => {
+      queryClient.setQueryData(["user-library"], data);
+      if (!context.toastId) return;
+      toast.success(toa("playlistAction.playlistCreate"), {
+        id: context.toastId,
+      });
+    },
+    onError: (_, __, context) => {
+      if (!context?.toastId) return;
+      toast.error(toa("error"), { id: context.toastId });
+    },
+    onSettled: () => {
+      closeModalBox(createToPlaylistModalBoxAction, originParentTriggerRef);
     },
   });
   const handleAction = (data: FormDataTypeCreate) => {

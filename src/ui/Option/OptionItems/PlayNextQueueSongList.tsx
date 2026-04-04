@@ -18,9 +18,11 @@ import OptionButton from "../OptionUI/OptionButton";
 import OptionIconEl from "../OptionUI/OptionIconEl";
 import IconWrapper from "@/ui/general/IconWrapper";
 import OptionText from "../OptionUI/OptionText";
+import { toast } from "sonner";
 
 function PlayNextQueueSongList() {
   const b = useTranslations("block");
+  const toa = useTranslations("Toast");
   const list = useSongListContext();
   const { inPage } = list;
   const currentAddToNext = useRepeatAndCurrentPlayList(
@@ -31,18 +33,30 @@ function PlayNextQueueSongList() {
   ) as SongDetail;
   if (!id_scoope) return null;
   async function addToNextSonglist() {
+    const toastId = toast.loading(toa("loading"));
     if (inPage) {
       const { songs } = list as SongListPageValue;
-      if (!songs || songs.idArray.length === 0) return;
+      if (!songs || songs.idArray.length === 0) {
+        toast.dismiss(toastId);
+        return;
+      }
       currentAddToNext(songs, songs.idArray, id_scoope);
+      toast.success(toa("addToPlayNextAction"), { id: toastId });
     } else {
       const { id, type } = list as SongListValue;
       const { data, error } = await getSongListClient(id, type);
 
-      if (!data || error) return;
+      if (!data || error) {
+        toast.error(toa("error"), { id: toastId });
+        return;
+      }
       const { songs } = data;
-      if (!songs || songs.idArray.length === 0) return;
+      if (!songs || songs.idArray.length === 0) {
+        toast.dismiss(toastId);
+        return;
+      }
       currentAddToNext(songs, songs.idArray, id_scoope);
+      toast.success(toa("addToPlayNextAction"), { id: toastId });
     }
   }
   return (
