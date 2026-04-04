@@ -8,7 +8,9 @@ import {
 import SubOpenContentWrapper from "../ModalWrapper/SubOpenContentWrapper";
 import SubOpenToggle from "../ModalWrapper/SubOpenToggle";
 import PlaylistEditForm from "./PlaylistEditForm";
+import { useTranslations } from "next-intl";
 function EditPlaylistBox() {
+  const b = useTranslations("block");
   const data = useEditToPlaylist(
     (state: editToPlaylistModalBox) => state.editToPlaylistModalBox,
   );
@@ -24,6 +26,7 @@ function EditPlaylistBox() {
         selector={(state: editToPlaylistModalBoxAction) =>
           state.editToPlaylistModalBoxAction
         }
+        headerText={b("editedPlaylist")}
         useStore={useEditToPlaylist}
       >
         <PlaylistEditForm />

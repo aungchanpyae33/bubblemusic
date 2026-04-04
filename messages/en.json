@@ -53,6 +53,7 @@
     "create": "Create",
     "edit": "Edit",
     "newPlaylist": "New Playlist",
+    "editedPlaylist": "Edit the Playlist",
     "navLink": {
       "exploreDescription": "Explore",
       "likeDescription": "Like Songs",
