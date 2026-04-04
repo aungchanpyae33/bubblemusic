@@ -7,32 +7,32 @@
   As tailwind text-* has its own line-height
   */
   .text-sm {
-    line-height: 1.625rem;
+    line-height: 1.625;
   }
   .text-base {
-    line-height: 1.625rem;
+    line-height: 1.625;
   }
 
   .text-xs {
-    line-height: 1.625rem;
+    line-height: 1.625;
   }
 
   .text-lg {
-    line-height: 2rem;
+    line-height: 2;
   }
 
   .text-xl {
-    line-height: 2.2rem;
+    line-height: 2.2;
   }
   .text-2xl {
-    line-height: 2.5rem;
+    line-height: 2.5;
   }
 
   .text-3xl {
-    line-height: 3rem;
+    line-height: 3;
   }
   .text-4xl {
-    line-height: 3.5rem;
+    line-height: 3.5;
   }
 }
 
