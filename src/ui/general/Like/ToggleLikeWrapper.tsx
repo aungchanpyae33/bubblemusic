@@ -34,6 +34,7 @@ function ToggleLikeWrapper({ songId, children }: ToggleLikeWrapperProps) {
         throw err;
       } else {
         setLikeAction({ [songId]: false });
+        return "remove";
       }
     } else {
       const { error } = await addLikeAction();
@@ -43,6 +44,7 @@ function ToggleLikeWrapper({ songId, children }: ToggleLikeWrapperProps) {
         throw err;
       } else {
         setLikeAction({ [songId]: true });
+        return "add";
       }
     }
   }
@@ -55,11 +57,17 @@ function ToggleLikeWrapper({ songId, children }: ToggleLikeWrapperProps) {
       const toastId = toast.loading(toa("loading")); // trigger loading toast
       return { toastId }; // pass to onSuccess / onError
     },
-    onSuccess: (_, __, context) => {
+    onSuccess: (data, __, context) => {
       if (!context.toastId) return;
-      toast.success(toa("like.removeLikeSuccess"), {
-        id: context.toastId,
-      });
+
+      toast.success(
+        toa(
+          data === "remove" ? "like.removeLikeSuccess" : "like.addLikeSuccess",
+        ),
+        {
+          id: context.toastId,
+        },
+      );
     },
     onError: (_, __, context) => {
       if (!context?.toastId) return;
