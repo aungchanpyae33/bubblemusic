@@ -14,7 +14,22 @@ import { useUserInfoContext } from "@/Context/ContextUserInfo";
 import { SignInModalBoxAction, useSignInModalBox } from "@/lib/zustand";
 import { guardToSignIn } from "@/lib/guardToSignIn";
 import { toast } from "sonner";
-
+import type { MediaItemType } from "../../../../database.types-fest";
+async function addToLibraryFn({
+  id,
+  type,
+}: {
+  id: string;
+  type: MediaItemType;
+}) {
+  const { data, error } = await addToLibrary(id, type);
+  if (!data || error) {
+    const err = new Error("action-failed");
+    err.name = "custom_error";
+    throw err;
+  }
+  return data;
+}
 function AddToLibraryChild() {
   const { id, type } = useSongListContext();
   const b = useTranslations("block");
@@ -25,15 +40,7 @@ function AddToLibraryChild() {
     (state: SignInModalBoxAction) => state.signInModalBoxAction,
   );
   const queryClient = useQueryClient();
-  async function addToLibraryFn() {
-    const { data, error } = await addToLibrary(id, type);
-    if (!data || error) {
-      const err = new Error("action-failed");
-      err.name = "custom_error";
-      throw err;
-    }
-    return data;
-  }
+
   const mutation = useMutation({
     mutationFn: addToLibraryFn,
     onMutate: () => {
@@ -61,7 +68,7 @@ function AddToLibraryChild() {
     if (!userInfo) {
       return guardToSignIn({ originParentTriggerRef }, signInModalBoxAction);
     }
-    mutation.mutate();
+    mutation.mutate({ id, type });
   }
 
   return (

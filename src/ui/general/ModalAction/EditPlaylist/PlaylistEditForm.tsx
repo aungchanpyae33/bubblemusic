@@ -20,6 +20,21 @@ export interface FormDataTypeEdit {
   checkType: "public" | "private";
 }
 
+async function editPlaylistActionFn(data: FormDataTypeEdit) {
+  const { data: playlistData, error: playlistError } = await editPlaylist({
+    playlistId: data.id,
+    playlistName: data.name,
+    checkType: data.checkType,
+  });
+  if (!data || playlistError) {
+    const err = new Error("action-failed");
+    err.name = "custom_error";
+    throw err;
+  }
+
+  return { data: playlistData, error: playlistError };
+}
+
 function PlaylistEditForm() {
   const b = useTranslations("block");
   const toa = useTranslations("Toast");
@@ -38,20 +53,7 @@ function PlaylistEditForm() {
   };
 
   const mutation = useMutation({
-    mutationFn: async (data: FormDataTypeEdit) => {
-      const { data: playlistData, error: playlistError } = await editPlaylist({
-        playlistId: data.id,
-        playlistName: data.name,
-        checkType: data.checkType,
-      });
-      if (!data || playlistError) {
-        const err = new Error("action-failed");
-        err.name = "custom_error";
-        throw err;
-      }
-
-      return { data: playlistData, error: playlistError };
-    },
+    mutationFn: editPlaylistActionFn,
     onMutate: () => {
       // This runs BEFORE mutationFn
       const toastId = toast.loading(toa("loading")); // trigger loading toast

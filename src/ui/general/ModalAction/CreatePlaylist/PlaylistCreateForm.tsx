@@ -22,6 +22,21 @@ const defaultValue: FormDataTypeCreate = {
   name: "",
   checkType: "public",
 };
+
+async function insertDataActionFn(data: FormDataTypeCreate) {
+  const { data: playlistData, error: playlistError } = await insertDataAction({
+    playlist_name: data.name,
+    checkType: data.checkType,
+  });
+  if (!data || playlistError) {
+    const err = new Error("action-failed");
+    err.name = "custom_error";
+    throw err;
+  }
+
+  return { data: playlistData, error: playlistError };
+}
+
 function PlaylistCreateForm() {
   const b = useTranslations("block");
   const toa = useTranslations("Toast");
@@ -34,20 +49,7 @@ function PlaylistCreateForm() {
   );
   const queryClient = useQueryClient();
   const mutation = useMutation({
-    mutationFn: async (data: FormDataTypeCreate) => {
-      const { data: playlistData, error: playlistError } =
-        await insertDataAction({
-          playlist_name: data.name,
-          checkType: data.checkType,
-        });
-      if (!data || playlistError) {
-        const err = new Error("action-failed");
-        err.name = "custom_error";
-        throw err;
-      }
-
-      return { data: playlistData, error: playlistError };
-    },
+    mutationFn: insertDataActionFn,
     onMutate: () => {
       // This runs BEFORE mutationFn
       const toastId = toast.loading(toa("loading")); // trigger loading toast

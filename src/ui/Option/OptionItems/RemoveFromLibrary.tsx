@@ -11,7 +11,26 @@ import OptionButton from "../OptionUI/OptionButton";
 import OptionIconEl from "../OptionUI/OptionIconEl";
 import OptionText from "../OptionUI/OptionText";
 import { toast } from "sonner";
+import type { MediaItemSource } from "../../../../database.types-fest";
+async function removeFromLibraryFn({
+  id,
+  source,
+}: {
+  id: string;
+  source: MediaItemSource;
+}) {
+  const { data, error } = await removeFromLibrary(
+    id,
+    source as "create" | "reference",
+  );
 
+  if (!data || error) {
+    const err = new Error("action-failed");
+    err.name = "custom_error";
+    throw err;
+  }
+  return data;
+}
 function RemoveFromLibraryChild() {
   const b = useTranslations("block");
   const toa = useTranslations("Toast");
@@ -19,19 +38,6 @@ function RemoveFromLibraryChild() {
   const { id, source } = useSongListContext();
   const queryClient = useQueryClient();
 
-  async function removeFromLibraryFn() {
-    const { data, error } = await removeFromLibrary(
-      id,
-      source as "create" | "reference",
-    );
-
-    if (!data || error) {
-      const err = new Error("action-failed");
-      err.name = "custom_error";
-      throw err;
-    }
-    return data;
-  }
   const mutation = useMutation({
     mutationFn: removeFromLibraryFn,
     onMutate: () => {
@@ -85,7 +91,7 @@ function RemoveFromLibraryChild() {
     },
   });
   function handleRemove() {
-    mutation.mutate();
+    mutation.mutate({ id, source });
   }
   return (
     <OptionItem>

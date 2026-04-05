@@ -40,7 +40,20 @@ function isAdd(source: MediaItemSource) {
     return true;
   }
 }
+async function ActionToLibraryFn({
+  id,
+  type,
+  source,
+}: ListContainerAddToLibraryProps) {
+  const { data, error } = await modifyLib({ id, type, source });
 
+  if (!data || error) {
+    const err = new Error("action-failed");
+    err.name = "custom_error";
+    throw err;
+  }
+  return data;
+}
 function ListContainerAddToLibrary() {
   const { id, type, source } = useSongListContext();
   const router = useRouter();
@@ -55,17 +68,6 @@ function ListContainerAddToLibrary() {
   useEffect(() => {
     setItemSource(isAdd(source));
   }, [source]);
-
-  async function ActionToLibraryFn() {
-    const { data, error } = await modifyLib({ id, type, source });
-
-    if (!data || error) {
-      const err = new Error("action-failed");
-      err.name = "custom_error";
-      throw err;
-    }
-    return data;
-  }
 
   const mutation = useMutation({
     mutationFn: ActionToLibraryFn,
@@ -136,7 +138,11 @@ function ListContainerAddToLibrary() {
       return guardToSignIn({}, signInModalBoxAction);
     }
     setItemSource(itemSource);
-    mutation.mutate();
+    mutation.mutate({
+      id,
+      type,
+      source,
+    });
   }
   return (
     <button onClick={handleAddToLib}>
