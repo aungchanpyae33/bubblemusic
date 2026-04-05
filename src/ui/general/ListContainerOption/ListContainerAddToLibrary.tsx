@@ -111,9 +111,16 @@ function ListContainerAddToLibrary() {
         router.push("/");
       }
       if (!context.toastId) return;
-      toast.success(toa("removeFromLib.removeFromLibSuccess"), {
-        id: context.toastId,
-      });
+      toast.success(
+        toa(
+          itemSource
+            ? "addToLib.addToLibSuccess"
+            : "removeFromLib.removeFromLibSuccess",
+        ),
+        {
+          id: context.toastId,
+        },
+      );
     },
     onError: (_, __, context) => {
       if (!context?.toastId) return;
