@@ -12,12 +12,14 @@ import {
   GetRecentReturn,
   GetSearchPageReturn,
   GetSpecificCategoryPageReturn,
+  GetUnAuthRootPageReturn,
   LibrarySongListSectionPageReturn,
   ListSongsReturn,
   UserLibReturn,
   UserPageReturn,
 } from "./data-types-return";
-import { LibSonglistRoute } from "@/app/(root)/library/(library)/[params]/page";
+import { checkUserExist } from "@/lib/checkUserExist";
+import { LibSonglistRoute } from "@/lib/libRoute";
 export interface Movie {
   id: number;
   name: string;
@@ -167,17 +169,50 @@ export const getMoodPage = async (
   }
 };
 
-export const get = async (): Promise<GetAllMediaItemsReturn> => {
+export const getPersonalized = async () => {
   try {
     const supabase = await createClient();
-    const { data, error } = await supabase.rpc("get_all_media_items");
+    await checkUserExist(supabase);
+    const { data, error } = await supabase.rpc("get_personalized_media_items");
+    console.log(data, error);
     if (error) throw error;
     if (!data) throw new Error("not found");
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getDiscover = async () => {
+  try {
+    const supabase = await createClient();
+    const { data, error } = await supabase.rpc("get_discover_media_items");
+    console.log(data);
+    if (error) throw error;
+    if (!data) throw new Error("not found");
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+export const get = async (): Promise<GetAllMediaItemsReturn> => {
+  try {
+    const [discover, personalized] = await Promise.all([
+      getDiscover(),
+      getPersonalized(),
+    ]);
+    if (!discover || !personalized) throw new Error("not found");
+
+    const data = {
+      ...discover,
+      ...personalized,
+    };
 
     const mapItem = {
       recentlyPlayed: normalizeById(data.recentlyPlayed),
       trendingSongs: normalizeById(data.trendingSongs),
       topMix: normalizeById(data.topMix),
+      trendingSongsWeek: normalizeById(data.trendingSongsWeek),
       topPlaylistWeek: normalizeById(data.topPlaylistWeek),
       topAlbumWeek: normalizeById(data.topAlbumWeek),
       topArtistWeek: normalizeById(data.topArtistWeek),
@@ -186,7 +221,26 @@ export const get = async (): Promise<GetAllMediaItemsReturn> => {
       playlistForYou: normalizeById(data.playlistForYou),
     };
 
-    return { data: mapItem, error };
+    return { data: mapItem, error: null };
+  } catch (error) {
+    return { data: null, error };
+  }
+};
+
+export const getUnAuthRoot = async (): Promise<GetUnAuthRootPageReturn> => {
+  try {
+    const discover = await getDiscover();
+    if (!discover) throw new Error("not found");
+
+    const mapItem = {
+      trendingSongs: normalizeById(discover.trendingSongs),
+      topMix: normalizeById(discover.topMix),
+      trendingSongsWeek: normalizeById(discover.trendingSongsWeek),
+      topPlaylistWeek: normalizeById(discover.topPlaylistWeek),
+      topAlbumWeek: normalizeById(discover.topAlbumWeek),
+      topArtistWeek: normalizeById(discover.topArtistWeek),
+    };
+    return { data: mapItem, error: null };
   } catch (error) {
     return { data: null, error };
   }

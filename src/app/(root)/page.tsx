@@ -1,13 +1,18 @@
-import { get } from "@/database/data";
+import { get, getUnAuthRoot } from "@/database/data";
 import TapNavi from "@/ui/TapNavi/TapNavi";
-import type { GetRecent } from "@/database/data-types-return";
+import type {
+  GetAllMediaItemsReturn,
+  GetRecent,
+} from "@/database/data-types-return";
 import ListUpFaceGroup from "@/ui/ListUpFaceContainer/ListUpFaceGroup";
 import ListItemUpFaceGroup from "@/ui/general/ListItemUpFaceGroup/ListItemUpFaceGroup";
 import ListItemUpFaceContainer from "@/ui/general/ListItemUpFaceGroup/ListItemUpFaceContainer";
 import RecentlyListContainer from "@/ui/ListUpFaceContainer/RecentlyListContainer";
-
+import { userFetch } from "@/lib/UserInfoFetch";
 async function page() {
-  const { data, error } = await get();
+  const user = await userFetch();
+
+  const { data, error } = user ? await get() : await getUnAuthRoot();
   if (!data || error) throw new Error("page-load-error");
   return (
     <div className="space-y-3">
@@ -15,14 +20,16 @@ async function page() {
       {(Object.keys(data) as (keyof typeof data)[]).map((itemKey) => {
         if (!data[itemKey]) return;
         if (data[itemKey] && data[itemKey].idArray.length === 0) return;
-        if (itemKey === "trendingSongs") {
+        if (itemKey === "trendingSongs" || itemKey === "trendingSongsWeek") {
           return (
             <ListItemUpFaceGroup description={itemKey} key={itemKey}>
               <ListItemUpFaceContainer songs={data[itemKey]} />
             </ListItemUpFaceGroup>
           );
         }
-        if (itemKey === "recentlyPlayed") {
+        if (
+          (itemKey as keyof GetAllMediaItemsReturn["data"]) === "recentlyPlayed"
+        ) {
           return (
             <RecentlyListContainer
               showMore={true}

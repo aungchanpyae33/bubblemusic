@@ -48,17 +48,23 @@ export interface SongInfo {
   cover_url: string;
 }
 
-export type AllMediaItems = {
-  recentlyPlayed: listInfo[];
+export type DiscoverMediaItems = {
   trendingSongs: SongInfo[];
+  trendingSongsWeek: SongInfo[];
   topMix: listInfo[];
   topPlaylistWeek: listInfo[];
   topAlbumWeek: listInfo[];
   topArtistWeek: listInfo[];
+};
+
+export type PersonalizedMediaItems = {
+  recentlyPlayed: listInfo[];
   artistForYou: listInfo[];
   albumForYou: listInfo[];
   playlistForYou: listInfo[];
 };
+
+export type AllMediaItems = DiscoverMediaItems & PersonalizedMediaItems;
 
 export type NewlyItems = {
   newlyAddedSongs: SongInfo[];
@@ -141,6 +147,14 @@ export type Database = MergeDeep<
         get_all_media_items: {
           Args: Record<string, never>; // Means 'never' or empty args
           Returns: AllMediaItems; // Overwrite 'Json' with our strict type
+        };
+        get_discover_media_items: {
+          Args: Record<string, never>;
+          Returns: DiscoverMediaItems;
+        };
+        get_personalized_media_items: {
+          Args: Record<string, never>;
+          Returns: PersonalizedMediaItems;
         };
         get_newly: {
           Args: Record<string, never>;

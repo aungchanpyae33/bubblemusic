@@ -13,7 +13,10 @@ async function ListUpFaceGroup({
   showMore,
   href,
 }: {
-  list: GetAllMediaItems[Exclude<keyof GetAllMediaItems, "trendingSongs">];
+  list: GetAllMediaItems[Exclude<
+    keyof GetAllMediaItems,
+    "trendingSongs" | "trendingSongsWeek"
+  >];
   description: string;
   insertDescription?: Record<string, string>;
   showMore?: boolean;

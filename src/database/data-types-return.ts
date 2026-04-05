@@ -2,6 +2,7 @@ import type { PostgrestError } from "@supabase/supabase-js";
 import type {
   AllMediaItems,
   CategorySection,
+  DiscoverMediaItems,
   LibraryOverview,
   listInfo,
   listSongsSection,
@@ -35,16 +36,33 @@ export interface GetLikedIdReturn {
 export type GetAllMediaItems = {
   [K in Exclude<
     keyof AllMediaItems,
-    "trendingSongs"
+    "trendingSongs" | "trendingSongsWeek"
   >]: NormalizedById<listInfo> | null;
 } & {
   trendingSongs: NormalizedById<SongInfo> | null;
+  trendingSongsWeek: NormalizedById<SongInfo> | null;
+};
+
+export type GetUnAuthRootPage = {
+  [K in Exclude<
+    keyof DiscoverMediaItems,
+    "trendingSongs" | "trendingSongsWeek"
+  >]: NormalizedById<listInfo> | null;
+} & {
+  trendingSongs: NormalizedById<SongInfo> | null;
+  trendingSongsWeek: NormalizedById<SongInfo> | null;
 };
 
 export interface GetAllMediaItemsReturn {
   data: GetAllMediaItems | null;
   error: ErrorResponse["error"];
 }
+
+export interface GetUnAuthRootPageReturn {
+  data: GetUnAuthRootPage | null;
+  error: ErrorResponse["error"];
+}
+
 export type GetRecent = NormalizedById<listInfo>;
 export interface GetRecentReturn {
   data: GetRecent | null;
