@@ -1,7 +1,7 @@
-import { SUPPORTED_ROUTE } from "@/app/(root)/library/(library)/[params]/page";
 import { getTranslations } from "next-intl/server";
 import NoThankYouPreFetchLink from "../general/NoThankYouPreFetchLink";
 import CurrentLibSectionHighlight from "./CurrentLibSectionHighlight";
+import { SUPPORTED_ROUTE } from "@/lib/libRoute";
 
 async function LibNavLink() {
   const l = await getTranslations("ListTitle");

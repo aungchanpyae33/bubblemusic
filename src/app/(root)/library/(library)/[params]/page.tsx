@@ -1,3 +1,4 @@
+import { LibRoute, SUPPORTED_ROUTE } from "@/lib/libRoute";
 import { userFetch } from "@/lib/UserInfoFetch";
 import LikeSongSection from "@/ui/LibraryPage/LibPagesUI/LikeSongSection";
 import ListSongsUpFaceSection from "@/ui/LibraryPage/LibPagesUI/ListSongsUpFaceSection";
@@ -14,21 +15,6 @@ const routeMap: Record<LibRoute, React.ReactNode> = {
   recently: <ListSongsUpFaceSection route="recently" />,
 };
 
-export const LIB_SONGLIST_ROUTE = [
-  "playlist",
-  "create-playlist",
-  "artist",
-  "album",
-  "recently",
-] as const;
-
-export const SUPPORTED_ROUTE = [
-  "overview",
-  "liked-songs",
-  ...LIB_SONGLIST_ROUTE,
-] as const;
-export type LibRoute = (typeof SUPPORTED_ROUTE)[number];
-export type LibSonglistRoute = (typeof LIB_SONGLIST_ROUTE)[number];
 async function page(props: { params: Promise<{ params: string }> }) {
   const user = await userFetch();
   if (!user) {

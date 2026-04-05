@@ -1,8 +1,8 @@
 import { getLibSectionList } from "@/database/data";
-import { LibSonglistRoute } from "@/app/(root)/library/(library)/[params]/page";
 import { getTranslations } from "next-intl/server";
 import ListSongsUpFaceContent from "./ListSongsUpFaceContent";
 import EmptyGeneral from "@/ui/general/NoExist/EmptyGeneral";
+import { LibSonglistRoute } from "@/lib/libRoute";
 
 async function ListSongsUpFaceSection({ route }: { route: LibSonglistRoute }) {
   const [l, libData] = await Promise.all([
