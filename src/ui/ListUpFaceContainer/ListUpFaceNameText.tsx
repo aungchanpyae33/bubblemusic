@@ -5,7 +5,9 @@ import UnderLineLinkHover from "../general/UnderLineLinkHover";
 function ListUpFaceNameText() {
   const { type, id, name } = useSongListContext();
   return (
-    <UnderLineLinkHover href={`/${type}/${id}`}>{name}</UnderLineLinkHover>
+    <UnderLineLinkHover className="block mt-2" href={`/${type}/${id}`}>
+      {name}
+    </UnderLineLinkHover>
   );
 }
 
