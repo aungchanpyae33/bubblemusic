@@ -15,6 +15,7 @@ import { useQuery } from "@tanstack/react-query";
 import { closeModalBox } from "@/lib/closeModalBox";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
+import Button from "@/components/button/Button";
 
 function AddSongItem({
   playlistSongs,
@@ -25,6 +26,7 @@ function AddSongItem({
   };
 }) {
   const toa = useTranslations("Toast");
+  const l = useTranslations("ListTitle");
   const playlistId = playlistSongs.id;
   const setIsSongExistModalBox = useIsExistSongsModalBox(
     (state: songExistActionModalBox) => state.setIsSongExistModalBox,
@@ -78,9 +80,15 @@ function AddSongItem({
   }
   return (
     <div className=" p-1">
-      <button className=" block max-w-full truncate" onClick={handleAdd}>
-        {playlistSongs.name}
-      </button>
+      <Button
+        className="w-full  flex items-center p-2 gap-3 rounded-md max-w-full"
+        onClick={handleAdd}
+      >
+        <div className=" p-2 border border-borderFull rounded-md">
+          {l("playlist")}
+        </div>
+        <div className=" text-start flex-1">{playlistSongs.name}</div>
+      </Button>
     </div>
   );
 }
