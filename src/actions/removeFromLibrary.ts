@@ -1,6 +1,7 @@
 "use server";
 import type { UserLibReturn } from "@/database/data-types-return";
 import { createClient } from "@/database/server";
+import { checkUserExist } from "@/lib/checkUserExist";
 import { normalizeById } from "@/lib/returnById";
 
 export const removeFromLibrary = async (
@@ -9,6 +10,7 @@ export const removeFromLibrary = async (
 ): Promise<UserLibReturn> => {
   try {
     const supabase = await createClient();
+    await checkUserExist(supabase);
     if (source === "create") {
       const { data, error } = await supabase.rpc("delete_user_playlist_item", {
         p_item_id: id,

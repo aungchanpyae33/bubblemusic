@@ -2,8 +2,10 @@
 // this is test preview like select songs and insert to list
 // it is not currently implemented and it will still preview logic
 import { createClient } from "@/database/server";
+import { checkUserExist } from "@/lib/checkUserExist";
 export const insertDataActionWithSongs = async (queryData: FormData) => {
   const supabase = await createClient();
+  await checkUserExist(supabase);
   const playlistname = queryData.get("playlistname");
   if (!playlistname || typeof playlistname !== "string") {
     return { data: null, error: "Invalid playlist name" };

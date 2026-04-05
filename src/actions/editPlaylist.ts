@@ -1,6 +1,7 @@
 "use server";
 
 import { createClient } from "@/database/server";
+import { checkUserExist } from "@/lib/checkUserExist";
 import { normalizeById } from "@/lib/returnById";
 import { FormDataTypeEdit } from "@/ui/general/ModalAction/EditPlaylist/PlaylistEditForm";
 
@@ -15,6 +16,7 @@ export const editPlaylist = async ({
 }) => {
   try {
     const supabase = await createClient();
+    await checkUserExist(supabase);
     const p_is_public = checkType === "public" ? true : false;
     const { data, error } = await supabase.rpc("edit_playlist", {
       p_playlist_id: playlistId,

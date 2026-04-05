@@ -1,6 +1,7 @@
 "use server";
 import type { ListSongsReturn } from "@/database/data-types-return";
 import { createClient } from "@/database/server";
+import { checkUserExist } from "@/lib/checkUserExist";
 import { normalizeById } from "@/lib/returnById";
 
 export const removeSongsFromPlaylist = async ({
@@ -12,6 +13,7 @@ export const removeSongsFromPlaylist = async ({
 }): Promise<ListSongsReturn> => {
   try {
     const supabase = await createClient();
+    await checkUserExist(supabase);
     const { data, error } = await supabase.rpc("delete_playlist_song", {
       p_id: playlistId,
       target_id: id,

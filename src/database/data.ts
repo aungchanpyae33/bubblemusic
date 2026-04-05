@@ -1,5 +1,5 @@
 import { createClient } from "./server";
-
+export type Supabase = Awaited<ReturnType<typeof createClient>>;
 import { normalizeById, normalizeByIdOnly } from "@/lib/returnById";
 import type { MediaItemType } from "../../database.types-fest";
 import {
@@ -31,6 +31,7 @@ export interface MovieRe {
 export const getLikedId = async (): Promise<GetLikedIdReturn> => {
   try {
     const supabase = await createClient();
+    await checkUserExist(supabase);
     const { data, error } = await supabase.rpc("getlikedid");
     if (error) throw error;
     if (!data) throw new Error("not found");
@@ -90,6 +91,7 @@ export const getLibraryOverview =
   async (): Promise<GetLibraryOverviewReturn> => {
     try {
       const supabase = await createClient();
+      await checkUserExist(supabase);
       const { data, error } = await supabase.rpc("get_library_overview");
       if (error) throw error;
       if (!data) throw new Error("not found");
@@ -113,6 +115,7 @@ export const getLikeSongs = async (
 ): Promise<ListSongsReturn> => {
   try {
     const supabase = await createClient();
+    await checkUserExist(supabase);
     const { data, error } = await supabase.rpc("get_last_liked_songs", {
       like_title,
     });
@@ -249,7 +252,7 @@ export const getUnAuthRoot = async (): Promise<GetUnAuthRootPageReturn> => {
 export const getRecent = async (): Promise<GetRecentReturn> => {
   try {
     const supabase = await createClient();
-
+    await checkUserExist(supabase);
     const { data, error } = await supabase.rpc("get_recent_list");
     if (error) throw error;
     if (!data) throw new Error("not found");
@@ -263,6 +266,7 @@ export const getRecent = async (): Promise<GetRecentReturn> => {
 export const getUserLib = async (): Promise<UserLibReturn> => {
   try {
     const supabase = await createClient();
+    await checkUserExist(supabase);
     const { data, error } = await supabase.rpc("get_user_library");
     if (error) throw error;
     if (!data) throw new Error("not found");
@@ -410,6 +414,7 @@ export const getUserPage = async (userId: string): Promise<UserPageReturn> => {
 const fetchSongListByType = async (id: string, type: MediaItemType) => {
   try {
     const supabase = await createClient();
+    await checkUserExist(supabase);
     if (type === "playlist") {
       return await supabase.rpc("get_playlist_songs_queue", {
         p_id: id,
@@ -433,6 +438,7 @@ const fetchSongListByType = async (id: string, type: MediaItemType) => {
 const fetchLibrarySectionByRoute = async (route: LibSonglistRoute) => {
   try {
     const supabase = await createClient();
+    await checkUserExist(supabase);
     if (route === "album") {
       return await supabase.rpc("get_last_saved_albums");
     }
@@ -510,6 +516,7 @@ export const getSongList = async (
 const fetchListDirectByType = async (id: string, type: MediaItemType) => {
   try {
     const supabase = await createClient();
+    await checkUserExist(supabase);
     if (type === "playlist") {
       return await supabase.rpc("get_playlist_direct", {
         p_id: id,
@@ -554,6 +561,7 @@ export const checkSongsBeforeAdd = async (
 ) => {
   try {
     const supabase = await createClient();
+    await checkUserExist(supabase);
     const { data, error } = await supabase
       .from("playlist_songs")
       .select("id")
@@ -575,6 +583,7 @@ export const getSimilarSongQueue = async (
 ): Promise<FetchSongsReturn> => {
   try {
     const supabase = await createClient();
+    await checkUserExist(supabase);
     const { data, error } = await supabase.rpc("get_similar_songs", {
       input_song_id: id,
       similarity_threshold: 0.3,
@@ -594,6 +603,7 @@ export const getSimilarSongQueue = async (
 export const getLyric = async (songId: string) => {
   try {
     const supabase = await createClient();
+    await checkUserExist(supabase);
     const { data, error } = await supabase
       .from("lyric")
       .select("*")
