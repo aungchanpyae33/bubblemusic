@@ -52,7 +52,8 @@ export type DiscoverMediaItems = {
   trendingSongs: SongInfo[];
   trendingSongsWeek: SongInfo[];
   topMix: listInfo[];
-  topPlaylistWeek: listInfo[];
+  topOfficialPlaylistWeek: listInfo[];
+  topCommunityPlaylistWeek: listInfo[];
   topAlbumWeek: listInfo[];
   topArtistWeek: listInfo[];
 };

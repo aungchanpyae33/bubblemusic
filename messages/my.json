@@ -157,6 +157,8 @@
   },
   "ListTitle": {
     "topMix": "ထိပ်တန်း သီချင်းမစ်ခ်(Mix)",
+    "topOfficialPlaylistWeek": "ဒီတစ်ပတ် Bubble မှ ထိပ်တန်း သီချင်းစာရင်းများ",
+    "topCommunityPlaylistWeek": "ဒီတစ်ပတ် ကွန်မြူနတီ မှ ထိပ်တန်း သီချင်းစာရင်းများ",
     "topPlaylistWeek": "ဒီတစ်ပတ် ထိပ်တန်း သီချင်းစာရင်းများ",
     "topAlbumWeek": "ဒီတစ်ပတ် ထိပ်တန်း အယ်လ်ဘမ်များ",
     "topArtistWeek": "ဒီတစ်ပတ် ထိပ်တန်း အဆိုတော်များ",

@@ -216,7 +216,8 @@ export const get = async (): Promise<GetAllMediaItemsReturn> => {
       trendingSongs: normalizeById(data.trendingSongs),
       topMix: normalizeById(data.topMix),
       trendingSongsWeek: normalizeById(data.trendingSongsWeek),
-      topPlaylistWeek: normalizeById(data.topPlaylistWeek),
+      topOfficialPlaylistWeek: normalizeById(data.topOfficialPlaylistWeek),
+      topCommunityPlaylistWeek: normalizeById(data.topCommunityPlaylistWeek),
       topAlbumWeek: normalizeById(data.topAlbumWeek),
       topArtistWeek: normalizeById(data.topArtistWeek),
       artistForYou: normalizeById(data.artistForYou),
@@ -239,7 +240,10 @@ export const getUnAuthRoot = async (): Promise<GetUnAuthRootPageReturn> => {
       trendingSongs: normalizeById(discover.trendingSongs),
       topMix: normalizeById(discover.topMix),
       trendingSongsWeek: normalizeById(discover.trendingSongsWeek),
-      topPlaylistWeek: normalizeById(discover.topPlaylistWeek),
+      topOfficialPlaylistWeek: normalizeById(discover.topOfficialPlaylistWeek),
+      topCommunityPlaylistWeek: normalizeById(
+        discover.topCommunityPlaylistWeek,
+      ),
       topAlbumWeek: normalizeById(discover.topAlbumWeek),
       topArtistWeek: normalizeById(discover.topArtistWeek),
     };

@@ -161,6 +161,8 @@
   },
   "ListTitle": {
     "topMix": "Top Mix",
+    "topOfficialPlaylistWeek": "Bubble's Top Playist  This Week",
+    "topCommunityPlaylistWeek": "Community's Top Playlist This Week",
     "topPlaylistWeek": "Top Playlists This Week",
     "topAlbumWeek": "Top Albums This Week",
     "topArtistWeek": "Top Artists This Week",
