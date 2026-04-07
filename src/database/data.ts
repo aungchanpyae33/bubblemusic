@@ -20,13 +20,7 @@ import {
 } from "./data-types-return";
 import { checkUserExist } from "@/lib/checkUserExist";
 import { LibSonglistRoute } from "@/lib/libRoute";
-export interface Movie {
-  id: number;
-  name: string;
-}
-export interface MovieRe {
-  title: string;
-}
+import { searchGuard } from "@/lib/searchGuard";
 
 export const getLikedId = async (): Promise<GetLikedIdReturn> => {
   try {
@@ -388,10 +382,12 @@ export const getArtistPage = async (
 
 export const getData = async (query: string) => {
   try {
+    if (searchGuard(query)) return { data: [], error: null };
     const supabase = await createClient();
     const { data, error } = await supabase.rpc("search_all", {
       query,
     });
+    if (error) throw error;
     return { data, error };
   } catch (error) {
     return { data: null, error };

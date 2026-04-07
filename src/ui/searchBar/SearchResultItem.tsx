@@ -6,15 +6,19 @@ import { memo, RefObject, useRef } from "react";
 import IconWrapper from "../general/IconWrapper";
 import { Search } from "lucide-react";
 import { useToggleContext } from "@/Context/ContextToggle";
+import type { MediaItemType } from "../../../database.types-fest";
+import { useTranslations } from "next-intl";
 interface SearchResultItemProps {
+  type: MediaItemType;
   title: string;
   show: boolean;
   inputRef: RefObject<HTMLInputElement | null>;
 }
 //[later] : reactcompiler -> stable
 const SearchResultItem = memo(
-  ({ title, show, inputRef }: SearchResultItemProps) => {
+  ({ type, title, show, inputRef }: SearchResultItemProps) => {
     const router = useRouter();
+    const l = useTranslations("ListTitle");
     const { setOpen } = useToggleContext();
     const ref = useRef<HTMLDivElement>(null);
     useScrollIntoView(show, ref);
@@ -41,6 +45,9 @@ const SearchResultItem = memo(
         </div>
 
         <div className=" flex-1 min-w-0 truncate">{title}</div>
+        <div className="w-24 text-center border text-sm border-borderFull font-medium p-1">
+          {l(type)}
+        </div>
       </div>
     );
   },

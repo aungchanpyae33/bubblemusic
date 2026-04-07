@@ -34,6 +34,11 @@ export interface Album {
   name: string;
 }
 
+export interface SearchInputItem {
+  id: string;
+  name: string;
+  type: MediaItemType;
+}
 export interface SongInfo {
   id: string;
   song_id: string;

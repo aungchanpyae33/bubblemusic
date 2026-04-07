@@ -1,13 +1,13 @@
 "use client";
 import { RefObject } from "react";
-import { Movie } from "@/database/data";
 
 import SearchResultItem from "./SearchResultItem";
 import useNaviSearch from "@/lib/CustomHooks/useNaviSearch";
 import SearchResultContainer from "./SearchResultContainer";
+import type { SearchInputItem } from "../../../database.types-fest";
 
 interface prop {
-  data: Movie[];
+  data: SearchInputItem[];
   inputRef: RefObject<HTMLInputElement | null>;
 }
 
@@ -16,8 +16,9 @@ function SearchResult({ data, inputRef }: prop) {
 
   return (
     <SearchResultContainer>
-      {data.map((item: Movie, index: number) => (
+      {data.map((item: SearchInputItem, index: number) => (
         <SearchResultItem
+          type={item.type}
           inputRef={inputRef}
           key={item.id}
           title={item.name}

@@ -9,6 +9,7 @@ import type {
   UserLibReturn,
 } from "./data-types-return";
 import type { MediaItemType } from "../../database.types-fest";
+import { searchGuard } from "@/lib/searchGuard";
 
 export const getListDirectClient = async (
   id: string,
@@ -79,7 +80,7 @@ export const getSimilarSongQueueClient = async (
   const params = new URLSearchParams({
     songId: id,
   });
-  const signal = abortController!.current!.signal;
+  const signal = abortController.current?.signal;
 
   try {
     const fetchData = await fetch(`/api/getSimilarSong?${params}`, {
@@ -90,6 +91,30 @@ export const getSimilarSongQueueClient = async (
     return { data, error };
   } catch (err) {
     return { data: null, error: err };
+  }
+};
+
+export const getSearchClient = async (
+  params: string,
+  searchAbortController: RefObject<AbortController | null>,
+) => {
+  if (searchGuard(params)) return [];
+  if (searchAbortController.current) {
+    searchAbortController.current.abort("new search initiated");
+  }
+  searchAbortController.current = new AbortController();
+  const signal = searchAbortController.current?.signal;
+  try {
+    const fetchData = await fetch(`/api/search?with=${params}`, {
+      signal,
+    });
+
+    const { data, error } = await fetchData.json();
+
+    if (error) throw new Error(error);
+    return data;
+  } catch (error) {
+    throw error;
   }
 };
 
