@@ -136,7 +136,7 @@ export const getGenresPage = async (
   try {
     const supabase = await createClient();
     const { data, error } = await supabase.rpc("get_genre_page", {
-      genre_id: genre_id,
+      p_genre_id: genre_id,
     });
     if (error) throw error;
     if (!data) throw new Error("not found");
@@ -157,7 +157,7 @@ export const getMoodPage = async (
   try {
     const supabase = await createClient();
     const { data, error } = await supabase.rpc("get_mood_page", {
-      mood_id: mood_id,
+      p_mood_id: mood_id,
     });
     if (error) throw error;
     if (!data) throw new Error("not found");
@@ -177,7 +177,6 @@ export const getPersonalized = async () => {
     const supabase = await createClient();
     await checkUserExist(supabase);
     const { data, error } = await supabase.rpc("get_personalized_media_items");
-    console.log(data, error);
     if (error) throw error;
     if (!data) throw new Error("not found");
     return data;
@@ -190,7 +189,6 @@ export const getDiscover = async () => {
   try {
     const supabase = await createClient();
     const { data, error } = await supabase.rpc("get_discover_media_items");
-    console.log(data);
     if (error) throw error;
     if (!data) throw new Error("not found");
     return data;

@@ -166,11 +166,11 @@ export type Database = MergeDeep<
           Returns: LibraryOverview;
         };
         get_genre_page: {
-          Args: { genre_id: string };
+          Args: { p_genre_id: string };
           Returns: CategorySection;
         };
         get_mood_page: {
-          Args: { mood_id: string };
+          Args: { p_mood_id: string };
           Returns: CategorySection;
         };
         get_recent_list: {
