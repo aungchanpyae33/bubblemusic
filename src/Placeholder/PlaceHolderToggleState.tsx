@@ -195,7 +195,7 @@ function PlaceHolderToggleState({
         if (setTimeoutRefForList.current) {
           setListTrack(type as "playlist" | "artist" | "album", list_id);
         }
-      }, 60000);
+      }, 40000);
     }
     addRecentList();
   }, [list_id, type, setListTrack, queryClient, flag]);
