@@ -631,7 +631,7 @@ export const fetchCheckExistByType = async (
     const supabase = await createClient();
 
     if (type === "playlist") {
-      return supabase.from("playlists").select("id").eq("id", id).maybeSingle();
+      return supabase.from("playlist").select("id").eq("id", id).maybeSingle();
     }
     if (type === "album") {
       return supabase.from("album").select("id").eq("id", id).maybeSingle();
