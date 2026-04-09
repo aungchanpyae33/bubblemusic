@@ -23,53 +23,51 @@ import { Suspense } from "react";
 import AppLoading from "@/ui/loading/AppLoading";
 import { Toaster } from "sonner";
 import DeviceCheckFetcher from "@/lib/DeviceCheck/DeviceCheckFetcher";
-export default function RootLayout({
+import LayoutLocalFetch from "@/ui/general/layout/LayoutLocalFetch";
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className="h-full bg-background text-foreground"
-      suppressHydrationWarning
-    >
-      <body
-        className={`${inter.className} overflow-hidden relative h-full flex flex-col`}
-      >
-        <Toaster
-          position="bottom-center"
-          toastOptions={{
-            duration: 2000,
-          }}
-        />
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
+    <Suspense fallback={<AppLoading />}>
+      <LayoutLocalFetch>
+        <body
+          className={`${inter.className} overflow-hidden relative h-full flex flex-col`}
         >
-          <NextTopLoader
-            color="var(--loader)"
-            initialPosition={0.08}
-            crawlSpeed={200}
-            height={3}
-            crawl={true}
-            showSpinner={false}
-            easing="ease"
-            speed={200}
-            shadow="0 0 10px var(--loader),0 0 5px var(--loader)"
-            template='<div class="bar" role="bar"><div class="peg"></div></div>' // no spinner
-            zIndex={1600}
-            showAtBottom={false}
+          <Toaster
+            position="bottom-center"
+            toastOptions={{
+              duration: 2000,
+            }}
           />
-          <Suspense fallback={<AppLoading />}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <NextTopLoader
+              color="var(--loader)"
+              initialPosition={0.08}
+              crawlSpeed={200}
+              height={3}
+              crawl={true}
+              showSpinner={false}
+              easing="ease"
+              speed={200}
+              shadow="0 0 10px var(--loader),0 0 5px var(--loader)"
+              template='<div class="bar" role="bar"><div class="peg"></div></div>' // no spinner
+              zIndex={1600}
+              showAtBottom={false}
+            />
+
             <NextIntlClientProvider>
               <DeviceCheckFetcher>{children}</DeviceCheckFetcher>
             </NextIntlClientProvider>
-          </Suspense>
-        </ThemeProvider>
-      </body>
-    </html>
+          </ThemeProvider>
+        </body>
+      </LayoutLocalFetch>
+    </Suspense>
   );
 }
