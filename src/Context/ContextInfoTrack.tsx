@@ -59,6 +59,17 @@ function ContextInfoTrack({
   });
   if (!queryData || queryError) return;
   const { data, error } = queryData || {};
+  if (error instanceof Error) {
+    if (error.name === "custom_auth_error") {
+      const source: "none" | undefined = inPage ? "none" : undefined;
+      const value = { id, song, source };
+      return (
+        <InfoTrackContext.Provider value={value}>
+          {children}
+        </InfoTrackContext.Provider>
+      );
+    }
+  }
   if (!data || error) return;
   const { userLib } = data;
   if (!userLib) return;
