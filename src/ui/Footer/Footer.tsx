@@ -12,9 +12,7 @@ function Footer() {
           </h3>
           <p className="text-ink-400 text-sm">{f("aboutDescription")}</p>
           <div className="bg-section p-3 rounded-md border border-borderFull">
-            <p className="text-warning-400 text-sm font-medium">
-              {f("disclaimer")}
-            </p>
+            <p className="text-sm font-medium">{f("disclaimer")}</p>
           </div>
         </div>
 

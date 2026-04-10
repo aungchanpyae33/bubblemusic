@@ -69,10 +69,6 @@ const config: Config = {
           400: "var(--ink-400)",
           "gray-400": "var(--ink-gray-400)",
         },
-        warning: {
-          300: "var(--warning-300)",
-          400: "var(--warning-400)",
-        },
       },
     },
   },
