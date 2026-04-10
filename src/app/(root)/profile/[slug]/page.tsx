@@ -49,7 +49,6 @@ async function page(props: { params: Promise<{ slug: string }> }) {
     "profile",
     params.slug,
   );
-  console.log(exists);
   if (checkExistError) throw new Error("page-load-error");
   if (!exists) notFound();
 
