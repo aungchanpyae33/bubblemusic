@@ -1,10 +1,30 @@
 import { LibRoute, SUPPORTED_ROUTE } from "@/lib/libRoute";
+import { outputBaseUrl } from "@/lib/outputBaseUrl";
 import { userFetch } from "@/lib/UserInfoFetch";
 import LikeSongSection from "@/ui/LibraryPage/LibPagesUI/LikeSongSection";
 import ListSongsUpFaceSection from "@/ui/LibraryPage/LibPagesUI/ListSongsUpFaceSection";
 import OverViewSection from "@/ui/LibraryPage/LibPagesUI/OverViewSection";
+import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { notFound, unauthorized } from "next/navigation";
-
+export async function generateMetadata(): Promise<Metadata> {
+  const meta = await getTranslations("MetaData");
+  return {
+    title: meta("LibraryPage.title"),
+    description: meta("LibraryPage.description"),
+    metadataBase: outputBaseUrl(),
+    robots: {
+      index: false,
+      follow: false,
+    },
+    openGraph: {
+      images: [],
+    },
+    twitter: {
+      images: [],
+    },
+  };
+}
 const routeMap: Record<LibRoute, React.ReactNode> = {
   overview: <OverViewSection />,
   playlist: <ListSongsUpFaceSection route="playlist" />,

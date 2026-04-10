@@ -1,10 +1,41 @@
 import { getSearchPage } from "@/database/data";
+import { outputBaseUrl } from "@/lib/outputBaseUrl";
 import { searchGuard } from "@/lib/searchGuard";
 import EmptyGeneral from "@/ui/general/NoExist/EmptyGeneral";
 import SearchKeywordInfo from "@/ui/searchPage/SearchKeywordInfo";
 import SearchSection from "@/ui/searchPage/SearchSection";
 import SearchSongSection from "@/ui/searchPage/SearchSongSection";
 import TopResult from "@/ui/searchPage/topResult/TopResult";
+import type { Metadata, ResolvingMetadata } from "next";
+import { getTranslations } from "next-intl/server";
+type Props = {
+  searchParams?: Promise<{
+    query?: string;
+  }>;
+};
+export async function generateMetadata(
+  { searchParams }: Props,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  const params = await searchParams;
+  const rawQuery = params?.query;
+  const query = searchGuard(rawQuery) ? "" : rawQuery;
+  const [meta, parentMeta] = await Promise.all([
+    getTranslations("MetaData"),
+    parent,
+  ]);
+  const parentOg = parentMeta.openGraph;
+  const title = meta("searchPage.title", { query: `'${query}'` });
+  return {
+    title: title,
+    description: meta("searchPage.description"),
+    metadataBase: outputBaseUrl(),
+    openGraph: {
+      ...parentOg,
+      url: `/search?query=${encodeURIComponent(query ?? "")}`,
+    },
+  };
+}
 
 async function page(props: {
   searchParams?: Promise<{

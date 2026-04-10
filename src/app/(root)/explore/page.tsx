@@ -4,6 +4,29 @@ import ListItemUpFaceGroup from "@/ui/general/ListItemUpFaceGroup/ListItemUpFace
 import GenreContainer from "@/ui/CategoryContainer/GenreContainer";
 import ListUpFaceGroup from "@/ui/ListUpFaceContainer/ListUpFaceGroup";
 import MoodContainer from "@/ui/CategoryContainer/MoodContainer";
+import type { Metadata, ResolvingMetadata } from "next";
+import { getTranslations } from "next-intl/server";
+import { outputBaseUrl } from "@/lib/outputBaseUrl";
+
+export async function generateMetadata(
+  _: unknown,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  const [meta, parentMeta] = await Promise.all([
+    getTranslations("MetaData"),
+    parent,
+  ]);
+  const parentOg = parentMeta.openGraph;
+  return {
+    title: meta("explorePage.title"),
+    description: meta("explorePage.description"),
+    metadataBase: outputBaseUrl(),
+    openGraph: {
+      ...parentOg,
+      url: "/explore",
+    },
+  };
+}
 
 async function page() {
   const [getNewlyData, getGenreData, getMoodData] = await Promise.all([

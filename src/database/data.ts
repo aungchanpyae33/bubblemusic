@@ -616,7 +616,7 @@ export const getLyric = async (songId: string) => {
 };
 
 //  check exist first
-type fetchCheckType = MediaItemType;
+export type fetchCheckType = MediaItemType;
 export const fetchCheckExistByType = async (
   type: fetchCheckType,
   id: string,
@@ -666,7 +666,7 @@ export const checkExist = async (type: fetchCheckType, id: string) => {
   }
 };
 
-type GenresAndMoodsType = "genres" | "moods";
+export type GenresAndMoodsType = "genres" | "moods";
 export const fetchCheckExistGenresAndMoodsById = async (
   type: GenresAndMoodsType,
   id: string,

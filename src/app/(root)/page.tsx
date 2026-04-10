@@ -9,6 +9,22 @@ import ListItemUpFaceGroup from "@/ui/general/ListItemUpFaceGroup/ListItemUpFace
 import ListItemUpFaceContainer from "@/ui/general/ListItemUpFaceGroup/ListItemUpFaceContainer";
 import RecentlyListContainer from "@/ui/ListUpFaceContainer/RecentlyListContainer";
 import { userFetch } from "@/lib/UserInfoFetch";
+import { getTranslations } from "next-intl/server";
+import { outputBaseUrl } from "@/lib/outputBaseUrl";
+import type { Metadata } from "next";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const meta = await getTranslations("MetaData");
+  return {
+    title: meta("default.title"),
+    description: meta("default.description"),
+    metadataBase: outputBaseUrl(),
+    alternates: {
+      canonical: "/",
+    },
+  };
+}
+
 async function page() {
   const user = await userFetch();
 

@@ -234,5 +234,72 @@
     "alreadyAcc": "Already have an account? <link>Log in here</link>",
     "signUpSuccess": "Verify your email",
     "signUpSuccessContent": "Sign-up successful! Please check your email to confirm your account. If you don’t see it, check your spam folder."
+  },
+  "MetaData": {
+    "default": {
+      "title": "Bubble",
+      "description": "Bubble is the music streaming platform where user can listen their favorite songs at their own control."
+    },
+    "searchPage": {
+      "title": "Search For {query}",
+      "description": "Are you looking for something? Find songs , albums , artists and playlists you loved in Bubble"
+    },
+    "explorePage": {
+      "title": "Explore",
+      "description": "Explore the newly added fresh songs for you. Don’t miss the newest releases right now in Bubble"
+    },
+    "moodPage": {
+      "title": "{mood} Mood",
+      "description": "Enjoy the {mood} Mood songs for you in Bubble"
+    },
+    "genrePage": {
+      "title": "{genre} Genre",
+      "description": "Enjoy the {genre} Genre songs for you in Bubble"
+    },
+    "albumPage": {
+      "title": "{album} - album",
+      "description": "Listen now album called {album} by {artistName} in Bubble"
+    },
+    "trackPage": {
+      "title": "{track} - track",
+      "description": "Listen the song called {track} in Bubble"
+    },
+    "playlistPage": {
+      "title": "{playlist} - playlist",
+      "description": "Listen the playlist called {playlist} in Bubble"
+    },
+    "libraryPage": {
+      "title": "Library",
+      "description": "Your own Library of music in Bubble"
+    },
+    "profilePage": {
+      "title": "{name}",
+      "description": "Check this {name} profile page in Bubble"
+    },
+    "artistPage": {
+      "title": "{name} - artist",
+      "description": "Check out {name}'s songs in Bubble"
+    },
+    "likedSongPage": {
+      "title": "Liked Track",
+      "description": "Your favourite songs playlist in Bubble"
+    },
+    "profilePlaylist": {
+      "title": "Playlists",
+      "description": "Listen the created playlists in bubble"
+    },
+    "authLogin": {
+      "title": "Log in",
+      "description": "Log in to your Bubble account and enjoy creating your personalized music world."
+    },
+
+    "authSignup": {
+      "title": "Sign up",
+      "description": "Create your new Bubble account and enjoy building your personalized music world."
+    },
+    "authConfirm": {
+      "title": "Verify Account",
+      "description": "Verify your account using the confirmation link sent to your email."
+    }
   }
 }
