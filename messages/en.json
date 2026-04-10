@@ -3,16 +3,6 @@
     "home": "Home",
     "back": "Back",
     "reload": "Reload",
-    "tapNavi": {
-      "like": "Like",
-      "energetic": "Energetic",
-      "heartbreak": "Heartbreak",
-      "happy": "Happy",
-      "sleep": "Sleep",
-      "relax": "Relax",
-      "rock": "Rock",
-      "kpop": "K pop"
-    },
     "login": "Login",
     "signUp": "Sign Up",
     "logout": "Logout",

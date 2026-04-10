@@ -1,5 +1,4 @@
 import { get, getUnAuthRoot } from "@/database/data";
-import TapNavi from "@/ui/TapNavi/TapNavi";
 import type {
   GetAllMediaItemsReturn,
   GetRecent,
@@ -32,7 +31,6 @@ async function page() {
   if (!data || error) throw new Error("page-load-error");
   return (
     <div className="space-y-3">
-      <TapNavi />
       {(Object.keys(data) as (keyof typeof data)[]).map((itemKey) => {
         if (!data[itemKey]) return;
         if (data[itemKey] && data[itemKey].idArray.length === 0) return;
