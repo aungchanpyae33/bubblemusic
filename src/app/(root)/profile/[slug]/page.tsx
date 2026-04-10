@@ -19,7 +19,7 @@ export async function generateMetadata(props: {
 
   const params = await props.params;
   const { exists, error: checkExistError } = await cacheCheckExist(
-    "playlist",
+    "profile",
     params.slug,
   );
 
@@ -49,6 +49,7 @@ async function page(props: { params: Promise<{ slug: string }> }) {
     "profile",
     params.slug,
   );
+  console.log(exists);
   if (checkExistError) throw new Error("page-load-error");
   if (!exists) notFound();
 
