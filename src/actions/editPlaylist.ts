@@ -3,6 +3,7 @@
 import { createClient } from "@/database/server";
 import { checkUserExist } from "@/lib/checkUserExist";
 import { normalizeById } from "@/lib/returnById";
+import { returnErrorResponse } from "@/lib/returnErrorResponse";
 import { FormDataTypeEdit } from "@/ui/general/ModalAction/EditPlaylist/PlaylistEditForm";
 
 export const editPlaylist = async ({
@@ -30,6 +31,6 @@ export const editPlaylist = async ({
     };
     return { data: userLib, error };
   } catch (error) {
-    return { data: null, error };
+    return returnErrorResponse(error);
   }
 };

@@ -4,6 +4,7 @@ import { createClient } from "@/database/server";
 import type { MediaItemType } from "../../database.types-fest";
 import { normalizeById } from "@/lib/returnById";
 import { checkUserExist } from "@/lib/checkUserExist";
+import { returnErrorResponse } from "@/lib/returnErrorResponse";
 
 export const addToLibrary = async (
   id: string,
@@ -23,6 +24,6 @@ export const addToLibrary = async (
     };
     return { data: userLib, error };
   } catch (error) {
-    return { data: null, error };
+    return returnErrorResponse(error);
   }
 };

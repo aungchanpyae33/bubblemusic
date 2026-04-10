@@ -3,6 +3,7 @@ import type { ListSongsReturn } from "@/database/data-types-return";
 import { createClient } from "@/database/server";
 import { checkUserExist } from "@/lib/checkUserExist";
 import { normalizeById } from "@/lib/returnById";
+import { returnErrorResponse } from "@/lib/returnErrorResponse";
 
 export const insertSongtoPlaylist = async ({
   playlistId,
@@ -25,6 +26,6 @@ export const insertSongtoPlaylist = async ({
     };
     return { data: mappedData, error };
   } catch (error) {
-    return { data: null, error: error };
+    return returnErrorResponse(error);
   }
 };

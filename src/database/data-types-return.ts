@@ -1,4 +1,3 @@
-import type { PostgrestError } from "@supabase/supabase-js";
 import type {
   AllMediaItems,
   CategorySection,
@@ -16,8 +15,12 @@ import type {
 } from "../../database.types-fest";
 import type { NormalizedById, NormalizedByIdOnly } from "@/lib/returnById";
 
+type Error = {
+  name: string;
+  message: string;
+};
 export interface ErrorResponse {
-  error: PostgrestError | null | unknown;
+  error: Error | null;
 }
 
 export interface GetLyricReturn {

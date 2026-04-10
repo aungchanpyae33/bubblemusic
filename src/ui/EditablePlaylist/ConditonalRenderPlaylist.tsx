@@ -18,11 +18,11 @@ function ConditonalRenderPlaylist({
   });
   if (!queryData || queryError) return;
   const { data, error } = queryData || {};
-  if (error instanceof Error) {
-    if (error.name === "custom_auth_error") {
-      return ViewAsOther;
-    }
+
+  if (error?.name === "custom_auth_error") {
+    return ViewAsOther;
   }
+
   if (!data || error) return;
   const { userLib } = data;
   if (!userLib) return;

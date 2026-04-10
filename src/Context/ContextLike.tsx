@@ -45,13 +45,11 @@ function ContextLike({
   });
   const { data, error } = queryData || {};
 
-  if (error instanceof Error) {
-    if (error.name === "custom_auth_error") {
-      const value = { isLike: false, setLikeAction };
-      return (
-        <LikeContext.Provider value={value}>{children}</LikeContext.Provider>
-      );
-    }
+  if (error?.name === "custom_auth_error") {
+    const value = { isLike: false, setLikeAction };
+    return (
+      <LikeContext.Provider value={value}>{children}</LikeContext.Provider>
+    );
   }
 
   // getting direct isLike instead of using useState update

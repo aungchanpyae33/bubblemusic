@@ -21,6 +21,7 @@ import {
 import { checkUserExist } from "@/lib/checkUserExist";
 import { LibSonglistRoute } from "@/lib/libRoute";
 import { searchGuard } from "@/lib/searchGuard";
+import { returnErrorResponse } from "@/lib/returnErrorResponse";
 
 export const getLikedId = async (): Promise<GetLikedIdReturn> => {
   try {
@@ -35,7 +36,7 @@ export const getLikedId = async (): Promise<GetLikedIdReturn> => {
 
     return { data: userLike, error };
   } catch (error) {
-    return { data: null, error };
+    return returnErrorResponse(error);
   }
 };
 
@@ -47,7 +48,7 @@ export const getGenre = async () => {
     if (!data) throw new Error("not found");
     return { data, error };
   } catch (error) {
-    return { data: null, error };
+    return returnErrorResponse(error);
   }
 };
 
@@ -59,7 +60,7 @@ export const getMood = async () => {
     if (!data) throw new Error("not found");
     return { data, error };
   } catch (error) {
-    return { data: null, error };
+    return returnErrorResponse(error);
   }
 };
 
@@ -77,7 +78,7 @@ export const getNewly = async (): Promise<GetNewlyItemsReturn> => {
     };
     return { data: mapItem, error };
   } catch (error) {
-    return { data: null, error };
+    return returnErrorResponse(error);
   }
 };
 
@@ -100,7 +101,7 @@ export const getLibraryOverview =
 
       return { data: mapItem, error };
     } catch (error) {
-      return { data: null, error };
+      return returnErrorResponse(error);
     }
   };
 
@@ -120,7 +121,7 @@ export const getLikeSongs = async (
     };
     return { data: mappedData, error };
   } catch (error) {
-    return { data: null, error };
+    return returnErrorResponse(error);
   }
 };
 
@@ -141,7 +142,7 @@ export const getGenresPage = async (
     };
     return { data: mappedItem, error };
   } catch (error) {
-    return { data: null, error };
+    return returnErrorResponse(error);
   }
 };
 
@@ -162,7 +163,7 @@ export const getMoodPage = async (
     };
     return { data: mappedItem, error };
   } catch (error) {
-    return { data: null, error };
+    return returnErrorResponse(error);
   }
 };
 
@@ -219,7 +220,7 @@ export const get = async (): Promise<GetAllMediaItemsReturn> => {
 
     return { data: mapItem, error: null };
   } catch (error) {
-    return { data: null, error };
+    return returnErrorResponse(error);
   }
 };
 
@@ -241,7 +242,7 @@ export const getUnAuthRoot = async (): Promise<GetUnAuthRootPageReturn> => {
     };
     return { data: mapItem, error: null };
   } catch (error) {
-    return { data: null, error };
+    return returnErrorResponse(error);
   }
 };
 
@@ -255,7 +256,7 @@ export const getRecent = async (): Promise<GetRecentReturn> => {
     const mappedData = normalizeById(data.recentlyPlayed);
     return { data: mappedData, error };
   } catch (error) {
-    return { data: null, error };
+    return returnErrorResponse(error);
   }
 };
 
@@ -271,7 +272,7 @@ export const getUserLib = async (): Promise<UserLibReturn> => {
     };
     return { data: userLib, error };
   } catch (error) {
-    return { data: null, error };
+    return returnErrorResponse(error);
   }
 };
 
@@ -296,8 +297,8 @@ export const getSearchPage = async (
       profiles: normalizeById(data.profiles),
     };
     return { data: mappedData, error };
-  } catch (err) {
-    return { data: null, error: err };
+  } catch (error) {
+    return returnErrorResponse(error);
   }
 };
 
@@ -318,7 +319,7 @@ export const getPlaylistSongs = async (
     };
     return { data: mappedData, error };
   } catch (error) {
-    return { data: null, error };
+    return returnErrorResponse(error);
   }
 };
 
@@ -337,7 +338,7 @@ export const getSongTrack = async (
     };
     return { data: mappedData, error };
   } catch (error) {
-    return { data: null, error };
+    return returnErrorResponse(error);
   }
 };
 
@@ -356,7 +357,7 @@ export const getAlbumSongs = async (
     };
     return { data: mappedData, error };
   } catch (error) {
-    return { data: null, error };
+    return returnErrorResponse(error);
   }
 };
 
@@ -376,7 +377,7 @@ export const getArtistPage = async (
     };
     return { data: mappedData, error };
   } catch (error) {
-    return { data: null, error };
+    return returnErrorResponse(error);
   }
 };
 
@@ -390,7 +391,7 @@ export const getData = async (query: string) => {
     if (error) throw error;
     return { data, error };
   } catch (error) {
-    return { data: null, error };
+    return returnErrorResponse(error);
   }
 };
 
@@ -405,7 +406,7 @@ export const getUserPage = async (userId: string): Promise<UserPageReturn> => {
     const mappedData = { ...data, playlists: normalizeById(data.playlists) };
     return { data: mappedData, error };
   } catch (error) {
-    return { data: null, error };
+    return returnErrorResponse(error);
   }
 };
 
@@ -429,7 +430,7 @@ const fetchSongListByType = async (id: string, type: MediaItemType) => {
       return { data: null, error: null };
     }
   } catch (error) {
-    return { data: null, error };
+    return returnErrorResponse(error);
   }
 };
 
@@ -454,7 +455,7 @@ const fetchLibrarySectionByRoute = async (route: LibSonglistRoute) => {
     }
     return { data: null, error: null };
   } catch (error) {
-    return { data: null, error };
+    return returnErrorResponse(error);
   }
 };
 
@@ -474,7 +475,7 @@ export const getUserFullPlaylist = async (
     };
     return { data: mappedData, error };
   } catch (error) {
-    return { data: null, error };
+    return returnErrorResponse(error);
   }
 };
 
@@ -490,7 +491,7 @@ export const getLibSectionList = async (
     };
     return { data: mappedData, error };
   } catch (error) {
-    return { data: null, error };
+    return returnErrorResponse(error);
   }
 };
 
@@ -507,7 +508,7 @@ export const getSongList = async (
     };
     return { data: mappedData, error };
   } catch (error) {
-    return { data: null, error };
+    return returnErrorResponse(error);
   }
 };
 
@@ -531,7 +532,7 @@ const fetchListDirectByType = async (id: string, type: MediaItemType) => {
       return { data: null, error: null };
     }
   } catch (error) {
-    return { data: null, error };
+    return returnErrorResponse(error);
   }
 };
 
@@ -549,7 +550,7 @@ export const getListDirect = async (
     };
     return { data: mappedData, error };
   } catch (error) {
-    return { data: null, error };
+    return returnErrorResponse(error);
   }
 };
 
@@ -593,8 +594,8 @@ export const getSimilarSongQueue = async (
     };
 
     return { data: mappedData, error };
-  } catch (err) {
-    return { data: null, error: err };
+  } catch (error) {
+    return returnErrorResponse(error);
   }
 };
 
@@ -611,7 +612,7 @@ export const getLyric = async (songId: string) => {
     if (!data) throw new Error("not found");
     return { data, error };
   } catch (error) {
-    return { data: null, error };
+    return returnErrorResponse(error);
   }
 };
 

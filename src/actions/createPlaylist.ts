@@ -3,6 +3,7 @@ import type { UserLibReturn } from "@/database/data-types-return";
 import { createClient } from "@/database/server";
 import { checkUserExist } from "@/lib/checkUserExist";
 import { normalizeById } from "@/lib/returnById";
+import { returnErrorResponse } from "@/lib/returnErrorResponse";
 import { FormDataTypeCreate } from "@/ui/general/ModalAction/CreatePlaylist/PlaylistCreateForm";
 
 export const insertDataAction = async ({
@@ -27,6 +28,6 @@ export const insertDataAction = async ({
     };
     return { data: userLib, error };
   } catch (error) {
-    return { data: null, error };
+    return returnErrorResponse(error);
   }
 };

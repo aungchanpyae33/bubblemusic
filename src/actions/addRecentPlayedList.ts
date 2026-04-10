@@ -5,6 +5,7 @@ import { normalizeById } from "@/lib/returnById";
 import type { GetRecentReturn } from "@/database/data-types-return";
 import type { MediaItemType } from "../../database.types-fest";
 import { checkUserExist } from "@/lib/checkUserExist";
+import { returnErrorResponse } from "@/lib/returnErrorResponse";
 
 export const addRecentlyPlayedList = async (
   id: string,
@@ -22,6 +23,6 @@ export const addRecentlyPlayedList = async (
     const mappedData = normalizeById(data.recentlyPlayed);
     return { data: mappedData, error };
   } catch (error) {
-    return { data: null, error };
+    return returnErrorResponse(error);
   }
 };

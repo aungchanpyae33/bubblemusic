@@ -10,6 +10,7 @@ import type {
 } from "./data-types-return";
 import type { MediaItemType } from "../../database.types-fest";
 import { searchGuard } from "@/lib/searchGuard";
+import { returnErrorResponse } from "@/lib/returnErrorResponse";
 
 export const getListDirectClient = async (
   id: string,
@@ -24,7 +25,7 @@ export const getListDirectClient = async (
     const { data, error } = (await fetchData.json()) as ListSongsReturn;
     return { data, error };
   } catch (error) {
-    return { data: null, error };
+    return returnErrorResponse(error);
   }
 };
 
@@ -34,7 +35,7 @@ export const getUserLibClient = async (): Promise<UserLibReturn> => {
     const { data, error } = (await fetchData.json()) as UserLibReturn;
     return { data, error };
   } catch (error) {
-    return { data: null, error };
+    return returnErrorResponse(error);
   }
 };
 
@@ -44,7 +45,7 @@ export const getLikedIdClient = async (): Promise<GetLikedIdReturn> => {
     const { data, error } = (await fetchData.json()) as GetLikedIdReturn;
     return { data, error };
   } catch (error) {
-    return { data: null, error };
+    return returnErrorResponse(error);
   }
 };
 
@@ -70,7 +71,7 @@ export const getPlaylistSongsClient = async (
     const { data, error } = (await fetchData.json()) as ListSongsReturn;
     return { data, error };
   } catch (error) {
-    return { data: null, error };
+    return returnErrorResponse(error);
   }
 };
 export const getSimilarSongQueueClient = async (
@@ -89,8 +90,8 @@ export const getSimilarSongQueueClient = async (
 
     const { data, error } = (await fetchData.json()) as FetchSongsReturn;
     return { data, error };
-  } catch (err) {
-    return { data: null, error: err };
+  } catch (error) {
+    return returnErrorResponse(error);
   }
 };
 
@@ -133,7 +134,7 @@ export const getSongListClient = async (
     const { data, error } = (await fetchData.json()) as FetchSongsReturn;
     return { data, error };
   } catch (error) {
-    return { data: null, error };
+    return returnErrorResponse(error);
   }
 };
 
@@ -169,6 +170,6 @@ export const getLyricClient = async (
 
     return { data, error };
   } catch (error) {
-    return { data: null, error };
+    return returnErrorResponse(error);
   }
 };

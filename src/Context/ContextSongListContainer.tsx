@@ -49,18 +49,18 @@ function ContextSongListContainer({
   });
   if (queryError) return;
   const { data, error } = queryData || {};
-  if (error instanceof Error) {
-    if (error.name === "custom_auth_error") {
-      const value = { ...list, source: "none", inPage } as
-        | SongListValue
-        | SongListPageValue;
-      return (
-        <SongListContext.Provider value={value}>
-          {children}
-        </SongListContext.Provider>
-      );
-    }
+
+  if (error?.name === "custom_auth_error") {
+    const value = { ...list, source: "none", inPage } as
+      | SongListValue
+      | SongListPageValue;
+    return (
+      <SongListContext.Provider value={value}>
+        {children}
+      </SongListContext.Provider>
+    );
   }
+
   if (!data || error) return;
   const { userLib } = data;
   if (!userLib) return;
