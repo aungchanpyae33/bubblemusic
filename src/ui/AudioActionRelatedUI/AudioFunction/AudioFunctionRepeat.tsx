@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import {
   IsRepeatState,
   RepeatAction,
@@ -15,7 +16,10 @@ function AudioFunctionRepeat({ className }: React.ComponentProps<"button">) {
     (state: RepeatAction) => state.setRepeat,
   );
   return (
-    <button className={className} onClick={() => setRepeat()}>
+    <button
+      className={cn("rounded-full", className, isRepeat && "bg-placeholder")}
+      onClick={() => setRepeat()}
+    >
       <IconWrapper
         Icon={Repeat}
         size="small"

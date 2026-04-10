@@ -2,6 +2,7 @@ import type { ListSongPage } from "@/database/data-types-return";
 import excludeCurrentSongs from "@/lib/excludeCurrentSongs";
 import outputCurrentIndex from "@/lib/OutputCurrentIndex";
 import shufflePlaylist from "@/lib/shufflePlaylist";
+import { cn } from "@/lib/utils";
 import {
   currentSongPlaylisthuffleAction,
   previousSongPlaylist,
@@ -62,7 +63,10 @@ function AudioFunctionShuffle({ className, listSong, id }: Props) {
     setIsShuffle(!isShuffle);
   }
   return (
-    <button className={className} onClick={shuffle}>
+    <button
+      className={cn("rounded-full", className, isShuffle && "bg-placeholder")}
+      onClick={shuffle}
+    >
       {/* {isShuffle ? "unSh" : "Shu"} */}
       <IconWrapper
         Icon={Shuffle}

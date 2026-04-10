@@ -28,7 +28,7 @@ function AudioFullUpperWrapper({ children }: { children: React.ReactNode }) {
   return (
     <ContextContainerHeight containerHeightRef={containerHeightRef}>
       <div
-        className=" mx-auto   w-[96%] md:w-[80%] lg:w-[90%]  flex-1 flex relative overflow-hidden"
+        className=" mx-auto w-[98%] md:w-[90%] flex-1 flex relative overflow-hidden"
         ref={containerHeightRef}
       >
         <div

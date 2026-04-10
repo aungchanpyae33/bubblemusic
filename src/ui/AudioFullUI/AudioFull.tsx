@@ -59,11 +59,11 @@ function AudioFull({
             >
               <FocusTrap>
                 <div
-                  className="w-full h-full  flex flex-col items-center justify-center bg-background relative"
+                  className="w-full h-full gap-2  flex flex-col items-center justify-center bg-background relative"
                   ref={refFocus}
                   tabIndex={0}
                 >
-                  <div className="mx-auto  w-[90%] h-[55px] min-h-[55px] max-h-[55px]  flex items-center justify-between sticky top-0">
+                  <div className="mx-auto w-[98%] md:w-[90%] h-[55px] min-h-[55px] max-h-[55px]  flex items-center justify-between sticky top-0">
                     <FullCloseBtn setOpen={setOpen} toggleRef={toggleRef} />
                     <FullThreeDots />
                   </div>
@@ -71,9 +71,9 @@ function AudioFull({
                   <AudioFullUpperWrapper>
                     <AudioFullImg />
                   </AudioFullUpperWrapper>
-                  <div className=" h-[20%]  p-2  shrink-0  w-[98%] md:w-[90%]  rounded-md  inset-x-0 mx-auto sticky bottom-0">
-                    <div className="audioFunctionContainer  flex  flex-col flex-1 h-full gap-y-10 items-center justify-center">
-                      <div className="BottomContainer w-full static top-0 left-0 items-center ">
+                  <div className=" h-[100px] p-2  shrink-0  w-[98%] md:w-[90%] rounded-md  inset-x-0 mx-auto sticky bottom-0">
+                    <div className="flex  flex-col flex-1 h-full gap-y-0 items-center justify-around">
+                      <div className="w-full static top-0 left-0 items-center ">
                         <div className="  w-full flex items-center relative">
                           <AudioSeekBar
                             isFull={true}
@@ -83,7 +83,7 @@ function AudioFull({
                               <TimeIndicatorCur
                                 value={value}
                                 duration={duration}
-                                className="text-sm md:text-base  w-fit md:w-[5rem] text-start md:static md:left-auto md:bottom-auto md:translate-y-0  absolute left-0 bottom-0 translate-y-full"
+                                className="text-sm md:text-base  w-fit md:w-[5rem] text-start"
                               />
                             )}
                             duration={duration}
@@ -92,12 +92,12 @@ function AudioFull({
                           />
                           <TimeIndicatorDur
                             duration={duration}
-                            className="text-sm md:text-base w-fit md:w-[5rem] text-end md:static md:right-auto md:bottom-auto md:translate-y-0 absolute right-0 bottom-0 translate-y-full "
+                            className="text-sm md:text-base w-fit md:w-[5rem] text-end"
                           />
                         </div>
                       </div>
-                      <div className="upContainer w-full flex justify-center md:justify-between">
-                        <div className=" md:flex w-[20%] max-w-[250px]  items-center">
+                      <div className="w-full flex justify-center md:justify-between">
+                        <div className=" md:flex w-[20%] max-w-[300px] items-center">
                           <LyricToggleBtn />
                         </div>
                         <AudioFunctionButton>
@@ -126,11 +126,11 @@ function AudioFull({
                             </div>
                           )}
                         </AudioFunctionButton>
-                        <div className="flex   relative w-[20%] gap-x-3 max-w-[250px] items-center justify-end">
+                        <div className="flex   relative w-[20%] gap-x-3 max-w-[300px] items-center justify-end">
                           <QueueToggle />
-                          <span className=" hidden md:inline">
+                          <div className="hidden md:block lg:flex-1">
                             <Volume isFull={true} />
-                          </span>
+                          </div>
                         </div>
                       </div>
                     </div>

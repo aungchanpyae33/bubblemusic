@@ -111,9 +111,9 @@ function AudioPlayer({ start }: { start: boolean }) {
                 )}
               </div>
 
-              <div className="max-w-[600px] sm:flex-1 w-fit  flex    ">
-                <div className="audioFunctionContainer flex  flex-col flex-1 items-end sm:items-center pr-2 sm:pr-0  justify-center">
-                  <div className="upContainer ">
+              <div className="max-w-[600px] sm:flex-1 w-fit  flex">
+                <div className="flex  flex-col flex-1 items-end sm:items-center pr-2 sm:pr-0  justify-center">
+                  <div className="">
                     <MediaSessionButtonWrapper id={id}>
                       <AudioFunctionButton>
                         {/* in jsx when use arrow and {} , react expect to return elemetn , if it does not have  return ,  implicitly returns void, or undefined, so, react think nothing to render  */}
@@ -121,17 +121,17 @@ function AudioPlayer({ start }: { start: boolean }) {
                           return (
                             // return element
                             <div
-                              className="flex gap-2"
+                              className="flex w-full h-full gap-2"
                               onClick={(e) => e.stopPropagation()}
                               onKeyDown={(e) => e.stopPropagation()}
                             >
                               <AudioFunctionShuffle
-                                className="text-foreground/70 hover:text-foreground  p-1  sm:inline-block text-sm md:text-base hidden"
+                                className="text-foreground/70 hover:text-foreground aspect-square   sm:flex sm:items-center sm:justify-center text-sm md:text-base hidden"
                                 listSong={playListArray}
                                 id={id}
                               />
                               <AudioFunctionPre
-                                className="text-foreground/70 hover:text-foreground  p-1  sm:inline-block text-sm md:text-base hidden"
+                                className="text-foreground/70 hover:text-foreground    sm:inline-block text-sm md:text-base hidden"
                                 id={id}
                                 listSong={playListArray}
                               />
@@ -141,7 +141,7 @@ function AudioPlayer({ start }: { start: boolean }) {
                                 listSong={playListArray}
                                 className="text-foreground/70 hover:text-foreground  p-1 text-sm md:text-base"
                               />
-                              <AudioFunctionRepeat className="text-foreground/70 hover:text-foreground  p-1  sm:inline-block text-sm md:text-base hidden" />
+                              <AudioFunctionRepeat className="text-foreground/70 hover:text-foreground aspect-square   sm:flex sm:items-center sm:justify-center text-sm md:text-base hidden" />
                             </div>
                           );
                         }}
