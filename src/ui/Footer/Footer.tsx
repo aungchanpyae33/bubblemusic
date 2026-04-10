@@ -54,7 +54,7 @@ function Footer() {
             <li className="text-ink-400 text-sm">
               <div className=" flex gap-1">
                 <span>•</span>
-                <span>HTML5 MediaSource API</span>
+                <span>hls.js</span>
               </div>
             </li>
           </ul>
