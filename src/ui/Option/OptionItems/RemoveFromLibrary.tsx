@@ -35,7 +35,8 @@ function RemoveFromLibraryChild() {
   const b = useTranslations("block");
   const toa = useTranslations("Toast");
   const router = useRouter();
-  const { id, source } = useSongListContext();
+  const { id, source, type } = useSongListContext();
+  const isOwnPlaylist = source === "create" && type === "playlist";
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
@@ -99,7 +100,9 @@ function RemoveFromLibraryChild() {
         <OptionIconEl>
           <IconWrapper size="small" Icon={BookmarkX} />
         </OptionIconEl>
-        <OptionText>{b("removeFromLibrary")}</OptionText>
+        <OptionText>
+          {isOwnPlaylist ? b("deletePlaylist") : b("removeFromLibrary")}
+        </OptionText>
       </OptionButton>
     </OptionItem>
   );

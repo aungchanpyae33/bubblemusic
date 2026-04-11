@@ -24,6 +24,7 @@
     "addToPlaylist": "Add To playlist",
     "removeFromQueue": "Remove from queue",
     "removeFromLibrary": "Remove from library",
+    "deletePlaylist": "Delete the playlist",
     "editPlaylist": "Edit to playlist",
     "addToQueue": "Add to  queue",
     "addToPlayNext": "Add to play next",
