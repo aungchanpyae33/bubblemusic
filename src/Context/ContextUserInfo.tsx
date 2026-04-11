@@ -6,14 +6,17 @@ import {
   createContext,
   Dispatch,
   ReactNode,
+  RefObject,
   SetStateAction,
   useContext,
   useEffect,
+  useRef,
   useState,
 } from "react";
 export interface UserInfoContextProps {
   userInfo: JwtPayload | undefined;
   setUserInfo: Dispatch<SetStateAction<JwtPayload | undefined>>;
+  immediateLogoutIndicateRef: RefObject<string | null>;
 }
 
 interface ContextUserInfoProps {
@@ -21,10 +24,9 @@ interface ContextUserInfoProps {
   children: ReactNode;
 }
 
-export const UserInfoContext = createContext<UserInfoContextProps>({
-  userInfo: undefined,
-  setUserInfo: () => {},
-});
+export const UserInfoContext = createContext<UserInfoContextProps | undefined>(
+  undefined,
+);
 
 export const useUserInfoContext = () => {
   const context = useContext(UserInfoContext);
@@ -37,13 +39,15 @@ export const useUserInfoContext = () => {
 };
 function ContextUserInfo({ user, children }: ContextUserInfoProps) {
   const [userInfo, setUserInfo] = useState(user);
-  const value = { userInfo, setUserInfo };
+  const immediateLogoutIndicateRef = useRef<null | string>("user");
+  const value = { userInfo, setUserInfo, immediateLogoutIndicateRef };
   useEffect(() => {
     const supabaseClient = supabase;
     const {
       data: { subscription },
     } = supabaseClient.auth.onAuthStateChange((event) => {
       if (event === "SIGNED_OUT") {
+        immediateLogoutIndicateRef.current = null;
         setUserInfo(undefined);
         useVolumeValue.getState().reset();
         useSongTrack.getState().reset();
