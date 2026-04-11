@@ -9,7 +9,7 @@ function UnAuthResponseWrapper() {
       <div className=" flex items-center gap-3">
         <UnAuthSignInLabel />
         <div className=" border border-seperate-soft rounded-md p-1">
-          <SignInButtonLink />
+          <SignInButtonLink className="p-2" />
         </div>
       </div>
     </>
