@@ -1,6 +1,7 @@
 "use client";
 import PlaceholderAudioHandler from "@/Placeholder/PlaceholderAudioHandler";
 import React, { createContext, ReactNode, useContext, useRef } from "react";
+import ContextAudioLoading from "./ContextAudioLoading";
 
 interface AudioElementContextProps {
   audioElRef: React.RefObject<HTMLAudioElement | null>;
@@ -26,7 +27,9 @@ function ContextAudioWrapper({ children }: { children: ReactNode }) {
       <audio ref={audioElRef} />
       <PlaceholderAudioHandler audioElRef={audioElRef} />
       <AudioElementContext.Provider value={{ audioElRef }}>
-        {children}
+        <ContextAudioLoading audioElRef={audioElRef}>
+          {children}
+        </ContextAudioLoading>
       </AudioElementContext.Provider>
     </>
   );

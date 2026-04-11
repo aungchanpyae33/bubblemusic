@@ -1,11 +1,15 @@
-import type { LucideIcon } from "lucide-react";
+import { LoaderCircle, type LucideIcon } from "lucide-react";
 import IconWrapper, { IconWrapperProps } from "../IconWrapper";
+import { useAudioLoadingContext } from "@/Context/ContextAudioLoading";
+import type { ComponentProps } from "react";
+import { cn } from "@/lib/utils";
 
-interface TogglePlayButtonProps {
+interface TogglePlayButtonProps extends ComponentProps<"div"> {
   isPlay: boolean | undefined;
   size?: IconWrapperProps["size"];
   notClickable?: boolean;
   playIcon: LucideIcon;
+  className?: string;
   pauseIcon: LucideIcon;
 }
 function TogglePlayButton({
@@ -14,10 +18,22 @@ function TogglePlayButton({
   pauseIcon,
   size,
   notClickable,
+  className,
+  ...props
 }: TogglePlayButtonProps) {
+  const { loading } = useAudioLoadingContext();
   return (
-    <div className="p-1 rounded-full bg-surface-1">
-      {isPlay ? (
+    <div className={cn("p-1 rounded-full bg-surface-1", className)} {...props}>
+      {loading ? (
+        <div className="animate-spin">
+          <IconWrapper
+            className="fill-ground"
+            Icon={LoaderCircle}
+            size={size}
+            notClickable={notClickable}
+          />
+        </div>
+      ) : isPlay ? (
         <IconWrapper
           className="fill-foreground"
           Icon={pauseIcon}

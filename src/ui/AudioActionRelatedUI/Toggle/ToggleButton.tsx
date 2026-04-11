@@ -9,7 +9,7 @@ import type {
   DirectPlayBackAction,
 } from "@/lib/zustand";
 import { Pause, Play } from "lucide-react";
-import IconWrapper from "@/ui/general/IconWrapper";
+import TogglePlayButton from "@/ui/general/TogglePlayButton/TogglePlayButton";
 
 type Props = React.ComponentProps<"button">;
 function ToggleButton({ className }: Props) {
@@ -37,11 +37,13 @@ function ToggleButton({ className }: Props) {
         setPlayList("toggle_key", undefined);
       }}
     >
-      {Isplay ? (
-        <IconWrapper size="large" Icon={Pause} />
-      ) : (
-        <IconWrapper size="large" Icon={Play} />
-      )}
+      <TogglePlayButton
+        size="large"
+        className="p-0 rounded-none bg-inherit"
+        pauseIcon={Pause}
+        playIcon={Play}
+        isPlay={Isplay}
+      />
     </button>
   );
 }
