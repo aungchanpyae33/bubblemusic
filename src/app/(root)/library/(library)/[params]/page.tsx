@@ -10,8 +10,8 @@ import { notFound, unauthorized } from "next/navigation";
 export async function generateMetadata(): Promise<Metadata> {
   const meta = await getTranslations("MetaData");
   return {
-    title: meta("LibraryPage.title"),
-    description: meta("LibraryPage.description"),
+    title: meta("libraryPage.title"),
+    description: meta("libraryPage.description"),
     metadataBase: outputBaseUrl(),
     robots: {
       index: false,
