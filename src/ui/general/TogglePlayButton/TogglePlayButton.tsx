@@ -27,7 +27,6 @@ function TogglePlayButton({
       {loading ? (
         <div className="animate-spin">
           <IconWrapper
-            className="fill-ground"
             Icon={LoaderCircle}
             size={size}
             notClickable={notClickable}
