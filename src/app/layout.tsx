@@ -15,6 +15,9 @@ export const metadata: Metadata = {
     url: "/",
     siteName: "Bubble",
   },
+  verification: {
+    google: "qUiD6zMa2G5hXsaRx_P2lfhYardVPp1UbjZDHvj_ulA",
+  },
   icons: {
     icon: [
       { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
