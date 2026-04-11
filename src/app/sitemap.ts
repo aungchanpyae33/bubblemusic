@@ -2,8 +2,7 @@
 import { outputBaseUrl } from "@/lib/outputBaseUrl";
 import type { MetadataRoute } from "next";
 import { cacheLife } from "next/cache";
-
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   cacheLife("days");
   const baseUrl = outputBaseUrl().toString();
   return [
@@ -16,14 +15,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/auth/login`,
-      lastModified: new Date(),
+      lastModified: new Date("2026-04-11"),
       priority: 0.6,
       changeFrequency: "monthly",
       images: [`${baseUrl}/opengraph-image.png`],
     },
     {
       url: `${baseUrl}/auth/sign-up`,
-      lastModified: new Date(),
+      lastModified: new Date("2026-04-11"),
       priority: 0.6,
       changeFrequency: "monthly",
       images: [`${baseUrl}/opengraph-image.png`],
