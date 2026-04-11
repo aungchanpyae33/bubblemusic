@@ -138,7 +138,7 @@
 
   "Footer": {
     "aboutTitle": "About This Project",
-    "aboutDescription": "This music streaming bubble web app is a personal web application project created to demonstrate TypeScript, React, and Next.js. It is designed with a simple and user-friendly interface that allows users to listen to music, save songs, and even listen together with others.",
+    "aboutDescription": "A sleek music streaming web app built with TypeScript, React, and Next.js. Users can discover music, manage a personal library, and build custom playlists through a streamlined interface.",
 
     "disclaimer": "⚠️ Disclaimer - This project is a non-commercial personal demonstration project. I do not own or claim copyright for any songs or images stored or used in this application. All media content is used strictly for demonstration purposes. I only own the source code written for this project.",
 
