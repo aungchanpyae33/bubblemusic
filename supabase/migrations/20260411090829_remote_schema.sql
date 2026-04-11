@@ -3602,7 +3602,6 @@ CREATE TABLE IF NOT EXISTS "public"."album" (
     "id" "text" DEFAULT "left"("replace"("replace"("encode"("extensions"."gen_random_bytes"(9), 'base64'::"text"), '/'::"text", ''::"text"), '+'::"text", ''::"text"), 12) NOT NULL,
     "title" "text" NOT NULL,
     "cover_url" "text",
-    "release_date" "date",
     "artist_id" "text" NOT NULL,
     "embedding" "extensions"."vector"(384),
     "type" "text" DEFAULT 'album'::"text" NOT NULL,
@@ -3677,7 +3676,7 @@ ALTER TABLE "public"."moods" OWNER TO "postgres";
 CREATE TABLE IF NOT EXISTS "public"."playlist" (
     "id" "text" DEFAULT "left"("replace"("replace"("encode"("extensions"."gen_random_bytes"(9), 'base64'::"text"), '/'::"text", ''::"text"), '+'::"text", ''::"text"), 12) NOT NULL,
     "name" "text" NOT NULL,
-    "created_at" timestamp with time zone DEFAULT "now"(),
+    "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
     "user_id" "text",
     "is_public" boolean DEFAULT true NOT NULL,
     "cover_url" "text",
@@ -3711,7 +3710,7 @@ CREATE TABLE IF NOT EXISTS "public"."playlist_songs" (
     "playlist_id" "text" NOT NULL,
     "song_id" "uuid",
     "id" "uuid" DEFAULT "gen_random_uuid"() NOT NULL,
-    "created_at" timestamp with time zone DEFAULT "now"()
+    "created_at" timestamp with time zone DEFAULT "now"() NOT NULL
 );
 
 
@@ -3722,7 +3721,7 @@ CREATE TABLE IF NOT EXISTS "public"."recently_played_list" (
     "id" bigint NOT NULL,
     "user_id" "text" DEFAULT ''::"text" NOT NULL,
     "item_id" "text" NOT NULL,
-    "played_at" timestamp with time zone DEFAULT "now"(),
+    "played_at" timestamp with time zone DEFAULT "now"() NOT NULL,
     "type" "public"."media_item_type" NOT NULL,
     "play_count" bigint,
     "week_start" "date" NOT NULL
@@ -3784,7 +3783,7 @@ ALTER TABLE "public"."user_reference_items" OWNER TO "postgres";
 
 CREATE TABLE IF NOT EXISTS "public"."user_song_plays" (
     "user_id" "text" NOT NULL,
-    "played_at" timestamp with time zone DEFAULT "now"(),
+    "played_at" timestamp with time zone DEFAULT "now"() NOT NULL,
     "song_id" "uuid" NOT NULL,
     "id" "uuid" DEFAULT "gen_random_uuid"() NOT NULL,
     "play_count" bigint,
@@ -3797,7 +3796,7 @@ ALTER TABLE "public"."user_song_plays" OWNER TO "postgres";
 
 CREATE TABLE IF NOT EXISTS "public"."users" (
     "id" "uuid" DEFAULT "gen_random_uuid"() NOT NULL,
-    "created_at" timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
+    "created_at" timestamp with time zone DEFAULT ("now"() AT TIME ZONE 'utc'::"text") NOT NULL,
     "user_id" "text" NOT NULL,
     "user_name" "text",
     "user_email" "text",
