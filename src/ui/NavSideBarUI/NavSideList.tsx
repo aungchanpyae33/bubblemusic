@@ -42,7 +42,7 @@ function NavSideList({
             e.preventDefault();
           }}
           tabIndex={open ? -1 : 0}
-          className=" w-[70px]  cursor-pointer border-none  h-[70px] min-h-[70px]  flex items-center justify-center "
+          className=" w-[70px] cursor-pointer h-[70px] min-h-[70px] flex items-center justify-center"
         >
           {/* open */}
           <IconWrapper size="large" Icon={Menu} />

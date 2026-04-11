@@ -3,7 +3,7 @@ import SearchInput from "./SearchInput";
 
 function SearchBar() {
   return (
-    <div className="">
+    <div className="h-full">
       <ContextToggle>
         <SearchInput />
       </ContextToggle>
