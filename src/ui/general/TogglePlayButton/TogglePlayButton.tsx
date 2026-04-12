@@ -12,6 +12,48 @@ interface TogglePlayButtonProps extends ComponentProps<"div"> {
   className?: string;
   pauseIcon: LucideIcon;
 }
+
+interface TogglePlayActionButtonProps {
+  isPlay: boolean | undefined;
+  size?: IconWrapperProps["size"];
+  notClickable?: boolean;
+  playIcon: LucideIcon;
+  pauseIcon: LucideIcon;
+}
+
+function TogglePlayActionButton({
+  isPlay,
+  playIcon,
+  pauseIcon,
+  size,
+  notClickable,
+}: TogglePlayActionButtonProps) {
+  const { loading } = useAudioLoadingContext();
+  return loading ? (
+    <div className="animate-spin">
+      <IconWrapper
+        Icon={LoaderCircle}
+        size={size}
+        notClickable={notClickable}
+      />
+    </div>
+  ) : isPlay ? (
+    <IconWrapper
+      className="fill-foreground"
+      Icon={pauseIcon}
+      size={size}
+      notClickable={notClickable}
+    />
+  ) : (
+    <IconWrapper
+      className="fill-foreground"
+      Icon={playIcon}
+      size={size}
+      notClickable={notClickable}
+    />
+  );
+}
+
 function TogglePlayButton({
   isPlay,
   playIcon,
@@ -21,17 +63,16 @@ function TogglePlayButton({
   className,
   ...props
 }: TogglePlayButtonProps) {
-  const { loading } = useAudioLoadingContext();
   return (
     <div className={cn("p-1 rounded-full bg-surface-1", className)} {...props}>
-      {loading ? (
-        <div className="animate-spin">
-          <IconWrapper
-            Icon={LoaderCircle}
-            size={size}
-            notClickable={notClickable}
-          />
-        </div>
+      {isPlay !== undefined ? (
+        <TogglePlayActionButton
+          isPlay={isPlay}
+          playIcon={playIcon}
+          pauseIcon={pauseIcon}
+          size={size}
+          notClickable={notClickable}
+        />
       ) : isPlay ? (
         <IconWrapper
           className="fill-foreground"
