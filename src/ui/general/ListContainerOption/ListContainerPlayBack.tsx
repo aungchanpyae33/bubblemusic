@@ -1,11 +1,11 @@
 "use client";
-import { getArtistPageProps } from "@/database/data";
 import {
   currentSongPlaylistAction,
   DirectPlayBackAction,
   DirectPlayBackState,
   isFallBackAudioActions,
   ShouldFetchSongsListIdAction,
+  SignInModalBoxAction,
   SongActions,
   SongDetail,
   SongFunctionActions,
@@ -16,18 +16,25 @@ import {
   useInstantFallBackAudioFull,
   useRepeatAndCurrentPlayList,
   useShouldFetchSongsList,
+  useSignInModalBox,
   useSong,
   useSongFunction,
   useStorePlayListId,
 } from "@/lib/zustand";
 import IconWrapper from "../IconWrapper";
 import { Pause, Play } from "lucide-react";
+import type { ListSongPage } from "@/database/data-types-return";
+import { audioPlayTriggerIos } from "@/lib/audioPlayTriggerIOS";
+import { useAudioElementContext } from "@/Context/ContextAudioWrapper";
+import { useUserInfoContext } from "@/Context/ContextUserInfo";
+import { guardToSignIn } from "@/lib/guardToSignIn";
 
 interface ListContainerPlayBackProps {
-  list: getArtistPageProps["songs"];
+  list: ListSongPage;
 }
 function ListContainerPlayBack({ list }: ListContainerPlayBackProps) {
-  const playListId = list!.id;
+  const playListId = list.id;
+  const { userInfo } = useUserInfoContext();
   const IsPlayList = useDirectPlayBack(
     (state: DirectPlayBackState) => state.IsPlayList[playListId || ""],
   );
@@ -58,42 +65,42 @@ function ListContainerPlayBack({ list }: ListContainerPlayBackProps) {
   const setIsFallBackAudio = useInstantFallBackAudioFull(
     (state: isFallBackAudioActions) => state.setIsFallBackAudio,
   );
-  if (list?.idArray.length === 0) return null; // no render the toggle playback
-  const handlePlayClick = async () => {
+
+  const signInModalBoxAction = useSignInModalBox(
+    (state: SignInModalBoxAction) => state.signInModalBoxAction,
+  );
+  const { audioElRef } = useAudioElementContext();
+  if (!list.songs) return null; // no render the toggle playback
+  if (list.songs.idArray.length === 0) return;
+  const handlePlayClick = () => {
+    if (!userInfo) {
+      return guardToSignIn({}, signInModalBoxAction);
+    }
+
+    if (!list.songs) return null; // no render the toggle playback)
     setIsFallBackAudio(); //fallback dynamic import
     FetchSongsListIdAction(undefined);
+
     if (list) {
-      const {
-        url,
-        sege,
-        duration,
-        name,
-        song_time_stamp,
-        id,
-        song_id,
-        artists,
-        is_lyric,
-        cover_url,
-      } = (() => {
-        if (playlistId) {
-          return list.songs[id_scope];
-        }
-        return list.songs[list.idArray[0]];
-      })();
+      const { url, duration, name, id, song_id, artists, is_lyric, cover_url } =
+        (() => {
+          if (playlistId) {
+            return list.songs.byId[id_scope];
+          }
+          return list.songs.byId[list.songs.idArray[0]];
+        })();
       const uniUrl = id;
       setPlayListArray({
         [playListId || ""]: list,
       });
       if (playlistId) {
-        setPlay("unknown", undefined);
-        setPlayList("unknown", undefined);
+        setPlay("toggle_key", undefined);
+        setPlayList("toggle_key", undefined);
       } else {
         updateSongCu({
           [uniUrl || ""]: url,
-          sege,
           duration,
           name,
-          song_time_stamp,
           id,
           song_id,
           artists,
@@ -104,13 +111,14 @@ function ListContainerPlayBack({ list }: ListContainerPlayBackProps) {
           [playListId || ""]: [playListId, id],
         });
         setPlayList(playListId || "", true);
+        audioPlayTriggerIos(audioElRef);
         setPlay(uniUrl || "", true);
       }
     }
   };
   return (
     <button
-      className="p-2 bg-[#3664ba]  rounded-full"
+      className="p-2 bg-brand  rounded-full"
       onClick={(e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -118,9 +126,9 @@ function ListContainerPlayBack({ list }: ListContainerPlayBackProps) {
       }}
     >
       {IsPlayList ? (
-        <IconWrapper className="fill-white" size="medium" Icon={Pause} />
+        <IconWrapper className="fill-foreground" size="medium" Icon={Pause} />
       ) : (
-        <IconWrapper className="fill-white" size="medium" Icon={Play} />
+        <IconWrapper className="fill-foreground" size="medium" Icon={Play} />
       )}
     </button>
   );

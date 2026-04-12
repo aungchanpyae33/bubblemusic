@@ -1,43 +1,28 @@
-import React, { RefObject, useContext, useEffect } from "react";
-import { ContextMoreOptionStack } from "@/ui/trackComponent/MoreOptionStackContext";
-import { ContextMoreOptionUnique } from "@/ui/trackComponent/MoreOptionUniqueContext";
-// this function do close the portal when escape is pressed , it also manage the stack for inner child components
+import { RefObject, useEffect } from "react";
+
 function useCloseFunctoion(
   value: boolean,
-  fun:
-    | React.Dispatch<React.SetStateAction<boolean>>
-    | ((value: boolean) => void),
-  closeElement?: RefObject<HTMLButtonElement | null>,
+  onClose: () => void,
+  containerRef: RefObject<HTMLElement | null>,
 ) {
-  const { stack, setStack } = useContext(ContextMoreOptionStack);
-  const { setUuidState } = useContext(ContextMoreOptionUnique);
-  // stack are 0 === parent , 1 === child , 2 === grand child etc..
   useEffect(() => {
-    function closeSearch(e: KeyboardEvent) {
-      if (e.key === "Escape" && value === true) {
-        e.preventDefault();
-        // decrease the stack count because of clicking triiger
-        const newStack = Math.max(0, stack - 1);
-        setStack(newStack);
-        setUuidState(""); // reset unique context state when any portal is closed so that next portal can set its own uuid
+    const containerEl = containerRef.current;
+    if (!containerEl || !value) return;
 
-        // stack === 0 means it is the parent component
-        // i use open (boolean) only  for parent , inner child state are paired with stack number
-        if (stack === 0) {
-          fun(false);
-          if (!closeElement) return;
-          closeElement.current!.focus();
-        }
+    function closeSearch(e: KeyboardEvent) {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        e.stopPropagation();
+        onClose();
       }
     }
-    if (value) {
-      window.addEventListener("keydown", closeSearch);
-    }
+
+    containerEl.addEventListener("keydown", closeSearch);
 
     return () => {
-      window.removeEventListener("keydown", closeSearch);
+      containerEl.removeEventListener("keydown", closeSearch);
     };
-  }, [value, fun, closeElement, stack, setStack, setUuidState]);
+  }, [value, onClose, containerRef]);
 }
 
 export default useCloseFunctoion;

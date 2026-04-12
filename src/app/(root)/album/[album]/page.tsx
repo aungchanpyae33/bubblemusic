@@ -1,52 +1,65 @@
-import { getAlbumSongs } from "@/database/data";
-import AlbumUpperBackground from "@/ui/albumContainer/AlbumUpperBackground";
-import AlbumUpperContainer from "@/ui/albumContainer/AlbumUpperContainer";
-import AudiosContainer from "@/ui/albumContainer/AudiosContainer";
-import VerticalThreeDots from "@/ui/general/icon/VerticalThreeDots";
-import ListContainer from "@/ui/general/ListContainerOption/ListContainer";
-import ListContainerAddToLibrary from "@/ui/general/ListContainerOption/ListContainerAddToLibrary";
-import ListContainerPlayBack from "@/ui/general/ListContainerOption/ListContainerPlayBack";
-import SongListContainerOption from "@/ui/general/optionBox/SongListContainerOption";
-import ContextSongListContainer from "@/ui/playlist/playlistOption/ContextSongListContainer";
-import MoreOption from "@/ui/trackComponent/MoreOption";
-import MoreOptionContext from "@/ui/trackComponent/MoreOptionContext";
-import { Suspense } from "react";
-// import Track from "@/ui/trackComponent/Track";
+import { checkExist } from "@/database/data";
+import { cacheCheckExist, cacheGetAlbumSongs } from "@/database/data-cache";
+import { outputBaseUrl } from "@/lib/outputBaseUrl";
+import EmptyGeneral from "@/ui/general/NoExist/EmptyGeneral";
+import ListPageView from "@/ui/general/SongPageView/ListPageView";
+import PageTrackItemContainer from "@/ui/general/SongPageView/PageTrackItemContainer";
+import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
+import { notFound } from "next/navigation";
+
+export async function generateMetadata(props: {
+  params: Promise<{ album: string }>;
+}): Promise<Metadata> {
+  const meta = await getTranslations("MetaData");
+
+  const params = await props.params;
+  const { exists, error: checkExistError } = await cacheCheckExist(
+    "album",
+    params.album,
+  );
+
+  if (checkExistError) throw new Error("page-load-error");
+  if (!exists) notFound();
+
+  const { data, error } = await cacheGetAlbumSongs(params.album);
+
+  if (!data || error) throw new Error("page-load-error");
+
+  return {
+    title: meta("albumPage.title", { album: data.songs.name }),
+    description: meta("albumPage.description", {
+      album: data.songs.name,
+      artistName: data.songs.related_name,
+    }),
+    metadataBase: outputBaseUrl(),
+    openGraph: {
+      url: `/album/${params.album}`,
+      type: "music.album",
+    },
+  };
+}
 
 async function page(props: { params: Promise<{ album: string }> }) {
   const params = await props.params;
-  const { data, error } = await getAlbumSongs(params.album);
 
-  if (!data || error) return;
+  const { exists, error: checkExistError } = await checkExist(
+    "album",
+    params.album,
+  );
+  if (checkExistError) throw new Error("page-load-error");
+  if (!exists) notFound();
+
+  const { data, error } = await cacheGetAlbumSongs(params.album);
+
+  if (!data || error) throw new Error("page-load-error");
   const { songs } = data;
-  if (!songs) return;
+
+  if (!songs || songs.songs?.idArray.length === 0) return <EmptyGeneral />;
   return (
-    <div className=" w-full">
-      <AlbumUpperBackground>
-        <Suspense fallback={<p>nice</p>}>
-          <AlbumUpperContainer songs={songs} />
-        </Suspense>
-      </AlbumUpperBackground>
-      <ContextSongListContainer id={songs.id} list={songs}>
-        <ListContainer>
-          <ListContainerPlayBack list={songs} />
-          <ListContainerAddToLibrary />
-
-          <div>
-            <MoreOptionContext
-              relative={{ id: songs.related_id, name: songs.related_name }}
-            >
-              <MoreOption
-                targetElement={<SongListContainerOption />}
-                triggerEl={<VerticalThreeDots />}
-              />
-            </MoreOptionContext>
-          </div>
-        </ListContainer>
-      </ContextSongListContainer>
-
-      <AudiosContainer description="album" listSong={songs} />
-    </div>
+    <ListPageView songs={songs}>
+      <PageTrackItemContainer description="album" listSong={songs} />
+    </ListPageView>
   );
 }
 

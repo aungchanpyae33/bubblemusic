@@ -1,37 +1,39 @@
 "use server";
-import { UserLibMappedProps } from "@/database/data";
+import type { UserLibReturn } from "@/database/data-types-return";
 import { createClient } from "@/database/server";
-import { deepMapById } from "@/lib/returnById";
+import { checkUserExist } from "@/lib/checkUserExist";
+import { normalizeById } from "@/lib/returnById";
+import { returnErrorResponse } from "@/lib/returnErrorResponse";
 
 export const removeFromLibrary = async (
   id: string,
   source: "create" | "reference",
-): Promise<{
-  data: UserLibMappedProps | null;
-  error: unknown;
-}> => {
+): Promise<UserLibReturn> => {
   try {
     const supabase = await createClient();
+    await checkUserExist(supabase);
     if (source === "create") {
       const { data, error } = await supabase.rpc("delete_user_playlist_item", {
         p_item_id: id,
       });
+      if (error) throw error;
+      if (!data) throw new Error("not success");
       const userLib = {
-        userLib: data,
+        userLib: normalizeById(data),
       };
-      const mappedData = deepMapById(userLib, ["userLib"]);
-      return { data: mappedData, error };
+      return { data: userLib, error };
     } else {
       const { data, error } = await supabase.rpc("delete_user_reference_item", {
         refer_item_id: id,
       });
+      if (error) throw error;
+      if (!data) throw new Error("not success");
       const userLib = {
-        userLib: data,
+        userLib: normalizeById(data),
       };
-      const mappedData = deepMapById(userLib, ["userLib"]);
-      return { data: mappedData, error };
+      return { data: userLib, error };
     }
   } catch (error) {
-    return { data: null, error };
+    return returnErrorResponse(error);
   }
 };

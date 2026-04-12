@@ -1,5 +1,5 @@
-import { Movie } from "@/database/data";
 import { RefObject, useEffect, useState } from "react";
+import { SearchInputItem } from "../../../database.types-fest";
 
 interface NaviState {
   run: boolean;
@@ -8,7 +8,7 @@ interface NaviState {
 function useNaviSearch(
   initialState: NaviState,
   inputRef: RefObject<HTMLInputElement | null>,
-  data: Movie[],
+  data: SearchInputItem[],
 ): [NaviState] {
   const [navi, setnavi] = useState(initialState);
 

@@ -1,12 +1,13 @@
 "use client";
 import { RefObject } from "react";
-import { Movie } from "@/database/data";
 
 import SearchResultItem from "./SearchResultItem";
 import useNaviSearch from "@/lib/CustomHooks/useNaviSearch";
+import SearchResultContainer from "./SearchResultContainer";
+import type { SearchInputItem } from "../../../database.types-fest";
 
 interface prop {
-  data: Movie[];
+  data: SearchInputItem[];
   inputRef: RefObject<HTMLInputElement | null>;
 }
 
@@ -14,16 +15,17 @@ function SearchResult({ data, inputRef }: prop) {
   const [arrow] = useNaviSearch({ run: false, number: -1 }, inputRef, data);
 
   return (
-    <div className="SearchResult w-full absolute bg-[#222222] rounded-md -bottom-1 translate-y-full  border border-neutral-200 border-opacity-25  py-3  shadow-md shadow-overlay text-start">
-      {data?.map((item: Movie, index: number) => (
+    <SearchResultContainer>
+      {data.map((item: SearchInputItem, index: number) => (
         <SearchResultItem
+          type={item.type}
+          inputRef={inputRef}
           key={item.id}
           title={item.name}
-          index={index}
           show={index === arrow.number && !arrow.run}
         />
       ))}
-    </div>
+    </SearchResultContainer>
   );
 }
 

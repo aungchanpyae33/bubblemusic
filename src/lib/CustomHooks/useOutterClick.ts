@@ -1,41 +1,52 @@
-import { ContextMoreOptionStack } from "@/ui/trackComponent/MoreOptionStackContext";
-import { ContextMoreOptionUnique } from "@/ui/trackComponent/MoreOptionUniqueContext";
-import React, { RefObject, useContext, useEffect } from "react";
-// this function handles clicks outside the component to close it , and ignore the click inside ignoreRef and parent(trigger button) and it only used for parent component
+import { useMoreOptionStackContext } from "@/Context/ContextMoreOptionStack";
+import { useMoreOptionUniqueContext } from "@/Context/ContextMoreOptionUnique";
+import React, { RefObject, useEffect } from "react";
+
+// this function handles clicks outside the component to close it
 
 function useOutterClick(
   value: boolean,
   fun: React.Dispatch<React.SetStateAction<boolean>>,
-  parentElement: RefObject<HTMLButtonElement | null>,
   ignoreRef: RefObject<HTMLDivElement | null>,
+  parentRef: RefObject<HTMLButtonElement | null>,
 ) {
-  // reset stack to 0 when clicked inside the parent element
-  //close the component when clicked outside the parent element by checking contains method
-  const { setStack } = useContext(ContextMoreOptionStack);
-  // reset unique uuid state when clicked inside the parent element
-  const { setUuidState } = useContext(ContextMoreOptionUnique);
+  const { setStack } = useMoreOptionStackContext();
+
+  const { setUuidState } = useMoreOptionUniqueContext();
+  // if it pass to reach it , it is outside click
   useEffect(() => {
-    const container = ignoreRef.current;
-    if (!container) return;
-    function OutterClickFunction(e: MouseEvent | TouchEvent) {
-      if (
-        !parentElement!.current!.contains(e.target as Node) &&
-        !ignoreRef?.current?.contains(e.target as HTMLElement)
-      ) {
-        fun(false);
-      } else {
+    function OutterClickFunction(e: MouseEvent) {
+      const target = e.target as Node | null;
+
+      if (!parentRef.current || !target) return;
+      if (parentRef.current?.contains(target)) return;
+      fun(false);
+    }
+    if (value) {
+      document.body.addEventListener("click", OutterClickFunction);
+    }
+
+    return () => {
+      document.body.removeEventListener("click", OutterClickFunction);
+    };
+  }, [fun, parentRef, value]);
+
+  // handle toggle content click ,
+  useEffect(() => {
+    const copyRef = ignoreRef.current;
+    if (!copyRef) return;
+    function Close(e: MouseEvent) {
+      if (e.target === e.currentTarget) {
+        e.stopPropagation();
         setUuidState("");
         setStack(0);
       }
     }
-    if (value) {
-      document.addEventListener("click", OutterClickFunction);
-    }
-
+    copyRef.addEventListener("click", Close);
     return () => {
-      document.removeEventListener("click", OutterClickFunction);
+      copyRef.removeEventListener("click", Close);
     };
-  }, [value, fun, parentElement, ignoreRef, setStack, setUuidState]);
+  }, [ignoreRef, setStack, setUuidState]);
 }
 
 export default useOutterClick;

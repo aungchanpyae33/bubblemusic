@@ -1,6 +1,5 @@
 import type { Config } from "tailwindcss";
 import plugin from "tailwindcss/plugin";
-import animate from "tailwindcss-animate";
 const config: Config = {
   darkMode: "selector",
   // in version 4 there is no need to do that
@@ -12,6 +11,7 @@ const config: Config = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/ui/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/lib/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
@@ -27,7 +27,6 @@ const config: Config = {
       animation: {
         showtextoverflow:
           "showtextoverflowF var(--animate-translate-duration) linear 500ms forwards, showtextoverflowB var(--animate-translate-duration) linear calc(1000ms + var(--animate-translate-duration)) forwards",
-        headshake: "headshake 0.5s ease-in-out",
       },
       keyframes: {
         showtextoverflowF: {
@@ -44,31 +43,36 @@ const config: Config = {
           },
           to: { transform: "translateX(0)" },
         },
-        headshake: {
-          "0%": { transform: "translateX(0) rotate(0)" },
-          "15%": { transform: "translateX(-3px) rotate(-1deg)" },
-          "30%": { transform: "translateX(3px) rotate(1deg)" },
-          "45%": { transform: "translateX(-2px) rotate(-0.7deg)" },
-          "60%": { transform: "translateX(2px) rotate(0.7deg)" },
-          "75%": { transform: "translateX(-1px) rotate(-0.3deg)" },
-          "100%": { transform: "translateX(0) rotate(0)" },
-        },
       },
       colors: {
-        overlay: "rgba(43,43, 41,0.5)",
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
+        overlay: "var(--overlay)",
+        background: "var(--background)",
+        foreground: "var(--foreground)",
         icon: {
-          foreground: "hsl(var(--foreground))",
+          foreground: "var(--foreground)",
         },
-        divided: "hsl(var(--border))",
-        borderFull: "hsl(var(--bordersecondary))",
-        input: "hsl(var(--input))",
+        seperate: {
+          soft: "var(--seperate)",
+          hard: "var(--seperate-hard)",
+        },
+        section: "var(--section-card)",
+        borderFull: "var(--bordersecondary)",
+        placeholder: "var(--placeholder)",
+        pop: "var(--pop)",
+        error: "var(--error)",
+        brand: "var(--brand)",
+        surface: {
+          1: "var(--surface-1)",
+          2: "var(--surface-2)",
+        },
+        ink: {
+          400: "var(--ink-400)",
+          "gray-400": "var(--ink-gray-400)",
+        },
       },
     },
   },
   plugins: [
-    animate,
     plugin(function ({ addVariant }) {
       addVariant("has-hover", "@media(hover : hover)");
       addVariant("no-hover", "@media not all and (hover: hover)");

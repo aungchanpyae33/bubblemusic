@@ -2,29 +2,10 @@ import React, { RefObject } from "react";
 
 interface sliderPositionCalprop {
   sliderRef: RefObject<HTMLDivElement | null>;
-  e:
-    | MouseEvent
-    | TouchEvent
-    | React.MouseEvent
-    | React.TouchEvent
-    | PointerEvent
-    | React.PointerEvent;
+  e: PointerEvent | React.PointerEvent;
 }
-const getClientX = (
-  e:
-    | MouseEvent
-    | TouchEvent
-    | React.MouseEvent
-    | React.TouchEvent
-    | PointerEvent
-    | React.PointerEvent,
-): number => {
-  if ("clientX" in e) {
-    return e.clientX;
-  } else if ("changedTouches" in e && e.changedTouches.length > 0) {
-    return e.changedTouches[0].clientX;
-  }
-  return 0; // Fallback for empty touch events
+const getClientX = (e: PointerEvent | React.PointerEvent): number => {
+  return e.clientX;
 };
 export const seekCal = ({ sliderRef, e }: sliderPositionCalprop) => {
   const rect = sliderRef!.current!.getBoundingClientRect();

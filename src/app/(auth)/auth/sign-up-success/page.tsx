@@ -1,32 +1,34 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-
+import { outputBaseUrl } from "@/lib/outputBaseUrl";
+import AuthContainer from "@/ui/auth/AuthContainer";
+import BrandTitle from "@/ui/auth/BrandTitle";
+import SignUpInstruction from "@/ui/auth/signupScuuess/SignUpInstruction";
+import SignUpSuccessTitle from "@/ui/auth/signupScuuess/SignUpSuccessTitle";
+import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
+export async function generateMetadata(): Promise<Metadata> {
+  const meta = await getTranslations("MetaData");
+  return {
+    title: meta("authConfirm.title"),
+    description: meta("authConfirm.description"),
+    metadataBase: outputBaseUrl(),
+    robots: {
+      index: false,
+      follow: false,
+    },
+    openGraph: {
+      images: [],
+    },
+    twitter: {
+      images: [],
+    },
+  };
+}
 export default function Page() {
   return (
-    <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
-      <div className="w-full max-w-sm">
-        <div className="flex flex-col gap-6">
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-2xl">
-                Thank you for signing up!
-              </CardTitle>
-              <CardDescription>Check your email to confirm</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-muted-foreground">
-                You&apos;ve successfully signed up. Please check your email to
-                confirm your account before signing in.
-              </p>
-            </CardContent>
-          </Card>
-        </div>
-      </div>
-    </div>
+    <AuthContainer>
+      <BrandTitle />
+      <SignUpSuccessTitle />
+      <SignUpInstruction />
+    </AuthContainer>
   );
 }

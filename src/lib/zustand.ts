@@ -1,13 +1,12 @@
-import { Artist, listSongsSection, SongInfo } from "@/database/data";
+import type { Artist, SongInfo } from "../../database.types-fest";
+import type { ListSongPage } from "@/database/data-types-return";
 import { RefObject } from "react";
 import { createWithEqualityFn as create } from "zustand/traditional";
 import { persist } from "zustand/middleware";
 
 export interface SongDetail {
   url: string;
-  sege: number;
   duration: number;
-  song_time_stamp: Array<number>;
   name: string;
   id: string;
   song_id: string;
@@ -21,17 +20,6 @@ export interface IsRepeatState {
 }
 export interface RepeatAction {
   setRepeat: () => void;
-}
-export interface PrefetchAction {
-  prefetchSegment: (params: PrefetchParams) => Promise<ArrayBuffer[] | null>;
-}
-export interface PrefetchParams {
-  id: string;
-  abortController: RefObject<AbortController | null>;
-  prefetchedUrl: RefObject<string>;
-  prefetchPromiseRef: RefObject<Promise<
-    [ArrayBuffer, ArrayBuffer] | null
-  > | null>;
 }
 export interface SongState {
   songCu: SongDetail | object;
@@ -55,7 +43,7 @@ export interface ShouldFetchSongsListIdAction {
   ) => void;
 }
 export interface currentSongPlaylist {
-  playListArray: listSongsSection | object;
+  playListArray: Record<string, ListSongPage>;
 }
 
 export interface currentSongPlaylistAction {
@@ -66,12 +54,12 @@ export interface currentSongPlaylisthuffleAction {
   shufflePlayListArray: (nweList: currentSongPlaylist["playListArray"]) => void;
 }
 export interface currentAddToQueueAction {
-  currentAddToQueue: (song: Record<string, SongInfo>, id: string[]) => void;
+  currentAddToQueue: (songs: NormalizedById<SongInfo>, id: string[]) => void;
 }
 
 export interface currentAddToNextAction {
   currentAddToNext: (
-    song: Record<string, SongInfo>,
+    songs: NormalizedById<SongInfo>,
     id: string[],
     curId: string,
   ) => void;
@@ -80,7 +68,7 @@ export interface removeFromQueueAction {
   removeFromQueue: (id: string) => void;
 }
 export interface previousSongPlaylist {
-  previousPlayListArray: listSongsSection | object;
+  previousPlayListArray: ListSongPage | object;
 }
 
 export interface resetAction {
@@ -90,30 +78,6 @@ export interface previousSongPlaylistAction {
   setPreviousPlayListArray: (
     newList: previousSongPlaylist["previousPlayListArray"],
   ) => void;
-}
-
-export interface Playlist {
-  id: string;
-  name: string;
-}
-
-export interface playlistFolderProps {
-  playlistFolder: Playlist[] | null;
-}
-
-export interface setPlaylistFolderAction {
-  setPlaylistFolder: (data: Playlist[]) => void;
-}
-
-export interface addPlaylistFolderAction {
-  addPlaylistFolder: (value: Playlist) => void;
-}
-
-export interface addSongProps {
-  addSong: object;
-}
-export interface addSongAction {
-  addSongAction: (value: addSongProps["addSong"]) => void;
 }
 
 export interface toggleLikeProps {
@@ -127,14 +91,14 @@ export interface SongFunctionState {
   Isplay: Record<string, boolean | undefined>;
 }
 export interface SongFunctionActions {
-  setPlay: (key: string, play: boolean | undefined) => void;
+  setPlay: (key: string, play: true | undefined) => void;
 }
 
 export interface DirectPlayBackState {
   IsPlayList: Record<string, boolean | undefined>;
 }
 export interface DirectPlayBackAction {
-  setPlayList: (key: string, play: boolean | undefined) => void;
+  setPlayList: (key: string, play: true | undefined) => void;
 }
 export interface AudioValueState {
   value: number;
@@ -148,6 +112,16 @@ export interface AudioDraggingState {
 }
 export interface AudioDraggingActions {
   setIsDragging: (newState: boolean) => void;
+}
+
+interface SignInModalBoxProps {
+  originParentTriggerRef?: originParentTriggerRef;
+}
+export interface SignInModalBox {
+  signInModalBox: SignInModalBoxProps | undefined;
+}
+export interface SignInModalBoxAction {
+  signInModalBoxAction: (value: SignInModalBox["signInModalBox"]) => void;
 }
 
 export interface VolumeValueState {
@@ -180,59 +154,48 @@ export interface focusStateAction {
 }
 
 // need to select them with object key as there will be used for many component
-export const useSong = create<SongState & SongActions & resetAction>()(
-  (set) => ({
-    songCu: {},
-    updateSongCu: (newSong) =>
-      set(() => ({
-        songCu: { ...newSong },
-      })),
-    reset: () => {
-      set({ songCu: {} });
-    },
-  }),
-);
+export const useSong = create<SongState & SongActions>()((set) => ({
+  songCu: {},
+  updateSongCu: (newSong) =>
+    set(() => ({
+      songCu: { ...newSong },
+    })),
+}));
 
 export const usePreviousPlayList = create<
-  previousSongPlaylist & previousSongPlaylistAction & resetAction
+  previousSongPlaylist & previousSongPlaylistAction
 >()((set) => ({
   previousPlayListArray: {},
   setPreviousPlayListArray: (newList) =>
     set(() => {
       return { previousPlayListArray: { ...newList } };
     }),
-  reset: () => {
-    set({ previousPlayListArray: {} });
-  },
 }));
 
 export const useSongFunction = create<SongFunctionState & SongFunctionActions>(
   (set) => ({
     Isplay: {},
-    setPlay: (key: string, play: boolean | undefined) =>
-      set((state) => ({
-        Isplay: {
-          [key === "unknown" ? Object.keys(state.Isplay)[0] : key]:
-            play ||
-            !state.Isplay[
-              key === "unknown" ? Object.keys(state.Isplay)[0] : key
-            ],
-        },
-      })),
+    setPlay: (key, play) =>
+      set((state) => {
+        const getKey =
+          key === "toggle_key" ? Object.keys(state.Isplay)[0] : key;
+        return {
+          Isplay: {
+            [getKey]: play ?? !state.Isplay[getKey],
+          },
+        };
+      }),
   }),
 );
 
 export const useStorePlayListId = create<
-  StorePlayListIdState & StorePlayListIdStateAction & resetAction
+  StorePlayListIdState & StorePlayListIdStateAction
 >()((set) => ({
   playlistId: {},
   setPlaylistId: (id) =>
     set(() => ({
       playlistId: { ...id },
     })),
-  reset: () => {
-    set({ playlistId: {} });
-  },
 }));
 
 export const useShouldFetchSongsList = create<
@@ -249,16 +212,16 @@ export const useDirectPlayBack = create<
   DirectPlayBackState & DirectPlayBackAction
 >((set) => ({
   IsPlayList: {},
-  setPlayList: (key: string, play: boolean | undefined) =>
-    set((state) => ({
-      IsPlayList: {
-        [key === "unknown" ? Object.keys(state.IsPlayList)[0] : key]:
-          play ||
-          !state.IsPlayList[
-            key === "unknown" ? Object.keys(state.IsPlayList)[0] : key
-          ],
-      },
-    })),
+  setPlayList: (key, play) =>
+    set((state) => {
+      const getKey =
+        key === "toggle_key" ? Object.keys(state.IsPlayList)[0] : key;
+      return {
+        IsPlayList: {
+          [getKey]: play ?? !state.IsPlayList[getKey],
+        },
+      };
+    }),
 }));
 
 export const useRepeatAndCurrentPlayList = create<
@@ -269,160 +232,92 @@ export const useRepeatAndCurrentPlayList = create<
     currentAddToNextAction &
     removeFromQueueAction &
     IsRepeatState &
-    RepeatAction &
-    PrefetchAction &
-    resetAction
->()((set, get) => ({
+    RepeatAction
+>()((set) => ({
   playListArray: {},
+
   setPlayListArray: (newList) =>
     set((state) => {
-      if (Object.keys(newList)[0] !== Object.keys(state.playListArray)[0]) {
-        return { playListArray: { ...newList } };
-      } else {
-        return state.playListArray;
-      }
-    }),
-  shufflePlayListArray: (newList) =>
-    set(() => {
+      const newKey = Object.keys(newList)[0];
+      const oldKey = Object.keys(state.playListArray)[0];
+      if (newKey === oldKey) return state;
       return { playListArray: { ...newList } };
     }),
-  currentAddToQueue: (song, id) =>
+
+  shufflePlayListArray: (newList) =>
+    set(() => ({ playListArray: { ...newList } })),
+
+  currentAddToQueue: (songs, ids) =>
     set((state) => {
-      const playListArray = (Object.values(state.playListArray)[0] ||
-        undefined) as listSongsSection;
-      const playListArrayKey = Object.keys(state.playListArray)[0] as string;
+      const key = Object.keys(state.playListArray)[0];
+      const playlist = state.playListArray[key];
+      if (!playlist?.songs) return state;
 
-      if (playListArray && "songs" in playListArray) {
-        playListArray.songs = { ...playListArray.songs, ...song };
-
-        return {
-          playListArray: {
-            [playListArrayKey || ""]: {
-              ...playListArray,
-              idArray: [...playListArray.idArray, ...id],
+      return {
+        playListArray: {
+          ...state.playListArray,
+          [key]: {
+            ...playlist,
+            songs: {
+              byId: { ...playlist.songs.byId, ...songs.byId },
+              idArray: [...playlist.songs.idArray, ...ids],
             },
           },
-        };
-      } else {
-        return state;
-      }
+        },
+      };
     }),
-  currentAddToNext: (song, id, curId) =>
-    set((state) => {
-      const playListArray = (Object.values(state.playListArray)[0] ||
-        undefined) as listSongsSection;
-      const playListArrayKey = Object.keys(state.playListArray)[0] as string;
 
-      if (playListArray && "songs" in playListArray) {
-        playListArray.songs = { ...playListArray.songs, ...song };
-        const currentIndex = outputCurrentIndex(playListArray.idArray, curId);
-        if (currentIndex === -1) return state;
-        const newSongs = [...playListArray.idArray];
-        newSongs.splice(currentIndex + 1, 0, ...id);
-        return {
-          playListArray: {
-            [playListArrayKey || ""]: {
-              ...playListArray,
-              idArray: newSongs,
+  currentAddToNext: (songs, ids, curId) =>
+    set((state) => {
+      const key = Object.keys(state.playListArray)[0];
+      const playlist = state.playListArray[key];
+      if (!playlist?.songs) return state;
+
+      const currentIndex = outputCurrentIndex(playlist.songs.idArray, curId);
+      if (currentIndex === -1) return state;
+
+      const nextIds = [...playlist.songs.idArray];
+      nextIds.splice(currentIndex + 1, 0, ...ids);
+
+      return {
+        playListArray: {
+          ...state.playListArray,
+          [key]: {
+            ...playlist,
+            songs: {
+              byId: { ...playlist.songs.byId, ...songs.byId },
+              idArray: nextIds,
             },
           },
-        };
-      } else {
-        return state;
-      }
+        },
+      };
     }),
 
   removeFromQueue: (id) =>
     set((state) => {
-      const playListArray = (Object.values(state.playListArray)[0] ||
-        undefined) as listSongsSection;
-      const playListArrayKey = Object.keys(state.playListArray)[0] as string;
+      const key = Object.keys(state.playListArray)[0];
+      const playlist = state.playListArray[key];
+      if (!playlist?.songs) return state;
 
-      if (playListArray && "songs" in playListArray) {
-        delete playListArray.songs[id];
-        const currentIndex = outputCurrentIndex(playListArray.idArray, id);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { [id]: _, ...restById } = playlist.songs.byId;
 
-        if (currentIndex === -1) return state;
-        const newSongs = [...playListArray.idArray];
-        newSongs.splice(currentIndex, 1);
-        return {
-          playListArray: {
-            [playListArrayKey || ""]: {
-              ...playListArray,
-              idArray: newSongs,
+      return {
+        playListArray: {
+          ...state.playListArray,
+          [key]: {
+            ...playlist,
+            songs: {
+              byId: restById,
+              idArray: playlist.songs.idArray.filter((x) => x !== id),
             },
           },
-        };
-      } else {
-        return state;
-      }
+        },
+      };
     }),
   isRepeat: false,
   setRepeat: () => set((state) => ({ isRepeat: !state.isRepeat })),
   // if it check as isRepeat in function component, it will re-render entrire component
-  prefetchSegment: async ({
-    id,
-    abortController,
-    prefetchedUrl,
-    prefetchPromiseRef,
-  }: PrefetchParams) => {
-    if (get().isRepeat) return null;
-
-    const fetchOptions: RequestInit = {
-      signal: abortController!.current!.signal,
-    };
-
-    const playlistArray = Object.values(
-      get().playListArray,
-    )[0] as listSongsSection;
-    const currentIndex = outputCurrentIndex(playlistArray.idArray, id);
-
-    const extract = Math.min(
-      currentIndex + 1,
-      playlistArray.idArray.length - 1,
-    );
-    const { id: id_scope, url } =
-      playlistArray.songs[playlistArray.idArray[extract]];
-
-    if (currentIndex >= playlistArray.idArray.length - 1 && id === id_scope) {
-      return prefetchPromiseRef.current;
-    }
-
-    const initUrl = url;
-    const seg1Url = url.replace("init.mp4", "seg-1.m4s");
-
-    try {
-      // if prefetch promise is not null , means they are waiting some promise, if then return this promise to receive the data
-      if (!prefetchPromiseRef.current) {
-        // immediate update url to inform there is a prefetch call
-        prefetchedUrl.current = url;
-        prefetchPromiseRef.current = Promise.all([
-          fetch(initUrl, fetchOptions).then((res) => res.arrayBuffer()),
-          fetch(seg1Url, fetchOptions).then((res) => res.arrayBuffer()),
-        ]).catch((err): [ArrayBuffer, ArrayBuffer] | null => {
-          //if there is error, reset the prefetchUrl to false the condition check in mediaSourceBuffer.ts
-          prefetchedUrl.current = "";
-          if (err instanceof DOMException && err.name === "AbortError") {
-            return null;
-          }
-          throw err;
-        });
-      }
-      return prefetchPromiseRef.current;
-    } catch (err: unknown) {
-      if (err instanceof DOMException && err.name === "AbortError") {
-        return null;
-      } else {
-        throw err;
-      }
-    }
-  },
-  reset: () => {
-    set(() => ({
-      playListArray: {},
-      isRepeat: false,
-    }));
-  },
 }));
 
 export const useAudioValue = create<AudioValueState & AudioValueActions>(
@@ -446,7 +341,19 @@ export const useAudioDragging = create<
     })),
 }));
 
-export const useVolumeValue = create<VolumeValueState & VolumeValueActions>()(
+export const useSignInModalBox = create<SignInModalBox & SignInModalBoxAction>(
+  (set) => ({
+    signInModalBox: undefined,
+    signInModalBoxAction: (newState) =>
+      set(() => ({
+        signInModalBox: newState,
+      })),
+  }),
+);
+
+export const useVolumeValue = create<
+  VolumeValueState & VolumeValueActions & resetAction
+>()(
   persist(
     (set) => ({
       value: 0,
@@ -454,6 +361,11 @@ export const useVolumeValue = create<VolumeValueState & VolumeValueActions>()(
         set(() => ({
           value: newValue,
         })),
+      reset: () => {
+        set(() => ({
+          value: 0,
+        }));
+      },
     }),
     {
       name: "volume-storage", // key in localStorage
@@ -503,96 +415,104 @@ export const useNotInputFocus = create<focusState & focusStateAction>(
   }),
 );
 
-export const usePlaylistFolder = create<
-  playlistFolderProps & setPlaylistFolderAction & addPlaylistFolderAction
->((set) => ({
-  playlistFolder: null,
-  setPlaylistFolder: (value) =>
-    set((state) => {
-      // If there's no existing state yet, just set the new value
-      if (!state.playlistFolder) {
-        return { playlistFolder: value };
-      }
-      return { playlistFolder: state.playlistFolder };
-    }),
-  addPlaylistFolder: (value) =>
-    set((state) => ({
-      playlistFolder: [...(state.playlistFolder || []), value],
-    })),
-}));
-
-// only for trigger
-export const useSongsStoreData = create<addSongProps & addSongAction>(
-  (set) => ({
-    addSong: {},
-    addSongAction: (value) =>
-      set(() => {
-        return {
-          addSong: { ...value },
-        };
-      }),
-  }),
-);
-
 import outputCurrentIndex from "./OutputCurrentIndex";
+import { NormalizedById } from "./returnById";
 
-export interface songExist {
+export interface isSongExistModalBoxProps {
   playlistId: string;
   songId: string;
+  cover_url: string;
+  originParentTriggerRef?: originParentTriggerRef;
 }
-export interface isSongExist {
-  isSongExist: songExist | object;
+export interface isSongExistModalBox {
+  isSongExistModalBox: isSongExistModalBoxProps | undefined;
 }
-export interface songExistAction {
-  setIsSongExist: (songExist: isSongExist["isSongExist"]) => void;
+export interface songExistActionModalBox {
+  setIsSongExistModalBox: (
+    songExist: isSongExistModalBox["isSongExistModalBox"],
+  ) => void;
 }
-export const useIsExistSongs = create<isSongExist & songExistAction>((set) => ({
-  isSongExist: {},
-  setIsSongExist: (value) =>
+export const useIsExistSongsModalBox = create<
+  isSongExistModalBox & songExistActionModalBox
+>((set) => ({
+  isSongExistModalBox: undefined,
+  setIsSongExistModalBox: (value) =>
     set(() => ({
-      isSongExist: value,
+      isSongExistModalBox: value,
     })),
 }));
 
-export interface addSongsToPlaylistProps {
+export interface songsToPlaylistModalBoxProps {
   songId: string;
   cover_url: string;
+  originParentTriggerRef?: originParentTriggerRef;
 }
-export interface songsToPlaylist {
-  songsToPlaylist: addSongsToPlaylistProps | object;
+export interface songsToPlaylistModalBox {
+  songsToPlaylistModalBox: songsToPlaylistModalBoxProps | undefined;
 }
-export interface addSongsToPlaylist {
-  addSongsToPlaylist: (value: addSongsToPlaylistProps | object) => void;
+export interface addSongsToPlaylistModalBox {
+  addSongsToPlaylistModalBox: (
+    value: songsToPlaylistModalBox["songsToPlaylistModalBox"],
+  ) => void;
 }
-export const useAddSongsToPlaylist = create<
-  songsToPlaylist & addSongsToPlaylist
+export const useAddSongsToPlaylistModalBox = create<
+  songsToPlaylistModalBox & addSongsToPlaylistModalBox
 >((set) => ({
-  songsToPlaylist: {},
-  addSongsToPlaylist: (value) =>
+  songsToPlaylistModalBox: undefined,
+  addSongsToPlaylistModalBox: (value) =>
     set(() => ({
-      songsToPlaylist: value,
+      songsToPlaylistModalBox: value,
     })),
 }));
 
-export interface editToPlaylistProps {
+export type originParentTriggerRef = RefObject<HTMLElement | null> | undefined;
+export interface editToPlaylistModalBoxProps {
   id: string;
   name: string;
+  originParentTriggerRef?: originParentTriggerRef;
 }
-export interface editToPlaylist {
-  editToPlaylist: editToPlaylistProps | object;
+export interface editToPlaylistModalBox {
+  editToPlaylistModalBox: editToPlaylistModalBoxProps | undefined;
 }
-export interface editToPlaylistAction {
-  editToPlaylistAction: (value: editToPlaylist["editToPlaylist"]) => void;
+export interface editToPlaylistModalBoxAction {
+  editToPlaylistModalBoxAction: (
+    value: editToPlaylistModalBox["editToPlaylistModalBox"],
+  ) => void;
 }
-export const useEditToPlaylist = create<editToPlaylist & editToPlaylistAction>(
-  (set) => ({
-    editToPlaylist: {},
-    editToPlaylistAction: (value) =>
-      set(() => ({
-        editToPlaylist: value,
-      })),
-  }),
-);
+export const useEditToPlaylist = create<
+  editToPlaylistModalBox & editToPlaylistModalBoxAction
+>((set) => ({
+  editToPlaylistModalBox: undefined,
+  editToPlaylistModalBoxAction: (value) =>
+    set(() => ({
+      editToPlaylistModalBox: value,
+    })),
+}));
+
+export interface createToPlaylistModalBoxProps {
+  originParentTriggerRef?: originParentTriggerRef;
+}
+
+export interface createToPlaylistModalBox {
+  createToPlaylistModalBox: createToPlaylistModalBoxProps | undefined;
+}
+
+export interface createToPlaylistModalBoxAction {
+  createToPlaylistModalBoxAction: (
+    value: createToPlaylistModalBox["createToPlaylistModalBox"],
+  ) => void;
+}
+
+export const useCreateToPlaylist = create<
+  createToPlaylistModalBox & createToPlaylistModalBoxAction
+>((set) => ({
+  createToPlaylistModalBox: undefined,
+  createToPlaylistModalBoxAction: (value) =>
+    set(() => ({
+      createToPlaylistModalBox: value,
+    })),
+}));
+
 export interface ShowBlock {
   showBlock: { type: "lyric" | "queue" | undefined; open: boolean };
 }
@@ -639,10 +559,13 @@ export interface SongTrackState {
 export interface SetSongTrackAction {
   setSongTrack: (songId: string) => void;
 }
-export const useSongTrack = create<SongTrackState & SetSongTrackAction>()(
+export const useSongTrack = create<
+  SongTrackState & SetSongTrackAction & resetAction
+>()(
   persist(
     (set) => ({
       songTrack: undefined,
+
       setSongTrack: (songId) =>
         set((state) => {
           if (!songId) return state;
@@ -658,21 +581,19 @@ export const useSongTrack = create<SongTrackState & SetSongTrackAction>()(
 
           if (state.songTrack.count >= 5) {
             return {
-              songTrack: {
-                count: 1,
-                songsId: [songId],
-              },
+              songTrack: { count: 1, songsId: [songId] },
             };
           }
 
           if (state.songTrack.songsId.includes(songId)) {
             return {
               songTrack: {
-                count: ++state.songTrack.count,
+                count: state.songTrack.count + 1,
                 songsId: state.songTrack.songsId,
               },
             };
           }
+
           return {
             songTrack: {
               count: state.songTrack.count + 1,
@@ -680,6 +601,12 @@ export const useSongTrack = create<SongTrackState & SetSongTrackAction>()(
             },
           };
         }),
+
+      reset: () => {
+        set(() => ({
+          songTrack: undefined,
+        }));
+      },
     }),
     {
       name: "track-song-storage",

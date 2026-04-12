@@ -1,34 +1,33 @@
-import { useContext } from "react";
-import { ContextToggle } from "./ToggleContext";
+import { useToggleContext } from "@/Context/ContextToggle";
 import { focusStateAction, useNotInputFocus } from "@/lib/zustand";
+import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 interface InputComponentProps {
   inputRef: React.RefObject<HTMLInputElement | null>;
-  setValue: React.Dispatch<React.SetStateAction<string | null>>;
-  setShow: React.Dispatch<React.SetStateAction<boolean>>;
+  setValue: React.Dispatch<React.SetStateAction<string>>;
 }
-function InputComponent({ inputRef, setShow, setValue }: InputComponentProps) {
-  const { setOpen } = useContext(ContextToggle);
+function InputComponent({ inputRef, setValue }: InputComponentProps) {
+  const b = useTranslations("block");
+  const { setOpen } = useToggleContext();
+  const searchParams = useSearchParams();
+  const defaultValue = searchParams.get("query") || "";
   const setIsInputFocus = useNotInputFocus(
     (state: focusStateAction) => state.setIsInputFocus,
   );
-  const searchParams = useSearchParams();
-  const defaultValueRef = searchParams.get("query") || "";
   return (
     <>
       <label htmlFor="search">
         <span className="sr-only">Search</span>
       </label>
       <input
-        className="placeholder:text-slate-400 placeholder:leading-relaxed block bg-blue w-full h-[40px]  pl-4 shadow-sm focus:outline-none text-base bg-[#222222]"
-        placeholder="ရှာဖွေမည်"
+        className="placeholder:text-ink-400 block bg-surface-1 flex-1 appearance-none rounded-none h-[45px]  pl-4 shadow-sm focus:outline-none text-base"
+        placeholder={b("searchInputPlaceholder")}
         type="search"
         id="search"
         name="query"
-        required
         autoComplete="off"
         spellCheck="false"
-        defaultValue={defaultValueRef}
+        defaultValue={defaultValue}
         ref={inputRef}
         onBlur={() => {
           setOpen(false);
@@ -37,6 +36,13 @@ function InputComponent({ inputRef, setShow, setValue }: InputComponentProps) {
         }}
         onFocus={() => {
           setOpen(true);
+          setValue((pre) => {
+            if (!inputRef.current) return pre;
+            if (pre !== inputRef.current.value) {
+              return inputRef.current.value;
+            }
+            return pre;
+          });
           // setShow(true);
           setIsInputFocus(true);
         }}

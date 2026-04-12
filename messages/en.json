@@ -1,0 +1,296 @@
+{
+  "block": {
+    "home": "Home",
+    "back": "Back",
+    "reload": "Reload",
+    "login": "Login",
+    "signUp": "Sign Up",
+    "logout": "Logout",
+    "profile": {
+      "title": "profile"
+    },
+    "theme": "Theme",
+    "light": "light",
+    "dark": "dark",
+    "deviceTheme": "device theme",
+    "changeLanguage": "Language",
+    "en": "English",
+    "my": "မြန်မာ",
+    "like": {
+      "addLike": "Add like",
+      "removeLike": "Remove like"
+    },
+    "removeFromPlaylist": "Remove from playlist",
+    "addToPlaylist": "Add To playlist",
+    "removeFromQueue": "Remove from queue",
+    "removeFromLibrary": "Remove from library",
+    "deletePlaylist": "Delete the playlist",
+    "editPlaylist": "Edit to playlist",
+    "addToQueue": "Add to  queue",
+    "addToPlayNext": "Add to play next",
+    "addToLibrary": "Add to library",
+    "goToAlbum": "Go to Album",
+    "goToRelative": {
+      "album": "Go to artist",
+      "track": "Go to artist",
+      "playlist": "Go to creator"
+    },
+    "share": "Share",
+    "searchPage": {
+      "searchResultFor": "Search results for {searchKeyword}"
+    },
+    "searchInputPlaceholder": "search",
+    "noExistLyric": "Lyrics not available yet.",
+    "create": "Create",
+    "edit": "Edit",
+    "newPlaylist": "New Playlist",
+    "editedPlaylist": "Edit the Playlist",
+    "navLink": {
+      "exploreDescription": "Explore",
+      "likeDescription": "Like Songs",
+      "libraryDescription": "Library"
+    },
+    "emptySongList": "There is no track in the playlist",
+    "playlistForm": {
+      "title": "Title",
+      "privacy": "Privacy",
+      "public": "public",
+      "private": "private"
+    },
+    "listHeader": {
+      "title": "Title",
+      "album": "Album"
+    }
+  },
+  "Toast": {
+    "loading": "Processing… Please wait.",
+    "like": {
+      "addLikeSuccess": "Song added to your likes.",
+      "addLikeError": "Couldn't like the song. Please try again.",
+      "removeLikeSuccess": "Song removed from your likes.",
+      "removeLikeError": "Couldn't remove like. Please try again."
+    },
+    "share": {
+      "shareCopy": "The share link is successfully copied"
+    },
+    "playlistAction": {
+      "playlistCreate": "The playlist is successfully created",
+      "playlistEdit": "The playlist is successfully edited"
+    },
+    "removeFromLib": {
+      "removeFromLibSuccess": "Removed from your library successfully"
+    },
+    "addToLib": {
+      "addToLibSuccess": "Added to your library successfully"
+    },
+    "addSongToPlaylist": {
+      "addSongToPlaylistSuccess": "The song is added to the playlist successfully"
+    },
+    "removeSongFromPlaylist": {
+      "removeSongFromPlaylistSuccess": "The song is removed from the playlist successfully"
+    },
+    "removeFromQueueAction": "Removed from the queue successfully",
+    "addToQueueAction": "Added to the queue successfully",
+    "addToPlayNextAction": "‌Added as play next to the queue successfully"
+  },
+  "ModalBox": {
+    "addSongToPlaylist": {
+      "title": " Add Songs to the Playlist"
+    }
+  },
+  "Loading": {
+    "loadingLyric": "Loading the lyric..."
+  },
+
+  "ErrorMsg": {
+    "errorLyric": "There was an error retrieving the lyrics",
+    "required": "{label} field needs to be filled in order to sumbit",
+    "maxLength": "Max length is {max} characters",
+    "minLength": "Max length is {min} characters",
+    "minLengthPassword": "Password must be at least {min} characters",
+    "passwordComplexity": "Password must include uppercase, lowercase, number, symbol and at least {min} characters",
+    "wrongEmail": "Please provide valid email address",
+    "wentWrong": "Something went wrong",
+    "alreadyEmail": "This email is alreay exist",
+    "notConfirmEmail": "Please comfirm the email first",
+    "wrongCredentials": "The credentials you typed are incorrect",
+    "alreadyUser": "User is already exist. Please sign in",
+    "notFoundUser": "User does not exist. Please Sign up",
+    "notFieldChange": "Input field datas are not changed",
+    "globalErrorTitle": "This page couldn't load.",
+    "globalErrorText": " Please reload to try again or go back.",
+    "searchError": "An error occurred while searching."
+  },
+  "Warning": {
+    "notice": "Notice",
+    "songAlreadyExist": "Songs is already exist. Do you want to add?",
+    "add": "Add",
+    "cancel": "Cancel",
+    "needToLogin": "You must be logged in to perform that feature",
+    "needToLoginSidebar": "Log in to save your favorites.",
+    "NotFound": "Not Found",
+
+    "globalNotFoundTitle": "We can't find the page",
+    "globalNotFoundText": "Please try searching for something else",
+    "currentlyEmpty": "Nothing yet.Currently, it is empty.",
+    "noSearchResult": "Search result not found"
+  },
+
+  "Footer": {
+    "aboutTitle": "About This Project",
+    "aboutDescription": "A sleek music streaming web app built with TypeScript, React, and Next.js. Users can discover music, manage a personal library, and build custom playlists through a streamlined interface.",
+
+    "disclaimer": "⚠️ Disclaimer - This project is a non-commercial personal demonstration project. I do not own or claim copyright for any songs or images stored or used in this application. All media content is used strictly for demonstration purposes. I only own the source code written for this project.",
+
+    "techTitle": "Technologies Used",
+
+    "contactTitle": "Contact",
+    "contactDescription": "I am currently looking for new opportunities.",
+
+    "copyright": "© {year} Bubble. Built by AungChanPyae",
+    "demoNote": "This project was created for demonstration purposes only."
+  },
+  "ListTitle": {
+    "topMix": "Top Mix",
+    "topOfficialPlaylistWeek": "Bubble's Top Playist  This Week",
+    "topCommunityPlaylistWeek": "Community's Top Playlist This Week",
+    "topPlaylistWeek": "Top Playlists This Week",
+    "topAlbumWeek": "Top Albums This Week",
+    "topArtistWeek": "Top Artists This Week",
+    "artistForYou": "Artists For You",
+    "albumForYou": "Albums For You",
+    "playlistForYou": "Playlists For You",
+    "recentlyPlayed": "Recently Played",
+    "trendingSongs": "Trending Songs",
+    "trendingSongsWeek": "Trending Songs This Week",
+    "publicPlaylist": "Public Playlists",
+    "album": "Album",
+    "artist": "Artist",
+    "playlist": "Playlist",
+    "track": "Song",
+    "profile": "Profile",
+    "topResult": "Top Result",
+    "topSongsArtist": "Popular Songs",
+    "newlyAddedSongs": "Recently Added Songs",
+    "newlyAddedPlaylists": "Recently Added Playlists",
+    "newlyAddedAlbums": "Recently Added Albums",
+    "newlyAddedArtists": "Recently Added Artists",
+    "genre": "Genre",
+    "mood": "Mood",
+    "showMore": "Show all",
+    "lastLikedSongs": "Liked Songs",
+    "lastSavedAlbums": "Your saved Albums",
+    "lastSavedPlaylists": "Your saved Playlists",
+    "lastCreatedPlaylists": "Your created Playlists",
+    "lastSavedArtists": "Your favourite Artists",
+    "overview": "Overview",
+    "create-playlist": "Own Playlist",
+    "liked-songs": "Liked Songs",
+    "recently": "Recently Played",
+    "recommended": "{name} Playlists For You",
+    "popular": "Top {name} Playlists This Week",
+    "recent": "Recently Added {name} Playlists"
+  },
+  "Genre": {
+    "mix": "Mix",
+    "electronic": "Electronic",
+    "k-pop": "K-pop",
+    "rap": "Rap",
+    "pop": "Pop",
+    "hip-hop": "Hip-hop",
+    "rock": "Rock",
+    "soul": "Soul"
+  },
+  "Mood": {
+    "energy": "Energy",
+    "love": "Love",
+    "sad": "Sad",
+    "happy": "Happy",
+    "chill": "Chill",
+    "sleep": "Sleep"
+  },
+  "Auth": {
+    "createAccount": "Create a new Account",
+    "loginAccount": "Login to an Account",
+    "email": "email",
+    "display_name": "Your Name",
+    "emailPlaceholder": "email@example.com",
+    "password": "Password",
+    "passwordPlaceholder": "password",
+    "login": "Login",
+    "signUp": "Sign Up",
+    "unAuthTitle": "Authentication Required",
+    "unAuthText": "You need to log in to view this page.",
+    "noAcc": "Don't have an account? <link>Register here</link>",
+    "alreadyAcc": "Already have an account? <link>Log in here</link>",
+    "signUpSuccess": "Verify your email",
+    "signUpSuccessContent": "Sign-up successful! Please check your email to confirm your account. If you don’t see it, check your spam folder."
+  },
+  "MetaData": {
+    "default": {
+      "title": "Bubble",
+      "description": "Bubble is the music streaming platform where user can listen their favorite songs at their own control."
+    },
+    "searchPage": {
+      "title": "Search For {query}",
+      "description": "Are you looking for something? Find songs , albums , artists and playlists you loved in Bubble"
+    },
+    "explorePage": {
+      "title": "Explore",
+      "description": "Explore the newly added fresh songs for you. Don’t miss the newest releases right now in Bubble"
+    },
+    "moodPage": {
+      "title": "{mood} Mood",
+      "description": "Enjoy the {mood} Mood songs for you in Bubble"
+    },
+    "genrePage": {
+      "title": "{genre} Genre",
+      "description": "Enjoy the {genre} Genre songs for you in Bubble"
+    },
+    "albumPage": {
+      "title": "{album} - album",
+      "description": "Listen now album called {album} by {artistName} in Bubble"
+    },
+    "trackPage": {
+      "title": "{track} - track",
+      "description": "Listen the song called {track} in Bubble"
+    },
+    "playlistPage": {
+      "title": "{playlist} - playlist",
+      "description": "Listen the playlist called {playlist} in Bubble"
+    },
+    "libraryPage": {
+      "title": "Library",
+      "description": "Your own Library of music in Bubble"
+    },
+    "profilePage": {
+      "title": "{name}",
+      "description": "Check this {name} profile page in Bubble"
+    },
+    "artistPage": {
+      "title": "{name} - artist",
+      "description": "Check out {name}'s songs in Bubble"
+    },
+    "likedSongPage": {
+      "title": "Liked Track",
+      "description": "Your favourite songs playlist in Bubble"
+    },
+    "profilePlaylist": {
+      "title": "Playlists",
+      "description": "Listen the created playlists in bubble"
+    },
+    "authLogin": {
+      "title": "Log in",
+      "description": "Log in to your Bubble account and enjoy creating your personalized music world."
+    },
+
+    "authSignup": {
+      "title": "Sign up",
+      "description": "Create your new Bubble account and enjoy building your personalized music world."
+    },
+    "authConfirm": {
+      "title": "Verify Account",
+      "description": "Verify your account using the confirmation link sent to your email."
+    }
+  }
+}

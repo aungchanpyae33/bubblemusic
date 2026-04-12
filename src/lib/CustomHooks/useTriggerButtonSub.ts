@@ -1,19 +1,20 @@
-import { ContextMoreOptionStack } from "@/ui/trackComponent/MoreOptionStackContext";
-import { ContextMoreOptionUnique } from "@/ui/trackComponent/MoreOptionUniqueContext";
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
+import { isTouchPointer } from "../isTouchPointer";
+import { useMoreOptionStackContext } from "@/Context/ContextMoreOptionStack";
+import { useMoreOptionUniqueContext } from "@/Context/ContextMoreOptionUnique";
 
 function useTriggerButtonSub(
   parentRef: React.RefObject<HTMLButtonElement | null>,
   stackNum: number,
   uuid: string,
 ) {
-  const { stack, setStack } = useContext(ContextMoreOptionStack);
-  const { uuidState, setUuidState } = useContext(ContextMoreOptionUnique);
+  const { stack, setStack } = useMoreOptionStackContext();
+  const { uuidState, setUuidState } = useMoreOptionUniqueContext();
 
   useEffect(() => {
     const triggerBtn = parentRef.current;
     if (!triggerBtn) return;
-    function ToggleFn(e: PointerEvent) {
+    function ToggleFn(e: MouseEvent) {
       // to stop the trigger to the parent outterClick
       e.stopImmediatePropagation();
       // toggle
@@ -28,7 +29,7 @@ function useTriggerButtonSub(
 
     function OpenFn(e: PointerEvent) {
       e.stopImmediatePropagation();
-      if (e.pointerType === "touch") return;
+      if (isTouchPointer(e)) return;
       // toggle
       setStack(stackNum);
       setUuidState(uuid);

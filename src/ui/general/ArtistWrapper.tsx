@@ -1,7 +1,7 @@
-import { Artist } from "@/database/data";
 import UnderLineLinkHover from "./UnderLineLinkHover";
 import ToolTip from "./ToolTip";
 import { twMerge } from "tailwind-merge";
+import type { Artist } from "../../../database.types-fest";
 const baseStyle = " text-sm truncate";
 interface ArtistWrapperProps extends React.ComponentProps<"div"> {
   artists: Artist[];
@@ -15,8 +15,7 @@ function ArtistWrapper({ artists, className }: ArtistWrapperProps) {
           <span key={item.id} className=" w-full">
             <UnderLineLinkHover
               href={`/artist/${item.id}`}
-              prefetch={false}
-              className="mr-1 leading-relaxed w-full  text-start"
+              className="mr-1 inline"
             >
               {item.name}
             </UnderLineLinkHover>

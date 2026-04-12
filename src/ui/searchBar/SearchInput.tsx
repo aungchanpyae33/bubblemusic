@@ -4,45 +4,38 @@ import { useQuery } from "@tanstack/react-query";
 import SearchResult from "./SearchResult";
 import FormContainer from "./FormContainer";
 import SearchResultWrapper from "./SearchResultWrapper";
+import SearchLoading from "../loading/SearchLoading";
+import { searchGuard } from "@/lib/searchGuard";
+import NoExistSearchResult from "../NoExist/NoExistSearchResult";
+import ErrorSearch from "../Error/ErrorSearch";
+import { getSearchClient } from "@/database/client-data";
 
 function SearchInput() {
   const inputRef = useRef<HTMLInputElement>(null);
-  const [value, setValue] = useState<string | null>(null);
+  const [value, setValue] = useState("");
   const searchAbortController = useRef<AbortController | null>(null);
 
-  async function fetchInput(params: string | null) {
-    if (searchAbortController.current) {
-      searchAbortController.current.abort("new search initiated");
-    }
-    searchAbortController.current = new AbortController();
-    const signal = searchAbortController.current.signal;
-
-    if (params && params.length > 0) {
-      const fetchData = await fetch(`/api/search?with=${params}`, {
-        signal,
-      });
-      const { data, error } = await fetchData.json();
-      if (error) throw new Error(error);
-      return data;
-    }
-    return [];
-  }
-
-  const { data = [], error } = useQuery({
+  const { data = [], status } = useQuery({
     queryKey: ["search", value],
-    queryFn: () => fetchInput(value!),
-    placeholderData: (previousData) => previousData,
+    queryFn: () => getSearchClient(value, searchAbortController),
     staleTime: 10 * 60 * 1000,
   });
-  // [todo] need to return error component
-  if (error) return;
+  const showLoading = status === "pending";
+
+  let content = null;
+
+  if (status === "error") {
+    content = <ErrorSearch />;
+  } else if (showLoading) {
+    content = <SearchLoading />;
+  } else if (data.length > 0) {
+    content = <SearchResult data={data} inputRef={inputRef} />;
+  } else if (!searchGuard(value) && value.length > 0) {
+    content = <NoExistSearchResult />;
+  }
   return (
     <FormContainer inputRef={inputRef} setValue={setValue}>
-      {data.length > 0 && (
-        <SearchResultWrapper>
-          <SearchResult data={data} inputRef={inputRef} />
-        </SearchResultWrapper>
-      )}
+      <SearchResultWrapper>{content}</SearchResultWrapper>
     </FormContainer>
   );
 }

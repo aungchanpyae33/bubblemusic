@@ -1,12 +1,10 @@
-import { listSongsSection } from "@/database/data";
+import { ListSongPage } from "@/database/data-types-return";
 
-const excludeCurrentSongs = (
-  urlProp: listSongsSection,
-  currentIndex: number,
-) => {
+const excludeCurrentSongs = (ListSong: ListSongPage, currentIndex: number) => {
+  if (!ListSong.songs) return;
   return [
-    ...urlProp.idArray.slice(0, currentIndex),
-    ...urlProp.idArray.slice(currentIndex + 1),
+    ...ListSong.songs.idArray.slice(0, currentIndex),
+    ...ListSong.songs.idArray.slice(currentIndex + 1),
   ];
 };
 export default excludeCurrentSongs;

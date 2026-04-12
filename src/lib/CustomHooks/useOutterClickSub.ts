@@ -1,22 +1,26 @@
-import { RefObject, useContext, useEffect } from "react";
-import { ContextMoreOptionStack } from "@/ui/trackComponent/MoreOptionStackContext";
+import { useMoreOptionStackContext } from "@/Context/ContextMoreOptionStack";
+import { RefObject, useEffect } from "react";
+
 // this function handles clicks inside the sub component to manage the stack , it does not manage the outter click of main parent element
 function useOutterClickSub(
   portalElRef: RefObject<HTMLDivElement | null>,
   stackNum: number,
+  isMobile?: boolean,
 ) {
-  const { stack, setStack } = useContext(ContextMoreOptionStack);
+  const { stack, setStack } = useMoreOptionStackContext();
   // stack are 0 === parent , 1 === child , 2 === grand child etc..
   //toggle sub content (open,close) based on stack number
   useEffect(() => {
     const copyRef = portalElRef.current;
     if (!copyRef) return;
-    function OutterClickFunction(e: PointerEvent) {
+    function OutterClickFunction(e: MouseEvent) {
       // to stop the trigger to the parent outterClick
-      e.stopImmediatePropagation();
-      if (stack > stackNum) {
-        // by setting stack of the current click portal, it can be determined which sub portal should be open or close(eg: when clicking stack 2 portal , parent stack 1 should not be closed, but when stack 2 portal is open and clicking stack 1 portal , stack 2 should be closed)
-        setStack(stackNum);
+      if (e.target === e.currentTarget) {
+        e.stopPropagation();
+        if (stack > stackNum) {
+          // by setting stack of the current click portal, it can be determined which sub portal should be open or close(eg: when clicking stack 2 portal , parent stack 1 should not be closed, but when stack 2 portal is open and clicking stack 1 portal , stack 2 should be closed)
+          setStack(stackNum);
+        }
       }
     }
 
@@ -24,7 +28,7 @@ function useOutterClickSub(
     return () => {
       copyRef.removeEventListener("click", OutterClickFunction);
     };
-  }, [portalElRef, stack, setStack, stackNum]);
+  }, [portalElRef, stack, setStack, stackNum, isMobile]);
 }
 
 export default useOutterClickSub;

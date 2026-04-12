@@ -4,7 +4,7 @@ import { AudioDraggingActions, AudioValueActions } from "../zustand";
 interface AudioSeekHandleDownProp {
   sliderRef: RefObject<HTMLDivElement | null>;
   setIsDragging: AudioDraggingActions["setIsDragging"];
-  e: React.TouchEvent | React.MouseEvent | React.TouchEvent;
+  e: React.PointerEvent;
   setValue: AudioValueActions["setValue"];
 }
 const AudioSeekHandleDown = ({

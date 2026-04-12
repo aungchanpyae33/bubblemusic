@@ -1,9 +1,15 @@
-import { ReactNode, useContext } from "react";
-import { ContextToggle } from "./ToggleContext";
+import { useToggleContext } from "@/Context/ContextToggle";
+import { ReactNode } from "react";
 
 function SearchResultWrapper({ children }: { children: ReactNode }) {
-  const { open } = useContext(ContextToggle);
-  return open && children;
+  const { open } = useToggleContext();
+  return (
+    open && (
+      <div className="w-full absolute bg-pop rounded-md -bottom-1 translate-y-full">
+        {children}
+      </div>
+    )
+  );
 }
 
 export default SearchResultWrapper;

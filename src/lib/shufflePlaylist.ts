@@ -1,22 +1,32 @@
-import { listSongsSection } from "@/database/data";
+import type { ListSongPage } from "@/database/data-types-return";
 
 const shufflePlaylist = (
   array: string[],
   isShuffle: boolean,
-  listProp: listSongsSection,
+  listProp: ListSongPage,
   currentSongs: string,
-  previousPlayListArray: listSongsSection,
+  previousPlayListArray: ListSongPage,
 ) => {
   const newCopyArray = array.slice();
   for (let i = newCopyArray.length - 1; i > 0; i--) {
     const n = Math.floor(Math.random() * (i + 1));
     [newCopyArray[i], newCopyArray[n]] = [newCopyArray[n], newCopyArray[i]];
   }
-  return !isShuffle
-    ? {
+
+  function outputShuffle() {
+    if (!isShuffle) {
+      if (!listProp.songs) return previousPlayListArray;
+      const shuffleData = {
         ...listProp,
-        idArray: [currentSongs, ...newCopyArray],
-      }
-    : previousPlayListArray;
+        songs: {
+          byId: listProp.songs.byId,
+          idArray: [currentSongs, ...newCopyArray],
+        },
+      };
+      return shuffleData;
+    }
+    return previousPlayListArray;
+  }
+  return outputShuffle();
 };
 export default shufflePlaylist;

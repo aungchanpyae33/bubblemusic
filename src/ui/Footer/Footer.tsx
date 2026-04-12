@@ -1,93 +1,82 @@
 import { Mail } from "lucide-react";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 function Footer() {
+  const f = useTranslations("Footer");
   return (
-    <footer className="w-full bg-inherit  border-t border-divided  py-8 px-4">
+    <footer className="w-full bg-inherit  border-t border-seperate-soft  py-8 px-4">
       <div className="grid grid-cols-1  lg:grid-cols-3 sm:grid-cols-2 gap-8">
         <div className="space-y-4 sm:col-span-2 lg:col-auto col-auto">
-          <h3 className="text-white font-bold text-lg">ဤ ပရောဂျက် အကြောင်း</h3>
-          <p className="text-zinc-400 text-sm leading-relaxed">
-            ဤ သီချင်းနားဆင်နိုင်သော ဘဘယ်လ် ဝက်ဘ်အက်ပ်သည် TypeScript ၊ React ၊
-            Nextjs တို့ဖြင့် သရုပ်ပြသရန်အတွက် ဖန်တီးထားသော ကိုယ်ပိုင် ဝက်ဘ်အက်ပ်
-            ပရောဂျက်တစ်ခုဖြစ်ပါသည်။ရိူးရှင်းပြီး အသုံးပြုရ
-            လွယ်ကူသောဒီဇိုင်းဖြင့် ဖန်တီးထားပြီး အသုံးပြုသူ အနေဖြင့်
-            သီချင်းနားထောင်ခြင်း ၊ သိမ်းဆည်းခြင်း အပြင် အခြားသူများဖြင့်ပါ
-            တိုက်ရိုက်နားဆင်နိုင်ပါသည်။
-          </p>
-          <div className="bg-zinc-800/50 p-3 rounded-md border border-borderFull">
-            <p className="text-amber-400 text-sm font-medium leading-relaxed">
-              ⚠️ ရှင်းလင်းချက် - ဤပရောဂျက်မှာ စီးပွားဖြစ်မဟုတ်သော
-              ကိုယ်ပိုင်နမူနာပြသမှု ပရောဂျက်တစ်ခုဖြစ်ပါသည်။
-              အသုံးပြုသိမ်းဆည်းထားသော မည်သည့်သီချင်း/ဓာတ်ပုံဧ။်
-              မူပိုင်ခွင့်ကိုမျှ ကျွန်တော် မပိုင်ဆိုင်ပါ သို့မဟုတ်
-              မူပိုင်ခွင့်ကိုလည်း မတောင်းဆိုပါ။ အကြောင်းအရာအားလုံးကို
-              သရုပ်ပြသရန်အတွက်သာ အသုံးပြုပါသည်။ ကိုယ်ပိုင်ရေးသားထားသော Source
-              Code ကိုသာ ကျွန်တော် ပိုင်ဆိုင်ပါသည်။
-            </p>
+          <h3 className="text-foreground font-bold text-lg">
+            {f("aboutTitle")}
+          </h3>
+          <p className="text-ink-400 text-sm">{f("aboutDescription")}</p>
+          <div className="bg-section p-3 rounded-md border border-borderFull">
+            <p className="text-sm font-medium">{f("disclaimer")}</p>
           </div>
         </div>
 
         <div className="space-y-4">
-          <h3 className="text-white font-bold text-lg">
-            အသုံးပြုထားသော နည်းပညာများ
+          <h3 className="text-foreground font-bold text-lg">
+            {f("techTitle")}
           </h3>
           <ul className="grid grid-cols-2 gap-2">
-            <li className="text-zinc-400 text-sm">
+            <li className="text-ink-400 text-sm">
               <div className=" flex gap-1">
                 <span>•</span>
                 <span>React</span>
               </div>
             </li>
-            <li className="text-zinc-400 text-sm">
+            <li className="text-ink-400 text-sm">
               <div className=" flex gap-1">
                 <span>•</span>
                 <span>Next.js</span>
               </div>
             </li>
-            <li className="text-zinc-400 text-sm">
+            <li className="text-ink-400 text-sm">
               <div className=" flex gap-1">
                 <span>•</span>
                 <span>TypeScript</span>
               </div>
             </li>
-            <li className="text-zinc-400 text-sm">
+            <li className="text-ink-400 text-sm">
               <div className=" flex gap-1">
                 <span>•</span>
                 <span>Tailwind CSS</span>
               </div>
             </li>
-            <li className="text-zinc-400 text-sm">
+            <li className="text-ink-400 text-sm">
               <div className=" flex gap-1">
                 <span>•</span>
                 <span> Supabase</span>
               </div>
             </li>
-            <li className="text-zinc-400 text-sm">
+            <li className="text-ink-400 text-sm">
               <div className=" flex gap-1">
                 <span>•</span>
-                <span>HTML5 MediaSource API</span>
+                <span>hls.js</span>
               </div>
             </li>
           </ul>
         </div>
 
         <div className="space-y-4">
-          <h3 className="text-white font-bold text-lg">ဆက်သွယ်ရန်</h3>
-          <p className="text-zinc-400 text-sm leading-relaxed">
-            ကျွန်တော်သည် လက်ရှိတွင် အခွင့်အလမ်းသစ်များ ရှာဖွေနေပါသည်။
-          </p>
+          <h3 className="text-foreground font-bold text-lg">
+            {f("contactTitle")}
+          </h3>
+          <p className="text-ink-400 text-sm">{f("contactDescription")}</p>
           <div className="flex flex-col space-y-3">
             <Link
               target="_"
-              href="mailto:khantlu24@gmail.com"
-              className="text-zinc-400 hover:text-white transition-colors text-sm flex items-center gap-2"
+              href="mailto:aung.c.pyae@outlook.com"
+              className="text-ink-400 hover:text-foreground transition-colors text-sm flex items-center gap-2"
             >
               <Mail size={16} />
-              <span className=" block truncate">khantlu24@gmail.com</span>
+              <span className=" block truncate">aung.c.pyae@outlook.com</span>
             </Link>
             <Link
               href="https://github.com/aungchanpyae33"
-              className="text-zinc-400 hover:text-white transition-colors text-sm flex items-center gap-2"
+              className="text-ink-400 hover:text-foreground transition-colors text-sm flex items-center gap-2"
             >
               <svg
                 role="img"
@@ -104,7 +93,7 @@ function Footer() {
 
             {/* <Link
               href="https://yourportfolio.com"
-              className="text-zinc-400 hover:text-white transition-colors text-sm flex items-center gap-2"
+              className="text-ink-400 hover:text-foreground transition-colors text-sm flex items-center gap-2"
             >
               <ExternalLink size={16} />
               ကျွန်တော်ဧ။် ပို့ဖိုလီယိုကို ကြည့်ရှုရန်
@@ -113,13 +102,11 @@ function Footer() {
         </div>
       </div>
 
-      <div className="mt-8 pt-6 border-t border-divided flex flex-col md:flex-row justify-between items-center">
-        <p className="text-zinc-500 text-sm">
-          © 2025 AungChanPyae မူပိုင်ခွင့်အားလုံးရှိသည်။
+      <div className="mt-8 pt-6 border-t border-seperate-soft flex flex-col md:flex-row justify-between items-center">
+        <p className="text-ink-500 text-sm">
+          {f("copyright", { year: new Date().getFullYear() })}
         </p>
-        <p className="text-zinc-500 text-sm mt-2 md:mt-0">
-          နမူနာ ပရောဂျက်အဖြစ် သရုပ်ပြရန်အတွက်သာ ဖန်တီးထားပါသည်။
-        </p>
+        <p className="text-ink-500 text-sm mt-2 md:mt-0">{f("demoNote")}</p>
       </div>
     </footer>
   );

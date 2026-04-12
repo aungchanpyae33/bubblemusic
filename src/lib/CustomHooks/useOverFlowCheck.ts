@@ -1,12 +1,6 @@
-import React, {
-  RefObject,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { RefObject, useEffect, useRef, useState } from "react";
 import debounce from "../debounce";
-import { Context } from "../MediaSource/ContextMediaAudioFull";
+import { useMediaAudioFullContext } from "@/Context/ContextMediaAudioFull";
 interface isOverFlowProp {
   duration: number;
   clientWidth: number;
@@ -24,7 +18,7 @@ const useOverflowCheck = (
     duration: 0,
     clientWidth: 0,
   });
-  const { open } = useContext(Context);
+  const { open } = useMediaAudioFullContext();
   const animateItterateRef = useRef(1);
   const [animate, setanimatie] = useState(true);
   const previousWidth = useRef(0);

@@ -1,6 +1,6 @@
 import { RefObject } from "react";
 import { FocusElement } from "./FocusElement";
-
+// currently not implemented
 function ArrowNavi(
   e: React.KeyboardEvent<HTMLDivElement>,
   dataInc: RefObject<number>,

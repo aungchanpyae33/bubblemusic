@@ -1,56 +1,66 @@
-import { getSongTrack } from "@/database/data";
-import AlbumUpperBackground from "@/ui/albumContainer/AlbumUpperBackground";
-import AlbumUpperContainer from "@/ui/albumContainer/AlbumUpperContainer";
-import AudiosContainer from "@/ui/albumContainer/AudiosContainer";
-import VerticalThreeDots from "@/ui/general/icon/VerticalThreeDots";
-import ListContainer from "@/ui/general/ListContainerOption/ListContainer";
-import ListContainerPlayBack from "@/ui/general/ListContainerOption/ListContainerPlayBack";
-import ContextInfoTrack from "@/ui/trackComponent/ContextInfoTrack";
-import ContextLike from "@/ui/trackComponent/ContextLike";
-import MoreOption from "@/ui/trackComponent/MoreOption";
-import MoreOptionContext from "@/ui/trackComponent/MoreOptionContext";
-import TrackItemContainer from "@/ui/trackComponent/TrackItemContainer";
-import TrackToggleLike from "@/ui/trackComponent/TrackToggleLike";
+import { cacheCheckExist, cacheGetSongTrack } from "@/database/data-cache";
+import { outputBaseUrl } from "@/lib/outputBaseUrl";
+import PageTrackItemContainer from "@/ui/general/SongPageView/PageTrackItemContainer";
+import TrackPageView from "@/ui/general/SongPageView/TrackPageView";
+import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
+import { notFound } from "next/navigation";
 
-// import PlaceHolderTrackInstantPlay from "@/ui/Footer/PlaceHolderTrackInstantPlay";
-import { Suspense } from "react";
+export async function generateMetadata(props: {
+  params: Promise<{ track: string }>;
+}): Promise<Metadata> {
+  const meta = await getTranslations("MetaData");
+
+  const params = await props.params;
+  const { exists, error: checkExistError } = await cacheCheckExist(
+    "track",
+    params.track,
+  );
+
+  if (checkExistError) throw new Error("page-load-error");
+  if (!exists) notFound();
+
+  const { data, error } = await cacheGetSongTrack(params.track);
+
+  if (!data || error) throw new Error("page-load-error");
+  const { songs } = data;
+  if (!songs) throw new Error("page-load-error");
+  if (!songs.songs) throw new Error("page-load-error");
+
+  return {
+    title: meta("trackPage.title", { track: data.songs.name }),
+    description: meta("trackPage.description", { track: data.songs.name }),
+    metadataBase: outputBaseUrl(),
+    openGraph: {
+      url: `/track/${params.track}`,
+      type: "music.song",
+    },
+  };
+}
 
 async function page(props: { params: Promise<{ track: string }> }) {
   const { track } = await props.params;
-  const { data, error } = await getSongTrack(track);
 
-  if (!data || error) return;
+  const { exists, error: checkExistError } = await cacheCheckExist(
+    "track",
+    track,
+  );
+  if (checkExistError) throw new Error("page-load-error");
+  if (!exists) notFound();
+
+  const { data, error } = await cacheGetSongTrack(track);
+
+  if (!data || error) throw new Error("page-load-error");
   const { songs } = data;
-  if (!songs) return;
-  const songsInfo = songs?.songs[track];
+  if (!songs) throw new Error("page-load-error");
+  if (!songs.songs) throw new Error("page-load-error");
+
+  const songsInfo = songs.songs.byId[track];
 
   return (
-    <div className=" w-full">
-      <AlbumUpperBackground>
-        <Suspense fallback={<p>nice</p>}>
-          <AlbumUpperContainer songs={songs} />
-        </Suspense>
-      </AlbumUpperBackground>
-
-      <ContextInfoTrack id={songsInfo?.id} source={undefined} song={songsInfo}>
-        <ContextLike id={songsInfo!.song_id}>
-          <ListContainer>
-            <ListContainerPlayBack list={songs} />
-            <TrackToggleLike songId={songsInfo!.song_id} />
-            <div>
-              <MoreOptionContext relative={songsInfo.artists}>
-                <MoreOption
-                  targetElement={<TrackItemContainer />}
-                  triggerEl={<VerticalThreeDots />}
-                />
-              </MoreOptionContext>
-            </div>
-          </ListContainer>
-        </ContextLike>
-      </ContextInfoTrack>
-
-      <AudiosContainer description="Song" listSong={songs} />
-    </div>
+    <TrackPageView songs={songs} songsInfo={songsInfo}>
+      <PageTrackItemContainer description="track" listSong={songs} />
+    </TrackPageView>
   );
 }
 

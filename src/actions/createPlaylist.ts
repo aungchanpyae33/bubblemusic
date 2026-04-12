@@ -1,30 +1,33 @@
 "use server";
-
-import { UserLibMappedProps } from "@/database/data";
+import type { UserLibReturn } from "@/database/data-types-return";
 import { createClient } from "@/database/server";
-import { deepMapById } from "@/lib/returnById";
+import { checkUserExist } from "@/lib/checkUserExist";
+import { normalizeById } from "@/lib/returnById";
+import { returnErrorResponse } from "@/lib/returnErrorResponse";
+import { FormDataTypeCreate } from "@/ui/general/ModalAction/CreatePlaylist/PlaylistCreateForm";
 
-export const insertDataAction = async (
-  playlist_name: string,
-  check_type: boolean,
-): Promise<{
-  data: UserLibMappedProps | null;
-  error: unknown;
-}> => {
+export const insertDataAction = async ({
+  playlist_name,
+  checkType,
+}: {
+  playlist_name: string;
+  checkType: FormDataTypeCreate["checkType"];
+}): Promise<UserLibReturn> => {
   try {
     const supabase = await createClient();
+    await checkUserExist(supabase);
+    const p_is_public = checkType === "public" ? true : false;
     const { data, error } = await supabase.rpc("insert_playlist", {
       playlist_name,
-      check_type,
+      p_is_public,
     });
-    console.log(error);
+    if (error) throw error;
+    if (!data) throw new Error("not success");
     const userLib = {
-      userLib: data,
+      userLib: normalizeById(data),
     };
-
-    const mappedData = data ? deepMapById(userLib, ["userLib"]) : null;
-    return { data: mappedData, error };
+    return { data: userLib, error };
   } catch (error) {
-    return { data: null, error };
+    return returnErrorResponse(error);
   }
 };

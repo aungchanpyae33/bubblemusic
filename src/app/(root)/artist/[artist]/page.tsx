@@ -1,56 +1,73 @@
-import { getArtistPage } from "@/database/data";
-import AlbumUpperBackground from "@/ui/albumContainer/AlbumUpperBackground";
-import AlbumUpperContainer from "@/ui/albumContainer/AlbumUpperContainer";
-import AudiosContainer from "@/ui/albumContainer/AudiosContainer";
-import Container from "@/ui/albumContainer/Container";
-import VerticalThreeDots from "@/ui/general/icon/VerticalThreeDots";
-import ListContainer from "@/ui/general/ListContainerOption/ListContainer";
-import ListContainerAddToLibrary from "@/ui/general/ListContainerOption/ListContainerAddToLibrary";
-import ListContainerPlayBack from "@/ui/general/ListContainerOption/ListContainerPlayBack";
-import SongListContainerOption from "@/ui/general/optionBox/SongListContainerOption";
-import ContextSongListContainer from "@/ui/playlist/playlistOption/ContextSongListContainer";
-import MoreOption from "@/ui/trackComponent/MoreOption";
-import MoreOptionContext from "@/ui/trackComponent/MoreOptionContext";
-import { Suspense } from "react";
+import { cacheCheckExist, cacheGetArtistPage } from "@/database/data-cache";
+import { outputBaseUrl } from "@/lib/outputBaseUrl";
+import EmptyGeneral from "@/ui/general/NoExist/EmptyGeneral";
+import ListPageView from "@/ui/general/SongPageView/ListPageView";
+import PageTrackItemContainer from "@/ui/general/SongPageView/PageTrackItemContainer";
+import ListUpFaceGroup from "@/ui/ListUpFaceContainer/ListUpFaceGroup";
+import { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
+import { notFound } from "next/navigation";
+
+export async function generateMetadata(props: {
+  params: Promise<{ artist: string }>;
+}): Promise<Metadata> {
+  const meta = await getTranslations("MetaData");
+
+  const params = await props.params;
+  const { exists, error: checkExistError } = await cacheCheckExist(
+    "artist",
+    params.artist,
+  );
+
+  if (checkExistError) throw new Error("page-load-error");
+  if (!exists) notFound();
+
+  const { data, error } = await cacheGetArtistPage(params.artist);
+
+  if (!data || error) throw new Error("page-load-error");
+  const { songs, albums } = data;
+  if (!songs && !albums) throw new Error("page-load-error");
+
+  return {
+    title: meta("artistPage.title", { name: songs.name }),
+    description: meta("artistPage.description", {
+      name: data.songs.name,
+    }),
+    metadataBase: outputBaseUrl(),
+    openGraph: {
+      url: `/artist/${params.artist}`,
+      type: "profile",
+    },
+  };
+}
+
 async function page(props: { params: Promise<{ artist: string }> }) {
   const params = await props.params;
+  const { exists, error: checkExistError } = await cacheCheckExist(
+    "artist",
+    params.artist,
+  );
+  if (checkExistError) throw new Error("page-load-error");
+  if (!exists) notFound();
 
-  const { data, error } = await getArtistPage(params.artist);
+  const { data, error } = await cacheGetArtistPage(params.artist);
 
-  if (!data || error) return;
+  if (!data || error) throw new Error("page-load-error");
   const { songs, albums } = data;
-  if (!songs && !albums) return;
+  if (!songs && !albums) throw new Error("page-load-error");
+  if (!songs || songs.songs?.idArray.length === 0) return <EmptyGeneral />;
   return (
-    <div className=" w-full">
-      <AlbumUpperBackground>
-        <Suspense fallback={<p>nice</p>}>
-          <AlbumUpperContainer songs={songs!} />
-        </Suspense>
-      </AlbumUpperBackground>
-      {songs && (
-        <ContextSongListContainer id={songs.id} list={songs}>
-          <ListContainer>
-            <ListContainerPlayBack list={songs} />
-            <ListContainerAddToLibrary />
-
-            <div>
-              <MoreOptionContext
-                relative={{ id: songs.related_id, name: songs.related_name }}
-              >
-                <MoreOption
-                  targetElement={<SongListContainerOption />}
-                  triggerEl={<VerticalThreeDots />}
-                />
-              </MoreOptionContext>
-            </div>
-          </ListContainer>
-        </ContextSongListContainer>
-      )}
+    <ListPageView songs={songs}>
       <div className=" space-y-3">
-        {songs && <AudiosContainer description="top songs" listSong={songs} />}
-        {albums && <Container songs={albums} description="album" />}
+        {songs && (
+          <PageTrackItemContainer
+            description="topSongsArtist"
+            listSong={songs}
+          />
+        )}
+        {albums && <ListUpFaceGroup list={albums} description="album" />}
       </div>
-    </div>
+    </ListPageView>
   );
 }
 

@@ -1,4 +1,4 @@
-import { RefObject, useContext, useEffect, useMemo } from "react";
+import { RefObject, useEffect, useMemo } from "react";
 import throttle from "../throttle";
 import { seekCal, sliderPositionCal } from "../MediaSource/SliderPositionCal";
 import AudioSeeked from "../MediaSource/AudioSeeked";
@@ -12,7 +12,7 @@ import {
   useAudioValue,
   useSongFunction,
 } from "../zustand";
-import { DataContext } from "../MediaSource/ContextMedia";
+import { useAudioElementContext } from "@/Context/ContextAudioWrapper";
 export interface valueProps {
   value: AudioValueState["value"] | undefined;
 }
@@ -22,8 +22,6 @@ export interface isDraggingProps {
 interface audioSeekProp {
   sliderRef: RefObject<HTMLDivElement | null>;
   duration: number;
-  isPointer: boolean;
-  isTouchDevice: boolean;
   url: string;
   shouldRun: boolean;
 }
@@ -37,8 +35,6 @@ interface useAudioSeekReturnType {
 const useAudioSeek = ({
   sliderRef,
   duration,
-  isPointer,
-  isTouchDevice,
   url,
   shouldRun,
 }: audioSeekProp): useAudioSeekReturnType => {
@@ -52,16 +48,6 @@ const useAudioSeek = ({
   const setIsDragging = useAudioDragging(
     (state: AudioDraggingActions) => state.setIsDragging,
   );
-  const {
-    dataAudio,
-    loadNextSegment,
-    segNum,
-    sege,
-    abortController,
-    fetching,
-    bufferThreshold,
-    song_time_stamp,
-  } = useContext(DataContext);
   const throttledSetValue = useMemo(
     () => throttle((val: number) => setValue(val), 1000),
     [setValue],
@@ -70,18 +56,20 @@ const useAudioSeek = ({
     (state: SongFunctionState) =>
       Object.values(state.Isplay as Record<string, boolean>)[0],
   );
+  const { audioElRef } = useAudioElementContext();
 
   useEffect(() => {
-    const copyDataAudio = dataAudio!.current!;
+    const copyAudioRef = audioElRef.current;
+    if (!copyAudioRef) return;
     let animationFrameId: number;
 
-    function handleMove(e: PointerEvent | TouchEvent | MouseEvent) {
+    function handleMove(e: PointerEvent) {
       if (!shouldRun) return;
       const { percentage } = sliderPositionCal({ sliderRef, e });
       setValue(percentage);
     }
 
-    function handleUp(e: PointerEvent | TouchEvent | MouseEvent) {
+    function handleUp(e: PointerEvent) {
       if (!shouldRun) return;
 
       setIsDragging(false);
@@ -90,72 +78,42 @@ const useAudioSeek = ({
       AudioSeeked({
         per,
         duration,
-        dataAudio,
-        sege,
-        segNum,
-        loadNextSegment,
-        bufferThreshold,
-        fetching,
-        abortController,
-        song_time_stamp,
+        audioElRef,
       });
     }
     function update() {
-      if (!Isplay || !shouldRun || !copyDataAudio || isDragging) {
+      if (!Isplay || !shouldRun || !copyAudioRef || isDragging) {
         animationFrameId = requestAnimationFrame(update);
         return;
       }
-      const data = (copyDataAudio.currentTime / copyDataAudio.duration) * 100;
+      const data = (copyAudioRef.currentTime / copyAudioRef.duration) * 100;
       const newValue = 100 - data;
       throttledSetValue(newValue);
       animationFrameId = requestAnimationFrame(update);
     }
 
     if (isDragging) {
-      if (isPointer) {
-        document.addEventListener("pointermove", handleMove);
-        document.addEventListener("pointerup", handleUp);
-      } else {
-        if (isTouchDevice) {
-          document.addEventListener("touchmove", handleMove, { passive: true });
-          document.addEventListener("touchend", handleUp, { passive: true });
-        } else {
-          document.addEventListener("mousemove", handleMove);
-          document.addEventListener("mouseup", handleUp);
-        }
-      }
+      document.body.addEventListener("pointermove", handleMove);
+      document.body.addEventListener("pointerup", handleUp);
     }
 
     animationFrameId = requestAnimationFrame(update);
 
     return () => {
-      document.removeEventListener("pointermove", handleMove);
-      document.removeEventListener("pointerup", handleUp);
-      document.removeEventListener("touchmove", handleMove);
-      document.removeEventListener("touchend", handleUp);
-      document.removeEventListener("mousemove", handleMove);
-      document.removeEventListener("mouseup", handleUp);
+      document.body.removeEventListener("pointermove", handleMove);
+      document.body.removeEventListener("pointerup", handleUp);
       cancelAnimationFrame(animationFrameId);
     };
   }, [
-    dataAudio,
     duration,
     isDragging,
-    loadNextSegment,
-    segNum,
-    sege,
     sliderRef,
-    abortController,
-    fetching,
-    isPointer,
-    isTouchDevice,
     setIsDragging,
     setValue,
-    bufferThreshold,
     shouldRun,
-    song_time_stamp,
     throttledSetValue,
     Isplay,
+    audioElRef,
   ]);
 
   useEffect(() => {
