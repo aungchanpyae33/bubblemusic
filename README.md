@@ -11,6 +11,11 @@
 
 [https://bubblemusic.vercel.app](https://bubblemusic.vercel.app)
 
+<img width="1200" height="630" alt="bubble2" src="https://github.com/user-attachments/assets/eda5d68d-5a23-4c77-90c8-9b5ab9b4b417" />
+<img width="1200" height="630" alt="bubble1" src="https://github.com/user-attachments/assets/9e48827a-3024-42f8-8faf-cd3cc2261788" />
+
+---
+
 ## The main Tech stack i used in Bubble
 
 ![TypeScript](https://img.shields.io/badge/TypeScript-blue?style=for-the-badge&logo=typescript&logoColor=white) ![Next.js](https://img.shields.io/badge/Next.js-black?style=for-the-badge&logo=next.js&logoColor=white) ![TanStack Query](https://img.shields.io/badge/TanStack_Query-FF4154?style=for-the-badge&logo=reactquery&logoColor=white) ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
