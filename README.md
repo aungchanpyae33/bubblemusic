@@ -61,22 +61,26 @@ Bash
 pnpm dlx supabase start
 ```
 
-\_This command will automatically create your `database tables`, `RLS policies`, and the `pg_function` `trigger` and `cron job`.
+This command will automatically create your `database tables`, `RLS policies`, and the `pg_function` `trigger` and `cron job`.
 
 #### Notice
 
 The above command will not create and seed any files or any database rows as i am not willing to share any other's copyrighted assets on online.
 But you can make it by your own. Below is my overview current method to make files and insert database.
 
-(_As this project is demo showcase and more focus on frontend , currently i don't have one-click simplify version to seed data audio and it is my low priority feature to do in future. If you find any questions about below setup , contact me freely on `aung.c.pyae@outlook.com`_)
+(_As this project is demo showcase and more focus on frontend , currently i don't have one-click simplify version to seed data audio and it is my low priority feature to do in future. If you find any questions about below setup , contact me freely on_ `aung.c.pyae@outlook.com`)
 
 - I use telegram bot to download the music files/album/artist mainly from **Deezload** and **Music Downloader**
 
 - Then i use **ffmpeg** locally to make hls format file.
+
   ```
   ffmpeg -i input.mp3 -map 0:a -map_metadata -1 -vn -c:a aac -b:a 128k -f hls -hls_time 10 -hls_playlist_type vod -hls_segment_filename "seg-%d.ts" index.m3u8
   ```
-- \*Before insert to database , it needs embedding of the song. I use `bge-small-en-v1.5` Text Embedding models from **baai** on cloudflare. Below is the example of how i prepare for embedding structure - - I use the website - https://audioaidynamics.com/music-analyzer to get analysis of the audio file. - I copy the output and convert to usable string output. **(Code is private)** - Then it is ready to insert like below embedding format. (For artist and album case , i just use google for that artist and album info and create text embedding with those info)
+
+  - Before insert to database , it needs embedding of the song. I use `bge-small-en-v1.5` Text Embedding models from **baai** on cloudflare.
+  - I use the website - https://audioaidynamics.com/music-analyzer to get analysis of the audio file. - I copy the output and convert to usable string output. **(Code is private)**
+  - Then it is ready to insert like below embedding format. (For artist and album case , i just use google for that artist and album info and create text embedding with those info)
 
 ```
    const  embeddingInput  =  `
