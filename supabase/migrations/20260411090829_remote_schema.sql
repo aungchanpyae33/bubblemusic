@@ -3606,6 +3606,7 @@ CREATE TABLE IF NOT EXISTS "public"."album" (
     "embedding" "extensions"."vector"(384),
     "type" "text" DEFAULT 'album'::"text" NOT NULL,
     "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "release_date" "date",
     CONSTRAINT "album_type_check" CHECK (("type" = ANY (ARRAY['album'::"text", 'single'::"text", 'ep'::"text"])))
 );
 
