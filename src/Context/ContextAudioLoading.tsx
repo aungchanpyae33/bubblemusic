@@ -25,7 +25,8 @@ export const useAudioLoadingContext = () => {
   }
   return context;
 };
-
+const StartLoadEvent = ["loadstart", "waiting", "seeking"];
+const StopLoadEvent = ["playing", "seeked", "canplay", "error"];
 function ContextAudioLoading({
   children,
   audioElRef,
@@ -44,25 +45,18 @@ function ContextAudioLoading({
     function stop() {
       setLoading(false);
     }
-
-    audio.addEventListener("loadstart", start);
-    audio.addEventListener("waiting", start);
-    audio.addEventListener("seeking", start);
-    audio.addEventListener("stalled", start);
-
-    audio.addEventListener("playing", stop);
-    audio.addEventListener("seeked", stop);
-    audio.addEventListener("canplay", stop);
+    StartLoadEvent.forEach((startLoad) =>
+      audio.addEventListener(startLoad, start),
+    );
+    StopLoadEvent.forEach((stopLoad) => audio.addEventListener(stopLoad, stop));
 
     return () => {
-      audio.removeEventListener("loadstart", start);
-      audio.removeEventListener("waiting", start);
-      audio.removeEventListener("seeking", start);
-      audio.removeEventListener("stalled", start);
-
-      audio.removeEventListener("playing", stop);
-      audio.removeEventListener("seeked", stop);
-      audio.removeEventListener("canplay", stop);
+      StartLoadEvent.forEach((startLoad) =>
+        audio.removeEventListener(startLoad, start),
+      );
+      StopLoadEvent.forEach((stopLoad) =>
+        audio.removeEventListener(stopLoad, stop),
+      );
     };
   }, [audioElRef]);
   const value = { loading, setLoading };
