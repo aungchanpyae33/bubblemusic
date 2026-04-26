@@ -39,11 +39,12 @@ export interface GetLikedIdReturn {
 export type GetAllMediaItems = {
   [K in Exclude<
     keyof AllMediaItems,
-    "trendingSongs" | "trendingSongsWeek"
+    "trendingSongs" | "trendingSongsWeek" | "songForYou"
   >]: NormalizedById<listInfo> | null;
 } & {
   trendingSongs: NormalizedById<SongInfo> | null;
   trendingSongsWeek: NormalizedById<SongInfo> | null;
+  songForYou: NormalizedById<SongInfo> | null;
 };
 
 export type GetUnAuthRootPage = {

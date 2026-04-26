@@ -213,6 +213,7 @@ export const get = async (): Promise<GetAllMediaItemsReturn> => {
       topCommunityPlaylistWeek: normalizeById(data.topCommunityPlaylistWeek),
       topAlbumWeek: normalizeById(data.topAlbumWeek),
       topArtistWeek: normalizeById(data.topArtistWeek),
+      songForYou: normalizeById(data.songForYou),
       artistForYou: normalizeById(data.artistForYou),
       albumForYou: normalizeById(data.albumForYou),
       playlistForYou: normalizeById(data.playlistForYou),
