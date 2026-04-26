@@ -602,7 +602,6 @@ export const getSimilarSongQueue = async (
 export const getLyric = async (songId: string) => {
   try {
     const supabase = await createClient();
-    await checkUserExist(supabase);
     const { data, error } = await supabase
       .from("lyric")
       .select("*")

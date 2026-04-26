@@ -6,7 +6,6 @@ import {
   DirectPlayBackState,
   isFallBackAudioActions,
   ShouldFetchSongsListIdAction,
-  SignInModalBoxAction,
   SongActions,
   SongFunctionActions,
   StorePlayListIdState,
@@ -15,7 +14,6 @@ import {
   useInstantFallBackAudioFull,
   useRepeatAndCurrentPlayList,
   useShouldFetchSongsList,
-  useSignInModalBox,
   useSong,
   useSongFunction,
   useStorePlayListId,
@@ -31,8 +29,6 @@ import { audioPlayTriggerIos } from "@/lib/audioPlayTriggerIOS";
 import { useAudioElementContext } from "@/Context/ContextAudioWrapper";
 import type { MediaItemType } from "../../../../database.types-fest";
 import TogglePlayButton from "./TogglePlayButton";
-import { useUserInfoContext } from "@/Context/ContextUserInfo";
-import { guardToSignIn } from "@/lib/guardToSignIn";
 import { IconWrapperProps } from "../IconWrapper";
 import { cn } from "@/lib/utils";
 const hasData = async (
@@ -96,11 +92,7 @@ function DirectPlayButton({
   const setIsFallBackAudio = useInstantFallBackAudioFull(
     (state: isFallBackAudioActions) => state.setIsFallBackAudio,
   );
-  const signInModalBoxAction = useSignInModalBox(
-    (state: SignInModalBoxAction) => state.signInModalBoxAction,
-  );
   const { audioElRef } = useAudioElementContext();
-  const { userInfo } = useUserInfoContext();
   async function getData() {
     const returnData = await hasData(dataFromFetch, listId, type);
     const { data, error } = returnData;
@@ -112,7 +104,6 @@ function DirectPlayButton({
     return songs;
   }
   const handlePlayClick = async () => {
-    if (!userInfo) return guardToSignIn({}, signInModalBoxAction);
     setIsFallBackAudio(); //fallback dynamic import
     //to reset auto fetch key after playing autogenerate playlist,
     FetchSongsListIdAction(undefined);
