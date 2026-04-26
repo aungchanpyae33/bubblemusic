@@ -41,7 +41,6 @@ function NavSideList({
           onContextMenu={(e) => {
             e.preventDefault();
           }}
-          tabIndex={open ? -1 : 0}
           className=" w-[70px] cursor-pointer h-[70px] min-h-[70px] flex items-center justify-center"
         >
           {/* open */}
@@ -73,7 +72,6 @@ function NavSideList({
           <NavSideLink
             url="/explore"
             desp={b("navLink.exploreDescription")}
-            open={open}
             setOpen={setOpen}
           >
             {childrenExplore}
@@ -81,7 +79,6 @@ function NavSideList({
           <NavSideLink
             url="/playlist/like"
             desp={b("navLink.likeDescription")}
-            open={open}
             setOpen={setOpen}
           >
             {childrenLike}
@@ -90,7 +87,6 @@ function NavSideList({
             <NavSideLink
               url="/library/overview"
               desp={b("navLink.libraryDescription")}
-              open={open}
               setOpen={setOpen}
             >
               {childrenPlaylist}

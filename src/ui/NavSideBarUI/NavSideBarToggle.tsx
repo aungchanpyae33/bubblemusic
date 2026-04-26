@@ -15,7 +15,6 @@ function NavSidebarToggle({
         setOpen(!open);
       }}
       className=" w-[70px] cursor-pointer h-[70px] flex items-center justify-center "
-      tabIndex={open ? 0 : -1}
     >
       <IconWrapper size="large" Icon={X} />
     </button>
