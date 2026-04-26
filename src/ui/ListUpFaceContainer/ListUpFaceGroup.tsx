@@ -15,7 +15,7 @@ async function ListUpFaceGroup({
 }: {
   list: GetAllMediaItems[Exclude<
     keyof GetAllMediaItems,
-    "trendingSongs" | "trendingSongsWeek"
+    "trendingSongs" | "trendingSongsWeek" | "songForYou"
   >];
   description: string;
   insertDescription?: Record<string, string>;
