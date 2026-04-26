@@ -73,6 +73,7 @@ function AudioFullUpperWrapper({ children }: { children: React.ReactNode }) {
             },
           )}
           tabIndex={-1}
+          inert={!showBlock.open ? true : false}
         >
           <div className=" w-full h-full grid-rows-[60px_1fr] grid relative">
             <div

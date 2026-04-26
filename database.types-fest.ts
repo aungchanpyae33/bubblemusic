@@ -65,6 +65,7 @@ export type DiscoverMediaItems = {
 
 export type PersonalizedMediaItems = {
   recentlyPlayed: listInfo[];
+  songForYou: SongInfo[];
   artistForYou: listInfo[];
   albumForYou: listInfo[];
   playlistForYou: listInfo[];

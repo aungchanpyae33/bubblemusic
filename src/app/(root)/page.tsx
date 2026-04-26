@@ -11,6 +11,8 @@ import { userFetch } from "@/lib/UserInfoFetch";
 import { getTranslations } from "next-intl/server";
 import { outputBaseUrl } from "@/lib/outputBaseUrl";
 import type { Metadata } from "next";
+import { SongInfo } from "../../../database.types-fest";
+import { NormalizedById } from "@/lib/returnById";
 
 export async function generateMetadata(): Promise<Metadata> {
   const meta = await getTranslations("MetaData");
@@ -38,6 +40,18 @@ async function page() {
           return (
             <ListItemUpFaceGroup description={itemKey} key={itemKey}>
               <ListItemUpFaceContainer songs={data[itemKey]} />
+            </ListItemUpFaceGroup>
+          );
+        }
+
+        if (
+          (itemKey as keyof GetAllMediaItemsReturn["data"]) === "songForYou"
+        ) {
+          return (
+            <ListItemUpFaceGroup description={itemKey} key={itemKey}>
+              <ListItemUpFaceContainer
+                songs={data[itemKey] as unknown as NormalizedById<SongInfo>}
+              />
             </ListItemUpFaceGroup>
           );
         }

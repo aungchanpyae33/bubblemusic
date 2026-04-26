@@ -2162,17 +2162,28 @@ DECLARE
   artist_for_you JSONB;
   album_for_you JSONB;
   playlist_for_you JSONB;
+  song_for_you JSONB;
+
   user_artist_embedding extensions.vector(384);
   user_album_embedding extensions.vector(384);
   user_playlist_embedding extensions.vector(384);
+  user_song_embedding extensions.vector(384);
 BEGIN
   -- Get user embeddings
-  SELECT u.artist_embedding, u.album_embedding, u.playlist_embedding
-  INTO user_artist_embedding, user_album_embedding, user_playlist_embedding
+  SELECT 
+    u.artist_embedding, 
+    u.album_embedding, 
+    u.playlist_embedding,
+    u.song_embedding
+  INTO 
+    user_artist_embedding, 
+    user_album_embedding, 
+    user_playlist_embedding,
+    user_song_embedding
   FROM public.users u
   WHERE u.user_id = public.get_user_id();
 
-  -- recently played
+  -- recently played 
   SELECT jsonb_agg(sub.item ORDER BY sub.last_played DESC)
   INTO recently_played_items
   FROM (
@@ -2198,20 +2209,19 @@ BEGIN
     LIMIT 8
   ) AS sub;
 
-  -- ArtistForYou
+  -- ArtistForYou 
   IF user_artist_embedding IS NOT NULL THEN
     SELECT jsonb_agg(item)
     INTO artist_for_you
     FROM (
-      SELECT
-        jsonb_build_object(
-          'id', ar.id,
-          'name', ar.name,
-          'related_id', ar.id,
-          'related_name', ar.name,
-          'cover_url' , ar.cover_url,
-          'type', 'artist'
-        ) AS item
+      SELECT jsonb_build_object(
+        'id', ar.id,
+        'name', ar.name,
+        'related_id', ar.id,
+        'related_name', ar.name,
+        'cover_url', ar.cover_url,
+        'type', 'artist'
+      ) AS item
       FROM public.artist ar
       ORDER BY ar.embedding OPERATOR(extensions.<=>) user_artist_embedding
       LIMIT 8
@@ -2220,20 +2230,19 @@ BEGIN
     artist_for_you := '[]'::jsonb;
   END IF;
 
-  -- AlbumForYou
+  -- AlbumForYou 
   IF user_album_embedding IS NOT NULL THEN
     SELECT jsonb_agg(item)
     INTO album_for_you
     FROM (
-      SELECT
-        jsonb_build_object(
-          'id', al.id,
-          'name', al.title,
-          'related_id', ar.id,
-          'cover_url' , al.cover_url,
-          'related_name', ar.name,
-          'type', 'album'
-        ) AS item
+      SELECT jsonb_build_object(
+        'id', al.id,
+        'name', al.title,
+        'related_id', ar.id,
+        'cover_url', al.cover_url,
+        'related_name', ar.name,
+        'type', 'album'
+      ) AS item
       FROM public.album al
       JOIN public.artist ar ON ar.id = al.artist_id
       ORDER BY al.embedding OPERATOR(extensions.<=>) user_album_embedding
@@ -2243,25 +2252,24 @@ BEGIN
     album_for_you := '[]'::jsonb;
   END IF;
 
- 
+  -- PlaylistForYou 
   IF user_playlist_embedding IS NOT NULL THEN
     SELECT jsonb_agg(item)
     INTO playlist_for_you
     FROM (
-      SELECT
-        jsonb_build_object(
-          'id', p.id,
-          'name', p.name,
-          'related_id', p.user_id,
-          'cover_url' , p.cover_url,
-          'related_name', u.user_name,
-          'type', 'playlist'
-        ) AS item
+      SELECT jsonb_build_object(
+        'id', p.id,
+        'name', p.name,
+        'related_id', p.user_id,
+        'cover_url', p.cover_url,
+        'related_name', u.user_name,
+        'type', 'playlist'
+      ) AS item
       FROM public.playlist p
       JOIN public.users u ON u.user_id = p.user_id
-      WHERE p.user_id != public.get_user_id()           -- exclude user's own playlists
-        AND p.is_public = true                          -- only public playlists
-        AND p.embedding IS NOT NULL                     -- must have embedding (has songs)
+      WHERE p.user_id != public.get_user_id()
+        AND p.is_public = true
+        AND p.embedding IS NOT NULL
       ORDER BY p.embedding OPERATOR(extensions.<=>) user_playlist_embedding
       LIMIT 8
     ) sub;
@@ -2269,11 +2277,61 @@ BEGIN
     playlist_for_you := '[]'::jsonb;
   END IF;
 
+  --  SongForYou 
+  IF user_song_embedding IS NOT NULL THEN
+    SELECT jsonb_agg(item)
+    INTO song_for_you
+    FROM (
+      SELECT
+        jsonb_build_object(
+          'id', gen_random_uuid(),
+          'song_id', s.id,
+          'name', s.name,
+          'url', s.url,
+          'cover_url', s.cover_url,
+          'type', 'track',
+          'duration', s.duration,
+          'is_lyric', s.is_lyric,
+          'artists', (
+            SELECT jsonb_agg(
+                     jsonb_build_object(
+                       'id', a.id,
+                       'name', a.name,
+                       'role', sa.role
+                     )
+                     ORDER BY
+                       CASE 
+                         WHEN sa.role = 'main' THEN 0
+                         WHEN sa.role = 'feat' THEN 1
+                         ELSE 2
+                       END,
+                       a.name
+                   )
+            FROM public.song_artists sa
+            JOIN public.artist a ON a.id = sa.artist_id
+            WHERE sa.song_id = s.id
+          ),
+          'album', jsonb_build_object(
+            'id', al.id,
+            'name', al.title
+          )
+        ) AS item
+      FROM public.song s
+      LEFT JOIN public.album al ON al.id = s.album_id
+      WHERE s.embedding IS NOT NULL
+      ORDER BY s.embedding OPERATOR(extensions.<=>) user_song_embedding
+      LIMIT 8
+    ) sub;
+  ELSE
+    song_for_you := '[]'::jsonb;
+  END IF;
+
   RETURN jsonb_build_object(
     'recentlyPlayed', COALESCE(recently_played_items, '[]'::jsonb),
     'artistForYou', COALESCE(artist_for_you, '[]'::jsonb),
     'albumForYou', COALESCE(album_for_you, '[]'::jsonb),
-    'playlistForYou', COALESCE(playlist_for_you, '[]'::jsonb)
+    'playlistForYou', COALESCE(playlist_for_you, '[]'::jsonb),
+    'songForYou', COALESCE(song_for_you, '[]'::jsonb)
   );
 END;
 $$;
@@ -2589,59 +2647,100 @@ CREATE OR REPLACE FUNCTION "public"."get_similar_songs"("input_song_id" "uuid", 
 DECLARE
   song_items JSON[];
   song_embedding extensions.vector(384);
+  user_embedding extensions.vector(384);
+  uid uuid;
 BEGIN
-  -- Get embedding of the input song
+  -- 1. Get input song embedding
   SELECT s.embedding INTO song_embedding
   FROM public.song s
   WHERE s.id = input_song_id;
 
-  -- Fetch similar songs with artist and album info
+  -- 2. Get current user
+  uid := public.get_user_id();
+
+  -- 3. Fetch user embedding IF user exists
+  IF uid IS NOT NULL THEN
+    SELECT u.song_embedding INTO user_embedding
+    FROM public."user" u
+    WHERE u.id = uid;
+  END IF;
+
+  -- 4. Main query (limit BEFORE aggregation)
   SELECT
     CASE
-      WHEN COUNT(s.id) > 0 THEN
+      WHEN COUNT(sub.id) > 0 THEN
         array_agg(
           json_build_object(
             'id', gen_random_uuid(),
-            'song_id', s.id,
-            'url', s.url,
-            'is_lyric', s.is_lyric,
-            'cover_url', s.cover_url,
-            'name', s.name,
+            'song_id', sub.id,
+            'url', sub.url,
+            'is_lyric', sub.is_lyric,
+            'cover_url', sub.cover_url,
+            'name', sub.name,
             'type', 'track',
-            'duration', s.duration,
-            'artists', (
-              SELECT json_agg(
-                json_build_object(
-                  'id', a.id,
-                  'name', a.name,
-                  'role', sa.role
-                )
-                ORDER BY
-                  CASE
-                    WHEN sa.role = 'main' THEN 0
-                    WHEN sa.role = 'featured' THEN 1
-                    ELSE 2
-                  END,
-                  a.name
-              )
-              FROM public.song_artists sa
-              JOIN public.artist a ON a.id = sa.artist_id
-              WHERE sa.song_id = s.id
-            ),
-            'album', json_build_object(
-              'id', al.id,
-              'name', al.title
-            )
+            'duration', sub.duration,
+            'artists', sub.artists,
+            'album', sub.album
           )
-          ORDER BY (1 - (s.embedding OPERATOR(extensions.<=>) song_embedding)) DESC
         )
       ELSE '{}'::json[]
     END
   INTO song_items
-  FROM public.song s
-  LEFT JOIN public.album al ON al.id = s.album_id
-  WHERE s.id != input_song_id
-    AND (1 - (s.embedding OPERATOR(extensions.<=>) song_embedding)) > similarity_threshold;
+  FROM (
+    SELECT
+      s.id,
+      s.url,
+      s.is_lyric,
+      s.cover_url,
+      s.name,
+      s.duration,
+
+      -- artists
+      (
+        SELECT json_agg(
+          json_build_object(
+            'id', a.id,
+            'name', a.name,
+            'role', sa.role
+          )
+          ORDER BY
+            CASE
+              WHEN sa.role = 'main' THEN 0
+              WHEN sa.role = 'featured' THEN 1
+              ELSE 2
+            END,
+            a.name
+        )
+        FROM public.song_artists sa
+        JOIN public.artist a ON a.id = sa.artist_id
+        WHERE sa.song_id = s.id
+      ) AS artists,
+
+      -- album
+      json_build_object(
+        'id', al.id,
+        'name', al.title
+      ) AS album,
+
+      -- final score (mix only in ranking)
+      (
+        (1 - (s.embedding OPERATOR(extensions.<=>) song_embedding)) * 0.9 +
+        COALESCE(
+          (1 - (s.embedding OPERATOR(extensions.<=>) user_embedding)) * 0.1,
+          0
+        )
+      ) AS score
+
+    FROM public.song s
+    LEFT JOIN public.album al ON al.id = s.album_id
+
+    WHERE s.id != input_song_id
+
+      AND (1 - (s.embedding OPERATOR(extensions.<=>) song_embedding)) > similarity_threshold
+
+    ORDER BY score DESC, s.id
+    LIMIT 30
+  ) sub;
 
   RETURN song_items;
 END;
@@ -2985,7 +3084,7 @@ $$;
 ALTER FUNCTION "public"."insert_playlist_with_songs"("playlist_name" "text", "song_ids" bigint[]) OWNER TO "postgres";
 
 
-CREATE OR REPLACE FUNCTION "public"."insert_song_with_refs"("p_url" "text", "p_name" "text", "p_duration" double precision, "p_embedding" "extensions"."vector", "p_song_album" "text", "p_song_cover" "text", "p_artists" "json") RETURNS "text"
+CREATE OR REPLACE FUNCTION "public"."insert_song_with_refs"("p_url" "text", "p_name" "text", "p_duration" double precision, "p_embedding" "extensions"."vector", "p_song_album" "text", "p_song_cover" "text", "p_artists" "json", "p_lyric" boolean) RETURNS "text"
     LANGUAGE "plpgsql"
     SET "search_path" TO ''
     AS $$
@@ -3001,9 +3100,9 @@ BEGIN
 
   -- Insert the song
   INSERT INTO public.song (
-    url, name, duration, embedding, album_id, cover_url
+    url, name, duration, embedding, album_id, cover_url, is_lyric
   ) VALUES (
-    p_url, p_name, p_duration, p_embedding, album_id, p_song_cover
+    p_url, p_name, p_duration, p_embedding, album_id, p_song_cover, p_lyric
   )
   RETURNING id INTO inserted_id;
 
@@ -3021,7 +3120,7 @@ END;
 $$;
 
 
-ALTER FUNCTION "public"."insert_song_with_refs"("p_url" "text", "p_name" "text", "p_duration" double precision, "p_embedding" "extensions"."vector", "p_song_album" "text", "p_song_cover" "text", "p_artists" "json") OWNER TO "postgres";
+ALTER FUNCTION "public"."insert_song_with_refs"("p_url" "text", "p_name" "text", "p_duration" double precision, "p_embedding" "extensions"."vector", "p_song_album" "text", "p_song_cover" "text", "p_artists" "json", "p_lyric" boolean) OWNER TO "postgres";
 
 
 CREATE OR REPLACE FUNCTION "public"."insert_weekly_list_play_counts"() RETURNS "void"
