@@ -46,8 +46,7 @@ function AudioInfoOverFlow({
         const fullWidth = ofcheckDiv.current!.scrollWidth;
         const showWidth = ofcheckDiv.current!.clientWidth;
         if (fullWidth > showWidth) {
-          const overFlowWidth = ((fullWidth - showWidth) * showWidth) / 2;
-
+          const overFlowWidth = ((fullWidth - showWidth) * showWidth) / 4;
           if (isOverFlow.duration !== overFlowWidth) {
             setIsOverFlow({
               duration: overFlowWidth,

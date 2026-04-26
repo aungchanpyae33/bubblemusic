@@ -28,7 +28,7 @@ const useOverflowCheck = (
       const fullWidth = element.current!.scrollWidth;
       const showWidth = element.current!.clientWidth;
       if (fullWidth > showWidth) {
-        const overFlowWidth = ((fullWidth - showWidth) * showWidth) / 2;
+        const overFlowWidth = ((fullWidth - showWidth) * showWidth) / 4;
         previousWidth.current = showWidth;
         setIsOverFlow({
           duration: overFlowWidth,
