@@ -51,15 +51,17 @@ function AudioFullUpperWrapper({ children }: { children: React.ReactNode }) {
           </div>
           <div
             className={clsx(
-              "min-h-[60px] max-w-fit   flex  items-center self-start lg:self-auto",
+              "min-h-[60px] w-full flex items-center self-start lg:self-auto",
             )}
           >
-            <div className="flex items-start  p-1 justify-center flex-col ">
-              <p className={clsx("text-xl lg:text-2xl")}>{name}</p>
+            <div className="flex w-full items-start  p-1 justify-center flex-col ">
+              <p className={clsx("text-xl lg:text-2xl max-w-full truncate")}>
+                {name}
+              </p>
 
               <ArtistWrapper
                 artists={artists}
-                className=" text-ink-400  lg:text-xl text-base"
+                className=" text-ink-400 max-w-full truncate lg:text-xl text-base"
               />
             </div>
           </div>
