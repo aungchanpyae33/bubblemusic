@@ -36,6 +36,7 @@ import { Toaster } from "sonner";
 import DeviceCheckFetcher from "@/lib/DeviceCheck/DeviceCheckFetcher";
 import LayoutLocalFetch from "@/ui/general/layout/LayoutLocalFetch";
 import { outputBaseUrl } from "@/lib/outputBaseUrl";
+import PlaceHolderPolyfillInert from "@/Placeholder/PlaceHolderPolyfillInert";
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -53,6 +54,7 @@ export default async function RootLayout({
               duration: 2000,
             }}
           />
+          <PlaceHolderPolyfillInert />
           <ThemeProvider
             attribute="class"
             defaultTheme="system"
