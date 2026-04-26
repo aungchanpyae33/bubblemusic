@@ -19,7 +19,7 @@ function NavSideLink({ url, desp, setOpen, children }: LinkProps) {
       >
         {children}
         <div className={clsx("flex flex-1 items-center  justify-start h-full")}>
-          {desp !== "" && <div className=" truncate">{desp} hello</div>}
+          {desp !== "" && <div className=" truncate">{desp}</div>}
         </div>
       </NoThankYouPreFetchLink>
     </li>
