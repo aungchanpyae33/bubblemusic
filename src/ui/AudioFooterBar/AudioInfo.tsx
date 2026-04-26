@@ -7,7 +7,7 @@ function AudioInfo({ el }: { el: React.ReactNode }) {
     <div
       ref={ofcheckDiv}
       className=" flex-1 
-  overflow-hidden will-change-transform"
+  overflow-hidden"
     >
       {/* <div className=" w-full whitespace-nowrap showtextoverflow">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit

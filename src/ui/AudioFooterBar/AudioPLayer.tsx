@@ -85,14 +85,11 @@ function AudioPlayer({ start }: { start: boolean }) {
             />
 
             <AudioFooterContainer>
-              <div className=" w-full sm:w-[25%]   md:w-[25%] max-w-[375px]  flex items-center">
+              <div className=" w-full sm:w-[25%] overflow-hidden md:w-[25%] max-w-[375px]  flex items-center">
                 <AudioDisplayFooter song_cover={cover_url} />
                 {/* without it will just changing data for audioinfo */}
                 {name && (
-                  <div
-                    className="flex flex-col overflow-hidden will-change-transform"
-                    key={name}
-                  >
+                  <div className="flex flex-col overflow-hidden" key={name}>
                     <AudioInfo
                       el={
                         <ToolTip tooltipContent={name}>

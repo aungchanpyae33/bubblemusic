@@ -97,7 +97,7 @@ function AudioFull({
                         </div>
                       </div>
                       <div className="w-full flex justify-center md:justify-between">
-                        <div className=" md:flex w-[20%] max-w-[300px] items-center">
+                        <div className="flex w-[20%] max-w-[300px] items-center">
                           <LyricToggleBtn />
                         </div>
                         <AudioFunctionButton>
