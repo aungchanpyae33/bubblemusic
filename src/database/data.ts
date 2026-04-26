@@ -413,7 +413,6 @@ export const getUserPage = async (userId: string): Promise<UserPageReturn> => {
 const fetchSongListByType = async (id: string, type: MediaItemType) => {
   try {
     const supabase = await createClient();
-    await checkUserExist(supabase);
     if (type === "playlist") {
       return await supabase.rpc("get_playlist_songs_queue", {
         p_id: id,
@@ -515,7 +514,6 @@ export const getSongList = async (
 const fetchListDirectByType = async (id: string, type: MediaItemType) => {
   try {
     const supabase = await createClient();
-    await checkUserExist(supabase);
     if (type === "playlist") {
       return await supabase.rpc("get_playlist_direct", {
         p_id: id,
@@ -582,7 +580,6 @@ export const getSimilarSongQueue = async (
 ): Promise<FetchSongsReturn> => {
   try {
     const supabase = await createClient();
-    await checkUserExist(supabase);
     const { data, error } = await supabase.rpc("get_similar_songs", {
       input_song_id: id,
       similarity_threshold: 0.3,
