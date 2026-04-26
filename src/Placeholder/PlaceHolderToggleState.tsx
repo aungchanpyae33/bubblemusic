@@ -27,6 +27,7 @@ import outputCurrentIndex from "@/lib/OutputCurrentIndex";
 import type { ListSongPage } from "@/database/data-types-return";
 import { useAudioElementContext } from "@/Context/ContextAudioWrapper";
 import { safeAudioPlay } from "@/lib/safeAudioPlay";
+import { useUserInfoContext } from "@/Context/ContextUserInfo";
 
 function PlaceHolderToggleState({
   url,
@@ -70,6 +71,9 @@ function PlaceHolderToggleState({
   const setSongTrack = useSongTrack(
     (state: SetSongTrackAction) => state.setSongTrack,
   );
+
+  const { userInfo } = useUserInfoContext();
+
   const updateSongCu = useSong((state: SongActions) => state.updateSongCu);
   const isRepeat = useRepeatAndCurrentPlayList(
     (state: IsRepeatState) => state.isRepeat,
@@ -175,14 +179,17 @@ function PlaceHolderToggleState({
 
   useEffect(() => {
     async function addRecentList() {
-      if (list_id.startsWith("create-on-fly")) return;
-      if (type === "track") return;
-      if (flag && flag === "user-specific") return;
+      if (!userInfo) {
+        return null;
+      }
+      if (list_id.startsWith("create-on-fly")) return null;
+      if (type === "track") return null;
+      if (flag && flag === "user-specific") return null;
       const { data: recentList, error } = await addRecentlyPlayedList(
         list_id,
         type,
       );
-      if (!recentList || error) return;
+      if (!recentList || error) return null;
       queryClient.setQueryData(["recentlyPlayed"], recentList);
       //to prevent fast skip case
       if (setTimeoutRefForList.current) {
@@ -198,10 +205,13 @@ function PlaceHolderToggleState({
       }, 40000);
     }
     addRecentList();
-  }, [list_id, type, setListTrack, queryClient, flag]);
+  }, [list_id, type, setListTrack, queryClient, flag, userInfo]);
   //to prevent fast skipping song to add many times and user fast skip songs should not store in user perference
   useEffect(() => {
     function addRecentSong() {
+      if (!userInfo) {
+        return null;
+      }
       //to prevent fast skip case
       if (setTimeoutRef.current) {
         clearTimeout(setTimeoutRef.current);
@@ -217,7 +227,7 @@ function PlaceHolderToggleState({
       }, 10000);
     }
     addRecentSong();
-  }, [song_id, setSongTrack]);
+  }, [song_id, setSongTrack, userInfo]);
 
   return children;
 }

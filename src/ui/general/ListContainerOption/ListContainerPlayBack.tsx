@@ -5,7 +5,6 @@ import {
   DirectPlayBackState,
   isFallBackAudioActions,
   ShouldFetchSongsListIdAction,
-  SignInModalBoxAction,
   SongActions,
   SongDetail,
   SongFunctionActions,
@@ -16,7 +15,6 @@ import {
   useInstantFallBackAudioFull,
   useRepeatAndCurrentPlayList,
   useShouldFetchSongsList,
-  useSignInModalBox,
   useSong,
   useSongFunction,
   useStorePlayListId,
@@ -26,15 +24,12 @@ import { Pause, Play } from "lucide-react";
 import type { ListSongPage } from "@/database/data-types-return";
 import { audioPlayTriggerIos } from "@/lib/audioPlayTriggerIOS";
 import { useAudioElementContext } from "@/Context/ContextAudioWrapper";
-import { useUserInfoContext } from "@/Context/ContextUserInfo";
-import { guardToSignIn } from "@/lib/guardToSignIn";
 
 interface ListContainerPlayBackProps {
   list: ListSongPage;
 }
 function ListContainerPlayBack({ list }: ListContainerPlayBackProps) {
   const playListId = list.id;
-  const { userInfo } = useUserInfoContext();
   const IsPlayList = useDirectPlayBack(
     (state: DirectPlayBackState) => state.IsPlayList[playListId || ""],
   );
@@ -65,18 +60,10 @@ function ListContainerPlayBack({ list }: ListContainerPlayBackProps) {
   const setIsFallBackAudio = useInstantFallBackAudioFull(
     (state: isFallBackAudioActions) => state.setIsFallBackAudio,
   );
-
-  const signInModalBoxAction = useSignInModalBox(
-    (state: SignInModalBoxAction) => state.signInModalBoxAction,
-  );
   const { audioElRef } = useAudioElementContext();
   if (!list.songs) return null; // no render the toggle playback
   if (list.songs.idArray.length === 0) return;
   const handlePlayClick = () => {
-    if (!userInfo) {
-      return guardToSignIn({}, signInModalBoxAction);
-    }
-
     if (!list.songs) return null; // no render the toggle playback)
     setIsFallBackAudio(); //fallback dynamic import
     FetchSongsListIdAction(undefined);
