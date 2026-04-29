@@ -80,7 +80,7 @@ function AudioFullUpperWrapper({ children }: { children: React.ReactNode }) {
           <div className=" w-full h-full grid-rows-[60px_1fr] grid relative">
             <div
               className={clsx(
-                "flex gap-x-3   border-b border-seperate-soft       items-center w-full",
+                "flex gap-x-3   border-b border-seperate-soft       items-center w-full overflow-hidden",
               )}
             >
               <div
