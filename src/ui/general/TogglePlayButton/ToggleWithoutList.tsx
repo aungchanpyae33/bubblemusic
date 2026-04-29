@@ -76,7 +76,7 @@ const ToggleWithoutList = ({ song }: ToggleWithoutListProp) => {
         }
       }}
       onClick={() => {
-        setIsFallBackAudio(true); //fallback dynamic import
+        setIsFallBackAudio(); //fallback dynamic import
 
         const data: ListSongPage = {
           id: playlistId,
@@ -98,14 +98,12 @@ const ToggleWithoutList = ({ song }: ToggleWithoutListProp) => {
         FetchSongsListIdAction(playlistId);
 
         // to handle same song but different playlist or album
-        console.log("jist");
+
         // safe to check currentsong exist because it will only one source of truth
         if (songCuUrl) {
           setPlay("toggle_key", undefined);
-          console.log("bi");
           setPlayList("toggle_key", undefined);
         } else {
-          console.log("ti");
           const data = {
             [uniUrl || ""]: song.url,
             duration: song.duration,
@@ -121,7 +119,6 @@ const ToggleWithoutList = ({ song }: ToggleWithoutListProp) => {
           setPlaylistId({
             [playlistId || ""]: [playlistId, song.id],
           });
-          console.log(uniUrl);
           setPlayList(playlistId || "", true);
           setPlay(uniUrl || "", true);
         }

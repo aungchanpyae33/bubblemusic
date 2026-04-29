@@ -3,7 +3,6 @@
     "home": "Home",
     "back": "Back",
     "reload": "Reload",
-    "close": "Close",
     "login": "Login",
     "signUp": "Sign Up",
     "logout": "Logout",
@@ -130,7 +129,7 @@
     "needToLogin": "You must be logged in to perform that feature",
     "needToLoginSidebar": "Log in to save your favorites.",
     "NotFound": "Not Found",
-    "noHlsSupport": "Your current browser does not support playing the song. Please try using another browser.",
+
     "globalNotFoundTitle": "We can't find the page",
     "globalNotFoundText": "Please try searching for something else",
     "currentlyEmpty": "Nothing yet.Currently, it is empty.",
