@@ -104,7 +104,7 @@ function DirectPlayButton({
     return songs;
   }
   const handlePlayClick = async () => {
-    setIsFallBackAudio(true); //fallback dynamic import
+    setIsFallBackAudio(); //fallback dynamic import
     //to reset auto fetch key after playing autogenerate playlist,
     FetchSongsListIdAction(undefined);
 
