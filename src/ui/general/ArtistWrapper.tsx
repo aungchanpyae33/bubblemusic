@@ -18,8 +18,8 @@ function ArtistWrapper({ artists, className }: ArtistWrapperProps) {
               className="mr-1 inline"
             >
               {item.name}
+              {index < artists.length - 1 && ","}
             </UnderLineLinkHover>
-            {index < artists.length - 1 && ","}
           </span>
         ))}
       </ToolTip>
