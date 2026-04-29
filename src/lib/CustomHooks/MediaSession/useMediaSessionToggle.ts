@@ -9,17 +9,24 @@ const useMediaSessionToggle = () => {
     (state: DirectPlayBackAction) => state.setPlayList,
   );
   useEffect(() => {
-    if (!("mediaSession" in navigator)) return;
+    if (navigator.mediaSession && window.MediaMetadata) {
+      try {
+        const handleMediaSession = () => {
+          setPlay("toggle_key", undefined);
+          setPlayList("toggle_key", undefined);
+        };
+        navigator.mediaSession.setActionHandler("play", handleMediaSession);
+        navigator.mediaSession.setActionHandler("pause", handleMediaSession);
+      } catch {}
+    }
 
-    const handleMediaSession = () => {
-      setPlay("toggle_key", undefined);
-      setPlayList("toggle_key", undefined);
-    };
-    navigator.mediaSession.setActionHandler("play", handleMediaSession);
-    navigator.mediaSession.setActionHandler("pause", handleMediaSession);
     return () => {
-      navigator.mediaSession.setActionHandler("play", null);
-      navigator.mediaSession.setActionHandler("pause", null);
+      if (navigator.mediaSession) {
+        try {
+          navigator.mediaSession.setActionHandler("play", null);
+          navigator.mediaSession.setActionHandler("pause", null);
+        } catch {}
+      }
     };
   }, [setPlay, setPlayList]);
 };

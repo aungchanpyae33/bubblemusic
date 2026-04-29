@@ -6,16 +6,22 @@ const useMediaSessionSeek = (duration: number) => {
   const { audioElRef } = useAudioElementContext();
 
   useEffect(() => {
-    if ("mediaSession" in navigator) {
-      navigator.mediaSession.setActionHandler("seekto", (details) => {
-        const data = details.seekTime;
-        if (!audioElRef.current || data === undefined) return;
-        audioElRef.current.currentTime = data;
-        safeAudioPlay(audioElRef.current);
-      });
+    if (navigator.mediaSession && window.MediaMetadata) {
+      try {
+        navigator.mediaSession.setActionHandler("seekto", (details) => {
+          const data = details.seekTime;
+          if (!audioElRef.current || data === undefined) return;
+          audioElRef.current.currentTime = data;
+          safeAudioPlay(audioElRef.current);
+        });
+      } catch {}
     }
     return () => {
-      navigator.mediaSession.setActionHandler("seekto", null);
+      if (navigator.mediaSession) {
+        try {
+          navigator.mediaSession.setActionHandler("seekto", null);
+        } catch {}
+      }
     };
   }, [duration, audioElRef]);
 };

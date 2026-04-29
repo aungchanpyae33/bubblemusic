@@ -71,84 +71,90 @@ const useMediaSessionButton = (id_scope: string) => {
       // url is also  keyName
       setPlay(uniUrl || "", true);
     }
-    if ("mediaSession" in navigator) {
-      navigator.mediaSession.setActionHandler("previoustrack", () => {
-        if (
-          !playListArray ||
-          !playListArray.songs ||
-          playListArray.songs.idArray.length === 0
-        )
-          return;
-        const currentIndex = outputCurrentIndex(
-          playListArray.songs.idArray,
-          id_scope,
-        );
-        if (currentIndex <= 0) return;
+    if (navigator.mediaSession && window.MediaMetadata) {
+      try {
+        navigator.mediaSession.setActionHandler("previoustrack", () => {
+          if (
+            !playListArray ||
+            !playListArray.songs ||
+            playListArray.songs.idArray.length === 0
+          )
+            return;
+          const currentIndex = outputCurrentIndex(
+            playListArray.songs.idArray,
+            id_scope,
+          );
+          if (currentIndex <= 0) return;
 
-        const {
-          url,
-          name,
-          duration,
-          id,
-          song_id,
-          artists,
-          is_lyric,
-          cover_url,
-        } =
-          playListArray.songs.byId[
-            playListArray.songs.idArray[currentIndex - 1]
-          ];
-        MediaSessionButtonTaks({
-          url,
-          duration,
-          name,
-          id,
-          song_id,
-          artists,
-          is_lyric,
-          cover_url,
+          const {
+            url,
+            name,
+            duration,
+            id,
+            song_id,
+            artists,
+            is_lyric,
+            cover_url,
+          } =
+            playListArray.songs.byId[
+              playListArray.songs.idArray[currentIndex - 1]
+            ];
+          MediaSessionButtonTaks({
+            url,
+            duration,
+            name,
+            id,
+            song_id,
+            artists,
+            is_lyric,
+            cover_url,
+          });
         });
-      });
-      navigator.mediaSession.setActionHandler("nexttrack", () => {
-        if (
-          !playListArray ||
-          !playListArray.songs ||
-          playListArray.songs.idArray.length === 0
-        )
-          return;
-        const currentIndex = outputCurrentIndex(
-          playListArray.songs.idArray,
-          id_scope,
-        );
-        if (currentIndex >= playListArray.songs.idArray.length - 1) return;
-        const {
-          url,
-          name,
-          duration,
-          id,
-          song_id,
-          artists,
-          is_lyric,
-          cover_url,
-        } =
-          playListArray.songs.byId[
-            playListArray.songs.idArray[currentIndex + 1]
-          ];
-        MediaSessionButtonTaks({
-          url,
-          duration,
-          name,
-          id,
-          song_id,
-          artists,
-          is_lyric,
-          cover_url,
+        navigator.mediaSession.setActionHandler("nexttrack", () => {
+          if (
+            !playListArray ||
+            !playListArray.songs ||
+            playListArray.songs.idArray.length === 0
+          )
+            return;
+          const currentIndex = outputCurrentIndex(
+            playListArray.songs.idArray,
+            id_scope,
+          );
+          if (currentIndex >= playListArray.songs.idArray.length - 1) return;
+          const {
+            url,
+            name,
+            duration,
+            id,
+            song_id,
+            artists,
+            is_lyric,
+            cover_url,
+          } =
+            playListArray.songs.byId[
+              playListArray.songs.idArray[currentIndex + 1]
+            ];
+          MediaSessionButtonTaks({
+            url,
+            duration,
+            name,
+            id,
+            song_id,
+            artists,
+            is_lyric,
+            cover_url,
+          });
         });
-      });
+      } catch {}
     }
     return () => {
-      navigator.mediaSession.setActionHandler("previoustrack", null);
-      navigator.mediaSession.setActionHandler("nexttrack", null);
+      if (navigator.mediaSession) {
+        try {
+          navigator.mediaSession.setActionHandler("previoustrack", null);
+          navigator.mediaSession.setActionHandler("nexttrack", null);
+        } catch {}
+      }
     };
   }, [
     playListArray,

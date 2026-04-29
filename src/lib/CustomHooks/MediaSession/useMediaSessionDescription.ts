@@ -6,21 +6,27 @@ const useMediaSessionDes = (
   cover_url: string,
 ) => {
   useEffect(() => {
-    if ("mediaSession" in navigator) {
-      navigator.mediaSession.metadata = new MediaMetadata({
-        title: name,
-        artist: artists.map((artist) => artist.name).join(", "),
-        artwork: [
-          {
-            src: cover_url,
-            sizes: "300x300",
-            type: "image/jpg",
-          },
-        ],
-      });
+    if (navigator.mediaSession && window.MediaMetadata) {
+      try {
+        navigator.mediaSession.metadata = new MediaMetadata({
+          title: name,
+          artist: artists.map((artist) => artist.name).join(", "),
+          artwork: [
+            {
+              src: cover_url,
+              sizes: "300x300",
+              type: "image/jpg",
+            },
+          ],
+        });
+      } catch {}
     }
     return () => {
-      navigator.mediaSession.metadata = null;
+      if (navigator.mediaSession) {
+        try {
+          navigator.mediaSession.metadata = null;
+        } catch {}
+      }
     };
   }, [name, artists, cover_url]);
 };
