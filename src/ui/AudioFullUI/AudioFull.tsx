@@ -103,7 +103,7 @@ function AudioFull({
                         <AudioFunctionButton>
                           {(playListArray) => (
                             <div
-                              className="flex flex-1  justify-center gap-5"
+                              className="flex flex-1 max-w-96  justify-around  items-center"
                               onClick={(e) => e.stopPropagation()}
                             >
                               <AudioFunctionShuffle

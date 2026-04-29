@@ -77,7 +77,7 @@ const ToggleWithList = ({ listSong, song }: ToggleWithListProp) => {
         }
       }}
       onClick={() => {
-        setIsFallBackAudio(); //fallback dynamic import
+        setIsFallBackAudio(true); //fallback dynamic import
 
         setPlayListArray({
           [playlistId || ""]: listSong,

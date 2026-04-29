@@ -177,6 +177,7 @@ export const useSongFunction = create<SongFunctionState & SongFunctionActions>(
     Isplay: {},
     setPlay: (key, play) =>
       set((state) => {
+        if (key === "close") return { Isplay: {} };
         const getKey =
           key === "toggle_key" ? Object.keys(state.Isplay)[0] : key;
         return {
@@ -214,6 +215,7 @@ export const useDirectPlayBack = create<
   IsPlayList: {},
   setPlayList: (key, play) =>
     set((state) => {
+      if (key === "close") return { IsPlayList: {} };
       const getKey =
         key === "toggle_key" ? Object.keys(state.IsPlayList)[0] : key;
       return {
@@ -392,19 +394,16 @@ export interface isFallBackAudioState {
   isFallBackAudio: boolean;
 }
 export interface isFallBackAudioActions {
-  setIsFallBackAudio: () => void;
+  setIsFallBackAudio: (boolean: boolean) => void;
 }
 
 export const useInstantFallBackAudioFull = create<
   isFallBackAudioState & isFallBackAudioActions
 >((set) => ({
   isFallBackAudio: false,
-  setIsFallBackAudio: () =>
-    set((state) => {
-      if (state.isFallBackAudio) {
-        return {};
-      }
-      return { isFallBackAudio: true };
+  setIsFallBackAudio: (value: boolean) =>
+    set(() => {
+      return { isFallBackAudio: value };
     }),
 }));
 
@@ -418,6 +417,28 @@ export const useNotInputFocus = create<focusState & focusStateAction>(
 import outputCurrentIndex from "./OutputCurrentIndex";
 import { NormalizedById } from "./returnById";
 
+export interface noticeModalBoxProps {
+  noticeText: string;
+  originParentTriggerRef?: originParentTriggerRef;
+}
+
+export interface noticeModalBox {
+  noticeModalBox: noticeModalBoxProps | undefined;
+}
+
+export interface noticeModalBoxAction {
+  noticeModalBoxAction: (value: noticeModalBox["noticeModalBox"]) => void;
+}
+
+export const useNoticeModalBox = create<noticeModalBox & noticeModalBoxAction>(
+  (set) => ({
+    noticeModalBox: undefined,
+    noticeModalBoxAction: (value) =>
+      set(() => ({
+        noticeModalBox: value,
+      })),
+  }),
+);
 export interface isSongExistModalBoxProps {
   playlistId: string;
   songId: string;
